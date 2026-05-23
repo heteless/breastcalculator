@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breast Calculator | Free Breast Size & Ptosis Measurement Tool</title>
+    <meta name="description" content="Free online breast calculator to accurately measure breast size, bra size, and breast ptosis (sagging) level. Get personalized recommendations for better breast health.">
+    <meta name="keywords" content="breast calculator, breast size calculator, bra size calculator, breast ptosis calculator, breast sagging measurement">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">Breast Calculator</a>
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="/" class="nav-link active">Home</a></li>
+                <li><a href="/about.html" class="nav-link">About Us</a></li>
+                <li><a href="/terms.html" class="nav-link">Terms of Use</a></li>
+                <li><a href="/privacy.html" class="nav-link">Privacy Policy</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header>
+        <div class="container">
+            <h1>Breast Calculator</h1>
+            <p class="subtitle">Accurate breast health measurement tools for every woman</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="calculator-section">
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="size-calculator">Breast Size Calculator</button>
+                <button class="tab-btn" data-tab="ptosis-calculator">Breast Ptosis (Sagging) Test</button>
+            </div>
+
+            <div id="size-calculator" class="tab-content active">
+                <h2>Breast Size Calculator</h2>
+                <p class="description">Enter your measurements below to get your accurate bra size</p>
+                
+                <form id="size-form">
+                    <div class="form-group">
+                        <label for="underbust">Underbust Measurement (inches)</label>
+                        <input type="number" id="underbust" min="20" max="60" step="0.1" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="bust">Bust Measurement (inches)</label>
+                        <input type="number" id="bust" min="25" max="70" step="0.1" required>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary">Calculate My Size</button>
+                </form>
+                
+                <div id="size-result" class="result hidden">
+                    <h3>Your Bra Size: <span id="bra-size"></span></h3>
+                    <p id="size-recommendation"></p>
+                </div>
+            </div>
+
+            <div id="ptosis-calculator" class="tab-content">
+                <h2>Breast Ptosis (Sagging) Test</h2>
+                <p class="description">Answer the questions below to assess your breast ptosis level</p>
+                
+                <form id="ptosis-form">
+                    <div class="form-group">
+                        <label>1. Where is your nipple located relative to your breast crease?</label>
+                        <select id="nipple-position" required>
+                            <option value="">Select an option</option>
+                            <option value="0">Above the breast crease</option>
+                            <option value="1">At the breast crease</option>
+                            <option value="2">Below the breast crease but above the lowest point of the breast</option>
+                            <option value="3">At the lowest point of the breast</option>
+                            <option value="4">Below the lowest point of the breast</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>2. How much does your breast tissue hang below the breast crease?</label>
+                        <select id="tissue-hang" required>
+                            <option value="">Select an option</option>
+                            <option value="0">None</option>
+                            <option value="1">Less than 1 inch</option>
+                            <option value="2">1-2 inches</option>
+                            <option value="3">2-3 inches</option>
+                            <option value="4">More than 3 inches</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary">Assess My Ptosis Level</button>
+                </form>
+                
+                <div id="ptosis-result" class="result hidden">
+                    <h3>Your Breast Ptosis Level: <span id="ptosis-level"></span></h3>
+                    <p id="ptosis-description"></p>
+                    <h4>Recommendations:</h4>
+                    <ul id="ptosis-recommendations"></ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <h2>Why Breast Health Matters</h2>
+            <p>Breast ptosis (sagging) is a common condition that affects women of all ages. While it is a natural part of aging, it can also be caused by factors such as pregnancy, breastfeeding, weight fluctuations, and improper bra support.</p>
+            
+            <p>Understanding your breast ptosis level is important because:</p>
+            <ul>
+                <li>It helps you choose the right bra for proper support</li>
+                <li>It allows you to track changes in your breast health over time</li>
+                <li>It helps you identify when to consult a healthcare professional</li>
+                <li>It empowers you to make informed decisions about your body</li>
+            </ul>
+
+            <p>Regular breast self-exams and proper bra fitting are essential components of breast health. Use our tools above to better understand your body and take proactive steps toward maintaining healthy breasts.</p>
+        </section>
+
+        <section class="faq-section">
+            <h2>Frequently Asked Questions</h2>
+            
+            <div class="faq-item">
+                <h3>How do I measure my underbust?</h3>
+                <p>Wrap a measuring tape snugly around your ribcage, directly under your bust. Make sure the tape is parallel to the ground and snug but not tight. Round to the nearest half inch.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>How do I measure my bust?</h3>
+                <p>Wrap the measuring tape around the fullest part of your bust, keeping it parallel to the ground. Do not pull too tight. Round to the nearest half inch for the most accurate result.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>What is breast ptosis?</h3>
+                <p>Breast ptosis is the medical term for breast sagging. It occurs when the breasts lose firmness and elasticity, causing them to droop. This is measured by the position of the nipple relative to the breast crease.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Can exercise prevent breast sagging?</h3>
+                <p>While exercise cannot directly lift breasts (which contain no muscle tissue), strengthening the pectoral muscles underneath can improve the appearance of the chest. Wearing proper support during exercise is also essential.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>When should I see a doctor about breast sagging?</h3>
+                <p>If you experience sudden changes in breast shape or position, pain, skin changes, or if you have concerns about your breast health, consult a healthcare professional. Our calculator is for educational purposes only and does not replace medical advice.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Breast Calculator</h4>
+                    <p>Accurate breast health measurement tools for every woman. Free online calculators for bra size and breast ptosis assessment.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Tools</h4>
+                    <ul>
+                        <li><a href="/">Breast Size Calculator</a></li>
+                        <li><a href="/">Breast Ptosis Test</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="/about.html">About Us</a></li>
+                        <li><a href="/terms.html">Terms of Use</a></li>
+                        <li><a href="/privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Breast Calculator. All rights reserved.</p>
+                <p class="disclaimer">This website is for informational purposes only and does not provide medical advice. Always consult a qualified healthcare professional for medical concerns.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
