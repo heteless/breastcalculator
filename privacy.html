@@ -1,6 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('consent', 'default', {
+            'ad_storage': 'denied',
+            'ad_user_data': 'denied',
+            'ad_personalization': 'denied',
+            'analytics_storage': 'denied',
+            'functionality_storage': 'granted',
+            'personalization_storage': 'denied',
+            'security_storage': 'granted',
+            'wait_for_update': 500
+        });
+        gtag('set', 'url_passthrough', true);
+        gtag('set', 'ads_data_redaction', true);
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5SB8FNFYDV"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-5SB8FNFYDV', { 'anonymize_ip': true });
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy | Breast Calculator</title>
@@ -21,9 +44,8 @@
             </button>
             <ul class="nav-links">
                 <li><a href="/" class="nav-link">Home</a></li>
-                <li><a href="/about.html" class="nav-link">About Us</a></li>
-                <li><a href="/terms.html" class="nav-link">Terms of Use</a></li>
-                <li><a href="/privacy.html" class="nav-link active">Privacy Policy</a></li>
+                <li><a href="/about.html" class="nav-link">About</a></li>
+                <li><a href="/about.html" class="nav-link">Contact</a></li>
             </ul>
         </div>
     </nav>
@@ -102,31 +124,38 @@
     </main>
 
     <footer>
-        <div class="container">
+        <div class="footer-main">
             <div class="footer-grid">
                 <div class="footer-col">
                     <h4>Breast Calculator</h4>
-                    <p>Accurate breast health measurement tools for every woman. Free online calculators for bra size and breast ptosis assessment.</p>
+                    <p>Free online tools for bra size calculation, breast ptosis assessment, and breast splaying evaluation. Educational resources for better breast health.</p>
                 </div>
                 <div class="footer-col">
                     <h4>Tools</h4>
                     <ul>
-                        <li><a href="/">Breast Size Calculator</a></li>
-                        <li><a href="/">Breast Ptosis Test</a></li>
+                        <li><a href="/">Bra Size Calculator</a></li>
+                        <li><a href="/">Ptosis (Sagging) Test</a></li>
+                        <li><a href="/">Splaying (Expansion) Test</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h4>Company</h4>
                     <ul>
                         <li><a href="/about.html">About Us</a></li>
-                        <li><a href="/terms.html">Terms of Use</a></li>
                         <li><a href="/privacy.html">Privacy Policy</a></li>
+                        <li><a href="/terms.html">Terms of Use</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="footer-bottom">
+        </div>
+        <div class="footer-bar">
+            <div class="footer-bar-inner">
                 <p>&copy; 2026 Breast Calculator. All rights reserved.</p>
-                <p class="disclaimer">This website is for informational purposes only and does not provide medical advice. Always consult a qualified healthcare professional for medical concerns.</p>
+                <ul class="footer-bar-links">
+                    <li><a href="/privacy.html">Privacy Policy</a></li>
+                    <li><a href="/terms.html">Terms of Use</a></li>
+                </ul>
+                <p class="disclaimer">This website is for informational purposes only and does not provide medical advice.</p>
             </div>
         </div>
     </footer>

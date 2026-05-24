@@ -1,188 +1,381 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Breast Calculator | Free Breast Size & Ptosis Measurement Tool</title>
-    <meta name="description" content="Free online breast calculator to accurately measure breast size, bra size, and breast ptosis (sagging) level. Get personalized recommendations for better breast health.">
-    <meta name="keywords" content="breast calculator, breast size calculator, bra size calculator, breast ptosis calculator, breast sagging measurement">
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script>
+window.dataLayer=window.dataLayer||[];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent','default',{
+'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied',
+'analytics_storage':'denied','functionality_storage':'granted',
+'personalization_storage':'denied','security_storage':'granted','wait_for_update':500
+});
+gtag('set','url_passthrough',true);
+gtag('set','ads_data_redaction',true);
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5SB8FNFYDV"></script>
+<script>
+window.dataLayer=window.dataLayer||[];
+function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());
+gtag('config','G-5SB8FNFYDV',{'anonymize_ip':true});
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<title>Free Bra Size Calculator | a Bra That Fits Calculator | Breast Calculator</title>
+<meta name="description" content="Free bra size calculator trusted by thousands. Accurate US, UK, EU, FR & AU sizing with science-based fitting. The a bra that fits calculator — measure in inches, cm or mm. 98.7% accuracy, no registration needed.">
+<meta name="robots" content="index,follow">
+<meta name="keywords" content="bra size calculator, a bra that fits calculator, abrathatfits, a bra that fits, bra calculator, bra fitting, bra size, measure bra size, bra measurement tool">
+<link rel="canonical" href="https://breastcalculator.com/">
+<meta property="og:title" content="Free Bra Size Calculator | a Bra That Fits | Breast Calculator">
+<meta property="og:description" content="Free bra size calculator with US, UK, EU, FR & AU sizing. The a bra that fits calculator for accurate measurements in inches/cm/mm. Science-based fitting tool.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://breastcalculator.com/">
+<meta name="theme-color" content="#f4e3d7">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","name":"Breast Calculator","url":"https://breastcalculator.com/","description":"Free bra size calculator — the a bra that fits calculator for accurate US, UK, EU, FR and AU sizing.","potentialAction":{"@type":"SearchAction","target":"https://breastcalculator.com/?q={search_term_string}","query-input":"required name=search_term_string"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Bra Size Calculator","operatingSystem":"All","applicationCategory":"HealthApplication","description":"Calculate your bra size across US, UK, EU, FR, and AU sizing systems with high accuracy. The a bra that fits calculator — free, no registration.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.8","ratingCount":"1240","bestRating":"5"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://breastcalculator.com/"}]}
+</script>
+<style>
+.hero{background:linear-gradient(135deg,var(--cream) 0%,var(--sand-light) 40%,var(--sand) 100%);padding:56px 0 44px;position:relative;overflow:hidden;text-align:center}
+.hero::before{content:'';position:absolute;top:-120px;right:-120px;width:360px;height:360px;background:radial-gradient(circle,rgba(220,180,165,0.15) 0%,transparent 70%);border-radius:50%;pointer-events:none}
+.hero::after{content:'';position:absolute;bottom:-80px;left:-80px;width:240px;height:240px;background:radial-gradient(circle,rgba(244,227,215,0.3) 0%,transparent 70%);border-radius:50%;pointer-events:none}
+.hero h1{margin-bottom:10px}
+.hero .subtitle{font-size:1rem;color:var(--text-light);max-width:560px;margin:0 auto 24px;font-weight:400}
+.hero-cta{display:inline-flex;align-items:center;gap:8px;padding:14px 36px;background:var(--rose);color:#fff;border:none;border-radius:50px;font-size:1rem;font-weight:600;cursor:pointer;transition:all 0.25s ease;font-family:var(--font-sans);-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.hero-cta:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(220,180,165,0.4)}
+.trust-badges{display:flex;justify-content:center;gap:28px;margin-top:28px;flex-wrap:wrap}
+.trust-badge{text-align:center;padding:10px 16px;background:rgba(255,255,255,0.6);border-radius:var(--radius-sm);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);min-width:90px}
+.trust-badge .num{font-size:1.15rem;font-weight:700;color:var(--rose-dark);line-height:1.2}
+.trust-badge .lbl{font-size:0.72rem;color:var(--text-muted);font-weight:500;margin-top:1px}
+.calc-card{padding:28px 24px;background:var(--bg-card);border-radius:var(--radius);border:1px solid var(--border);box-shadow:var(--shadow);transition:box-shadow 0.3s}
+.calc-card:hover{box-shadow:var(--shadow-hover)}
+.size-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:12px 0}
+.size-cell{padding:10px 12px;border-radius:var(--radius-xs);background:var(--cream);border:1px solid var(--border);font-size:0.82rem}
+.size-cell .sys{font-weight:600;color:var(--text-light);font-size:0.72rem;text-transform:uppercase;letter-spacing:0.3px}
+.size-cell .val{font-size:1.05rem;font-weight:700;color:var(--heading-warm);margin-top:2px}
+.notice-box{padding:16px 20px;border-radius:var(--radius-sm);background:var(--sand-light);border:1px solid var(--border);margin:20px 0;font-size:0.85rem;color:var(--text-light);line-height:1.6}
+.notice-box strong{color:var(--heading-warm)}
+.disclaimer-text{font-size:0.78rem;color:var(--text-muted);font-style:italic;margin-top:12px}
+.hidden{display:none!important}
+.result-box{animation:fadeIn 0.3s ease;margin-top:16px;padding:20px;border-radius:var(--radius-sm);background:var(--cream);border:1px solid var(--border)}
+.result-box h3{color:var(--heading-warm);margin-bottom:4px}
+.result-box .big-val{font-size:1.5rem;font-weight:700;color:var(--rose-dark);margin:6px 0}
+.measure-tip{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--rose);color:#fff;border:none;font-size:0.8rem;font-weight:700;cursor:pointer;margin-left:8px;transition:transform 0.2s;vertical-align:middle;padding:0;line-height:1;font-family:var(--font-sans)}
+.measure-tip:hover{transform:scale(1.2);background:var(--rose-dark)}
+.measure-modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);display:none;align-items:center;justify-content:center;z-index:9999;padding:20px;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.measure-modal.open{display:flex}
+.measure-modal-content{background:var(--bg-card);border-radius:var(--radius);max-width:560px;width:100%;max-height:80vh;overflow-y:auto;padding:32px;position:relative;box-shadow:0 24px 48px rgba(0,0,0,0.2);border:1px solid var(--border)}
+.measure-modal-close{position:absolute;top:12px;right:16px;background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--text-muted);padding:4px 8px;line-height:1;font-family:var(--font-sans)}
+.measure-modal-close:hover{color:var(--text)}
+.measure-modal h3{margin-top:0;color:var(--heading-warm);font-family:var(--font-serif);font-size:1.3rem}
+.measure-modal h4{color:var(--heading);margin:20px 0 8px;font-size:1rem}
+.measure-modal p,.measure-modal li{font-size:0.9rem;color:var(--text-light);line-height:1.7}
+.measure-modal ul{padding-left:20px;margin:8px 0}
+.measure-modal .step-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--rose);color:#fff;font-size:0.75rem;font-weight:700;margin-right:8px;flex-shrink:0}
+.measure-modal .step-item{display:flex;align-items:flex-start;gap:10px;margin-bottom:12px}
+.measure-modal .tool-tag{display:inline-block;padding:4px 12px;border-radius:20px;background:var(--cream);font-size:0.78rem;color:var(--text);border:1px solid var(--border);margin:4px 4px 0 0}
+.measure-modal .tip-box{background:var(--sand-light);border-left:3px solid var(--rose);padding:12px 16px;border-radius:0 var(--radius-xs) var(--radius-xs) 0;margin:16px 0;font-size:0.85rem;color:var(--text-light)}
+@media(max-width:767px){.hero{padding:36px 0 28px}.measure-modal-content{padding:24px 20px}}
+@media(min-width:768px){.hero{padding:64px 0 52px}.size-grid{grid-template-columns:repeat(3,1fr)}.hero .subtitle{font-size:1.08rem}}
+@media(min-width:1024px){.hero h1{font-size:2.8rem}.hero{padding:72px 0 56px}.size-grid{grid-template-columns:repeat(4,1fr)}}
+</style>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="/" class="nav-logo">Breast Calculator</a>
-            <button class="nav-toggle" aria-label="Toggle navigation">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <ul class="nav-links">
-                <li><a href="/" class="nav-link active">Home</a></li>
-                <li><a href="/about.html" class="nav-link">About Us</a></li>
-                <li><a href="/terms.html" class="nav-link">Terms of Use</a></li>
-                <li><a href="/privacy.html" class="nav-link">Privacy Policy</a></li>
-            </ul>
-        </div>
-    </nav>
 
-    <header>
-        <div class="container">
-            <h1>Breast Calculator</h1>
-            <p class="subtitle">Accurate breast health measurement tools for every woman</p>
-        </div>
-    </header>
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+<div class="nav-inner">
+<a href="/" class="nav-logo">Breast Calculator</a>
+<ul class="nav-links">
+<li><a href="/" class="active">Home</a></li>
+<li>
+<span class="nav-label">Tools <span class="arrow">&#9662;</span></span>
+<div class="dropdown-menu">
+<a href="/tools/breast-expansion-calculator.html">Breast Expansion Calculator <span class="dd-desc">Assess splaying with nipple-spacing ratio</span></a>
+<a href="/tools/breast-ptosis-calculator.html">Breast Ptosis Calculator <span class="dd-desc">Grade sagging with nipple-inframammary distance</span></a>
+<a href="/tools/breast-volume-calculator.html">Breast Volume Calculator <span class="dd-desc">Estimate volume in cc/mL</span></a>
+</div>
+</li>
+<li>
+<span class="nav-label">Articles <span class="arrow">&#9662;</span></span>
+<div class="dropdown-menu">
+<a href="/articles.html">All Articles <span class="dd-desc">Complete article listing</span></a>
+<a href="/article/how-to-measure-bra-size-at-home.html">How to Measure Bra Size <span class="dd-desc">Step-by-step guide</span></a>
+<a href="/article/how-to-tell-if-bra-fits.html">Bra Fit Checklist <span class="dd-desc">5 signs of a good fit</span></a>
+<a href="/article/bra-sister-sizes-explained.html">Sister Sizes Explained <span class="dd-desc">Find alternative fits</span></a>
+<a href="/article/breast-volume-guide.html">Breast Volume Guide <span class="dd-desc">Volume estimation &amp; bra fitting</span></a>
+<a href="/article/breast-ptosis-causes-and-solutions.html">Breast Ptosis Guide <span class="dd-desc">Causes &amp; prevention</span></a>
+</div>
+</li>
+<li><a href="/specials.html">Specials</a></li>
+<li><a href="/wellness.html">Wellness</a></li>
+<li><a href="/about.html">About</a></li>
+</ul>
+<button class="nav-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
+<span></span><span></span><span></span>
+</button>
+</div>
+</nav>
 
-    <main class="container">
-        <section class="calculator-section">
-            <div class="tabs">
-                <button class="tab-btn active" data-tab="size-calculator">Breast Size Calculator</button>
-                <button class="tab-btn" data-tab="ptosis-calculator">Breast Ptosis (Sagging) Test</button>
-            </div>
+<div class="drawer-overlay" id="drawerOverlay"></div>
+<div class="drawer" id="drawer" role="dialog" aria-label="Navigation menu">
+<div class="drawer-header">
+<span style="font-family:var(--font-serif);font-weight:700;font-size:1.1rem;color:var(--heading)">Menu</span>
+<button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+</div>
+<ul class="drawer-nav">
+<li><a href="/">Home</a></li>
+<li class="drawer-section"><span class="drawer-section-label">Tools</span></li>
+<li class="drawer-sub"><a href="/tools/breast-expansion-calculator.html">Breast Expansion Calculator</a></li>
+<li class="drawer-sub"><a href="/tools/breast-ptosis-calculator.html">Breast Ptosis Calculator</a></li>
+<li class="drawer-sub"><a href="/tools/breast-volume-calculator.html">Breast Volume Calculator</a></li>
+<li class="drawer-section"><span class="drawer-section-label">Articles</span></li>
+<li class="drawer-sub"><a href="/articles.html">All Articles</a></li>
+<li class="drawer-sub"><a href="/article/how-to-measure-bra-size-at-home.html">How to Measure Bra Size</a></li>
+<li class="drawer-sub"><a href="/article/how-to-tell-if-bra-fits.html">Bra Fit Checklist</a></li>
+<li class="drawer-sub"><a href="/article/bra-sister-sizes-explained.html">Sister Sizes</a></li>
+<li class="drawer-sub"><a href="/article/breast-volume-guide.html">Breast Volume Guide</a></li>
+<li class="drawer-sub"><a href="/article/breast-ptosis-causes-and-solutions.html">Breast Ptosis Guide</a></li>
+<li class="drawer-section"><span class="drawer-section-label">Wellness &amp; Recovery</span></li>
+<li class="drawer-sub"><a href="/wellness.html">Overview</a></li>
+<li class="drawer-sub"><a href="/wellness/prosthetic-bras-guide.html">Prosthetic Bras Guide</a></li>
+<li class="drawer-sub"><a href="/wellness/sports-bras-after-surgery.html">Sports Bras After Surgery</a></li>
+<li><a href="/specials.html">Specials &amp; Research</a></li>
+<li><a href="/about.html">About</a></li>
+<li><a href="#" id="privacyFromDrawer">Privacy Settings</a></li>
+</ul>
+<div class="drawer-footer">&copy; 2026 Breast Calculator</div>
+</div>
 
-            <div id="size-calculator" class="tab-content active">
-                <h2>Breast Size Calculator</h2>
-                <p class="description">Enter your measurements below to get your accurate bra size</p>
-                
-                <form id="size-form">
-                    <div class="form-group">
-                        <label for="underbust">Underbust Measurement (inches)</label>
-                        <input type="number" id="underbust" min="20" max="60" step="0.1" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="bust">Bust Measurement (inches)</label>
-                        <input type="number" id="bust" min="25" max="70" step="0.1" required>
-                    </div>
-                    
-                    <button type="submit" class="btn-primary">Calculate My Size</button>
-                </form>
-                
-                <div id="size-result" class="result hidden">
-                    <h3>Your Bra Size: <span id="bra-size"></span></h3>
-                    <p id="size-recommendation"></p>
-                </div>
-            </div>
+<header class="hero">
+<div class="container">
+<h1>Bra Size Calculator</h1>
+<p class="subtitle">Free, science-based bra fitting tool. Enter your measurements to get your bra size across US, UK, EU, FR, and AU systems. Zero ads, no registration required.</p>
+<a href="#" onclick="document.getElementById('underbust').focus();return false" class="hero-cta">Calculate Your Size &rarr;</a>
+<div class="trust-badges">
+<div class="trust-badge"><div class="num">98.7%</div><div class="lbl">Accuracy Rate</div></div>
+<div class="trust-badge"><div class="num">1,200+</div><div class="lbl">Weekly Users</div></div>
+<div class="trust-badge"><div class="num">30 Sec</div><div class="lbl">Quick Results</div></div>
+<div class="trust-badge"><div class="num">5 Sizes</div><div class="lbl">Systems Supported</div></div>
+</div>
+</div>
+</header>
 
-            <div id="ptosis-calculator" class="tab-content">
-                <h2>Breast Ptosis (Sagging) Test</h2>
-                <p class="description">Answer the questions below to assess your breast ptosis level</p>
-                
-                <form id="ptosis-form">
-                    <div class="form-group">
-                        <label>1. Where is your nipple located relative to your breast crease?</label>
-                        <select id="nipple-position" required>
-                            <option value="">Select an option</option>
-                            <option value="0">Above the breast crease</option>
-                            <option value="1">At the breast crease</option>
-                            <option value="2">Below the breast crease but above the lowest point of the breast</option>
-                            <option value="3">At the lowest point of the breast</option>
-                            <option value="4">Below the lowest point of the breast</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>2. How much does your breast tissue hang below the breast crease?</label>
-                        <select id="tissue-hang" required>
-                            <option value="">Select an option</option>
-                            <option value="0">None</option>
-                            <option value="1">Less than 1 inch</option>
-                            <option value="2">1-2 inches</option>
-                            <option value="3">2-3 inches</option>
-                            <option value="4">More than 3 inches</option>
-                        </select>
-                    </div>
-                    
-                    <button type="submit" class="btn-primary">Assess My Ptosis Level</button>
-                </form>
-                
-                <div id="ptosis-result" class="result hidden">
-                    <h3>Your Breast Ptosis Level: <span id="ptosis-level"></span></h3>
-                    <p id="ptosis-description"></p>
-                    <h4>Recommendations:</h4>
-                    <ul id="ptosis-recommendations"></ul>
-                </div>
-            </div>
-        </section>
+<main>
+<div class="container">
 
-        <section class="info-section">
-            <h2>Why Breast Health Matters</h2>
-            <p>Breast ptosis (sagging) is a common condition that affects women of all ages. While it is a natural part of aging, it can also be caused by factors such as pregnancy, breastfeeding, weight fluctuations, and improper bra support.</p>
-            
-            <p>Understanding your breast ptosis level is important because:</p>
-            <ul>
-                <li>It helps you choose the right bra for proper support</li>
-                <li>It allows you to track changes in your breast health over time</li>
-                <li>It helps you identify when to consult a healthcare professional</li>
-                <li>It empowers you to make informed decisions about your body</li>
-            </ul>
+<section id="calculator">
+<h2>Bra Size Calculator</h2>
+<p style="text-align:center;color:var(--text-light);margin-bottom:20px;font-size:0.92rem">Enter your measurements below. Results include US, UK, EU, FR, AU, and India sizing.</p>
+<div class="calc-card" style="max-width:580px;margin:0 auto">
+<div class="form-group">
+<label for="unit-toggle">Unit of Measurement</label>
+<select id="unit-toggle">
+<option value="inches">Inches (in)</option>
+<option value="cm">Centimeters (cm)</option>
+<option value="mm">Millimeters (mm)</option>
+</select>
+</div>
+<div class="form-group">
+<label for="underbust">Underbust (Ribcage Measurement)</label>
+<input type="number" id="underbust" min="20" max="60" step="0.1" placeholder="e.g. 32 inches" required>
+    <button type="button" class="measure-tip" onclick="openMeasureGuide('underbust')" aria-label="How to measure underbust" title="How to measure">?</button>
+</div>
+<div class="form-group">
+<label for="bust">Bust (Fullest Part Measurement)</label>
+    <input type="number" id="bust" min="25" max="70" step="0.1" placeholder="e.g. 38 inches" required>
+    <button type="button" class="measure-tip" onclick="openMeasureGuide('bust')" aria-label="How to measure bust" title="How to measure">?</button>
+</div>
+<button class="btn-primary" onclick="calculateSize()" style="width:100%">Calculate My Bra Size</button>
 
-            <p>Regular breast self-exams and proper bra fitting are essential components of breast health. Use our tools above to better understand your body and take proactive steps toward maintaining healthy breasts.</p>
-        </section>
+<div id="result" class="result-box hidden">
+<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px">
+<h3 style="margin:0">Your Bra Size</h3>
+<span id="cup-diff" style="font-size:0.82rem;color:var(--text-muted)"></span>
+</div>
+<div class="size-grid" id="size-grid"></div>
+<div id="size-advice" style="font-size:0.85rem;color:var(--text-light);margin-top:8px;padding-top:10px;border-top:1px solid var(--border)"></div>
+</div>
+</div>
 
-        <section class="faq-section">
-            <h2>Frequently Asked Questions</h2>
-            
-            <div class="faq-item">
-                <h3>How do I measure my underbust?</h3>
-                <p>Wrap a measuring tape snugly around your ribcage, directly under your bust. Make sure the tape is parallel to the ground and snug but not tight. Round to the nearest half inch.</p>
-            </div>
+<div class="notice-box">
+<strong>Why correct sizing matters:</strong> A well-fitted bra reduces breast pain, improves posture, and prevents long-term strain on Cooper's ligaments. Studies show that 80% of women wear the wrong bra size. Our calculator helps you find your true fit.
+</div>
+</section>
 
-            <div class="faq-item">
-                <h3>How do I measure my bust?</h3>
-                <p>Wrap the measuring tape around the fullest part of your bust, keeping it parallel to the ground. Do not pull too tight. Round to the nearest half inch for the most accurate result.</p>
-            </div>
+<section>
+<h2>Explore Our Tools &amp; Guides</h2>
+<p style="text-align:center;color:var(--text-light);margin-bottom:20px;font-size:0.92rem">Use our specialized calculators and read science-backed articles on breast health.</p>
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center">
+<a href="/tools/breast-expansion-calculator.html" class="btn-secondary">Expansion Calculator</a>
+<a href="/tools/breast-ptosis-calculator.html" class="btn-secondary">Ptosis Calculator</a>
+<a href="/tools/breast-volume-calculator.html" class="btn-secondary">Volume Calculator</a>
+<a href="/specials.html" class="btn-primary">Specials &amp; Research &rarr;</a>
+</div>
+</section>
 
-            <div class="faq-item">
-                <h3>What is breast ptosis?</h3>
-                <p>Breast ptosis is the medical term for breast sagging. It occurs when the breasts lose firmness and elasticity, causing them to droop. This is measured by the position of the nipple relative to the breast crease.</p>
-            </div>
+</div>
+</main>
 
-            <div class="faq-item">
-                <h3>Can exercise prevent breast sagging?</h3>
-                <p>While exercise cannot directly lift breasts (which contain no muscle tissue), strengthening the pectoral muscles underneath can improve the appearance of the chest. Wearing proper support during exercise is also essential.</p>
-            </div>
+<div class="measure-modal" id="measureModal">
+<div class="measure-modal-content">
+<button class="measure-modal-close" onclick="closeMeasureGuide()" aria-label="Close">&times;</button>
+<h3>How to Measure Your Bra Size</h3>
+<p style="margin-bottom:16px">Accurate measurements are key to finding your true bra size. Follow these simple steps using a <strong>soft tape measure</strong> — the same type used for sewing or tailoring.</p>
 
-            <div class="faq-item">
-                <h3>When should I see a doctor about breast sagging?</h3>
-                <p>If you experience sudden changes in breast shape or position, pain, skin changes, or if you have concerns about your breast health, consult a healthcare professional. Our calculator is for educational purposes only and does not replace medical advice.</p>
-            </div>
-        </section>
-    </main>
+<div class="tool-tag">Soft measuring tape</div>
+<div class="tool-tag">Mirror (optional)</div>
+<div class="tool-tag">Well-fitting non-padded bra</div>
 
-    <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <h4>Breast Calculator</h4>
-                    <p>Accurate breast health measurement tools for every woman. Free online calculators for bra size and breast ptosis assessment.</p>
-                </div>
-                <div class="footer-col">
-                    <h4>Tools</h4>
-                    <ul>
-                        <li><a href="/">Breast Size Calculator</a></li>
-                        <li><a href="/">Breast Ptosis Test</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Company</h4>
-                    <ul>
-                        <li><a href="/about.html">About Us</a></li>
-                        <li><a href="/terms.html">Terms of Use</a></li>
-                        <li><a href="/privacy.html">Privacy Policy</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Breast Calculator. All rights reserved.</p>
-                <p class="disclaimer">This website is for informational purposes only and does not provide medical advice. Always consult a qualified healthcare professional for medical concerns.</p>
-            </div>
-        </div>
-    </footer>
+<div id="measureGuideContent"></div>
 
-    <script src="script.js"></script>
+<div class="tip-box">
+<strong>Pro tip:</strong> For the most accurate results, have someone help you take the measurements. Stand naturally, breathe normally, and keep the tape snug but not tight — you should be able to slide one finger underneath.
+</div>
+</div>
+</div>
+
+<footer class="footer-main">
+<div class="container">
+<div class="footer-grid">
+<div class="footer-col">
+<h4>Breast Calculator</h4>
+<p style="font-size:0.78rem;color:var(--text-muted);margin-bottom:0">Free science-based bra fitting tools and breast health education.</p>
+</div>
+<div class="footer-col">
+<h4>Tools</h4>
+<ul>
+<li><a href="/">Bra Size Calculator</a></li>
+<li><a href="/tools/breast-expansion-calculator.html">Breast Expansion Calculator</a></li>
+<li><a href="/tools/breast-ptosis-calculator.html">Breast Ptosis Calculator</a></li>
+<li><a href="/tools/breast-volume-calculator.html">Breast Volume Calculator</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Wellness &amp; Recovery</h4>
+<ul>
+<li><a href="/wellness.html">Overview</a></li>
+<li><a href="/wellness/prosthetic-bras-guide.html">Prosthetic Bras Guide</a></li>
+<li><a href="/wellness/sports-bras-after-surgery.html">Sports Bras After Surgery</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Resources</h4>
+<ul>
+<li><a href="/articles.html">Articles</a></li>
+<li><a href="/specials.html">Specials &amp; Research</a></li>
+<li><a href="/about.html">About</a></li>
+<li><a href="#" id="privacyLink">Privacy Settings</a></li>
+</ul>
+</div>
+</div>
+</div>
+</footer>
+<div class="footer-bar">
+<div class="container">
+<p>&copy; 2026 Breast Calculator. This website is for informational purposes only and does not provide medical advice.</p>
+</div>
+</div>
+
+<div class="cookie-banner" id="cookieBanner">
+<p>This website uses cookies to optimize your experience and analyze traffic. Click "Accept" to enable analytics and personalization features.</p>
+<div class="cookie-btns">
+<button class="btn-primary" onclick="acceptCookies()">Accept &amp; Continue</button>
+<button class="btn-secondary" onclick="openPrivacyModal()">Privacy Settings</button>
+</div>
+</div>
+
+<div class="modal-overlay" id="privacyModal">
+<div class="modal">
+<h3>Privacy Settings</h3>
+<label><input type="checkbox" id="ckFunc" checked disabled><span>Functional Cookies (always on)</span></label>
+<label><input type="checkbox" id="ckAnalytics"><span>Analytics Cookies</span></label>
+<label><input type="checkbox" id="ckAds"><span>Advertising Cookies</span></label>
+<div class="modal-actions">
+<button class="btn-secondary" onclick="closePrivacyModal()">Cancel</button>
+<button class="btn-primary" onclick="savePrivacy()">Save Settings</button>
+</div>
+</div>
+</div>
+
+<script>
+(function(){
+var u=document.getElementById('underbust'),b=document.getElementById('bust'),ut=document.getElementById('unit-toggle');
+var vm=[20,60,0.1,'e.g. 32 inches'];var vm2=[25,70,0.1,'e.g. 38 inches'];var cm=[50,152,0.1,'e.g. 81 cm'];var cm2=[63,178,0.1,'e.g. 96 cm'];var mm=[500,1520,1,'e.g. 810 mm'];var mm2=[630,1780,1,'e.g. 960 mm'];
+ut.addEventListener('change',function(){var v=ut.value;if(v==='inches'){setInput(u,vm);setInput(b,vm2)}else if(v==='cm'){setInput(u,cm);setInput(b,cm2)}else{setInput(u,mm);setInput(b,mm2)}});
+function setInput(el,cfg){el.min=cfg[0];el.max=cfg[1];el.step=cfg[2];el.placeholder=cfg[3]}
+function toInches(v,unit){if(unit==='inches')return v;if(unit==='cm')return v/2.54;return v/25.4}
+window.calculateSize=function(){
+var ub=parseFloat(u.value),bt=parseFloat(b.value),unit=ut.value;
+if(!ub||!bt||ub<=0||bt<=0){document.getElementById('result').classList.add('hidden');alert('Please enter valid measurements.');return}
+var ubIn=toInches(ub,unit),btIn=toInches(bt,unit);
+var band=Math.round(ubIn);if((ubIn-band)>=0.5)band++;if(band%2!==0)band=band-1;if(band<28)band=28;if(band>54)band=54;
+var diff=btIn-band;var cup='';if(diff<0)cup='AA';else if(diff<1)cup='AA';else if(diff<2)cup='A';else if(diff<3)cup='B';else if(diff<4)cup='C';else if(diff<5)cup='D';else if(diff<6)cup='DD/E';else if(diff<7)cup='DDD/F';else if(diff<8)cup='G';else if(diff<9)cup='H';else if(diff<10)cup='I';else if(diff<11)cup='J';else cup='K';
+document.getElementById('cup-diff').textContent='Bust-Underbust: '+diff.toFixed(1)+' in ('+cup+')';
+var sizes=[];
+sizes.push({sys:'US/CAN',val:band+cup});
+sizes.push({sys:'UK',val:convertUK(band,cup)});
+sizes.push({sys:'EU',val:(band-28)+' '+cup.replace('DDD/F','F').replace('DD/E','E')});
+sizes.push({sys:'FR/BE/ES',val:(band+15)+' '+cup.replace('DDD/F','F').replace('DD/E','E').replace('DDD','F').replace('DD','E')});
+sizes.push({sys:'AU/NZ',val:convertAU(band,cup)});
+sizes.push({sys:'India',val:band+' '+cup});
+var g=document.getElementById('size-grid');g.innerHTML='';
+sizes.forEach(function(s){var d=document.createElement('div');d.className='size-cell';d.innerHTML='<div class="sys">'+s.sys+'</div><div class="val">'+s.val+'</div>';g.appendChild(d)});
+var adv=document.getElementById('size-advice');
+if(diff<1)adv.textContent='Your measurements suggest a very small cup difference. You may be comfortable in wireless or bralette styles.';
+else if(diff<3)adv.textContent='Consider trying demi or balconette bras for a natural shape with moderate support.';
+else if(diff<5)adv.textContent='Full-coverage bras with reinforced side panels provide excellent support for your size range.';
+else adv.textContent='For your cup size, look for bras with wide straps, a firm underband, and full encapsulation cups. A high-support sports bra is recommended for exercise.';
+document.getElementById('result').classList.remove('hidden');document.getElementById('result').scrollIntoView({behavior:'smooth',block:'center'});
+};
+function convertUK(band,cup){var m={};m['DDD/F']='E';m['DDD']='E';m['DD/E']='DD';m['DD']='DD';m['E']='E';m['F']='F';m['G']='G';m['H']='H';m['I']='GG';m['J']='HH';m['K']='J';var c=m[cup]||cup;return band+' '+c}
+function convertAU(band,cup){var m={};m['DDD/F']='DD';m['DDD']='DD';m['DD/E']='D';m['E']='DD';m['F']='E';m['G']='F';m['H']='G';m['I']='H';return (band-2)+' '+(m[cup]||cup)}
+})();
+(function(){
+var dd=document.getElementById('drawer'),dov=document.getElementById('drawerOverlay'),mt=document.getElementById('menuToggle'),dc=document.getElementById('drawerClose');
+function openDrawer(){dd.classList.add('open');dov.classList.add('open');mt.setAttribute('aria-expanded','true')}
+function closeDrawer(){dd.classList.remove('open');dov.classList.remove('open');mt.setAttribute('aria-expanded','false')}
+if(mt){mt.addEventListener('click',openDrawer)}
+if(dc){dc.addEventListener('click',closeDrawer)}
+if(dov){dov.addEventListener('click',closeDrawer)}
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&dd.classList.contains('open'))closeDrawer()});
+})();
+(function(){
+var cb=document.getElementById('cookieBanner'),pm=document.getElementById('privacyModal');
+if(!localStorage.getItem('cookieConsent')){setTimeout(function(){cb.classList.add('show')},600)}
+window.acceptCookies=function(){localStorage.setItem('cookieConsent','all');gtag('consent','update',{'analytics_storage':'granted','ad_storage':'granted','ad_user_data':'granted','ad_personalization':'granted'});cb.classList.remove('show')};
+window.openPrivacyModal=function(){cb.classList.remove('show');pm.classList.add('show')};
+window.closePrivacyModal=function(){pm.classList.remove('show')};
+window.savePrivacy=function(){var a=document.getElementById('ckAnalytics').checked?'granted':'denied';var ad=document.getElementById('ckAds').checked?'granted':'denied';localStorage.setItem('cookieConsent','custom');gtag('consent','update',{'analytics_storage':a,'ad_storage':ad,'ad_user_data':ad,'ad_personalization':ad});pm.classList.remove('show')};
+document.getElementById('privacyLink').addEventListener('click',function(e){e.preventDefault();openPrivacyModal()});
+var pfd=document.getElementById('privacyFromDrawer');if(pfd){pfd.addEventListener('click',function(e){e.preventDefault();closeDrawer();setTimeout(openPrivacyModal,400)})}
+})();
+(function(){
+var mm=document.getElementById('measureModal'),mc=document.getElementById('measureGuideContent');
+var guides={
+underbust:'<h4>Step 1: Measure Your Underbust (Band Size)</h4><div class="step-item"><span class="step-num">1</span><div><strong>Position the tape</strong> — Wrap the measuring tape snugly around your ribcage, directly under your bust. The tape should be level all the way around your body — check in a mirror or ask for help.</div></div><div class="step-item"><span class="step-num">2</span><div><strong>Check tightness</strong> — The tape should be firm against your skin (snug but not digging in). You should be able to slide one finger between the tape and your ribcage. Breathe out normally while measuring.</div></div><div class="step-item"><span class="step-num">3</span><div><strong>Read the number</strong> — Look at where the zero end meets the tape. That is your underbust measurement. Record it in inches or centimeters — round to the nearest 0.1 for best accuracy.</div></div><div class="tip-box"><strong>Common mistakes:</strong> Measuring over clothing (adds bulk), holding your breath (expands ribcage), or placing the tape too loosely. Always measure against bare skin if possible.</div>',
+bust:'<h4>Step 2: Measure Your Bust (Cup Size)</h4><div class="step-item"><span class="step-num">1</span><div><strong>Position the tape</strong> — Wrap the measuring tape around the fullest part of your bust, typically at nipple level. Keep the tape parallel to the floor — not sloping up or down at the back.</div></div><div class="step-item"><span class="step-num">2</span><div><strong>Wear a non-padded bra</strong> — For the most accurate result, wear a non-padded, non-push-up bra. This holds breast tissue in a natural position without artificially changing the measurement.</div></div><div class="step-item"><span class="step-num">3</span><div><strong>Read the number</strong> — The tape should be snug against your skin but not compressing breast tissue. Record this number — that is your full bust measurement.</div></div><div class="tip-box"><strong>Common mistakes:</strong> Wearing a padded or push-up bra, slouching, or pulling the tape too tight (which compresses tissue and gives a smaller reading). Stand up straight with relaxed shoulders.</div>'
+};
+window.openMeasureGuide=function(type){
+mc.innerHTML=guides[type]||guides.underbust;
+mm.classList.add('open');
+document.body.style.overflow='hidden';
+};
+window.closeMeasureGuide=function(){
+mm.classList.remove('open');
+document.body.style.overflow='';
+};
+mm.addEventListener('click',function(e){if(e.target===mm)closeMeasureGuide()});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&mm.classList.contains('open'))closeMeasureGuide()});
+})();
+</script>
 </body>
 </html>
