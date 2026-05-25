@@ -12,6 +12,7 @@
 /terms          /terms.html          301
 /privacy        /privacy.html        301
 
+
 # --- Well-known paths (prevent 404s) ---
 
 # Prevent favicon 404 - redirect to SVG favicon

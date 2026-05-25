@@ -1,0 +1,208 @@
+{
+  "summary": {
+    "total": 21,
+    "ok_200": 6,
+    "redirect_to_200": 6,
+    "redirect_loops": 0,
+    "errors": 9
+  },
+  "results": [
+    {
+      "sitemap_url": "https://breastcalculator.com/",
+      "hop_count": 1,
+      "chain": "404",
+      "final_url": null,
+      "final_status": 404,
+      "error": "Not Found (no local file)",
+      "is_loop": false
+    },
+    {
+      "sitemap_url": "https://breastcalculator.com/tools.html",
+      "hop_count": 2,
+      "chain": "301 -> 200",
+      "final_url": "https://breastcalculator.com/",
+      "final_status": 200,
+      "error": null,
+      "is_loop": false
+    },
+    {
+      "sitemap_url": "https://breastcalculator.com/articles.html",
+      "hop_count": 1,
+      "chain": "200",
+      "final_url": "https://breastcalculator.com/articles.html",
+      "final_status": 200,
+      "error": null,
+      "is_loop": false
+    },
+    {
+      "sitemap_url": "https://breastcalculator.com/specials.html",
+      "hop_count": 1,
+      "chain": "200",
+      "final_url": "https://breastcalculator.com/specials.html",
+      "final_status": 200,
+      "error": null,
+      "is_loop": false
+    },
+    {
+      "sitemap_url": "https://breastcalculator.com/wellness.html",
+      "hop_count": 1,
+      "chain": "200",
+      "final_url": "https://breastcalculator.com/wellness.html",
+      "final_status": 200,
+      "error": null,
+      "is_loop": false
+    },
+    {
+      "sitemap_url": "https://breastcalculator.com/about.html",
+      "hop_count": 1,
+      "chain": "200",
+      "final_url": "https://breastcalculator.com/about.html",
+      "final_status": 200,
+      "error": null,
+      "is_loop": false
+    },
+    {
+      "sitemap_url": "https://breastcalculator.com/privacy.html",
+      "hop_count": 1,
+      "chain": "200",
+      "final_url": "https://breastcalculator.com/privacy.html",
+      "final_status": 200,
+      "error": null,
+      "is_loop": false
+    },
+    {
+      "sitemap_url": "https://breastcalculator.com/terms.html",
+      "hop_count": 1,
+      "chain": "200",
+      "final_url": "https://breastcalculator.com/terms.html",
+      "final_status": 200,
+      "error": null,
+      "is_loop": false
+    },
+    {
+      "sitemap_url": "https://breastcalculator.com/bra-size-calculator.html",
+      "hop_count": 2,
+      "chain": "301 -> 200",
+      "final_url": "https://breastcalculator.com/",
+      "final_status": 200,
+      "error": null,
+      "is_loop": false
+    },
+    {
+      "sitemap_url": "https://breastcalculator.com/breast-expansion-calculator.html",
+      "hop_count": 2,
+      "chain": "301 -> 200",
+      "final_url": "https://breastcalculator.com/tools/breast-expansion-calculator.html",
+      "final_status": 200,
+      "error": null,
+      "is_loop": false
+    },
+    {
+      "sitemap_url": "https://breastcalculator.com/breast-ptosis-calculator.html",
+      "hop_count": 2,
+      "chain": "301 -> 200",
+      "final_url": "https://breastcalculator.com/tools/breast-ptosis-calculator.html",
+      "final_status": 200,
+      "error": null,
+      "is_loop": false
+    },
+    {
+      "sitemap_url": "https://breastcalculator.com/breast-volume-calculator.html",
+      "hop_count": 2,
+      "chain": "301 -> 200",
+      "final_url": "https://breastcalculator.com/tools/breast-volume-calculator.html",
+      "final_status": 200,
+      "error": null,
+      "is_loop": false
+    },
+    {
+      "sitemap_url": "https://breastcalculator.com/length-converter.html",
+      "hop_count": 2,
+      "chain": "301 -> 200",
+      "final_url": "https://breastcalculator.com/tools/length-converter.html",
+      "final_status": 200,
+      "error": null,
+      "is_loop": false
+    },
+    {
+      "sitemap_url": "https://breastcalculator.com/es/",
+      "hop_count": 1,
+      "chain": "404",
+      "final_url": null,
+      "final_status": 404,
+      "error": "Not Found (no local file)",
+      "is_loop": false
+    },
+    {
+      "sitemap_url": "https://breastcalculator.com/es/herramientas.html",
+      "hop_count": 1,
+      "chain": "404",
+      "final_url": null,
+      "final_status": 404,
+      "error": "Not Found (no local file)",
+      "is_loop": false
+    },
+    {
+      "sitemap_url": "https://breastcalculator.com/es/articulos.html",
+      "hop_count": 1,
+      "chain": "404",
+      "final_url": null,
+      "final_status": 404,
+      "error": "Not Found (no local file)",
+      "is_loop": false
+    },
+    {
+      "sitemap_url": "https://breastcalculator.com/es/especiales.html",
+      "hop_count": 1,
+      "chain": "404",
+      "final_url": null,
+      "final_status": 404,
+      "error": "Not Found (no local file)",
+      "is_loop": false
+    },
+    {
+      "sitemap_url": "https://breastcalculator.com/es/bienestar.html",
+      "hop_count": 1,
+      "chain": "404",
+      "final_url": null,
+      "final_status": 404,
+      "error": "Not Found (no local file)",
+      "is_loop": false
+    },
+    {
+      "sitemap_url": "https://breastcalculator.com/es/sobre-nosotras.html",
+      "hop_count": 1,
+      "chain": "404",
+      "final_url": null,
+      "final_status": 404,
+      "error": "Not Found (no local file)",
+      "is_loop": false
+    },
+    {
+      "sitemap_url": "https://breastcalculator.com/es/politica-de-privacidad.html",
+      "hop_count": 1,
+      "chain": "404",
+      "final_url": null,
+      "final_status": 404,
+      "error": "Not Found (no local file)",
+      "is_loop": false
+    },
+    {
+      "sitemap_url": "https://breastcalculator.com/es/terminos-de-uso.html",
+      "hop_count": 1,
+      "chain": "404",
+      "final_url": null,
+      "final_status": 404,
+      "error": "Not Found (no local file)",
+      "is_loop": false
+    }
+  ],
+  "url_replacement_map": {
+    "https://breastcalculator.com/tools.html": "https://breastcalculator.com/",
+    "https://breastcalculator.com/bra-size-calculator.html": "https://breastcalculator.com/",
+    "https://breastcalculator.com/breast-expansion-calculator.html": "https://breastcalculator.com/tools/breast-expansion-calculator.html",
+    "https://breastcalculator.com/breast-ptosis-calculator.html": "https://breastcalculator.com/tools/breast-ptosis-calculator.html",
+    "https://breastcalculator.com/breast-volume-calculator.html": "https://breastcalculator.com/tools/breast-volume-calculator.html",
+    "https://breastcalculator.com/length-converter.html": "https://breastcalculator.com/tools/length-converter.html"
+  }
+}

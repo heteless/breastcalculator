@@ -21,12 +21,15 @@ gtag('config','G-5SB8FNFYDV',{'anonymize_ip':true});
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
-<title>Free Bra Size Calculator | a Bra That Fits Calculator | Breast Calculator</title>
-<meta name="description" content="Free breast calculator trusted by thousands. The most accurate bra size calculator online with US, UK, EU, FR & AU sizing. A bra that fits calculator — measure in inches, cm or mm. 98.7% accuracy, no registration needed.">
+<title>Free Bra Size Calculator | Breast Calculator</title>
+<meta name="description" content="Free bra size calculator with US, UK, EU, FR & AU sizing. Accurate measurements in inches, cm or mm. A bra that fits calculator built on fitting science.">
 <meta name="robots" content="index,follow">
 <meta name="keywords" content="bra size calculator, a bra that fits calculator, abrathatfits, a bra that fits, bra calculator, bra fitting, bra size, measure bra size, bra measurement tool">
-<link rel="canonical" href="https://breastcalculator.com/">
-<meta property="og:title" content="Free Bra Size Calculator | a Bra That Fits | Breast Calculator">
+<meta property="og:title" content="Free Bra Size Calculator | Breast Calculator">
+<meta property="og:image" content="https://breastcalculator.com/images/og-default.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="Breast Calculator">
 <meta property="og:description" content="Free bra size calculator with US, UK, EU, FR & AU sizing. The a bra that fits calculator for accurate measurements in inches/cm/mm. Science-based fitting tool.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://breastcalculator.com/">
@@ -36,10 +39,10 @@ gtag('config','G-5SB8FNFYDV',{'anonymize_ip':true});
 <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/style.css">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","name":"Breast Calculator","url":"https://breastcalculator.com/","description":"Free bra size calculator — the a bra that fits calculator for accurate US, UK, EU, FR and AU sizing.","potentialAction":{"@type":"SearchAction","target":"https://breastcalculator.com/?q={search_term_string}","query-input":"required name=search_term_string"}}
+{"@context":"https://schema.org","@type":"WebSite","name":"Breast Calculator","url":"https://breastcalculator.com/","description":"Free bra size calculator &mdash; the a bra that fits calculator for accurate US, UK, EU, FR and AU sizing.","potentialAction":{"@type":"SearchAction","target":"https://breastcalculator.com/?q={search_term_string}","query-input":"required name=search_term_string"}}
 </script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Bra Size Calculator","operatingSystem":"All","applicationCategory":"HealthApplication","description":"Calculate your bra size across US, UK, EU, FR, and AU sizing systems with high accuracy. The a bra that fits calculator — free, no registration.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.8","ratingCount":"1240","bestRating":"5"}}
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Bra Size Calculator","operatingSystem":"All","applicationCategory":"HealthApplication","description":"Calculate your bra size across US, UK, EU, FR, and AU sizing systems with high accuracy. The a bra that fits calculator &mdash; free, no registration.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.8","ratingCount":"1240","bestRating":"5"}}
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://breastcalculator.com/"}]}
@@ -65,7 +68,7 @@ gtag('config','G-5SB8FNFYDV',{'anonymize_ip':true});
 .notice-box{padding:16px 20px;border-radius:var(--radius-sm);background:var(--sand-light);border:1px solid var(--border);margin:20px 0;font-size:0.85rem;color:var(--text-light);line-height:1.6}
 .notice-box strong{color:var(--heading-warm)}
 .disclaimer-text{font-size:0.78rem;color:var(--text-muted);font-style:italic;margin-top:12px}
-.hidden{display:none!important}
+.hidden{display:none}
 .result-box{animation:fadeIn 0.3s ease;margin-top:16px;padding:20px;border-radius:var(--radius-sm);background:var(--cream);border:1px solid var(--border)}
 .result-box h3{color:var(--heading-warm);margin-bottom:4px}
 .result-box .big-val{font-size:1.5rem;font-weight:700;color:var(--rose-dark);margin:6px 0}
@@ -89,8 +92,17 @@ gtag('config','G-5SB8FNFYDV',{'anonymize_ip':true});
 @media(min-width:1024px){.hero h1{font-size:2.8rem}.hero{padding:72px 0 56px}.size-grid{grid-template-columns:repeat(4,1fr)}}
 </style>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config={corePlugins:{preflight:false},theme:{extend:{colors:{brand:{bg:'#fdf8f5',text:'#8b7355',hover:'#6b5344',border:'#e8ddd0',highlight:'#7a6455'}}}}}
+</script>
+
+<link rel="canonical" href="https://breastcalculator.com/">
 </head>
 <body>
+<button id="footerBackToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" class="fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full bg-[#fdf8f5] border border-[#e6d5c3] text-[#8b7355] hover:text-[#6b5344] hover:border-[#6b5344] shadow-md flex items-center justify-center transition-all duration-300 opacity-0 pointer-events-none" aria-label="Back to top">
+  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
 
 <nav class="navbar" role="navigation" aria-label="Main navigation">
 <div class="nav-inner">
@@ -160,7 +172,7 @@ gtag('config','G-5SB8FNFYDV',{'anonymize_ip':true});
 
 <header class="hero">
 <div class="container">
-<h1>Breast Calculator — The Most Accurate Bra Size Calculator Online</h1>
+<h1>Breast Calculator &mdash; The Most Accurate Bra Size Calculator Online</h1>
 <p class="subtitle">The most accurate breast calculator online. Enter your measurements below to get your bra size across US, UK, EU, FR, and AU systems. Zero ads, no registration required.</p>
 <a href="#" onclick="document.getElementById('underbust').focus();return false" class="hero-cta">Calculate Your Size &rarr;</a>
 <div class="trust-badges">
@@ -232,7 +244,7 @@ gtag('config','G-5SB8FNFYDV',{'anonymize_ip':true});
 <div class="measure-modal-content">
 <button class="measure-modal-close" onclick="closeMeasureGuide()" aria-label="Close">&times;</button>
 <h3>How to Measure Your Bra Size</h3>
-<p style="margin-bottom:16px">Accurate measurements are key to finding your true bra size. Follow these simple steps using a <strong>soft tape measure</strong> — the same type used for sewing or tailoring.</p>
+<p style="margin-bottom:16px">Accurate measurements are key to finding your true bra size. Follow these simple steps using a <strong>soft tape measure</strong> &mdash; the same type used for sewing or tailoring.</p>
 
 <div class="tool-tag">Soft measuring tape</div>
 <div class="tool-tag">Mirror (optional)</div>
@@ -241,65 +253,101 @@ gtag('config','G-5SB8FNFYDV',{'anonymize_ip':true});
 <div id="measureGuideContent"></div>
 
 <div class="tip-box">
-<strong>Pro tip:</strong> For the most accurate results, have someone help you take the measurements. Stand naturally, breathe normally, and keep the tape snug but not tight — you should be able to slide one finger underneath.
+<strong>Pro tip:</strong> For the most accurate results, have someone help you take the measurements. Stand naturally, breathe normally, and keep the tape snug but not tight &mdash; you should be able to slide one finger underneath.
 </div>
 </div>
 </div>
 
-<footer class="footer-main">
-<div class="container">
-<div class="footer-grid">
-<div class="footer-col">
-<h4>Breast Calculator</h4>
-<p style="font-size:0.78rem;color:var(--text-muted);margin-bottom:0">Free science-based bra fitting tools and breast health education.</p>
-</div>
-<div class="footer-col">
-<h4>Tools</h4>
-<ul>
-<li><a href="/">Bra Size Calculator</a></li>
-<li><a href="/tools/breast-expansion-calculator.html">Breast Expansion Calculator</a></li>
-<li><a href="/tools/breast-ptosis-calculator.html">Breast Ptosis Calculator</a></li>
-<li><a href="/tools/breast-volume-calculator.html">Breast Volume Calculator</a></li>
-<li><a href="/tools/length-converter.html">Length Converter</a></li>
-</ul>
-</div>
-<div class="footer-col">
-<h4>Wellness &amp; Recovery</h4>
-<ul>
-<li><a href="/wellness.html">Overview</a></li>
-<li><a href="/wellness/prosthetic-bras-guide.html">Prosthetic Bras Guide</a></li>
-<li><a href="/wellness/sports-bras-after-surgery.html">Sports Bras After Surgery</a></li>
-</ul>
-</div>
-<div class="footer-col">
-<h4>Resources</h4>
-<ul>
-<li><a href="/articles.html">Articles</a></li>
-<li><a href="/specials.html">Specials &amp; Research</a></li>
-<li><a href="/about.html">About</a></li>
-<li><a href="#" id="privacyLink">Privacy Settings</a></li>
-</ul>
-</div>
-</div>
-</div>
+<footer class="bg-[#fdf8f5] border-t border-[#e8ddd0] text-[#8b7355] font-sans">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-10">
+    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-x-8 gap-y-6">
+
+      <!-- Brand -->
+      <div class="lg:col-span-1">
+        <div class="font-bold text-[1.25rem] leading-[1.6] mb-3" style="font-family:Georgia,'Times New Roman',Times,serif;color:#7a6455">BREAST CALCULATOR</div>
+        <p class="text-[0.9rem] leading-[1.6] mb-3" style="font-family:Georgia,'Times New Roman',Times,serif;color:#8b7355">Free science-based bra fitting tools and breast health education.</p>
+        <a href="mailto:contact@breastcalculator.com?subject=Inquiry%20from%20Breast%20Calculator" class="inline-flex items-center gap-1.5 text-xs text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 min-h-[28px]">
+          <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 0 0 2.22 0L21 8M5 19h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2z"/></svg>
+          <span class="hover:underline decoration-1 underline-offset-2">contact@breastcalculator.com</span>
+        </a>
+
+                
+      </div>
+
+      <!-- Tools -->
+      <div>
+        <button class="flex md:hidden items-center justify-between w-full text-left font-bold text-sm tracking-[0.1em] text-[#7a6455] min-h-[48px] px-0 py-2 bg-transparent border-0 cursor-pointer" onclick="toggleFooterCol(this)" aria-expanded="false">
+          TOOLS
+          <svg class="w-3 h-3 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="font-bold text-sm tracking-[0.1em] mb-3 text-[#7a6455] hidden md:block">TOOLS</div>
+        <ul class="space-y-2 hidden md:block m-0 p-0 list-none" data-footer-col>
+          <li><a href="/" class="block text-sm font-semibold text-[#7a6455] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline">Bra Size Calculator</a></li>
+          <li><a href="/tools/breast-expansion-calculator.html" class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline">Breast Expansion Calculator</a></li>
+          <li><a href="/tools/breast-ptosis-calculator.html" class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline">Breast Ptosis Calculator</a></li>
+          <li><a href="/tools/breast-volume-calculator.html" class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline">Breast Volume Calculator</a></li>
+          <li><a href="/tools/length-converter.html" class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline">Length Converter</a></li>
+        </ul>
+      </div>
+
+      <!-- Specials -->
+      <div>
+        <button class="flex md:hidden items-center justify-between w-full text-left font-bold text-sm tracking-[0.1em] text-[#7a6455] min-h-[48px] px-0 py-2 bg-transparent border-0 cursor-pointer" onclick="toggleFooterCol(this)" aria-expanded="false">
+          SPECIALS
+          <svg class="w-3 h-3 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="font-bold text-sm tracking-[0.1em] mb-3 text-[#7a6455] hidden md:block">SPECIALS</div>
+        <ul class="space-y-2 hidden md:block m-0 p-0 list-none" data-footer-col>
+          <li><a href="/specials/why-d-cup-support.html" class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline">D+ Cup Support Science</a></li>
+          <li><a href="/specials/sports-bra-science.html" class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline">Sports Bra Science</a></li>
+          <li><a href="/specials/ptosis-prevention-evidence.html" class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline">Ptosis Prevention</a></li>
+          <li><a href="/specials/buying-guide.html" class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline">D+ Cup Buying Guide</a></li>
+        </ul>
+      </div>
+
+      <!-- Wellness -->
+      <div>
+        <button class="flex md:hidden items-center justify-between w-full text-left font-bold text-sm tracking-[0.1em] text-[#7a6455] min-h-[48px] px-0 py-2 bg-transparent border-0 cursor-pointer" onclick="toggleFooterCol(this)" aria-expanded="false">
+          WELLNESS
+          <svg class="w-3 h-3 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="font-bold text-sm tracking-[0.1em] mb-3 text-[#7a6455] hidden md:block">WELLNESS</div>
+        <ul class="space-y-2 hidden md:block m-0 p-0 list-none" data-footer-col>
+          <li><a href="/wellness/prosthetic-bras-guide.html" class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline">Prosthetic Bras Guide</a></li>
+          <li><a href="/wellness/sports-bras-after-surgery.html" class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline">Sports Bras After Surgery</a></li>
+          <li><a href="/wellness.html" class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline">Overview</a></li>
+        </ul>
+      </div>
+
+      <!-- Resources -->
+      <div>
+        <button class="flex md:hidden items-center justify-between w-full text-left font-bold text-sm tracking-[0.1em] text-[#7a6455] min-h-[48px] px-0 py-2 bg-transparent border-0 cursor-pointer" onclick="toggleFooterCol(this)" aria-expanded="false">
+          RESOURCES
+          <svg class="w-3 h-3 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="font-bold text-sm tracking-[0.1em] mb-3 text-[#7a6455] hidden md:block">RESOURCES</div>
+        <ul class="space-y-2 hidden md:block m-0 p-0 list-none" data-footer-col>
+          <li><a href="/articles.html" class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline">Articles</a></li>
+          <li><a href="/about.html" class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline">About</a></li>
+          <li><a href="/privacy.html" class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline">Privacy Policy</a></li>
+          <li><a href="/terms.html" class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline">Terms of Use</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="border-t border-[#e6d5c3]">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <p class="text-xs text-[#8b7355] m-0 text-center sm:text-left">&copy; 2026 Breast Calculator. This website is for informational purposes only and does not provide medical advice.</p>
+      <button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="inline-flex items-center gap-1 px-3 py-1.5 rounded border border-[#e6d5c3] hover:border-[#6b5344] hover:text-[#6b5344] transition-colors duration-200 min-w-[48px] min-h-[48px] sm:min-w-0 sm:min-h-0 justify-center text-xs text-[#8b7355] flex-shrink-0" aria-label="Back to top">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+        <span class="hidden sm:inline">Back to Top</span>
+      </button>
+    </div>
+  </div>
 </footer>
-<div class="footer-bar">
-<div class="container">
-<div class="footer-bar-row">
-<div class="footer-bar-links">
-<a href="/privacy.html">Privacy Policy</a>
-<a href="/terms.html">Terms of Use</a>
-<a href="/about.html">About Us</a>
-<a href="/specials.html">Specials &amp; Research</a>
-</div>
-<div class="footer-bar-contact">
-<span class="footer-email">contact@breastcalculator.com</span>
-
-</div>
-<p class="disclaimer">&copy; 2026 Breast Calculator. This website is for informational purposes only and does not provide medical advice.</p>
-</div>
-</div>
-
 <div class="cookie-banner" id="cookieBanner">
 <p>This website uses cookies to optimize your experience and analyze traffic. Click "Accept" to enable analytics and personalization features.</p>
 <div class="cookie-btns">
@@ -376,8 +424,8 @@ var pfd=document.getElementById('privacyFromDrawer');if(pfd){pfd.addEventListene
 (function(){
 var mm=document.getElementById('measureModal'),mc=document.getElementById('measureGuideContent');
 var guides={
-underbust:'<h4>Step 1: Measure Your Underbust (Band Size)</h4><div class="step-item"><span class="step-num">1</span><div><strong>Position the tape</strong> — Wrap the measuring tape snugly around your ribcage, directly under your bust. The tape should be level all the way around your body — check in a mirror or ask for help.</div></div><div class="step-item"><span class="step-num">2</span><div><strong>Check tightness</strong> — The tape should be firm against your skin (snug but not digging in). You should be able to slide one finger between the tape and your ribcage. Breathe out normally while measuring.</div></div><div class="step-item"><span class="step-num">3</span><div><strong>Read the number</strong> — Look at where the zero end meets the tape. That is your underbust measurement. Record it in inches or centimeters — round to the nearest 0.1 for best accuracy.</div></div><div class="tip-box"><strong>Common mistakes:</strong> Measuring over clothing (adds bulk), holding your breath (expands ribcage), or placing the tape too loosely. Always measure against bare skin if possible.</div>',
-bust:'<h4>Step 2: Measure Your Bust (Cup Size)</h4><div class="step-item"><span class="step-num">1</span><div><strong>Position the tape</strong> — Wrap the measuring tape around the fullest part of your bust, typically at nipple level. Keep the tape parallel to the floor — not sloping up or down at the back.</div></div><div class="step-item"><span class="step-num">2</span><div><strong>Wear a non-padded bra</strong> — For the most accurate result, wear a non-padded, non-push-up bra. This holds breast tissue in a natural position without artificially changing the measurement.</div></div><div class="step-item"><span class="step-num">3</span><div><strong>Read the number</strong> — The tape should be snug against your skin but not compressing breast tissue. Record this number — that is your full bust measurement.</div></div><div class="tip-box"><strong>Common mistakes:</strong> Wearing a padded or push-up bra, slouching, or pulling the tape too tight (which compresses tissue and gives a smaller reading). Stand up straight with relaxed shoulders.</div>'
+underbust:'<h4>Step 1: Measure Your Underbust (Band Size)</h4><div class="step-item"><span class="step-num">1</span><div><strong>Position the tape</strong> &mdash; Wrap the measuring tape snugly around your ribcage, directly under your bust. The tape should be level all the way around your body &mdash; check in a mirror or ask for help.</div></div><div class="step-item"><span class="step-num">2</span><div><strong>Check tightness</strong> &mdash; The tape should be firm against your skin (snug but not digging in). You should be able to slide one finger between the tape and your ribcage. Breathe out normally while measuring.</div></div><div class="step-item"><span class="step-num">3</span><div><strong>Read the number</strong> &mdash; Look at where the zero end meets the tape. That is your underbust measurement. Record it in inches or centimeters &mdash; round to the nearest 0.1 for best accuracy.</div></div><div class="tip-box"><strong>Common mistakes:</strong> Measuring over clothing (adds bulk), holding your breath (expands ribcage), or placing the tape too loosely. Always measure against bare skin if possible.</div>',
+bust:'<h4>Step 2: Measure Your Bust (Cup Size)</h4><div class="step-item"><span class="step-num">1</span><div><strong>Position the tape</strong> &mdash; Wrap the measuring tape around the fullest part of your bust, typically at nipple level. Keep the tape parallel to the floor &mdash; not sloping up or down at the back.</div></div><div class="step-item"><span class="step-num">2</span><div><strong>Wear a non-padded bra</strong> &mdash; For the most accurate result, wear a non-padded, non-push-up bra. This holds breast tissue in a natural position without artificially changing the measurement.</div></div><div class="step-item"><span class="step-num">3</span><div><strong>Read the number</strong> &mdash; The tape should be snug against your skin but not compressing breast tissue. Record this number &mdash; that is your full bust measurement.</div></div><div class="tip-box"><strong>Common mistakes:</strong> Wearing a padded or push-up bra, slouching, or pulling the tape too tight (which compresses tissue and gives a smaller reading). Stand up straight with relaxed shoulders.</div>'
 };
 window.openMeasureGuide=function(type){
 mc.innerHTML=guides[type]||guides.underbust;
@@ -389,8 +437,10 @@ mm.classList.remove('open');
 document.body.style.overflow='';
 };
 mm.addEventListener('click',function(e){if(e.target===mm)closeMeasureGuide()});
-document.addEventListener('keydown',function(e){if(e.key==='Escape'&&mm.classList.contains('open'))closeMeasureGuide()});
 })();
+
+function toggleFooterCol(b){var u=b.nextElementSibling;while(u&&u.tagName!=='UL'){u=u.nextElementSibling}if(u){var sv=b.querySelector('svg');if(u.classList.contains('hidden')){u.classList.remove('hidden');if(sv)sv.style.transform='rotate(180deg)';b.setAttribute('aria-expanded','true')}else{u.classList.add('hidden');if(sv)sv.style.transform='';b.setAttribute('aria-expanded','false')}}}
 </script>
+
 </body>
 </html>

@@ -1,0 +1,22 @@
+sitemap_url,hop_count,chain,final_url,final_status,error,is_loop
+https://breastcalculator.com/,1,404,,404,Not Found (no local file),False
+https://breastcalculator.com/tools.html,2,301 -> 200,https://breastcalculator.com/,200,,False
+https://breastcalculator.com/articles.html,1,200,https://breastcalculator.com/articles.html,200,,False
+https://breastcalculator.com/specials.html,1,200,https://breastcalculator.com/specials.html,200,,False
+https://breastcalculator.com/wellness.html,1,200,https://breastcalculator.com/wellness.html,200,,False
+https://breastcalculator.com/about.html,1,200,https://breastcalculator.com/about.html,200,,False
+https://breastcalculator.com/privacy.html,1,200,https://breastcalculator.com/privacy.html,200,,False
+https://breastcalculator.com/terms.html,1,200,https://breastcalculator.com/terms.html,200,,False
+https://breastcalculator.com/bra-size-calculator.html,2,301 -> 200,https://breastcalculator.com/,200,,False
+https://breastcalculator.com/breast-expansion-calculator.html,2,301 -> 200,https://breastcalculator.com/tools/breast-expansion-calculator.html,200,,False
+https://breastcalculator.com/breast-ptosis-calculator.html,2,301 -> 200,https://breastcalculator.com/tools/breast-ptosis-calculator.html,200,,False
+https://breastcalculator.com/breast-volume-calculator.html,2,301 -> 200,https://breastcalculator.com/tools/breast-volume-calculator.html,200,,False
+https://breastcalculator.com/length-converter.html,2,301 -> 200,https://breastcalculator.com/tools/length-converter.html,200,,False
+https://breastcalculator.com/es/,1,404,,404,Not Found (no local file),False
+https://breastcalculator.com/es/herramientas.html,1,404,,404,Not Found (no local file),False
+https://breastcalculator.com/es/articulos.html,1,404,,404,Not Found (no local file),False
+https://breastcalculator.com/es/especiales.html,1,404,,404,Not Found (no local file),False
+https://breastcalculator.com/es/bienestar.html,1,404,,404,Not Found (no local file),False
+https://breastcalculator.com/es/sobre-nosotras.html,1,404,,404,Not Found (no local file),False
+https://breastcalculator.com/es/politica-de-privacidad.html,1,404,,404,Not Found (no local file),False
+https://breastcalculator.com/es/terminos-de-uso.html,1,404,,404,Not Found (no local file),False
