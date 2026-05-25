@@ -3,14 +3,8 @@
 
 # --- Permanent redirects (301) ---
 
-# Handle extensionless URLs → .html (Cloudflare Pages handles this automatically,
-# but explicit rules ensure consistency)
-/articles       /articles.html       301
-/specials       /specials.html       301
-/wellness       /wellness.html       301
-/about          /about.html          301
-/terms          /terms.html          301
-/privacy        /privacy.html        301
+# Extensionless URLs are handled automatically by Cloudflare Pages.
+# Explicit 301 rules cause redirect loops because Cloudflare strips .html.
 
 
 # --- Well-known paths (prevent 404s) ---
