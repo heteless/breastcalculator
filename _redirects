@@ -1,0 +1,24 @@
+# Cloudflare Pages _redirects
+# Format: source destination status
+
+# --- Permanent redirects (301) ---
+
+# Handle extensionless URLs → .html (Cloudflare Pages handles this automatically,
+# but explicit rules ensure consistency)
+/articles       /articles.html       301
+/specials       /specials.html       301
+/wellness       /wellness.html       301
+/about          /about.html          301
+/terms          /terms.html          301
+/privacy        /privacy.html        301
+
+# --- Well-known paths (prevent 404s) ---
+
+# Prevent favicon 404 - redirect to SVG favicon
+/favicon.ico    /favicon.svg         302
+
+# --- Catch-all: handle common misspellings ---
+/breast-calculator   /             301
+/bra-calculator      /             301
+/bracalculator       /             301
+/breastcalculator    /             301

@@ -1,0 +1,67 @@
+# Cloudflare Pages _headers
+# Cache-Control: max-age in seconds (31536000 = 1 year, 3600 = 1 hour)
+
+# --- Static assets: long-term cache (1 year) ---
+/style.css
+  Cache-Control: max-age=31536000
+  Cache-Tag: css
+
+/script.js
+  Cache-Control: max-age=31536000
+  Cache-Tag: js
+
+# --- HTML pages: revalidate frequently (1 hour) ---
+/index.html
+  Cache-Control: max-age=3600, must-revalidate
+  Cache-Tag: html
+
+/articles.html
+  Cache-Control: max-age=3600, must-revalidate
+  Cache-Tag: html
+
+/specials.html
+  Cache-Control: max-age=3600, must-revalidate
+  Cache-Tag: html
+
+/wellness.html
+  Cache-Control: max-age=3600, must-revalidate
+  Cache-Tag: html
+
+/about.html
+  Cache-Control: max-age=3600, must-revalidate
+  Cache-Tag: html
+
+/terms.html
+  Cache-Control: max-age=3600, must-revalidate
+  Cache-Tag: html
+
+/privacy.html
+  Cache-Control: max-age=3600, must-revalidate
+  Cache-Tag: html
+
+# --- Subdirectory HTML pages ---
+/tools/*.html
+  Cache-Control: max-age=3600, must-revalidate
+  Cache-Tag: html
+
+/articles/*.html
+  Cache-Control: max-age=3600, must-revalidate
+  Cache-Tag: html
+
+/specials/*.html
+  Cache-Control: max-age=3600, must-revalidate
+  Cache-Tag: html
+
+/wellness/*.html
+  Cache-Control: max-age=3600, must-revalidate
+  Cache-Tag: html
+
+# --- Other static files ---
+/sitemap.xml
+  Cache-Control: max-age=3600
+
+/favicon.svg
+  Cache-Control: max-age=31536000
+
+/robots.txt
+  Cache-Control: max-age=86400

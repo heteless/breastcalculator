@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://breastcalculator.com/sitemap.xml

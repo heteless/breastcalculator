@@ -18,6 +18,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://breastcalculator.com/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://breastcalculator.com/tools/length-converter.html"},{"@type":"ListItem","position":3,"name":"Length Converter","item":"https://breastcalculator.com/tools/length-converter.html"}]}
 </script>
 <style>.tool-hero{background:linear-gradient(135deg,var(--cream) 0%,var(--sand-light) 40%,var(--sand) 100%);padding:44px 0 36px;text-align:center}.tool-hero h1{font-size:clamp(1.5rem,4vw,2.2rem);max-width:640px;margin:0 auto 10px}.tool-hero .subtitle{font-size:0.92rem;color:var(--text-light);max-width:520px;margin:0 auto 6px}.big-val{font-size:1.3rem;font-weight:700;color:var(--rose-dark);margin:8px 0}</style>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head>
 <body>
 
@@ -88,6 +89,8 @@
 
 <main>
 <div class="container">
+<div class="tool-welcome" style="max-width:720px;margin:0 auto 28px;padding:16px 24px;background:var(--cream);border-radius:var(--radius-sm);text-align:center;font-size:0.92rem;color:var(--text);border:1px solid var(--border)">Welcome to the most accurate <strong>breast calculator</strong> online. Use this tool to get precise measurements and find your perfect fit with confidence.</div>
+
 <div class="tool-card">
 <h3>Convert Length Units</h3>
 
@@ -122,6 +125,15 @@
 </div>
 </div>
 
+<div class="how-to-measure" style="max-width:720px;margin:0 auto 32px;padding:24px;background:var(--cream);border:1px solid var(--border);border-radius:var(--radius-sm)">
+<h2 style="font-family:var(--font-serif);font-size:1.15rem;margin:0 0 12px;color:var(--heading)">How to Measure Your Breast Size</h2>
+<p style="font-size:0.92rem;line-height:1.8;color:var(--text);margin-bottom:10px">Getting an accurate measurement is the first step to finding a bra that truly fits. Here’s a simple method you can do at home with just a soft measuring tape. No advanced tools needed.</p>
+<p style="font-size:0.92rem;line-height:1.8;color:var(--text);margin-bottom:10px"><strong>Step 1 — Measure your underbust:</strong> Stand upright wearing a non-padded bra. Wrap the measuring tape around your ribcage, just under your bust. Make sure it’s snug but not too tight — that’s your band size (underbust measurement). Write down the number.</p>
+<p style="font-size:0.92rem;line-height:1.8;color:var(--text);margin-bottom:10px"><strong>Step 2 — Measure your bust:</strong> Measure around the fullest part of your bust, keeping the tape parallel to the floor. Don’t pull it too tight — this is your bust measurement. The difference between your bust and underbust measurements determines your cup size.</p>
+<p style="font-size:0.92rem;line-height:1.8;color:var(--text);margin-bottom:10px"><strong>Step 3 — Use our breast calculator:</strong> Enter your measurements into the <a href="/">breast calculator</a> above to get your bra size across US, UK, EU, FR, and AU sizing systems instantly. For the most accurate results, measure first thing in the morning and avoid measuring during your menstrual period when breast tissue may be swollen.</p>
+<p style="font-size:0.92rem;line-height:1.8;color:var(--text);margin-bottom:0">For a more detailed walkthrough, check out our <a href="/article/how-to-measure-bra-size-at-home.html">complete guide on how to measure bra size at home</a>.</p>
+</div>
+
 <div class="tool-faq">
 <h2>Frequently Asked Questions</h2>
 <div>
@@ -141,6 +153,8 @@
 <p>The standard formula is: 1 inch = 2.54 centimeters. To convert inches to cm: <strong>cm = inches &times; 2.54</strong>. To convert cm to inches: <strong>inches = cm &divide; 2.54</strong>.</p>
 </div>
 </div>
+
+<div class="tool-closing" style="max-width:720px;margin:0 auto 28px;padding:16px 24px;background:var(--cream);border-radius:var(--radius-sm);text-align:center;font-size:0.92rem;color:var(--text);border:1px solid var(--border)">Thank you for using the most accurate <strong>breast calculator</strong> online. Accurate measurements are the foundation of a comfortable, supportive bra that fits you perfectly.</div>
 
 <div class="tool-ref">
 <p><strong>Reference:</strong> The International System of Units (SI) defines 1 inch as exactly 25.4 mm (2.54 cm). This standard conversion factor is used internationally for science, engineering, and bra sizing measurements. Length conversion is essential for accurate body measurement and bra fitting across different sizing systems.</p>
@@ -181,7 +195,7 @@
 </div>
 </div>
 </footer>
-<div class="footer-bar"><div class="container"><p>&copy; 2026 Breast Calculator. This website is for informational purposes only and does not provide medical advice.</p></div></div>
+<div class="footer-bar"><div class="container"><div class="footer-bar-row"><div class="footer-bar-links"><a href="/privacy.html">Privacy Policy</a><a href="/terms.html">Terms of Use</a><a href="/about.html">About Us</a><a href="/specials.html">Specials &amp; Research</a></div><div class="footer-bar-contact"><span class="footer-email">contact@breastcalculator.com</span></div></div><p class="disclaimer">&copy; 2026 Breast Calculator. This website is for informational purposes only and does not provide medical advice.</p></div></div>
 
 <div class="cookie-banner" id="cookieBanner"><p>This website uses cookies to optimize your experience and analyze traffic.</p><div class="cookie-btns"><button class="btn-primary" onclick="acceptCookies()">Accept</button><button class="btn-secondary" onclick="openPrivacyModal()">Settings</button></div></div>
 <div class="modal-overlay" id="privacyModal"><div class="modal"><h3>Privacy Settings</h3><label><input type="checkbox" id="ckFunc" checked disabled><span>Functional (always on)</span></label><label><input type="checkbox" id="ckAnalytics"><span>Analytics</span></label><label><input type="checkbox" id="ckAds"><span>Advertising</span></label><div class="modal-actions"><button class="btn-secondary" onclick="closePrivacyModal()">Cancel</button><button class="btn-primary" onclick="savePrivacy()">Save</button></div></div></div>
@@ -198,9 +212,9 @@ rv.textContent=result+(t==='inches'?' in':' cm');rd.textContent=detail;document.
 })();
 (function(){var dd=document.getElementById('drawer'),dov=document.getElementById('drawerOverlay'),mt=document.getElementById('menuToggle'),dc=document.getElementById('drawerClose');function od(){dd.classList.add('open');dov.classList.add('open');mt.setAttribute('aria-expanded','true')}function cd(){dd.classList.remove('open');dov.classList.remove('open');mt.setAttribute('aria-expanded','false')}if(mt)mt.addEventListener('click',od);if(dc)dc.addEventListener('click',cd);if(dov)dov.addEventListener('click',cd);document.addEventListener('keydown',function(e){if(e.key==='Escape'&&dd.classList.contains('open'))cd()})})();
 (function(){var cb=document.getElementById('cookieBanner'),pm=document.getElementById('privacyModal');if(!localStorage.getItem('cookieConsent')){setTimeout(function(){cb.classList.add('show')},600)}
-window.acceptCookies=function(){localStorage.setItem('cookieConsent','all');gtag('consent','update',{'analytics_storage':'granted','ad_storage':'granted'});cb.classList.remove('show')};
+window.acceptCookies=function(){localStorage.setItem('cookieConsent','all');gtag('consent','update',{'analytics_storage':'granted','ad_storage':'granted','ad_user_data':'granted','ad_personalization':'granted'});cb.classList.remove('show')};
 window.openPrivacyModal=function(){cb.classList.remove('show');pm.classList.add('show')};window.closePrivacyModal=function(){pm.classList.remove('show')};
-window.savePrivacy=function(){var a=document.getElementById('ckAnalytics').checked?'granted':'denied';var ad=document.getElementById('ckAds').checked?'granted':'denied';localStorage.setItem('cookieConsent','custom');gtag('consent','update',{'analytics_storage':a,'ad_storage':ad});pm.classList.remove('show')};
+window.savePrivacy=function(){var a=document.getElementById('ckAnalytics').checked?'granted':'denied';var ad=document.getElementById('ckAds').checked?'granted':'denied';localStorage.setItem('cookieConsent','custom');gtag('consent','update',{'analytics_storage':a,'ad_storage':ad,'ad_user_data':ad,'ad_personalization':ad});pm.classList.remove('show')};
 document.getElementById('privacyLink').addEventListener('click',function(e){e.preventDefault();openPrivacyModal()});var pfd=document.getElementById('privacyFromDrawer');if(pfd)pfd.addEventListener('click',function(e){e.preventDefault();cd();setTimeout(openPrivacyModal,400)})})();
 </script>
 </body>
