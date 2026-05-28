@@ -1,16 +1,45 @@
 # Cloudflare Pages _redirects
 # Format: source destination status
+#
+# Site structure: all pages are now directory-based (index.html in each folder).
+# This works with BOTH Cloudflare Pages (auto extensionless routing) AND
+# local HTTP servers (standard directory index serving).
+#
+# Cloudflare handles equivalent non-trailing-slash paths automatically:
+#   /articles → articles/index.html (same as /articles/)
+#   /specials/why-d-cup-support → specials/why-d-cup-support/index.html
 
-# --- Permanent redirects (301) ---
+# --- Legacy URL redirects (for old flat-file URLs pre-restructuring) ---
+/specials.html                       /specials/                      301
+/articles.html                       /articles/                      301
+/wellness.html                       /wellness/                      301
+/about.html                          /about/                         301
+/privacy.html                        /privacy/                       301
+/terms.html                          /terms/                         301
 
-# Extensionless URLs are handled automatically by Cloudflare Pages.
-# Explicit 301 rules cause redirect loops because Cloudflare strips .html.
+# --- Legacy tool and article URLs (pre-directory restructuring) ---
+/tools/breast-expansion-calculator.html  /tools/breast-expansion-calculator/  301
+/tools/breast-ptosis-calculator.html     /tools/breast-ptosis-calculator/     301
+/tools/breast-volume-calculator.html     /tools/breast-volume-calculator/     301
+/tools/length-converter.html             /tools/length-converter/             301
 
+/specials/accessory-breast-guide.html    /specials/accessory-breast-guide/    301
+/specials/buying-guide.html              /specials/buying-guide/              301
+/specials/expansion-evidence.html        /specials/expansion-evidence/        301
+/specials/ptosis-prevention-evidence.html /specials/ptosis-prevention-evidence/ 301
+/specials/sports-bra-science.html        /specials/sports-bra-science/        301
+/specials/why-d-cup-support.html         /specials/why-d-cup-support/         301
 
-# --- Well-known paths (prevent 404s) ---
+/wellness/sports-bras-after-surgery.html /wellness/sports-bras-after-surgery/ 301
+/wellness/prosthetic-bras-guide.html     /wellness/prosthetic-bras-guide/     301
 
-# Prevent favicon 404 - redirect to SVG favicon
-/favicon.ico    /favicon.svg         302
+/article/bra-sister-sizes-explained.html              /article/bra-sister-sizes-explained/              301
+/article/breast-ptosis-causes-and-solutions.html      /article/breast-ptosis-causes-and-solutions/       301
+/article/breast-volume-guide.html                     /article/breast-volume-guide/                      301
+/article/how-to-measure-bra-size-at-home.html         /article/how-to-measure-bra-size-at-home/          301
+/article/how-to-tell-if-bra-fits.html                 /article/how-to-tell-if-bra-fits/                  301
+/article/post-mastectomy-breast-care.html             /article/post-mastectomy-breast-care/              301
+/article/prosthetic-bras-guide-after-mastectomy.html  /article/prosthetic-bras-guide-after-mastectomy/   301
 
 # --- Catch-all: handle common misspellings ---
 /breast-calculator   /             301

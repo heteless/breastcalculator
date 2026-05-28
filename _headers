@@ -1,67 +1,89 @@
 # Cloudflare Pages _headers
+# All pages are now directory-based: /path/index.html (served as /path/)
 # Cache-Control: max-age in seconds (31536000 = 1 year, 3600 = 1 hour)
 
-# --- Static assets: long-term cache (1 year) ---
+# --- Static assets: immutable, long-term cache (1 year) ---
+
 /style.css
-  Cache-Control: max-age=31536000
-  Cache-Tag: css
+  Cache-Control: public, max-age=31536000, immutable
 
 /script.js
-  Cache-Control: max-age=31536000
-  Cache-Tag: js
+  Cache-Control: public, max-age=31536000, immutable
 
-# --- HTML pages: revalidate frequently (1 hour) ---
-/index.html
-  Cache-Control: max-age=3600, must-revalidate
-  Cache-Tag: html
-
-/articles.html
-  Cache-Control: max-age=3600, must-revalidate
-  Cache-Tag: html
-
-/specials.html
-  Cache-Control: max-age=3600, must-revalidate
-  Cache-Tag: html
-
-/wellness.html
-  Cache-Control: max-age=3600, must-revalidate
-  Cache-Tag: html
-
-/about.html
-  Cache-Control: max-age=3600, must-revalidate
-  Cache-Tag: html
-
-/terms.html
-  Cache-Control: max-age=3600, must-revalidate
-  Cache-Tag: html
-
-/privacy.html
-  Cache-Control: max-age=3600, must-revalidate
-  Cache-Tag: html
-
-# --- Subdirectory HTML pages ---
-/tools/*.html
-  Cache-Control: max-age=3600, must-revalidate
-  Cache-Tag: html
-
-/articles/*.html
-  Cache-Control: max-age=3600, must-revalidate
-  Cache-Tag: html
-
-/specials/*.html
-  Cache-Control: max-age=3600, must-revalidate
-  Cache-Tag: html
-
-/wellness/*.html
-  Cache-Control: max-age=3600, must-revalidate
-  Cache-Tag: html
-
-# --- Other static files ---
-/sitemap.xml
-  Cache-Control: max-age=3600
+# --- Favicon & PWA assets: long-term cache (1 year) ---
 
 /favicon.svg
-  Cache-Control: max-age=31536000
+  Cache-Control: public, max-age=31536000, immutable
+
+/favicon.ico
+  Cache-Control: public, max-age=31536000, immutable
+
+/favicon-32x32.png
+  Cache-Control: public, max-age=31536000, immutable
+
+/favicon-96x96.png
+  Cache-Control: public, max-age=31536000, immutable
+
+/apple-touch-icon.png
+  Cache-Control: public, max-age=31536000, immutable
+
+/android-chrome-192x192.png
+  Cache-Control: public, max-age=31536000, immutable
+
+/site.webmanifest
+  Cache-Control: public, max-age=604800
+
+# --- Robots & sitemap: medium cache (1 day) ---
 
 /robots.txt
-  Cache-Control: max-age=86400
+  Cache-Control: public, max-age=86400
+
+/sitemap.xml
+  Cache-Control: public, max-age=86400
+
+# --- HTML pages: short cache with revalidation (1 hour) ---
+
+/index.html
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/about/index.html
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/articles/index.html
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/privacy/index.html
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/specials/index.html
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/terms/index.html
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/wellness/index.html
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/404.html
+  Cache-Control: no-cache
+
+# --- Subdirectory pages: all use the same pattern (index.html in dir) ---
+
+/tools/*/index.html
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/specials/*/index.html
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/wellness/*/index.html
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/article/*/index.html
+  Cache-Control: public, max-age=3600, must-revalidate
+
+# --- Security headers ---
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()

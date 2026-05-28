@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <script>
@@ -91,8 +91,21 @@ gtag('config','G-5SB8FNFYDV',{'anonymize_ip':true});
 @media(min-width:768px){.hero{padding:64px 0 52px}.size-grid{grid-template-columns:repeat(3,1fr)}.hero .subtitle{font-size:1.08rem}}
 @media(min-width:1024px){.hero h1{font-size:2.8rem}.hero{padding:72px 0 56px}.size-grid{grid-template-columns:repeat(4,1fr)}}
 </style>
+<!-- Google Search preferred icon (32x32px is standard Google display size) -->
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<!-- Modern browser vector icon (pure vector SVG, <5KB) -->
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <script src="https://cdn.tailwindcss.com"></script>
+<!-- Legacy browser fallback icon (contains 16x16, 32x32, 48x48px) -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- iOS/iPadOS home screen icon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<!-- Android PWA app icon (also used by Google Search) -->
+<link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+<!-- PWA manifest -->
+<link rel="manifest" href="/site.webmanifest">
+<!-- Microsoft tile color -->
+<meta name="msapplication-TileColor" content="#f4e3d7">
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
 <script>
 tailwind.config={corePlugins:{preflight:false},theme:{extend:{colors:{brand:{bg:'#fdf8f5',text:'#8b7355',hover:'#6b5344',border:'#e8ddd0',highlight:'#7a6455'}}}}}
 </script>
@@ -112,26 +125,26 @@ tailwind.config={corePlugins:{preflight:false},theme:{extend:{colors:{brand:{bg:
 <li>
 <span class="nav-label">Tools <span class="arrow">&#9662;</span></span>
 <div class="dropdown-menu">
-<a href="/tools/breast-expansion-calculator.html">Breast Expansion Calculator <span class="dd-desc">Assess splaying with nipple-spacing ratio</span></a>
-<a href="/tools/breast-ptosis-calculator.html">Breast Ptosis Calculator <span class="dd-desc">Grade sagging with nipple-inframammary distance</span></a>
-<a href="/tools/breast-volume-calculator.html">Breast Volume Calculator <span class="dd-desc">Estimate volume in cc/mL</span></a>
-<a href="/tools/length-converter.html">Length Converter <span class="dd-desc">Convert inches &amp; cm instantly</span></a>
+<a href="/tools/breast-expansion-calculator/">Breast Expansion Calculator <span class="dd-desc">Assess splaying with nipple-spacing ratio</span></a>
+<a href="/tools/breast-ptosis-calculator/">Breast Ptosis Calculator <span class="dd-desc">Grade sagging with nipple-inframammary distance</span></a>
+<a href="/tools/breast-volume-calculator/">Breast Volume Calculator <span class="dd-desc">Estimate volume in cc/mL</span></a>
+<a href="/tools/length-converter/">Length Converter <span class="dd-desc">Convert inches &amp; cm instantly</span></a>
 </div>
 </li>
 <li>
 <span class="nav-label">Articles <span class="arrow">&#9662;</span></span>
 <div class="dropdown-menu">
-<a href="/articles.html">All Articles <span class="dd-desc">Complete article listing</span></a>
-<a href="/article/how-to-measure-bra-size-at-home.html">How to Measure Bra Size <span class="dd-desc">Step-by-step guide</span></a>
-<a href="/article/how-to-tell-if-bra-fits.html">Bra Fit Checklist <span class="dd-desc">5 signs of a good fit</span></a>
-<a href="/article/bra-sister-sizes-explained.html">Sister Sizes Explained <span class="dd-desc">Find alternative fits</span></a>
-<a href="/article/breast-volume-guide.html">Breast Volume Guide <span class="dd-desc">Volume estimation &amp; bra fitting</span></a>
-<a href="/article/breast-ptosis-causes-and-solutions.html">Breast Ptosis Guide <span class="dd-desc">Causes &amp; prevention</span></a>
+<a href="/articles/">All Articles <span class="dd-desc">Complete article listing</span></a>
+<a href="/article/how-to-measure-bra-size-at-home/">How to Measure Bra Size <span class="dd-desc">Step-by-step guide</span></a>
+<a href="/article/how-to-tell-if-bra-fits/">Bra Fit Checklist <span class="dd-desc">5 signs of a good fit</span></a>
+<a href="/article/bra-sister-sizes-explained/">Sister Sizes Explained <span class="dd-desc">Find alternative fits</span></a>
+<a href="/article/breast-volume-guide/">Breast Volume Guide <span class="dd-desc">Volume estimation &amp; bra fitting</span></a>
+<a href="/article/breast-ptosis-causes-and-solutions/">Breast Ptosis Guide <span class="dd-desc">Causes &amp; prevention</span></a>
 </div>
 </li>
-<li><a href="/specials.html">Specials</a></li>
-<li><a href="/wellness.html">Wellness</a></li>
-<li><a href="/about.html">About</a></li>
+<li><a href="/specials/">Specials</a></li>
+<li><a href="/wellness/">Wellness</a></li>
+<li><a href="/about/">About</a></li>
 </ul>
 <button class="nav-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
 <span></span><span></span><span></span>
@@ -148,23 +161,23 @@ tailwind.config={corePlugins:{preflight:false},theme:{extend:{colors:{brand:{bg:
 <ul class="drawer-nav">
 <li><a href="/">Home</a></li>
 <li class="drawer-section"><span class="drawer-section-label">Tools</span></li>
-<li class="drawer-sub"><a href="/tools/breast-expansion-calculator.html">Breast Expansion Calculator</a></li>
-<li class="drawer-sub"><a href="/tools/breast-ptosis-calculator.html">Breast Ptosis Calculator</a></li>
-<li class="drawer-sub"><a href="/tools/breast-volume-calculator.html">Breast Volume Calculator</a></li>
-<li class="drawer-sub"><a href="/tools/length-converter.html">Length Converter</a></li>
+<li class="drawer-sub"><a href="/tools/breast-expansion-calculator/">Breast Expansion Calculator</a></li>
+<li class="drawer-sub"><a href="/tools/breast-ptosis-calculator/">Breast Ptosis Calculator</a></li>
+<li class="drawer-sub"><a href="/tools/breast-volume-calculator/">Breast Volume Calculator</a></li>
+<li class="drawer-sub"><a href="/tools/length-converter/">Length Converter</a></li>
 <li class="drawer-section"><span class="drawer-section-label">Articles</span></li>
-<li class="drawer-sub"><a href="/articles.html">All Articles</a></li>
-<li class="drawer-sub"><a href="/article/how-to-measure-bra-size-at-home.html">How to Measure Bra Size</a></li>
-<li class="drawer-sub"><a href="/article/how-to-tell-if-bra-fits.html">Bra Fit Checklist</a></li>
-<li class="drawer-sub"><a href="/article/bra-sister-sizes-explained.html">Sister Sizes</a></li>
-<li class="drawer-sub"><a href="/article/breast-volume-guide.html">Breast Volume Guide</a></li>
-<li class="drawer-sub"><a href="/article/breast-ptosis-causes-and-solutions.html">Breast Ptosis Guide</a></li>
+<li class="drawer-sub"><a href="/articles/">All Articles</a></li>
+<li class="drawer-sub"><a href="/article/how-to-measure-bra-size-at-home/">How to Measure Bra Size</a></li>
+<li class="drawer-sub"><a href="/article/how-to-tell-if-bra-fits/">Bra Fit Checklist</a></li>
+<li class="drawer-sub"><a href="/article/bra-sister-sizes-explained/">Sister Sizes</a></li>
+<li class="drawer-sub"><a href="/article/breast-volume-guide/">Breast Volume Guide</a></li>
+<li class="drawer-sub"><a href="/article/breast-ptosis-causes-and-solutions/">Breast Ptosis Guide</a></li>
 <li class="drawer-section"><span class="drawer-section-label">Wellness &amp; Recovery</span></li>
-<li class="drawer-sub"><a href="/wellness.html">Overview</a></li>
-<li class="drawer-sub"><a href="/wellness/prosthetic-bras-guide.html">Prosthetic Bras Guide</a></li>
-<li class="drawer-sub"><a href="/wellness/sports-bras-after-surgery.html">Sports Bras After Surgery</a></li>
-<li><a href="/specials.html">Specials &amp; Research</a></li>
-<li><a href="/about.html">About</a></li>
+<li class="drawer-sub"><a href="/wellness/">Overview</a></li>
+<li class="drawer-sub"><a href="/wellness/prosthetic-bras-guide/">Prosthetic Bras Guide</a></li>
+<li class="drawer-sub"><a href="/wellness/sports-bras-after-surgery/">Sports Bras After Surgery</a></li>
+<li><a href="/specials/">Specials &amp; Research</a></li>
+<li><a href="/about/">About</a></li>
 <li><a href="#" id="privacyFromDrawer">Privacy Settings</a></li>
 </ul>
 <div class="drawer-footer">&copy; 2026 Breast Calculator</div>
@@ -230,10 +243,10 @@ tailwind.config={corePlugins:{preflight:false},theme:{extend:{colors:{brand:{bg:
 <h2>Explore Our Tools &amp; Guides</h2>
 <p style="text-align:center;color:var(--text-light);margin-bottom:20px;font-size:0.92rem">Use our specialized calculators and read science-backed articles on breast health.</p>
 <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center">
-<a href="/tools/breast-expansion-calculator.html" class="btn-secondary">Expansion Calculator</a>
-<a href="/tools/breast-ptosis-calculator.html" class="btn-secondary">Ptosis Calculator</a>
-<a href="/tools/breast-volume-calculator.html" class="btn-secondary">Volume Calculator</a>
-<a href="/specials.html" class="btn-primary">Specials &amp; Research &rarr;</a>
+<a href="/tools/breast-expansion-calculator/" class="btn-secondary">Expansion Calculator</a>
+<a href="/tools/breast-ptosis-calculator/" class="btn-secondary">Ptosis Calculator</a>
+<a href="/tools/breast-volume-calculator/" class="btn-secondary">Volume Calculator</a>
+<a href="/specials/" class="btn-primary">Specials &amp; Research &rarr;</a>
 </div>
 </section>
 
@@ -283,10 +296,10 @@ tailwind.config={corePlugins:{preflight:false},theme:{extend:{colors:{brand:{bg:
         <div class="font-bold text-sm tracking-[0.1em] mb-3 text-[#7a6455] hidden md:block">TOOLS</div>
         <ul class="space-y-2 hidden md:block m-0 p-0 list-none" data-footer-col>
           <li><a href="/" class="block text-sm font-semibold text-[#7a6455] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline">Bra Size Calculator</a></li>
-          <li><a href="/tools/breast-expansion-calculator.html" class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline">Breast Expansion Calculator</a></li>
-          <li><a href="/tools/breast-ptosis-calculator.html" class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline">Breast Ptosis Calculator</a></li>
-          <li><a href="/tools/breast-volume-calculator.html" class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline">Breast Volume Calculator</a></li>
-          <li><a href="/tools/length-converter.html" class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline">Length Converter</a></li>
+          <li><a href="/tools/breast-expansion-calculator/" class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline">Breast Expansion Calculator</a></li>
+          <li><a href="/tools/breast-ptosis-calculator/" class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline">Breast Ptosis Calculator</a></li>
+          <li><a href="/tools/breast-volume-calculator/" class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline">Breast Volume Calculator</a></li>
+          <li><a href="/tools/length-converter/" class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline">Length Converter</a></li>
         </ul>
       </div>
 
@@ -298,10 +311,10 @@ tailwind.config={corePlugins:{preflight:false},theme:{extend:{colors:{brand:{bg:
         </button>
         <div class="font-bold text-sm tracking-[0.1em] mb-3 text-[#7a6455] hidden md:block">SPECIALS</div>
         <ul class="space-y-2 hidden md:block m-0 p-0 list-none" data-footer-col>
-          <li><a href="/specials/why-d-cup-support.html" class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline">D+ Cup Support Science</a></li>
-          <li><a href="/specials/sports-bra-science.html" class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline">Sports Bra Science</a></li>
-          <li><a href="/specials/ptosis-prevention-evidence.html" class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline">Ptosis Prevention</a></li>
-          <li><a href="/specials/buying-guide.html" class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline">D+ Cup Buying Guide</a></li>
+          <li><a href="/specials/why-d-cup-support/" class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline">D+ Cup Support Science</a></li>
+          <li><a href="/specials/sports-bra-science/" class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline">Sports Bra Science</a></li>
+          <li><a href="/specials/ptosis-prevention-evidence/" class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline">Ptosis Prevention</a></li>
+          <li><a href="/specials/buying-guide/" class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline">D+ Cup Buying Guide</a></li>
         </ul>
       </div>
 
@@ -313,9 +326,9 @@ tailwind.config={corePlugins:{preflight:false},theme:{extend:{colors:{brand:{bg:
         </button>
         <div class="font-bold text-sm tracking-[0.1em] mb-3 text-[#7a6455] hidden md:block">WELLNESS</div>
         <ul class="space-y-2 hidden md:block m-0 p-0 list-none" data-footer-col>
-          <li><a href="/wellness/prosthetic-bras-guide.html" class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline">Prosthetic Bras Guide</a></li>
-          <li><a href="/wellness/sports-bras-after-surgery.html" class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline">Sports Bras After Surgery</a></li>
-          <li><a href="/wellness.html" class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline">Overview</a></li>
+          <li><a href="/wellness/prosthetic-bras-guide/" class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline">Prosthetic Bras Guide</a></li>
+          <li><a href="/wellness/sports-bras-after-surgery/" class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline">Sports Bras After Surgery</a></li>
+          <li><a href="/wellness/" class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline">Overview</a></li>
         </ul>
       </div>
 
@@ -327,10 +340,10 @@ tailwind.config={corePlugins:{preflight:false},theme:{extend:{colors:{brand:{bg:
         </button>
         <div class="font-bold text-sm tracking-[0.1em] mb-3 text-[#7a6455] hidden md:block">RESOURCES</div>
         <ul class="space-y-2 hidden md:block m-0 p-0 list-none" data-footer-col>
-          <li><a href="/articles.html" class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline">Articles</a></li>
-          <li><a href="/about.html" class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline">About</a></li>
-          <li><a href="/privacy.html" class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline">Privacy Policy</a></li>
-          <li><a href="/terms.html" class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline">Terms of Use</a></li>
+          <li><a href="/articles/" class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline">Articles</a></li>
+          <li><a href="/about/" class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline">About</a></li>
+          <li><a href="/privacy/" class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline">Privacy Policy</a></li>
+          <li><a href="/terms/" class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline">Terms of Use</a></li>
         </ul>
       </div>
 
@@ -444,3 +457,4 @@ function toggleFooterCol(b){var u=b.nextElementSibling;while(u&&u.tagName!=='UL'
 
 </body>
 </html>
+
