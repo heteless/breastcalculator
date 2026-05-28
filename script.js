@@ -354,7 +354,7 @@
         banner.className = 'cookie-consent';
         banner.innerHTML = [
             '<div class="cookie-consent-inner">',
-            '<p>This website uses cookies to provide the best user experience and analyze traffic. <a href="/privacy.html">Learn more</a></p>',
+            '<p>We do not collect personal or private data without your explicit authorization. Basic cookies are used only for site functionality. <a href="/privacy/">Learn more</a></p>',
             '<div class="cookie-consent-buttons">',
             '<button class="cookie-btn cookie-btn-reject" id="cookie-reject">Reject All</button>',
             '<button class="cookie-btn cookie-btn-accept" id="cookie-accept">Accept All</button>',
@@ -371,8 +371,7 @@
             localStorage.setItem('cookieConsent', 'accepted');
             if (typeof gtag === 'function') {
                 gtag('consent', 'update', {
-                    'analytics_storage': 'granted',
-                    'ad_storage': 'granted'
+                    'analytics_storage': 'granted'
                 });
             }
             banner.classList.remove('show');
@@ -383,8 +382,7 @@
             localStorage.setItem('cookieConsent', 'rejected');
             if (typeof gtag === 'function') {
                 gtag('consent', 'update', {
-                    'analytics_storage': 'denied',
-                    'ad_storage': 'denied'
+                    'analytics_storage': 'denied'
                 });
             }
             banner.classList.remove('show');
