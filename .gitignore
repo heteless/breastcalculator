@@ -4,3 +4,44 @@
 !.dev.vars.example
 .env*
 !.env.example
+
+# Next.js build output / source
+.next/
+out/
+node_modules/
+app/
+lib/
+components/
+public/
+Breastcalculator/
+
+# Local dev / utility scripts
+scripts/
+seo-tools/
+server.py
+start-server.bat
+gen-urls.ps1
+sync-out.ps1
+submit-indexnow.py
+_fix_cookies.py
+urllist.txt
+predeploy-output.txt
+
+# IDE
+.vscode/
+.idea/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Node / package
+package.json
+package-lock.json
+jsconfig.json
+next.config.js

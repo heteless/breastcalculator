@@ -34,7 +34,8 @@
 /specials/sports-bra-science            /specials/sports-bra-science/            301
 /specials/why-d-cup-support             /specials/why-d-cup-support/             301
 
-/tools/breast-expansion-calculator  /tools/breast-expansion-calculator/  301
+/tools/breast-expansion-calculator  /breast-shape-assessment/  301
+/tools/breast-expansion-calculator/  /breast-shape-assessment/  301
 /tools/breast-ptosis-calculator     /tools/breast-ptosis-calculator/     301
 /tools/breast-shape-calculator      /tools/breast-shape-calculator/      301
 /tools/breast-volume-calculator     /tools/breast-volume-calculator/     301
@@ -58,10 +59,8 @@
 /tools/length-converter.html             /tools/length-converter/             301
 
 /specials/accessory-breast-guide.html    /specials/accessory-breast-guide/    301
-/specials/buying-guide.html              /specials/buying-guide/              301
 /specials/expansion-evidence.html        /specials/expansion-evidence/        301
 /specials/ptosis-prevention-evidence.html /specials/ptosis-prevention-evidence/ 301
-/specials/sports-bra-science.html        /specials/sports-bra-science/        301
 /specials/why-d-cup-support.html         /specials/why-d-cup-support/         301
 
 /wellness/sports-bras-after-surgery.html /wellness/sports-bras-after-surgery/ 301
@@ -70,7 +69,6 @@
 /article/bra-sister-sizes-explained.html              /article/bra-sister-sizes-explained/              301
 /article/breast-ptosis-causes-and-solutions.html      /article/breast-ptosis-causes-and-solutions/       301
 /article/breast-volume-guide.html                     /article/breast-volume-guide/                      301
-/article/how-to-measure-bra-size-at-home.html         /article/how-to-measure-bra-size-at-home/          301
 /article/how-to-tell-if-bra-fits.html                 /article/how-to-tell-if-bra-fits/                  301
 /article/post-mastectomy-breast-care.html             /article/post-mastectomy-breast-care/              301
 /article/prosthetic-bras-guide-after-mastectomy.html  /article/prosthetic-bras-guide-after-mastectomy/   301
@@ -80,3 +78,68 @@
 /bra-calculator      /             301
 /bracalculator       /             301
 /breastcalculator    /             301
+
+# --- Section 5: Legacy deep URLs → flat URL migration (301) — must precede Section 3 .html rules to avoid chains ---
+/article/how-to-measure-bra-size-at-home       /how-to-measure-bra-size/  301
+/article/how-to-measure-bra-size-at-home/      /how-to-measure-bra-size/  301
+/article/how-to-measure-bra-size-at-home.html  /how-to-measure-bra-size/  301
+/specials/buying-guide                          /bra-buying-guide/         301
+/specials/buying-guide/                         /bra-buying-guide/         301
+/specials/buying-guide.html                     /bra-buying-guide/         301
+/specials/sports-bra-science                    /sports-bra-guide/         301
+/specials/sports-bra-science/                   /sports-bra-guide/         301
+/specials/sports-bra-science.html               /sports-bra-guide/         301
+
+# --- Section 6: New Next.js routes (non-slash → slash) ---
+/bra-size-calculator     /bra-size-calculator/     301
+/bra-size-guide          /bra-size-guide/          301
+/bra-buying-guide        /bra-buying-guide/        301
+/sports-bra-guide        /sports-bra-guide/        301
+/best-comfort-bras       /best-comfort-bras/       301
+/best-wireless-bras      /best-wireless-bras/      301
+/how-to-measure-bra-size /how-to-measure-bra-size/ 301
+/compare                 /compare/                 301
+
+# Compare subpages (non-slash → slash)
+/compare/32d-vs-34c          /compare/32d-vs-34c/          301
+/compare/34b-vs-36c          /compare/34b-vs-36c/          301
+/compare/36b-vs-34c          /compare/36b-vs-34c/          301
+/compare/34dd-vs-36d         /compare/34dd-vs-36d/         301
+/compare/38c-vs-40b          /compare/38c-vs-40b/          301
+/compare/b-cup-vs-c-cup      /compare/b-cup-vs-c-cup/      301
+/compare/c-cup-vs-d-cup      /compare/c-cup-vs-d-cup/      301
+/compare/d-cup-vs-dd-cup     /compare/d-cup-vs-dd-cup/     301
+/compare/dd-cup-vs-ddd-cup   /compare/dd-cup-vs-ddd-cup/   301
+/compare/wireless-vs-wired-bra /compare/wireless-vs-wired-bra/ 301
+
+# --- Section 7: Legacy comparison URLs → new /compare/ paths (301) ---
+/32d-vs-34c       /compare/32d-vs-34c/       301
+/32d-vs-34c/      /compare/32d-vs-34c/       301
+/34b-vs-36c       /compare/34b-vs-36c/       301
+/34b-vs-36c/      /compare/34b-vs-36c/       301
+/36b-vs-34c       /compare/36b-vs-34c/       301
+/36b-vs-34c/      /compare/36b-vs-34c/       301
+/34dd-vs-36d      /compare/34dd-vs-36d/      301
+/34dd-vs-36d/     /compare/34dd-vs-36d/      301
+/38c-vs-40b       /compare/38c-vs-40b/       301
+/38c-vs-40b/      /compare/38c-vs-40b/       301
+
+# --- Section 8: Auto-generated next/prev links to non-catalog bra sizes ---
+# (size guides link to cup volumes outside the published catalog; redirect to the pillar)
+
+/bra-size-guide/32aa/     /bra-size-guide/32a/      301
+/bra-size-guide/32ddd/    /bra-size-guide/32dd/     301
+/bra-size-guide/34aa/     /bra-size-guide/34a/      301
+/bra-size-guide/34ddd/    /bra-size-guide/34dd/     301
+/bra-size-guide/36aa/     /bra-size-guide/36a/      301
+/bra-size-guide/36ddd/    /bra-size-guide/36dd/     301
+/bra-size-guide/38a/      /bra-size-guide/38b/      301
+/bra-size-guide/38ddd/    /bra-size-guide/38dd/     301
+/bra-size-guide/40b/      /bra-size-guide/40c/      301
+/bra-size-guide/40dd/     /bra-size-guide/40d/      301
+
+# --- Section 9: Tool-CTA article slugs that don't exist (legacy) ---
+/article/breast-anatomy-and-fit/   /article/breast-volume-guide/        301
+/article/breast-shape-types/       /article/bra-sister-sizes-explained/ 301
+/article/breast-weight-back-pain/  /article/breast-volume-guide/        301
+/tools/bra-size-calculator-units/  /tools/                              301

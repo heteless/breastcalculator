@@ -6,17 +6,19 @@ import mimetypes
 PORT = 8080
 DIRECTORY = os.path.dirname(os.path.abspath(__file__))
 
+# Map legacy .html URLs to their canonical replacements.
+# Each value may be a file path or a directory; directory targets resolve to <dir>/index.html.
 DIR_TO_HTML = {
-    '/specials': '/specials.html',
-    '/specials/': '/specials.html',
-    '/wellness': '/wellness.html',
-    '/wellness/': '/wellness.html',
-    '/articles': '/articles.html',
-    '/articles/': '/articles.html',
-    '/tools': '/tools/breast-volume-calculator',
-    '/tools/': '/tools/breast-volume-calculator',
-    '/article': '/articles.html',
-    '/article/': '/articles.html',
+    '/specials': '/specials/',
+    '/specials/': '/specials/',
+    '/wellness': '/wellness/',
+    '/wellness/': '/wellness/',
+    '/articles': '/articles/',
+    '/articles/': '/articles/',
+    '/tools': '/tools/',
+    '/tools/': '/tools/',
+    '/article': '/article/',
+    '/article/': '/article/',
 }
 
 class CleanURLHandler(http.server.SimpleHTTPRequestHandler):
@@ -27,8 +29,20 @@ class CleanURLHandler(http.server.SimpleHTTPRequestHandler):
         path = self.path.split('?')[0]
 
         if path in DIR_TO_HTML:
-            self.path = DIR_TO_HTML[path]
-            path = self.path.split('?')[0]
+            target = DIR_TO_HTML[path]
+            # Directory target: resolve to <dir>/index.html
+            if target.endswith('/'):
+                candidate = target + 'index.html'
+                if os.path.isfile(os.path.join(DIRECTORY, candidate.lstrip('/'))):
+                    self.path = candidate
+                    path = candidate
+                else:
+                    # Directory exists but no index.html; let super() 404
+                    self.path = target
+                    path = target
+            else:
+                self.path = target
+                path = target.split('?')[0]
 
         if not os.path.splitext(path)[1]:
             test_path = path.rstrip('/') + '.html'
