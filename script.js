@@ -1,6 +1,19 @@
 (function() {
     'use strict';
 
+    // ========== iOS / macOS Safari viewport fix ==========
+    // iOS Safari URL bar causes 100vh to be too tall; --vh tracks the *real* visible height.
+    function setVh() {
+        const vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', vh + 'px');
+    }
+    setVh();
+    window.addEventListener('resize', setVh, { passive: true });
+    window.addEventListener('orientationchange', () => setTimeout(setVh, 100), { passive: true });
+    if (window.visualViewport) {
+        window.visualViewport.addEventListener('resize', setVh, { passive: true });
+    }
+
     // ========== Unit System ==========
     const UNIT_CONFIG = {
         inch: {
