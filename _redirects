@@ -22,16 +22,16 @@
 /article/bra-sister-sizes-explained               /article/bra-sister-sizes-explained/               301
 /article/breast-ptosis-causes-and-solutions        /article/breast-ptosis-causes-and-solutions/        301
 /article/breast-volume-guide                       /article/breast-volume-guide/                       301
-/article/how-to-measure-bra-size-at-home           /article/how-to-measure-bra-size-at-home/           301
+# /article/how-to-measure-bra-size-at-home: redirect defined in Section 5 (legacy → /how-to-measure-bra-size/)
 /article/how-to-tell-if-bra-fits                   /article/how-to-tell-if-bra-fits/                   301
 /article/post-mastectomy-breast-care               /article/post-mastectomy-breast-care/               301
 /article/prosthetic-bras-guide-after-mastectomy    /article/prosthetic-bras-guide-after-mastectomy/    301
 
 /specials/accessory-breast-guide        /specials/accessory-breast-guide/        301
-/specials/buying-guide                  /specials/buying-guide/                  301
+# /specials/buying-guide: redirect defined in Section 5 (legacy → /bra-buying-guide/)
 /specials/expansion-evidence            /specials/expansion-evidence/            301
 /specials/ptosis-prevention-evidence    /specials/ptosis-prevention-evidence/    301
-/specials/sports-bra-science            /specials/sports-bra-science/            301
+# /specials/sports-bra-science: redirect defined in Section 5 (legacy → /sports-bra-guide/)
 /specials/why-d-cup-support             /specials/why-d-cup-support/             301
 
 /tools/breast-expansion-calculator  /breast-shape-assessment/  301

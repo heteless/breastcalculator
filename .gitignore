@@ -1,21 +1,19 @@
-# wrangler files
+# === 必须排除 ===
+.git/                    # 排除 git 目录
 .wrangler
 .dev.vars*
 !.dev.vars.example
 .env*
 !.env.example
 
-# Next.js build output / source
+# === Next.js 构建输出（本地/CI 生成，不提交） ===
 .next/
 out/
-node_modules/
-app/
-lib/
-components/
-public/
-Breastcalculator/
 
-# Local dev / utility scripts
+# === 依赖 ===
+node_modules/
+
+# === 本地开发脚本（不提交） ===
 scripts/
 seo-tools/
 server.py
@@ -27,21 +25,19 @@ _fix_cookies.py
 urllist.txt
 predeploy-output.txt
 
-# IDE
+# === IDE/OS ===
 .vscode/
 .idea/
-
-# OS / editor
 .DS_Store
 Thumbs.db
 *.log
 
-# Python cache
+# === 缓存 ===
 __pycache__/
 *.pyc
 
-# Node / package
-package.json
-package-lock.json
-jsconfig.json
-next.config.js
+# Breastcalculator/ 已弃用目录
+Breastcalculator/
+
+# 注意：app/, lib/, components/, public/, package.json, next.config.js
+# 不再被 ignore，因为 Cloudflare Pages 需要它们来构建
