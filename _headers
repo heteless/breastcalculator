@@ -46,27 +46,33 @@
   Cache-Control: public, max-age=86400
 
 # --- HTML pages: short cache with revalidation (1 hour) ---
+# IMPORTANT: stale-while-revalidate used to be 86400, which let Cloudflare's
+# edge serve stale HTML for up to 24 h after a deploy — the cause of
+# "deployed but still showing the old version" reports. We now use
+# `no-cache, must-revalidate` so the browser and the CDN must revalidate
+# with the origin on every request. Origin response is static and free,
+# so the cost is negligible and content is always fresh.
 
 /index.html
-  Cache-Control: public, max-age=3600, must-revalidate, stale-while-revalidate=86400
+  Cache-Control: public, no-cache, must-revalidate
 
 /about/index.html
-  Cache-Control: public, max-age=3600, must-revalidate, stale-while-revalidate=86400
+  Cache-Control: public, no-cache, must-revalidate
 
 /articles/index.html
-  Cache-Control: public, max-age=3600, must-revalidate, stale-while-revalidate=86400
+  Cache-Control: public, no-cache, must-revalidate
 
 /privacy/index.html
-  Cache-Control: public, max-age=3600, must-revalidate, stale-while-revalidate=86400
+  Cache-Control: public, no-cache, must-revalidate
 
 /specials/index.html
-  Cache-Control: public, max-age=3600, must-revalidate, stale-while-revalidate=86400
+  Cache-Control: public, no-cache, must-revalidate
 
 /terms/index.html
-  Cache-Control: public, max-age=3600, must-revalidate, stale-while-revalidate=86400
+  Cache-Control: public, no-cache, must-revalidate
 
 /wellness/index.html
-  Cache-Control: public, max-age=3600, must-revalidate, stale-while-revalidate=86400
+  Cache-Control: public, no-cache, must-revalidate
 
 /404.html
   Cache-Control: no-cache
@@ -74,48 +80,48 @@
 # --- Subdirectory pages: all use the same pattern (index.html in dir) ---
 
 /tools/*/index.html
-  Cache-Control: public, max-age=3600, must-revalidate, stale-while-revalidate=86400
+  Cache-Control: public, no-cache, must-revalidate
 
 /specials/*/index.html
-  Cache-Control: public, max-age=3600, must-revalidate, stale-while-revalidate=86400
+  Cache-Control: public, no-cache, must-revalidate
 
 /wellness/*/index.html
-  Cache-Control: public, max-age=3600, must-revalidate, stale-while-revalidate=86400
+  Cache-Control: public, no-cache, must-revalidate
 
 /article/*/index.html
-  Cache-Control: public, max-age=3600, must-revalidate, stale-while-revalidate=86400
+  Cache-Control: public, no-cache, must-revalidate
 
 /compare/index.html
-  Cache-Control: public, max-age=3600, must-revalidate, stale-while-revalidate=86400
+  Cache-Control: public, no-cache, must-revalidate
 
 /compare/*/index.html
-  Cache-Control: public, max-age=3600, must-revalidate, stale-while-revalidate=86400
+  Cache-Control: public, no-cache, must-revalidate
 
 # --- Next.js generated clusters (SSG output) ---
 
 /bra-size-calculator/index.html
-  Cache-Control: public, max-age=3600, must-revalidate, stale-while-revalidate=86400
+  Cache-Control: public, no-cache, must-revalidate
 
 /bra-size-guide/index.html
-  Cache-Control: public, max-age=3600, must-revalidate, stale-while-revalidate=86400
+  Cache-Control: public, no-cache, must-revalidate
 
 /bra-size-guide/*/index.html
-  Cache-Control: public, max-age=3600, must-revalidate, stale-while-revalidate=86400
+  Cache-Control: public, no-cache, must-revalidate
 
 /bra-buying-guide/index.html
-  Cache-Control: public, max-age=3600, must-revalidate, stale-while-revalidate=86400
+  Cache-Control: public, no-cache, must-revalidate
 
 /best-comfort-bras/index.html
-  Cache-Control: public, max-age=3600, must-revalidate, stale-while-revalidate=86400
+  Cache-Control: public, no-cache, must-revalidate
 
 /best-wireless-bras/index.html
-  Cache-Control: public, max-age=3600, must-revalidate, stale-while-revalidate=86400
+  Cache-Control: public, no-cache, must-revalidate
 
 /how-to-measure-bra-size/index.html
-  Cache-Control: public, max-age=3600, must-revalidate, stale-while-revalidate=86400
+  Cache-Control: public, no-cache, must-revalidate
 
 /sports-bra-guide/index.html
-  Cache-Control: public, max-age=3600, must-revalidate, stale-while-revalidate=86400
+  Cache-Control: public, no-cache, must-revalidate
 
 # --- Next.js hashed bundles: long-term immutable cache (1 year) ---
 

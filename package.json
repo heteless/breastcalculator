@@ -2,10 +2,11 @@
   "name": "breastcalculator",
   "version": "1.0.0",
   "private": true,
-  "description": "Breast Calculator — static site deployed to Cloudflare Pages. No Node.js build step is required: all HTML, CSS, and JS files are served as-is.",
+  "description": "Breast Calculator — static site deployed to Cloudflare Pages.",
   "scripts": {
-    "build": "echo 'Static site: no build step required. Serving HTML/CSS/JS as-is.' && exit 0",
-    "dev": "echo 'Open index.html in a browser, or run: npx http-server -p 8000'"
+    "build": "node scripts/cache-bust.js && echo 'Static site ready: HTML cache-busted, served as-is.' && exit 0",
+    "dev": "echo 'Open index.html in a browser, or run: npx http-server -p 8000'",
+    "cache-bust": "node scripts/cache-bust.js"
   },
   "engines": {
     "node": ">=18"
