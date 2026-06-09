@@ -10,3 +10,10 @@ __pycache__/
 *.pyc
 *.pyo
 build.log
+
+# === Node (Cloudflare Pages build shim) ===
+# package.json is committed so `npm install && npm run build` succeeds
+# in the Cloudflare Pages build environment. The artifacts below are
+# not part of the site and should not be tracked.
+node_modules/
+package-lock.json
