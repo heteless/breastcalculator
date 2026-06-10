@@ -25,6 +25,6 @@ function run(cmd) {
 
 run(
   'npx tailwindcss -i tailwind-input.css -o tailwind-built.css ' +
-    '--content "./**/index.html,./index.html,./script.js" --no-preflight'
+    '--content "./**/index.html,./**/footer.html,./**/header.html,./index.html,./footer.html,./header.html,./script.js" --no-preflight'
 );
 console.log('[build-tailwind] Done.');
