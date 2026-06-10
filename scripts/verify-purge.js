@@ -7,7 +7,7 @@ const glob = require('fast-glob');
 const ROOT = 'd:/DevProject/breastcalculator';
 const cssPath = path.join(ROOT, 'style.css');
 
-console.log('=== CSS 文件验证 ===');
+console.log('=== CSS file verification ===');
 const c = fs.readFileSync(cssPath, 'utf8');
 try {
   const r = postcss.parse(c);
@@ -28,7 +28,7 @@ try {
   console.log('  ✗ FAIL:', e.message);
 }
 
-console.log('\n=== HTML 页面引用验证 ===');
+console.log('\n=== HTML page reference verification ===');
 const htmlFiles = glob.sync('**/*.html', { cwd: ROOT, ignore: ['node_modules/**', 'tools/**/node_modules/**'] });
 const cssContent = fs.readFileSync(cssPath, 'utf8');
 const cssClasses = new Set();
@@ -48,14 +48,14 @@ for (const f of htmlFiles) {
 }
 const usedButMissingInCss = [...usedInHtml].filter((c) => !cssClasses.has(c));
 const unusedInCss = [...cssClasses].filter((c) => !usedInHtml.has(c));
-console.log('  HTML 文件总数:', htmlFiles.length);
-console.log('  CSS 中定义的 class 总数:', cssClasses.size);
-console.log('  HTML 中实际使用的 class 总数:', usedInHtml.size);
-console.log('  使用但 CSS 中未找到的 class (需检查):', usedButMissingInCss.length);
-if (usedButMissingInCss.length > 0) console.log('    例子:', usedButMissingInCss.slice(0, 10).join(', '));
-console.log('  CSS 中定义但 HTML 未直接使用的 class:', unusedInCss.length, '(其中部分是 JS 动态添加)');
+console.log('  HTML pages:', htmlFiles.length);
+console.log('  CSS class count:', cssClasses.size);
+console.log('  HTML used class count:', usedInHtml.size);
+console.log('  Used but not in CSS (check):', usedButMissingInCss.length);
+if (usedButMissingInCss.length > 0) console.log('    examples:', usedButMissingInCss.slice(0, 10).join(', '));
+console.log('  Unused in CSS:', unusedInCss.length, '(some may be JS dynamic)');
 
-console.log('\n=== JS 文件 (script.js) 动态 class 引用验证 ===');
+console.log('\n=== JS dynamic class verification ===');
 const jsPath = path.join(ROOT, 'script.js');
 if (fs.existsSync(jsPath)) {
   const jsContent = fs.readFileSync(jsPath, 'utf8');
@@ -74,7 +74,7 @@ if (fs.existsSync(jsPath)) {
     }
   }
   const missing = [...dynamicSet].filter((c) => !cssClasses.has(c));
-  console.log('  动态添加的 class 总数:', dynamicSet.size);
-  console.log('  动态但 CSS 中未找到的 class (需补 safelist):', missing.length);
-  if (missing.length > 0) console.log('    例子:', missing.slice(0, 10).join(', '));
+  console.log('  Dynamic class count:', dynamicSet.size);
+  console.log('  Dynamic but missing from CSS:', missing.length);
+  if (missing.length > 0) console.log('    examples:', missing.slice(0, 10).join(', '));
 }

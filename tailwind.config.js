@@ -1,2 +1,3 @@
 module.exports ={content:[
-'.*/index.html','.*/index.html','.***/index.html','./index.html','./script.js',],corePlugins:{preflight:false},theme:{extend:{}},plugins:[],};
+'.*.html','.index.html','.footer.html','.header.html','./index.html','./footer.html','./header.html','./script.js'
+],corePlugins:{preflight:false},theme:{extend:{}},plugins:[]};
