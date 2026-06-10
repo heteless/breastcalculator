@@ -1,0 +1,43 @@
+# Cloudflare Pages / Workers asset ignore patterns
+# Files matching these globs will be excluded from upload.
+
+# Build / source artifacts
+node_modules/
+.git/
+.gitignore
+.github/
+.cache/
+
+# Tooling & scripts (not part of deployed site)
+scripts/
+*.log
+*.md
+LICENSE*
+README*
+CHANGELOG*
+.eslintrc*
+.prettierrc*
+.vscode/
+.idea/
+
+# Config & lockfiles
+package.json
+package-lock.json
+wrangler.toml
+wrangler.jsonc
+.npmrc
+.yarnrc*
+.pnpmrc
+
+# Tests
+test/
+tests/
+__tests__/
+*.test.*
+*.spec.*
+
+# Dry-run output
+dist-dryrun/
+
+# PurgeCSS reports
+purgecss-report-*.md
