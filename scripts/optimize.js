@@ -58,7 +58,9 @@ function minifyHTML(html) {
     .replace(/\s+type=["']text\/(javascript|css)["']/gi, '')
     .replace(/\s+type=["'](application\/(javascript|ecmascript))["']/gi, '')
     .replace(/\s+language=["'][^"']*["']/gi, '')
-    .replace(/\s+charset=["']utf-?8["']/gi, '')
+    // NOTE: do NOT strip charset="utf-8" — the meta charset is required so
+    // browsers render non-ASCII characters (e.g. ▾ dropdown arrows, em
+    // dashes, CJK) correctly. Removing it produced "â–¾" garbled output.
     // Collapse all whitespace runs (including newlines) to a single space
     .replace(/\s+/g, ' ')
     // Remove whitespace between tags
