@@ -1,0 +1,358 @@
+/**
+ * Bra Size Calculator - Enhancement Module
+ * Adds sister sizes, brand selector, loading state, and real-time feedback
+ * to existing calculators without modifying the core script.
+ *
+ * Usage: <script src="/assets/bra-calculator.js"></script>
+ *        <script src="/assets/bra-calculator-enhance.js"></script>
+ *
+ * Looks for forms with id="size-form" or class="bc-enhance" and enhances them.
+ */
+(function () {
+  'use strict';
+  if (typeof window.BraCalculator === 'undefined') {
+    console.warn('[bc-enhance] BraCalculator module not found');
+    return;
+  }
+  var BC = window.BraCalculator;
+  if (window.__bcEnhanceLoaded) return;
+  window.__bcEnhanceLoaded = true;
+
+  // --- Loading state -----------------------------------------------------
+  function setLoading(form, loading) {
+    var btn = form.querySelector('button[type="submit"]');
+    if (!btn) return;
+    if (loading) {
+      btn.disabled = true;
+      btn.dataset.origText = btn.textContent;
+      btn.innerHTML = '<span class="bc-spinner" aria-hidden="true"></span><span>Calculating…</span>';
+      btn.classList.add('is-loading');
+    } else {
+      btn.disabled = false;
+      if (btn.dataset.origText) btn.textContent = btn.dataset.origText;
+      btn.classList.remove('is-loading');
+    }
+  }
+
+  function flashSuccess(form) {
+    var result = form.parentElement && form.parentElement.querySelector('.calc-result, #size-result, [data-result]');
+    if (!result) return;
+    result.classList.add('bc-flash-success');
+    setTimeout(function () { result.classList.remove('bc-flash-success'); }, 1200);
+  }
+
+  // --- Sister sizes rendering -------------------------------------------
+  function renderSisterSizes(container, bandSize, cupLetter) {
+    if (!container) return;
+    var sisters = BC.getSisterSizes(bandSize, cupLetter);
+    if (!sisters || sisters.length === 0) {
+      container.innerHTML = '';
+      return;
+    }
+    var html = '<div class="bc-sister-sizes">';
+    html += '<h4 class="bc-sister-title">Sister Sizes <span class="bc-sister-hint">(equivalent cup volume)</span></h4>';
+    html += '<ul class="bc-sister-list" role="list">';
+    for (var i = 0; i < sisters.length; i++) {
+      var s = sisters[i];
+      var cls = 'bc-sister-item' + (s.primary ? ' bc-sister-primary' : '');
+      html += '<li class="' + cls + '">';
+      html += '<span class="bc-sister-band">' + s.band + '</span>';
+      html += '<span class="bc-sister-cup">' + s.cup + '</span>';
+      if (s.primary) html += '<span class="bc-sister-badge">Your size</span>';
+      html += '</li>';
+    }
+    html += '</ul></div>';
+    container.innerHTML = html;
+  }
+
+  // --- Brand selector ---------------------------------------------------
+  function populateBrandSelect(select) {
+    if (!select) return;
+    var keys = Object.keys(BC.BRAND_DATABASE);
+    for (var i = 0; i < keys.length; i++) {
+      var key = keys[i];
+      var b = BC.BRAND_DATABASE[key];
+      var opt = document.createElement('option');
+      opt.value = key;
+      opt.textContent = b.name;
+      select.appendChild(opt);
+    }
+  }
+
+  function renderBrandResult(container, adjusted, original) {
+    if (!container) return;
+    if (adjusted.brand && adjusted.brand.name === 'Standard (most brands)') {
+      container.innerHTML = '';
+      return;
+    }
+    var html = '<div class="bc-brand-result">';
+    html += '<h4 class="bc-brand-title">Brand-Specific Size: ' + adjusted.brand.name + '</h4>';
+    html += '<div class="bc-brand-sizes">';
+    html += sizeRow('US', adjusted.us, original.us);
+    html += sizeRow('UK', adjusted.uk, original.uk);
+    html += sizeRow('EU', adjusted.eu, original.eu);
+    html += '</div>';
+    html += '<p class="bc-brand-note">' + adjusted.brand.note + '</p>';
+    html += '</div>';
+    container.innerHTML = html;
+  }
+
+  function sizeRow(label, adjusted, original) {
+    var changed = adjusted !== original;
+    return '<div class="bc-brand-row">' +
+      '<span class="bc-brand-label">' + label + '</span>' +
+      '<span class="bc-brand-value' + (changed ? ' bc-brand-changed' : '') + '">' + adjusted + '</span>' +
+      (changed ? '<span class="bc-brand-original">(was ' + original + ')</span>' : '') +
+      '</div>';
+  }
+
+  // --- Main enhancement handler ----------------------------------------
+  function enhance(form) {
+    if (form.dataset.enhanced === '1') return;
+    form.dataset.enhanced = '1';
+
+    // Build sister-sizes and brand containers
+    var sisterContainer = form.parentElement.querySelector('[data-sister-sizes]') ||
+      (function () {
+        var d = document.createElement('div');
+        d.setAttribute('data-sister-sizes', '');
+        form.parentElement.insertBefore(d, form.nextSibling);
+        return d;
+      })();
+    var brandSelect = form.parentElement.querySelector('[data-brand-select]') ||
+      (function () {
+        var wrap = document.createElement('div');
+        wrap.className = 'calc-field bc-brand-field';
+        wrap.innerHTML = '<label for="bc-brand-' + (form.id || 'f') + '">Brand (optional)</label>' +
+          '<select id="bc-brand-' + (form.id || 'f') + '" data-brand-select aria-describedby="bc-brand-hint">' +
+          '<option value="">— Select a brand —</option>' +
+          '</select>' +
+          '<p class="field-hint" id="bc-brand-hint">Sizing varies by brand. Pick yours for a more accurate size.</p>';
+        var fieldRow = form.querySelector('.calc-fields, .calc-field-row');
+        if (fieldRow) fieldRow.appendChild(wrap);
+        else form.appendChild(wrap);
+        return wrap.querySelector('select');
+      })();
+    var brandResult = form.parentElement.querySelector('[data-brand-result]') ||
+      (function () {
+        var d = document.createElement('div');
+        d.setAttribute('data-brand-result', '');
+        sisterContainer.parentElement.insertBefore(d, sisterContainer.nextSibling);
+        return d;
+      })();
+    // Build a result-size display (US/UK/EU/FR/AU/IN grid) if none exists
+    var resultDiv = form.parentElement.querySelector('.calc-result, #size-result, [data-result]') ||
+      (function () {
+        var d = document.createElement('div');
+        d.className = 'calc-result hidden';
+        d.setAttribute('data-result', '');
+        d.setAttribute('aria-live', 'polite');
+        d.innerHTML =
+          '<div class="bc-result-card">' +
+            '<h3 class="bc-result-title">Your Bra Size</h3>' +
+            '<div class="bc-result-grid">' +
+              '<div class="bc-result-cell"><span class="bc-result-label">US</span><span class="bc-result-value" id="size-us">—</span></div>' +
+              '<div class="bc-result-cell bc-result-cell-primary"><span class="bc-result-label">UK</span><span class="bc-result-value" id="size-uk">—</span></div>' +
+              '<div class="bc-result-cell"><span class="bc-result-label">EU</span><span class="bc-result-value" id="size-eu">—</span></div>' +
+              '<div class="bc-result-cell"><span class="bc-result-label">FR</span><span class="bc-result-value" id="size-fr">—</span></div>' +
+              '<div class="bc-result-cell"><span class="bc-result-label">AU</span><span class="bc-result-value" id="size-au">—</span></div>' +
+              '<div class="bc-result-cell"><span class="bc-result-label">IN</span><span class="bc-result-value" id="size-india">—</span></div>' +
+            '</div>' +
+            '<p class="bc-result-recommendation" id="size-recommendation">—</p>' +
+          '</div>';
+        form.parentElement.insertBefore(d, sisterContainer);
+        return d;
+      })();
+    // Expose the result div for flashSuccess via dataset
+    form.dataset.resultDiv = '1';
+
+    populateBrandSelect(brandSelect);
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      setLoading(form, true);
+
+      // Tiny delay for UX feedback (even though calc is instant)
+      setTimeout(function () {
+        try {
+          var ubEl = form.querySelector('input[name="underbust"], #underbust');
+          var bEl = form.querySelector('input[name="bust"], #bust');
+          if (!ubEl || !bEl) {
+            throw new Error('Missing underbust or bust input');
+          }
+          var ub = parseFloat(ubEl.value);
+          var b = parseFloat(bEl.value);
+          if (isNaN(ub) || isNaN(b)) {
+            if (window.showToast) window.showToast('Please enter valid numbers', 'error');
+            return;
+          }
+          // Convert to inches
+          var unitEl = form.querySelector('#unit, [name="unit"]');
+          var unit = unitEl ? unitEl.value : 'inch';
+          var unitKey = unit === 'inches' ? 'inch' : unit === 'centimeters' ? 'cm' : unit === 'millimeters' ? 'mm' : 'inch';
+          var ubIn = BC.convertToInches(ub, unitKey);
+          var bIn = BC.convertToInches(b, unitKey);
+
+          // Validate
+          var v1 = BC.validateMeasurement(ub, 'underbust', unitKey);
+          var v2 = BC.validateMeasurement(b, 'bust', unitKey);
+          if (!v1.valid || !v2.valid) {
+            if (window.showToast) {
+              window.showToast(v1.valid ? v2.message : v1.message, 'error');
+            }
+            return;
+          }
+          var vp = BC.validatePair(ubIn, bIn);
+          if (!vp.valid) {
+            if (window.showToast) window.showToast(vp.message + ' ' + (vp.suggestion || ''), 'error');
+            return;
+          }
+
+          // Calculate
+          var result = BC.calculateBraSize(ubIn, bIn);
+
+          // Fill existing slots if any
+          fillIfPresent(form, 'size-us', result.us);
+          fillIfPresent(form, 'size-uk', result.uk);
+          fillIfPresent(form, 'size-eu', result.eu);
+          fillIfPresent(form, 'size-fr', result.fr);
+          fillIfPresent(form, 'size-au', result.au);
+          fillIfPresent(form, 'size-india', result.india);
+          fillIfPresent(form, 'cup-diff', result.cupLetter);
+          fillIfPresent(form, 'cup-diff-value', result.cupDiff);
+          fillIfPresent(form, 'size-recommendation', BC.getBraRecommendation(result.cupLetter, result.bandSize));
+
+          // Show result
+          if (resultDiv) {
+            resultDiv.classList.remove('hidden');
+            try { resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); } catch (e) {}
+          }
+
+          // Sister sizes
+          renderSisterSizes(sisterContainer, result.bandSize, result.cupLetter);
+
+          // Brand
+          var brandKey = brandSelect && brandSelect.value;
+          if (brandKey) {
+            var adj = BC.applyBrandAdjustment(result, brandKey);
+            renderBrandResult(brandResult, adj, result);
+          } else {
+            brandResult.innerHTML = '';
+          }
+
+          flashSuccess(form);
+          if (window.showToast) window.showToast('Calculation complete!', 'success');
+        } catch (err) {
+          if (window.showToast) window.showToast('Calculation failed: ' + err.message, 'error');
+          console.error('[bc-enhance]', err);
+        } finally {
+          setLoading(form, false);
+        }
+      }, 80);
+    });
+
+    // Real-time sister-size preview when both inputs have values
+    var ubEl = form.querySelector('input[name="underbust"], #underbust');
+    var bEl = form.querySelector('input[name="bust"], #bust');
+    function livePreview() {
+      if (!ubEl || !bEl) return;
+      var ub = parseFloat(ubEl.value);
+      var b = parseFloat(bEl.value);
+      if (isNaN(ub) || isNaN(b)) return;
+      var unitEl = form.querySelector('#unit, [name="unit"]');
+      var unit = unitEl ? unitEl.value : 'inch';
+      var unitKey = unit === 'inches' ? 'inch' : unit === 'centimeters' ? 'cm' : unit === 'millimeters' ? 'mm' : 'inch';
+      var ubIn = BC.convertToInches(ub, unitKey);
+      var bIn = BC.convertToInches(b, unitKey);
+      var r = BC.calculateBraSize(ubIn, bIn);
+      renderSisterSizes(sisterContainer, r.bandSize, r.cupLetter);
+    }
+    if (ubEl) ubEl.addEventListener('input', debounce(livePreview, 200));
+    if (bEl) bEl.addEventListener('input', debounce(livePreview, 200));
+  }
+
+  function fillIfPresent(scope, id, value) {
+    // Search the result area first (siblings of the form), then fall back to scope
+    var parent = scope.parentElement;
+    var el = parent ? parent.querySelector('#' + id) : null;
+    if (!el && scope.querySelector) el = scope.querySelector('#' + id);
+    if (!el) el = document.getElementById(id);
+    if (el) el.textContent = value;
+  }
+
+  function debounce(fn, ms) {
+    var t = null;
+    return function () {
+      var args = arguments, ctx = this;
+      clearTimeout(t);
+      t = setTimeout(function () { fn.apply(ctx, args); }, ms);
+    };
+  }
+
+  // --- Quick-input templates -------------------------------------------
+  function initQuickTemplates(form) {
+    if (form.dataset.quickInit === '1') return;
+    form.dataset.quickInit = '1';
+    var container = form.parentElement.querySelector('[data-quick-templates]') ||
+      (function () {
+        var d = document.createElement('div');
+        d.setAttribute('data-quick-templates', '');
+        var actions = form.querySelector('.calc-actions');
+        if (actions && actions.parentElement) {
+          actions.parentElement.insertBefore(d, actions);
+        } else {
+          form.parentElement.insertBefore(d, form.nextSibling);
+        }
+        return d;
+      })();
+    if (form.dataset.quickOptOut === '1') return;
+    var templates = [
+      { label: '34B (typical)', ub: 32, b: 34, unit: 'inch' },
+      { label: '36C (typical)', ub: 34, b: 37, unit: 'inch' },
+      { label: '38DD (typical)', ub: 36, b: 40, unit: 'inch' },
+      { label: '81/86 cm', ub: 81, b: 86, unit: 'cm' }
+    ];
+    var html = '<div class="bc-quick-templates">';
+    html += '<span class="bc-quick-label">Quick fill:</span>';
+    for (var i = 0; i < templates.length; i++) {
+      var t = templates[i];
+      html += '<button type="button" class="bc-quick-btn" data-ub="' + t.ub + '" data-b="' + t.b + '" data-unit="' + t.unit + '">' + t.label + '</button>';
+    }
+    html += '</div>';
+    container.innerHTML = html;
+    container.addEventListener('click', function (e) {
+      var btn = e.target.closest('.bc-quick-btn');
+      if (!btn) return;
+      var ubEl = form.querySelector('#underbust');
+      var bEl = form.querySelector('#bust');
+      var unitEl = form.querySelector('#unit');
+      if (ubEl) ubEl.value = btn.dataset.ub;
+      if (bEl) bEl.value = btn.dataset.b;
+      if (unitEl) {
+        var u = btn.dataset.unit;
+        unitEl.value = u === 'inch' ? 'inches' : u === 'cm' ? 'cm' : 'mm';
+        unitEl.dispatchEvent(new Event('change'));
+      }
+      if (window.showToast) window.showToast('Filled with ' + btn.textContent.trim(), 'info');
+    });
+  }
+
+  // --- Init --------------------------------------------------------------
+  function init() {
+    var forms = document.querySelectorAll('#size-form, form.bc-enhance, form.calc-form, .calc-form[data-enhance="sister"]');
+    forms.forEach(function (f) {
+      enhance(f);
+      initQuickTemplates(f);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+  // Re-init on late DOMContentLoaded hook (the page also does this)
+  setTimeout(init, 50);
+  setTimeout(init, 250);
+  setTimeout(init, 800);
+})();

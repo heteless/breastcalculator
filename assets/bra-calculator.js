@@ -1,0 +1,355 @@
+/**
+ * Bra Size Calculator - Core Module
+ * Industry-standard bra fitting algorithm with international size conversion,
+ * sister sizes, brand size adjustments, and real-time input validation.
+ *
+ * Algorithm: Based on the standard "underbust + cup difference" method used by
+ * professional fitters, with band rounding to even numbers and a 12-step cup
+ * progression. The band size is derived from the underbust measurement (in
+ * inches), then the cup letter is determined by the difference between the
+ * bust and the rounded band.
+ *
+ * Reference: ASTM D7660-21, ISO 3636 (size designation of clothes).
+ */
+(function (global) {
+  'use strict';
+
+  // --- Constants ---------------------------------------------------------
+
+  var CUP_SIZES = ['AA', 'A', 'B', 'C', 'D', 'DD', 'DDD', 'G', 'H', 'I', 'J', 'K'];
+
+  // US cup -> UK cup (UK skips DD, DDD and uses E, F, FF, G, GG, H)
+  var UK_CUP_MAP = {
+    'DDD': 'E',
+    'G': 'F',
+    'H': 'FF',
+    'I': 'G',
+    'J': 'GG',
+    'K': 'H'
+  };
+
+  // US cup -> EU cup (EU increments alphabetically from D: E, F, G, H...)
+  var EU_CUP_MAP = {
+    'DD': 'E',
+    'DDD': 'F',
+    'G': 'G',
+    'H': 'H',
+    'I': 'I',
+    'J': 'J',
+    'K': 'K'
+  };
+
+  // Brand-specific band/cup offsets (inches). Positive = band runs tight,
+  // negative = band runs loose. Cup offset is in cup letters.
+  var BRAND_DATABASE = {
+    'standard':   { name: 'Standard (most brands)', bandOffset: 0,  cupOffset: 0,  note: 'Use the standard size as a starting point.' },
+    'victorias-secret': { name: "Victoria's Secret",   bandOffset: -1, cupOffset: -1, note: 'Tends to run small in the band and shallow in the cup. Consider sizing up.' },
+    'thirdlove':  { name: 'ThirdLove',              bandOffset: 0,  cupOffset: 1,  note: 'Half-cup sizing. Cups run slightly shallow.' },
+    'soma':       { name: 'Soma',                   bandOffset: 0,  cupOffset: 0,  note: 'Generally true to size.' },
+    'wacoal':     { name: 'Wacoal',                 bandOffset: 0,  cupOffset: 0,  note: 'Generally true to size with excellent support.' },
+    'natori':     { name: 'Natori',                 bandOffset: 0,  cupOffset: 0,  note: 'True to size; bands run snug at first.' },
+    'calvin-klein': { name: 'Calvin Klein',         bandOffset: 0,  cupOffset: 0,  note: 'True to size.' },
+    'spanx':      { name: 'Spanx',                  bandOffset: -1, cupOffset: 0,  note: 'Compression fit. Band runs tight.' },
+    'cosabella':  { name: 'Cosabella',              bandOffset: 0,  cupOffset: 0,  note: 'European cut. Lingerie sizing.' },
+    'prima-donna':{ name: 'Prima Donna',            bandOffset: 0,  cupOffset: 0,  note: 'European sizing, generous cups.' },
+    'freya':      { name: 'Freya',                  bandOffset: 0,  cupOffset: 1,  note: 'UK brand. Cups run slightly large.' },
+    'panache':    { name: 'Panache',                bandOffset: 0,  cupOffset: 0,  note: 'UK brand. True to size with strong support.' }
+  };
+
+  // --- Validation --------------------------------------------------------
+
+  /**
+   * Validate a measurement value. Returns { valid, message, suggestion }.
+   * @param {string|number} value - Raw input value.
+   * @param {string} type - 'underbust' or 'bust'.
+   * @param {string} unit - 'inch', 'cm', or 'mm'.
+   */
+  function validateMeasurement(value, type, unit) {
+    var num = typeof value === 'number' ? value : parseFloat(value);
+    if (value === '' || value === null || value === undefined) {
+      return { valid: false, code: 'empty', message: 'Please enter a value.' };
+    }
+    if (isNaN(num) || !isFinite(num)) {
+      return { valid: false, code: 'nan', message: 'Please enter a valid number.' };
+    }
+    if (num <= 0) {
+      return { valid: false, code: 'nonpositive', message: 'Value must be greater than zero.' };
+    }
+    // Per-unit ranges
+    var ranges = {
+      inch: { underbust: { min: 20, max: 60 }, bust: { min: 22, max: 70 } },
+      cm:   { underbust: { min: 50, max: 152 }, bust: { min: 56, max: 178 } },
+      mm:   { underbust: { min: 500, max: 1520 }, bust: { min: 560, max: 1780 } }
+    };
+    var range = ranges[unit] && ranges[unit][type];
+    if (!range) {
+      return { valid: false, code: 'unit', message: 'Unknown unit. Use inches, cm, or mm.' };
+    }
+    if (num < range.min) {
+      return {
+        valid: false,
+        code: 'too-small',
+        message: 'Value is below the realistic range (' + range.min + ' ' + unit + ').',
+        suggestion: 'Please re-measure carefully.'
+      };
+    }
+    if (num > range.max) {
+      return {
+        valid: false,
+        code: 'too-large',
+        message: 'Value is above the realistic range (' + range.max + ' ' + unit + ').',
+        suggestion: 'Please re-measure carefully.'
+      };
+    }
+    return { valid: true, code: 'ok', message: 'OK' };
+  }
+
+  /**
+   * Cross-validate that bust >= underbust by a reasonable amount.
+   * @param {number} underbustInches
+   * @param {number} bustInches
+   */
+  function validatePair(underbustInches, bustInches) {
+    if (bustInches < underbustInches) {
+      return {
+        valid: false,
+        code: 'bust-smaller',
+        message: 'Bust measurement should be at least equal to the underbust.',
+        suggestion: 'Swap the two values, or re-measure.'
+      };
+    }
+    var diff = bustInches - underbustInches;
+    if (diff > 12) {
+      return {
+        valid: false,
+        code: 'diff-too-large',
+        message: 'The difference between bust and underbust is unusually large (' + diff.toFixed(1) + ' in).',
+        suggestion: 'Please re-measure both values.'
+      };
+    }
+    if (diff < 0) {
+      return {
+        valid: false,
+        code: 'negative-diff',
+        message: 'Bust should not be smaller than underbust.',
+        suggestion: 'Re-measure and re-enter the values.'
+      };
+    }
+    return { valid: true, code: 'ok', message: 'OK' };
+  }
+
+  // --- Unit conversion ---------------------------------------------------
+
+  var UNIT_TO_INCHES = { inch: 1, cm: 1 / 2.54, mm: 1 / 25.4 };
+
+  function convertToInches(value, unit) {
+    if (value == null || isNaN(value)) return NaN;
+    var factor = UNIT_TO_INCHES[unit];
+    if (!factor) return NaN;
+    return value * factor;
+  }
+
+  // --- Core size calculation --------------------------------------------
+
+  /**
+   * Round to nearest even integer, clamped to [28, 50].
+   */
+  function roundBand(underbustInches) {
+    if (underbustInches == null || isNaN(underbustInches)) return 28;
+    var band = Math.round(underbustInches);
+    if (band % 2 !== 0) band += 1;
+    if (band < 28) band = 28;
+    if (band > 50) band = 50;
+    return band;
+  }
+
+  function getCupLetter(index) {
+    if (index < 0) return CUP_SIZES[0];
+    if (index >= CUP_SIZES.length) return CUP_SIZES[CUP_SIZES.length - 1];
+    return CUP_SIZES[index];
+  }
+
+  function getCupIndex(letter) {
+    var i = CUP_SIZES.indexOf(letter);
+    return i < 0 ? 0 : i;
+  }
+
+  /**
+   * Calculate bra size from underbust and bust in inches.
+   * Returns an object with US, UK, EU, FR, AU, IN sizes plus cup letter and diff.
+   */
+  function calculateBraSize(underbustInches, bustInches) {
+    var bandSize = roundBand(underbustInches);
+    var diff = bustInches - bandSize;
+    var cupIndex = Math.round(diff);
+    if (cupIndex < 0) cupIndex = 0;
+    if (cupIndex > CUP_SIZES.length - 1) cupIndex = CUP_SIZES.length - 1;
+
+    var usCup = CUP_SIZES[cupIndex];
+    var ukCup = UK_CUP_MAP[usCup] || usCup;
+    var euCup = EU_CUP_MAP[usCup] || usCup;
+    var euBand = Math.round((bandSize * 2.54) / 5) * 5;
+    var frBand = euBand + 15;
+
+    return {
+      us: bandSize + usCup,
+      uk: bandSize + ukCup,
+      eu: euBand + euCup,
+      fr: frBand + euCup,
+      au: (bandSize - 22) + usCup,
+      india: bandSize + usCup,
+      bandSize: bandSize,
+      cupLetter: usCup,
+      cupIndex: cupIndex,
+      cupDiff: diff.toFixed(1)
+    };
+  }
+
+  // --- Sister sizes ------------------------------------------------------
+
+  /**
+   * Generate sister sizes for a given band + cup. Sister sizes are
+   * alternative sizes with the same cup volume: as band goes up by 2,
+   * cup goes down by one letter.
+   * @param {number} bandSize
+   * @param {string} cupLetter
+   * @returns {Array<{band:number, cup:string, label:string, primary:boolean}>}
+   */
+  function getSisterSizes(bandSize, cupLetter) {
+    var result = [];
+    var baseCupIndex = getCupIndex(cupLetter);
+    for (var offset = -2; offset <= 2; offset++) {
+      var newBand = bandSize + (offset * 2);
+      var newCupIndex = baseCupIndex - offset;
+      if (newBand < 28 || newBand > 50) continue;
+      if (newCupIndex < 0 || newCupIndex >= CUP_SIZES.length) continue;
+      result.push({
+        band: newBand,
+        cup: CUP_SIZES[newCupIndex],
+        label: newBand + CUP_SIZES[newCupIndex],
+        primary: offset === 0
+      });
+    }
+    return result;
+  }
+
+  // --- Brand adjustments -------------------------------------------------
+
+  /**
+   * Apply a brand-specific adjustment to a calculated size.
+   * @param {object} sizeResult - Result from calculateBraSize.
+   * @param {string} brandKey - Key from BRAND_DATABASE.
+   */
+  function applyBrandAdjustment(sizeResult, brandKey) {
+    var brand = BRAND_DATABASE[brandKey] || BRAND_DATABASE.standard;
+    var band = sizeResult.bandSize + (brand.bandOffset || 0);
+    if (band % 2 !== 0) band += 1;
+    if (band < 28) band = 28;
+    if (band > 50) band = 50;
+    var cupIndex = sizeResult.cupIndex + (brand.cupOffset || 0);
+    if (cupIndex < 0) cupIndex = 0;
+    if (cupIndex >= CUP_SIZES.length) cupIndex = CUP_SIZES.length - 1;
+    var usCup = CUP_SIZES[cupIndex];
+    var ukCup = UK_CUP_MAP[usCup] || usCup;
+    var euCup = EU_CUP_MAP[usCup] || usCup;
+    var euBand = Math.round((band * 2.54) / 5) * 5;
+    return {
+      brand: brand,
+      us: band + usCup,
+      uk: band + ukCup,
+      eu: euBand + euCup,
+      fr: (euBand + 15) + euCup,
+      au: (band - 22) + usCup,
+      india: band + usCup,
+      bandSize: band,
+      cupLetter: usCup,
+      cupIndex: cupIndex
+    };
+  }
+
+  // --- Recommendation ----------------------------------------------------
+
+  function getBraRecommendation(cupLetter, bandSize) {
+    var text = 'Your calculated size is ' + bandSize + cupLetter + '. ';
+    if (cupLetter === 'AA' || cupLetter === 'A') {
+      text += 'Smaller cup sizes are normal. Ensure a proper fit by checking the band and straps.';
+    } else if (cupLetter === 'B' || cupLetter === 'C' || cupLetter === 'D') {
+      text += 'This is a common size range. A well-fitted bra should feel comfortable without digging in.';
+    } else {
+      text += 'Larger cup sizes need extra support. Look for bras with wider straps and reinforced bands.';
+    }
+    text += ' If in doubt, try a sister size on either side for a better fit.';
+    return text;
+  }
+
+  // --- Volume estimate ---------------------------------------------------
+
+  var CUP_VOLUMES = [150, 200, 280, 350, 430, 520, 620, 720, 830, 950, 1080];
+
+  function estimateBreastVolume(underbustInches, bustInches) {
+    var bandSize = roundBand(underbustInches);
+    var diff = bustInches - underbustInches;
+    var cupIndex = Math.round(diff);
+    if (cupIndex < 0) cupIndex = 0;
+    if (cupIndex > CUP_VOLUMES.length - 1) cupIndex = CUP_VOLUMES.length - 1;
+    var baseVolume = CUP_VOLUMES[cupIndex];
+    var bandAdjustment = (bandSize - 34) * 8;
+    var volume = Math.round(baseVolume + bandAdjustment);
+    if (volume < 100) volume = 100;
+    var category, note;
+    if (volume <= 250) {
+      category = 'Small';
+      note = 'Common for AA to A cup sizes. Bralettes and wireless designs often fit well.';
+    } else if (volume <= 400) {
+      category = 'Average';
+      note = 'Corresponds to roughly B to C cup. Most standard bras work well.';
+    } else if (volume <= 600) {
+      category = 'Full';
+      note = 'Typically D to DD cups. Wider straps and full-coverage cups provide best support.';
+    } else if (volume <= 900) {
+      category = 'Large';
+      note = 'Common for DDD to G cups. Look for extra support and wider side panels.';
+    } else {
+      category = 'Very Large';
+      note = 'H+ cup range. Maximum support, reinforced construction, cushioned straps recommended.';
+    }
+    return {
+      volume: volume,
+      category: category,
+      note: note,
+      diff: diff.toFixed(1)
+    };
+  }
+
+  // --- Format helpers ----------------------------------------------------
+
+  function formatNumber(n, decimals) {
+    if (n == null || isNaN(n)) return '—';
+    return Number(n).toFixed(decimals == null ? 1 : decimals);
+  }
+
+  // --- Public API --------------------------------------------------------
+
+  var api = {
+    CUP_SIZES: CUP_SIZES,
+    BRAND_DATABASE: BRAND_DATABASE,
+    validateMeasurement: validateMeasurement,
+    validatePair: validatePair,
+    convertToInches: convertToInches,
+    roundBand: roundBand,
+    getCupLetter: getCupLetter,
+    getCupIndex: getCupIndex,
+    calculateBraSize: calculateBraSize,
+    getSisterSizes: getSisterSizes,
+    applyBrandAdjustment: applyBrandAdjustment,
+    getBraRecommendation: getBraRecommendation,
+    estimateBreastVolume: estimateBreastVolume,
+    formatNumber: formatNumber
+  };
+
+  if (typeof module !== 'undefined' && module.exports) {
+    module.exports = api;
+  } else {
+    global.BraCalculator = api;
+  }
+})(typeof window !== 'undefined' ? window : globalThis);
