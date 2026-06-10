@@ -7,7 +7,12 @@
     "build": "node scripts/optimize.js && node scripts/cache-bust.js && echo 'Static site ready: minified, cache-busted, served as-is.' && exit 0",
     "dev": "echo 'Open index.html in a browser, or run: npx http-server -p 8000'",
     "optimize": "node scripts/optimize.js",
-    "cache-bust": "node scripts/cache-bust.js"
+    "purge": "node scripts/purgecss.js",
+    "purge:verify": "node scripts/verify-purge.js",
+    "cache-bust": "node scripts/cache-bust.js",
+    "deploy": "npm run build && wrangler pages deploy ./ --project-name=breastcalc --commit-dirty=true",
+    "deploy:preview": "npm run build && wrangler pages deploy ./ --project-name=breastcalc --branch=preview",
+    "deploy:clean": "npm run build && wrangler pages deploy ./ --project-name=breastcalc --commit-dirty=true --clean"
   },
   "engines": {
     "node": ">=18"
@@ -15,5 +20,8 @@
   "keywords": [
     "static-site",
     "cloudflare-pages"
-  ]
+  ],
+  "devDependencies": {
+    "purgecss": "^8.0.0"
+  }
 }

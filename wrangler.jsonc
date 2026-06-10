@@ -2,11 +2,8 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "breastcalc",
   "compatibility_date": "2026-06-10",
+  "pages_build_output_dir": "./",
   "observability": {
-    "enabled": true
-  },
-  "assets": {
-    "directory": "./",
-    "binding": "ASSETS"
+    "enabled": false
   }
 }
