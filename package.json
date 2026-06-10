@@ -4,8 +4,9 @@
   "private": true,
   "description": "Breast Calculator — static site deployed to Cloudflare Pages.",
   "scripts": {
-    "build": "node scripts/cache-bust.js && echo 'Static site ready: HTML cache-busted, served as-is.' && exit 0",
+    "build": "node scripts/optimize.js && node scripts/cache-bust.js && echo 'Static site ready: minified, cache-busted, served as-is.' && exit 0",
     "dev": "echo 'Open index.html in a browser, or run: npx http-server -p 8000'",
+    "optimize": "node scripts/optimize.js",
     "cache-bust": "node scripts/cache-bust.js"
   },
   "engines": {
