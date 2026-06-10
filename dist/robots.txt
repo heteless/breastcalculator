@@ -1,0 +1,38 @@
+# Cloudflare AI Block Config
+Content-Signal: search=yes,ai-train=no
+
+User-agent: GPTBot
+Disallow: /
+User-agent: ClaudeBot
+Disallow: /
+User-agent: meta-externalagent
+Disallow: /
+User-agent: Applebot-Extended
+Disallow: /
+User-agent: Google-Extended
+Disallow: /
+
+# open to Ahrefs/SimilarWeb/TrafficCV 
+User-agent: CCBot
+Allow: /
+User-agent: Bytespider
+Allow: /
+User-agent: Amazonbot
+Allow: /
+User-agent: CloudflareBrowserRenderingCrawler
+Allow: /
+
+# sitemap
+User-agent: *
+Allow: /
+<<<<<<< HEAD
+
+Disallow: /404.html
+Disallow: /gen-urls.ps1
+Disallow: /server.py
+Disallow: /urllist.txt
+
+Sitemap: https://breastcalculator.com/sitemap.xml
+=======
+Sitemap: https://breastcalculator.com/sitemap.xml
+>>>>>>> b1eaffe3b8d611555eaa18f5f6a2fe3ceb0362f7

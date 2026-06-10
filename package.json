@@ -2,24 +2,25 @@
   "name": "breastcalculator",
   "version": "1.0.0",
   "private": true,
-  "description": "Breast Calculator — static site deployed to Cloudflare Pages.",
+  "description": "Breast Calculator — static site deployed to Cloudflare Workers.",
   "scripts": {
-    "build": "node scripts/optimize.js && node scripts/cache-bust.js && echo 'Static site ready: minified, cache-busted, served as-is.' && exit 0",
+    "build": "node scripts/optimize.js && node scripts/cache-bust.js && node scripts/build-dist.js && echo 'Static site ready in dist/.'",
     "dev": "echo 'Open index.html in a browser, or run: npx http-server -p 8000'",
     "optimize": "node scripts/optimize.js",
     "purge": "node scripts/purgecss.js",
     "purge:verify": "node scripts/verify-purge.js",
     "cache-bust": "node scripts/cache-bust.js",
-    "deploy": "npm run build && wrangler pages deploy ./ --project-name=breastcalc --commit-dirty=true",
-    "deploy:preview": "npm run build && wrangler pages deploy ./ --project-name=breastcalc --branch=preview",
-    "deploy:clean": "npm run build && wrangler pages deploy ./ --project-name=breastcalc --commit-dirty=true --clean"
+    "build:dist": "node scripts/build-dist.js",
+    "deploy": "npm run build && wrangler deploy",
+    "deploy:preview": "npm run build && wrangler deploy --env preview",
+    "deploy:clean": "npm run build && wrangler deploy --clean"
   },
   "engines": {
     "node": ">=18"
   },
   "keywords": [
     "static-site",
-    "cloudflare-pages"
+    "cloudflare-workers"
   ],
   "devDependencies": {
     "purgecss": "^8.0.0",
