@@ -34,8 +34,6 @@
 # /specials/sports-bra-science: redirect defined in Section 5 (legacy → /sports-bra-guide/)
 /specials/why-d-cup-support             /specials/why-d-cup-support/             301
 
-/tools/breast-expansion-calculator  /breast-shape-assessment/  301
-/tools/breast-expansion-calculator/  /breast-shape-assessment/  301
 /tools/breast-ptosis-calculator     /tools/breast-ptosis-calculator/     301
 /tools/breast-shape-calculator      /tools/breast-shape-calculator/      301
 /tools/breast-volume-calculator     /tools/breast-volume-calculator/     301
@@ -53,7 +51,6 @@
 /privacy.html                        /privacy/                       301
 /terms.html                          /terms/                         301
 
-/tools/breast-expansion-calculator.html  /tools/breast-expansion-calculator/  301
 /tools/breast-ptosis-calculator.html     /tools/breast-ptosis-calculator/     301
 /tools/breast-volume-calculator.html     /tools/breast-volume-calculator/     301
 /tools/length-converter.html             /tools/length-converter/             301
