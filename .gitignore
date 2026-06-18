@@ -17,3 +17,7 @@ build.log
 # not part of the site and should not be tracked.
 node_modules/
 package-lock.json
+
+# === Wrangler ===
+.wrangler-out/
+.wrangler/

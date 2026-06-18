@@ -13,6 +13,12 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://breastcalculator.com/article/band-bra-fit-problems/</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://breastcalculator.com/article/bra-sister-sizes-explained/</loc>
     <lastmod>2026-06-10</lastmod>
     <changefreq>monthly</changefreq>
@@ -31,7 +37,13 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://breastcalculator.com/how-to-measure-bra-size/</loc>
+    <loc>https://breastcalculator.com/article/cups-bra-fit-problems/</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://breastcalculator.com/article/how-to-measure-bra-size-at-home/</loc>
     <lastmod>2026-06-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -49,37 +61,25 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://breastcalculator.com/best-comfort-bras/</loc>
-    <lastmod>2026-06-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://breastcalculator.com/guide/no-underwire-bras/</loc>
-    <lastmod>2026-06-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://breastcalculator.com/guide/comfortable-wireless-bras/</loc>
-    <lastmod>2026-06-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://breastcalculator.com/compare/breast-size-chart/</loc>
-    <lastmod>2026-06-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://breastcalculator.com/bra-size-guide/h-cup/</loc>
-    <lastmod>2026-06-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://breastcalculator.com/article/prosthetic-bras-guide-after-mastectomy/</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://breastcalculator.com/article/special-bra-fit-problems/</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://breastcalculator.com/article/straps-bra-fit-problems/</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://breastcalculator.com/article/underwire-gore-bra-fit-problems/</loc>
     <lastmod>2026-06-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -247,6 +247,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://breastcalculator.com/bra-size-guide/h-cup/</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://breastcalculator.com/compare/</loc>
     <lastmod>2026-06-10</lastmod>
     <changefreq>monthly</changefreq>
@@ -289,6 +295,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://breastcalculator.com/compare/breast-size-chart/</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://breastcalculator.com/compare/c-cup-vs-d-cup/</loc>
     <lastmod>2026-06-10</lastmod>
     <changefreq>monthly</changefreq>
@@ -311,6 +323,18 @@
     <lastmod>2026-06-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breastcalculator.com/guide/comfortable-wireless-bras/</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://breastcalculator.com/guide/no-underwire-bras/</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://breastcalculator.com/how-to-measure-bra-size/</loc>
@@ -337,7 +361,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://breastcalculator.com/bra-buying-guide/</loc>
+    <loc>https://breastcalculator.com/specials/buying-guide/</loc>
     <lastmod>2026-06-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -355,13 +379,19 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://breastcalculator.com/sports-bra-guide/</loc>
+    <loc>https://breastcalculator.com/specials/sports-bra-science/</loc>
     <lastmod>2026-06-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://breastcalculator.com/specials/why-d-cup-support/</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breastcalculator.com/sports-bra-guide/</loc>
     <lastmod>2026-06-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
