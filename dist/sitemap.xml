@@ -259,94 +259,100 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://breastcalculator.com/bra-size-guide/compare/</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://breastcalculator.com/bra-size-guide/compare/32d-vs-34c/</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breastcalculator.com/bra-size-guide/compare/34b-vs-36c/</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breastcalculator.com/bra-size-guide/compare/34dd-vs-36d/</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breastcalculator.com/bra-size-guide/compare/36b-vs-34c/</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breastcalculator.com/bra-size-guide/compare/38c-vs-40b/</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breastcalculator.com/bra-size-guide/compare/b-cup-vs-c-cup/</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breastcalculator.com/bra-size-guide/compare/breast-size-chart/</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breastcalculator.com/bra-size-guide/compare/c-cup-vs-d-cup/</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breastcalculator.com/bra-size-guide/compare/d-cup-vs-dd-cup/</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breastcalculator.com/bra-size-guide/compare/dd-cup-vs-ddd-cup/</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://breastcalculator.com/bra-size-guide/compare/wireless-vs-wired-bra/</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://breastcalculator.com/bra-size-guide/h-cup/</loc>
     <lastmod>2026-06-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://breastcalculator.com/compare/</loc>
+    <loc>https://breastcalculator.com/breast-volume/</loc>
     <lastmod>2026-06-10</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://breastcalculator.com/compare/32d-vs-34c/</loc>
-    <lastmod>2026-06-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://breastcalculator.com/compare/34b-vs-36c/</loc>
-    <lastmod>2026-06-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://breastcalculator.com/compare/34dd-vs-36d/</loc>
-    <lastmod>2026-06-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://breastcalculator.com/compare/36b-vs-34c/</loc>
-    <lastmod>2026-06-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://breastcalculator.com/compare/38c-vs-40b/</loc>
-    <lastmod>2026-06-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://breastcalculator.com/compare/b-cup-vs-c-cup/</loc>
-    <lastmod>2026-06-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://breastcalculator.com/compare/breast-size-chart/</loc>
-    <lastmod>2026-06-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://breastcalculator.com/compare/c-cup-vs-d-cup/</loc>
-    <lastmod>2026-06-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://breastcalculator.com/compare/d-cup-vs-dd-cup/</loc>
-    <lastmod>2026-06-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://breastcalculator.com/compare/dd-cup-vs-ddd-cup/</loc>
-    <lastmod>2026-06-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://breastcalculator.com/compare/wireless-vs-wired-bra/</loc>
-    <lastmod>2026-06-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>1.0</priority>
   </url>
   <url>
     <loc>https://breastcalculator.com/guide/comfortable-wireless-bras/</loc>
     <lastmod>2026-06-10</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://breastcalculator.com/guide/no-underwire-bras/</loc>
     <lastmod>2026-06-10</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://breastcalculator.com/how-to-measure-bra-size/</loc>
@@ -469,13 +475,85 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://breastcalculator.com/wellness/bra-care-after-surgery/</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://breastcalculator.com/wellness/bra-discomfort-after-surgery/</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://breastcalculator.com/wellness/bra-tightness-after-surgery/</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://breastcalculator.com/wellness/compression-vs-support-bras/</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://breastcalculator.com/wellness/front-vs-back-closure-bras/</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://breastcalculator.com/wellness/mastectomy-bra-guide/</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://breastcalculator.com/wellness/pocketed-bras-guide/</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://breastcalculator.com/wellness/post-surgery-bra-mistakes/</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://breastcalculator.com/wellness/post-surgery-bra-recovery-timeline/</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://breastcalculator.com/wellness/prosthetic-bras-guide/</loc>
     <lastmod>2026-06-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://breastcalculator.com/wellness/sensitive-skin-bra-materials/</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://breastcalculator.com/wellness/sleeping-after-breast-surgery/</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://breastcalculator.com/wellness/sports-bras-after-surgery/</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://breastcalculator.com/wellness/swelling-after-surgery-bras/</loc>
     <lastmod>2026-06-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

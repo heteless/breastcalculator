@@ -5,6 +5,58 @@
 # All non-slash paths redirect to slash paths via explicit 301 rules below,
 # preventing Cloudflare's default 307/308 auto-redirect behavior.
 
+# --- Section 0: /compare/* → /bra-size-guide/compare/* (URL consolidation) ---
+# These MUST be defined before any other /compare/* rules to prevent chains.
+# After these run, Cloudflare will serve the new directory paths from /bra-size-guide/compare/.
+
+/compare                            /bra-size-guide/compare/             301
+/compare/                           /bra-size-guide/compare/             301
+/compare.html                       /bra-size-guide/compare/             301
+
+/compare/32d-vs-34c                 /bra-size-guide/compare/32d-vs-34c/ 301
+/compare/32d-vs-34c/                /bra-size-guide/compare/32d-vs-34c/ 301
+/compare/32d-vs-34c.html            /bra-size-guide/compare/32d-vs-34c/ 301
+
+/compare/34b-vs-36c                 /bra-size-guide/compare/34b-vs-36c/ 301
+/compare/34b-vs-36c/                /bra-size-guide/compare/34b-vs-36c/ 301
+/compare/34b-vs-36c.html            /bra-size-guide/compare/34b-vs-36c/ 301
+
+/compare/34dd-vs-36d                /bra-size-guide/compare/34dd-vs-36d/ 301
+/compare/34dd-vs-36d/               /bra-size-guide/compare/34dd-vs-36d/ 301
+/compare/34dd-vs-36d.html           /bra-size-guide/compare/34dd-vs-36d/ 301
+
+/compare/36b-vs-34c                 /bra-size-guide/compare/36b-vs-34c/ 301
+/compare/36b-vs-34c/                /bra-size-guide/compare/36b-vs-34c/ 301
+/compare/36b-vs-34c.html            /bra-size-guide/compare/36b-vs-34c/ 301
+
+/compare/38c-vs-40b                 /bra-size-guide/compare/38c-vs-40b/ 301
+/compare/38c-vs-40b/                /bra-size-guide/compare/38c-vs-40b/ 301
+/compare/38c-vs-40b.html            /bra-size-guide/compare/38c-vs-40b/ 301
+
+/compare/b-cup-vs-c-cup             /bra-size-guide/compare/b-cup-vs-c-cup/ 301
+/compare/b-cup-vs-c-cup/            /bra-size-guide/compare/b-cup-vs-c-cup/ 301
+/compare/b-cup-vs-c-cup.html        /bra-size-guide/compare/b-cup-vs-c-cup/ 301
+
+/compare/breast-size-chart          /bra-size-guide/compare/breast-size-chart/ 301
+/compare/breast-size-chart/         /bra-size-guide/compare/breast-size-chart/ 301
+/compare/breast-size-chart.html     /bra-size-guide/compare/breast-size-chart/ 301
+
+/compare/c-cup-vs-d-cup             /bra-size-guide/compare/c-cup-vs-d-cup/ 301
+/compare/c-cup-vs-d-cup/            /bra-size-guide/compare/c-cup-vs-d-cup/ 301
+/compare/c-cup-vs-d-cup.html        /bra-size-guide/compare/c-cup-vs-d-cup/ 301
+
+/compare/d-cup-vs-dd-cup            /bra-size-guide/compare/d-cup-vs-dd-cup/ 301
+/compare/d-cup-vs-dd-cup/           /bra-size-guide/compare/d-cup-vs-dd-cup/ 301
+/compare/d-cup-vs-dd-cup.html       /bra-size-guide/compare/d-cup-vs-dd-cup/ 301
+
+/compare/dd-cup-vs-ddd-cup          /bra-size-guide/compare/dd-cup-vs-ddd-cup/ 301
+/compare/dd-cup-vs-ddd-cup/         /bra-size-guide/compare/dd-cup-vs-ddd-cup/ 301
+/compare/dd-cup-vs-ddd-cup.html     /bra-size-guide/compare/dd-cup-vs-ddd-cup/ 301
+
+/compare/wireless-vs-wired-bra      /bra-size-guide/compare/wireless-vs-wired-bra/ 301
+/compare/wireless-vs-wired-bra/     /bra-size-guide/compare/wireless-vs-wired-bra/ 301
+/compare/wireless-vs-wired-bra.html /bra-size-guide/compare/wireless-vs-wired-bra/ 301
+
 # --- Section 1: HTTP → HTTPS (enforced by Cloudflare automatically) ---
 
 # --- Section 2: Non-slash → slash (301 Permanent, prevents 307) ---
@@ -95,31 +147,32 @@
 /best-comfort-bras       /best-comfort-bras/       301
 /best-wireless-bras      /best-wireless-bras/      301
 /how-to-measure-bra-size /how-to-measure-bra-size/ 301
-/compare                 /compare/                 301
 
-# Compare subpages (non-slash → slash)
-/compare/32d-vs-34c          /compare/32d-vs-34c/          301
-/compare/34b-vs-36c          /compare/34b-vs-36c/          301
-/compare/36b-vs-34c          /compare/36b-vs-34c/          301
-/compare/34dd-vs-36d         /compare/34dd-vs-36d/         301
-/compare/38c-vs-40b          /compare/38c-vs-40b/          301
-/compare/b-cup-vs-c-cup      /compare/b-cup-vs-c-cup/      301
-/compare/c-cup-vs-d-cup      /compare/c-cup-vs-d-cup/      301
-/compare/d-cup-vs-dd-cup     /compare/d-cup-vs-dd-cup/     301
-/compare/dd-cup-vs-ddd-cup   /compare/dd-cup-vs-ddd-cup/   301
-/compare/wireless-vs-wired-bra /compare/wireless-vs-wired-bra/ 301
+# /compare → /bra-size-guide/compare/  (handled in Section 0)
 
-# --- Section 7: Legacy comparison URLs → new /compare/ paths (301) ---
-/32d-vs-34c       /compare/32d-vs-34c/       301
-/32d-vs-34c/      /compare/32d-vs-34c/       301
-/34b-vs-36c       /compare/34b-vs-36c/       301
-/34b-vs-36c/      /compare/34b-vs-36c/       301
-/36b-vs-34c       /compare/36b-vs-34c/       301
-/36b-vs-34c/      /compare/36b-vs-34c/       301
-/34dd-vs-36d      /compare/34dd-vs-36d/      301
-/34dd-vs-36d/     /compare/34dd-vs-36d/      301
-/38c-vs-40b       /compare/38c-vs-40b/       301
-/38c-vs-40b/      /compare/38c-vs-40b/       301
+# --- Section 7: Legacy comparison URLs → new /bra-size-guide/compare/ paths (301) ---
+/32d-vs-34c       /bra-size-guide/compare/32d-vs-34c/       301
+/32d-vs-34c/      /bra-size-guide/compare/32d-vs-34c/       301
+/34b-vs-36c       /bra-size-guide/compare/34b-vs-36c/       301
+/34b-vs-36c/      /bra-size-guide/compare/34b-vs-36c/       301
+/36b-vs-34c       /bra-size-guide/compare/36b-vs-34c/       301
+/36b-vs-34c/      /bra-size-guide/compare/36b-vs-34c/       301
+/34dd-vs-36d      /bra-size-guide/compare/34dd-vs-36d/      301
+/34dd-vs-36d/     /bra-size-guide/compare/34dd-vs-36d/      301
+/38c-vs-40b       /bra-size-guide/compare/38c-vs-40b/       301
+/38c-vs-40b/      /bra-size-guide/compare/38c-vs-40b/       301
+/b-cup-vs-c-cup   /bra-size-guide/compare/b-cup-vs-c-cup/   301
+/b-cup-vs-c-cup/  /bra-size-guide/compare/b-cup-vs-c-cup/   301
+/c-cup-vs-d-cup   /bra-size-guide/compare/c-cup-vs-d-cup/   301
+/c-cup-vs-d-cup/  /bra-size-guide/compare/c-cup-vs-d-cup/   301
+/d-cup-vs-dd-cup  /bra-size-guide/compare/d-cup-vs-dd-cup/  301
+/d-cup-vs-dd-cup/ /bra-size-guide/compare/d-cup-vs-dd-cup/  301
+/dd-cup-vs-ddd-cup /bra-size-guide/compare/dd-cup-vs-ddd-cup/ 301
+/dd-cup-vs-ddd-cup/ /bra-size-guide/compare/dd-cup-vs-ddd-cup/ 301
+/breast-size-chart /bra-size-guide/compare/breast-size-chart/ 301
+/breast-size-chart/ /bra-size-guide/compare/breast-size-chart/ 301
+/wireless-vs-wired-bra /bra-size-guide/compare/wireless-vs-wired-bra/ 301
+/wireless-vs-wired-bra/ /bra-size-guide/compare/wireless-vs-wired-bra/ 301
 
 # --- Section 8: Auto-generated next/prev links to non-catalog bra sizes ---
 # (size guides link to cup volumes outside the published catalog; redirect to the pillar)
