@@ -597,14 +597,13 @@ function bylineHtml({ author, publishedDate, updatedDate, readingTime }) {
   if (!author && !publishedDate && !readingTime) return '';
   const parts = [];
   if (author && author.name) {
-    const cred = author.credentials ? `, <span class="byline-cred">${author.credentials}</span>` : '';
-    parts.push(`<span class="byline-author">By <strong>${author.name}</strong>${cred}</span>`);
+    const cred = author.credentials ? `, ${author.credentials}` : '';
+    parts.push(`<span class="byline-author">Reviewed by <strong>${author.name}</strong>${cred}</span>`);
   }
-  if (publishedDate) {
-    const updated = updatedDate && updatedDate !== publishedDate
-      ? ` <span class="byline-updated">(Updated ${formatDate(updatedDate)})</span>`
-      : '';
-    parts.push(`<span class="byline-date">Published ${formatDate(publishedDate)}${updated}</span>`);
+  if (publishedDate && updatedDate && updatedDate !== publishedDate) {
+    parts.push(`<span class="byline-date">Updated ${formatDate(updatedDate)}</span>`);
+  } else if (publishedDate) {
+    parts.push(`<span class="byline-date">${formatDate(publishedDate)}</span>`);
   }
   if (readingTime) {
     parts.push(`<span class="byline-readtime">${readingTime} min read</span>`);
