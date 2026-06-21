@@ -231,8 +231,8 @@ const ARTICLES = [
   },
   {
     dir: 'compression-vs-support-bras',
-    title: 'Compression Bra vs Support Bra: How to Choose',
-    description: 'Free comparison of compression bra vs support bra. Learn the difference, when to use each, a side-by-side comparison table, pros/cons, and step-down guidance.',
+    title: 'Compression vs Support Bras: How to Pick the Right',
+    description: 'Compression vs support bras: when to wear each, the science of post-surgical compression, and how to choose the right breast health bra for recovery.',
     ogTitle: 'Compression Bra vs Support Bra &mdash; How to Choose',
     h1: 'Compression Bra vs Support Bra: When to Use Each (with Comparison Table)',
     intro: 'A clear, side-by-side comparison of compression bras and support bras&mdash;how they differ, when surgeons prescribe each, pros and cons, and how to step down between them safely.',
@@ -663,8 +663,8 @@ const ARTICLES = [
   },
   {
     dir: 'post-surgery-bra-mistakes',
-    title: '10 Post-Surgery Bra Mistakes That Slow Healing',
-    description: 'Free guide to 10 post-surgery bra mistakes that slow healing. Learn what to avoid, why these mistakes are common, and how to fix them for a smoother recovery.',
+    title: '10 Post-Surgery Bra Mistakes That Slow Healing Down',
+    description: 'Ten post-surgery bra mistakes that slow breast health recovery. What to avoid, why these mistakes are common, and how to fix them for smoother healing.',
     ogTitle: '10 Post-Surgery Bra Mistakes That Slow Healing',
     h1: '10 Post-Surgery Bra Mistakes That Slow Healing (and How to Fix Them)',
     intro: 'A list of the 10 most common post-surgery bra mistakes&mdash;from the wrong size to skipping bras at night&mdash;and how to fix each one for a smoother, faster recovery.',
