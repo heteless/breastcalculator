@@ -177,16 +177,52 @@
 # --- Section 8: Auto-generated next/prev links to non-catalog bra sizes ---
 # (size guides link to cup volumes outside the published catalog; redirect to the pillar)
 
+/bra-size-guide/28a/      /bra-size-guide/32a/      301
+/bra-size-guide/28b/      /bra-size-guide/32b/      301
+/bra-size-guide/28c/      /bra-size-guide/32c/      301
+/bra-size-guide/28d/      /bra-size-guide/32d/      301
+/bra-size-guide/28dd/     /bra-size-guide/32dd/     301
+/bra-size-guide/28aaa/    /bra-size-guide/32a/      301
+/bra-size-guide/28aa/     /bra-size-guide/32a/      301
+/bra-size-guide/28dddd/   /bra-size-guide/32dd/     301
+
+/bra-size-guide/30a/      /bra-size-guide/32a/      301
+/bra-size-guide/30b/      /bra-size-guide/32b/      301
+/bra-size-guide/30c/      /bra-size-guide/32c/      301
+/bra-size-guide/30d/      /bra-size-guide/32d/      301
+/bra-size-guide/30dd/     /bra-size-guide/32dd/     301
+/bra-size-guide/30aaa/    /bra-size-guide/32a/      301
+/bra-size-guide/30aa/     /bra-size-guide/32a/      301
+/bra-size-guide/30dddd/   /bra-size-guide/32dd/     301
+
 /bra-size-guide/32aa/     /bra-size-guide/32a/      301
+/bra-size-guide/32aaa/    /bra-size-guide/32a/      301
+/bra-size-guide/32dddd/   /bra-size-guide/32dd/     301
 /bra-size-guide/32ddd/    /bra-size-guide/32dd/     301
+
 /bra-size-guide/34aa/     /bra-size-guide/34a/      301
+/bra-size-guide/34aaa/    /bra-size-guide/34a/      301
+/bra-size-guide/34dddd/   /bra-size-guide/34dd/     301
 /bra-size-guide/34ddd/    /bra-size-guide/34dd/     301
+
 /bra-size-guide/36aa/     /bra-size-guide/36a/      301
+/bra-size-guide/36aaa/    /bra-size-guide/36a/      301
+/bra-size-guide/36dddd/   /bra-size-guide/36dd/     301
 /bra-size-guide/36ddd/    /bra-size-guide/36dd/     301
+
 /bra-size-guide/38a/      /bra-size-guide/38b/      301
+/bra-size-guide/38aa/     /bra-size-guide/38b/      301
+/bra-size-guide/38aaa/    /bra-size-guide/38b/      301
+/bra-size-guide/38dddd/   /bra-size-guide/38dd/     301
 /bra-size-guide/38ddd/    /bra-size-guide/38dd/     301
+
+/bra-size-guide/40a/      /bra-size-guide/40c/      301
+/bra-size-guide/40aa/     /bra-size-guide/40c/      301
+/bra-size-guide/40aaa/    /bra-size-guide/40c/      301
 /bra-size-guide/40b/      /bra-size-guide/40c/      301
 /bra-size-guide/40dd/     /bra-size-guide/40d/      301
+/bra-size-guide/40ddd/    /bra-size-guide/40d/      301
+/bra-size-guide/40dddd/   /bra-size-guide/40d/      301
 
 # --- Section 9: Tool-CTA article slugs that don't exist (legacy) ---
 /article/breast-anatomy-and-fit/   /article/breast-volume-guide/        301

@@ -21,3 +21,18 @@ package-lock.json
 # === Wrangler ===
 .wrangler-out/
 .wrangler/
+
+# === Build output (Cloudflare Workers assets directory) ===
+dist/
+dist-dryrun/
+
+# === Audit/log/debug output from scripts/ ===
+.audit*.log
+.tree.log
+.file-tree.txt
+.seo-audit.csv
+.seo-tags-audit.txt
+.internal-links-audit.csv
+
+# === Local generation cache used by hub builders ===
+.tmp-gen/

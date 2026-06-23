@@ -8,6 +8,7 @@
  * Usage:
  *   node scripts/indexnow.js submit [url1 url2 ...]   # submit explicit URLs (or all from sitemap)
  *   node scripts/indexnow.js key                       # (re)generate key file only
+ *   node scripts/indexnow.js verify                    # confirm key file is reachable on the live host
  */
 
 const fs = require('fs');
@@ -116,6 +117,36 @@ async function submit(urls) {
   console.log(`[IndexNow] Submitted: ${totalOk}/${urls.length} URLs`);
 }
 
+/**
+ * Verify that the public key file is reachable at https://<host>/<key>.txt
+ * and that the body matches the local key. Returns a Promise<boolean>.
+ */
+function verifyKeyReachable(key) {
+  const url = `https://${HOST}/${key}.txt`;
+  return new Promise((resolve) => {
+    const req = https.get(url, (res) => {
+      let body = '';
+      res.on('data', (c) => (body += c));
+      res.on('end', () => {
+        const ok = res.statusCode === 200 && body.trim() === key;
+        console.log(
+          `[IndexNow] GET ${url} -> HTTP ${res.statusCode}  body="${body.trim()}"  ${ok ? 'OK' : 'MISMATCH'}`
+        );
+        resolve(ok);
+      });
+    });
+    req.on('error', (e) => {
+      console.log(`[IndexNow] GET ${url} -> ERROR ${e.message}`);
+      resolve(false);
+    });
+    req.setTimeout(15000, () => {
+      console.log(`[IndexNow] GET ${url} -> TIMEOUT`);
+      req.destroy();
+      resolve(false);
+    });
+  });
+}
+
 (async () => {
   const args = process.argv.slice(2);
   const cmd = args[0] || 'submit';
@@ -125,8 +156,14 @@ async function submit(urls) {
     console.log('Key:', k);
     return;
   }
+  if (cmd === 'verify') {
+    const k = getOrCreateKey();
+    writeKeyTxtFile(k);
+    const ok = await verifyKeyReachable(k);
+    process.exit(ok ? 0 : 1);
+  }
   if (cmd !== 'submit') {
-    console.error('Unknown command. Use: submit [urls...] | key');
+    console.error('Unknown command. Use: submit [urls...] | key | verify');
     process.exit(2);
   }
   const urls = args.slice(1);
