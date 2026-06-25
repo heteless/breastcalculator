@@ -2,20 +2,21 @@
 //
 // Why this exists
 // ---------------
-// /style.css and /script.js are served with `Cache-Control:
-// public, max-age=31536000, immutable` (1 year, immutable) so browsers
-// re-use them aggressively. The HTML pages reference them by path
-// (e.g. <link rel="stylesheet" href="/style.css"/>) — without a version
-// query string, a browser that has already cached the file will not
-// refetch it for a year even if we deploy a new CSS file.
+// /main.css, /common.js, and /calculator.js are served with
+// `Cache-Control: public, max-age=31536000, immutable` (1 year) so
+// browsers re-use them aggressively. The HTML pages reference them by
+// path; without a version query string, a browser that has already
+// cached the file will not refetch it for a year even if we deploy
+// a new copy.
 //
 // The fix used by the script
 // --------------------------
-// 1. Compute a short content hash of /style.css and /script.js.
-// 2. Rewrite every *.html file so their <link rel="stylesheet" href="/style.css">
-//    and <script src="/script.js"> tags carry `?v=<hash>`. The path stays
-//    the same so the _headers rules still match; the query string just
-//    changes the cache key.
+// 1. Compute a short content hash of /main.css, /common.js, and
+//    /calculator.js.
+// 2. Rewrite every *.html file so their <link href="/main.css"> and
+//    <script src="/common.js">/src="/calculator.js"> tags carry
+//    `?v=<hash>`. The path stays the same so the _headers rules still
+//    match; the query string just changes the cache key.
 // 3. Add a meta cache-control tag as a belt-and-suspenders fallback so
 //    that browsers revalidate the HTML itself, not just the assets.
 //
@@ -26,11 +27,12 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
-const STYLE_FILE = path.join(ROOT, 'style.css');
-const SCRIPT_FILE = path.join(ROOT, 'script.js');
+const MAIN_CSS_FILE = path.join(ROOT, 'main.css');
+const COMMON_JS_FILE = path.join(ROOT, 'common.js');
+const CALC_JS_FILE = path.join(ROOT, 'calculator.js');
 
-if (!fs.existsSync(STYLE_FILE) || !fs.existsSync(SCRIPT_FILE)) {
-  console.error('[cache-bust] style.css or script.js not found at repo root.');
+if (!fs.existsSync(MAIN_CSS_FILE) || !fs.existsSync(COMMON_JS_FILE) || !fs.existsSync(CALC_JS_FILE)) {
+  console.error('[cache-bust] main.css, common.js, or calculator.js not found at repo root.');
   process.exit(1);
 }
 
@@ -41,12 +43,15 @@ function shortHash(file) {
   return hash.digest('hex').slice(0, 8);
 }
 
-const styleHash = shortHash(STYLE_FILE);
-const scriptHash = shortHash(SCRIPT_FILE);
-const styleV = `?v=${styleHash}`;
-const scriptV = `?v=${scriptHash}`;
-console.log(`[cache-bust] style.css hash: ${styleHash}`);
-console.log(`[cache-bust] script.js hash: ${scriptHash}`);
+const mainHash = shortHash(MAIN_CSS_FILE);
+const commonHash = shortHash(COMMON_JS_FILE);
+const calcHash = shortHash(CALC_JS_FILE);
+const mainV = `?v=${mainHash}`;
+const commonV = `?v=${commonHash}`;
+const calcV = `?v=${calcHash}`;
+console.log(`[cache-bust] main.css hash:      ${mainHash}`);
+console.log(`[cache-bust] common.js hash:     ${commonHash}`);
+console.log(`[cache-bust] calculator.js hash: ${calcHash}`);
 
 function listHtml(dir) {
   const out = [];
@@ -68,21 +73,27 @@ const META_TAG = '<meta http-equiv="Cache-Control" content="no-cache, no-store, 
 // Match the link/script tags regardless of attribute order. We accept the
 // canonical form the existing files use, but the regex is tolerant of
 // double-quoted or single-quoted href/src values.
-const styleLinkRe = /<link\b([^>]*?)\bhref=(["'])\/style\.css(?:\?v=[a-z0-9]+)?\2([^>]*)>/gi;
-const scriptTagRe = /<script\b([^>]*?)\bsrc=(["'])\/script\.js(?:\?v=[a-z0-9]+)?\2([^>]*)>\s*<\/script>/gi;
+const mainCssRe = /(<link\b[^>]*?href=)(["'])\/main\.css(?:\?v=[a-z0-9]+)?\2([^>]*>)/gi;
+const commonJsRe = /(<script\b[^>]*?src=)(["'])\/common\.js(?:\?v=[a-z0-9]+)?\2([^>]*><\/script>)/gi;
+const calcJsRe = /(<script\b[^>]*?src=)(["'])\/calculator\.js(?:\?v=[a-z0-9]+)?\2([^>]*><\/script>)/gi;
 
 for (const file of htmlFiles) {
   const before = fs.readFileSync(file, 'utf8');
   let after = before;
 
-  after = after.replace(styleLinkRe, (match, pre, quote, post) => {
+  after = after.replace(mainCssRe, (match, pre, quote, post) => {
     assetLinksUpdated++;
-    return `<link${pre}href=${quote}/style.css${styleV}${quote}${post}>`;
+    return `${pre}${quote}/main.css${mainV}${quote}${post}`;
   });
 
-  after = after.replace(scriptTagRe, (match, pre, quote, post) => {
+  after = after.replace(commonJsRe, (match, pre, quote, post) => {
     assetLinksUpdated++;
-    return `<script${pre}src=${quote}/script.js${scriptV}${quote}${post}></script>`;
+    return `${pre}${quote}/common.js${commonV}${quote}${post}`;
+  });
+
+  after = after.replace(calcJsRe, (match, pre, quote, post) => {
+    assetLinksUpdated++;
+    return `${pre}${quote}/calculator.js${calcV}${quote}${post}`;
   });
 
   // Insert the meta cache-control tag right after <head> if missing.

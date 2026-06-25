@@ -1,0 +1,66 @@
+; ============================================================================
+; DNS for AI Discovery (DNS-AID) zone file for breastcalculator.com
+; Reference: https://datatracker.ietf.org/doc/draft-mozleywilliams-dnsop-dnsaid/
+; Format:    RFC 9460 (SVCB / HTTPS), RFC 9461 (SvcParams)
+;
+; How to apply
+; ------------
+; Option A (recommended): In Cloudflare Dashboard
+;   1. Go to https://dash.cloudflare.com -> breastcalculator.com -> DNS -> Records
+;   2. Click "Add record" -> Type: SVCB (or HTTPS)
+;   3. For each record below: paste the Name, leave TTL at "Auto", set Type,
+;      paste the Target, and add the SvcParams in the "Service parameters" field
+;   4. After all records are added, go to DNS -> Settings -> DNSSEC and
+;      click "Enable DNSSEC" (Cloudflare will publish a DS record to the
+;      parent zone)
+;
+; Option B: via Wrangler / Cloudflare API (see `cloudflare-api-curl.sh`)
+;
+; Option C: via `cloudflared` / `cflare` CLI
+; ============================================================================
+
+$ORIGIN _agents.breastcalculator.com.
+$TTL 3600
+
+; ---------------------------------------------------------------------------
+; 1. Primary agent index endpoint
+;    SvcPriority=1 (ServiceMode), target=breastcalculator.com, alpn="index"
+; ---------------------------------------------------------------------------
+_index          3600  IN  SVCB  1 breastcalculator.com. alpn="index" port=443 mandatory=alpn,port
+
+; ---------------------------------------------------------------------------
+; 2. Agent-to-agent (A2A) endpoint
+;    Used by agents that implement the A2A protocol
+; ---------------------------------------------------------------------------
+_a2a            3600  IN  SVCB  1 breastcalculator.com. alpn="a2a" port=443 mandatory=alpn,port
+
+; ---------------------------------------------------------------------------
+; 3. HTTPS-specific discovery (RFC 9460 variant)
+;    Use this when the agent only supports HTTPS SvcParamKeys
+; ---------------------------------------------------------------------------
+_https          3600  IN  HTTPS 1 breastcalculator.com. alpn="h2,h3" port=443 mandatory=alpn,port
+
+; ---------------------------------------------------------------------------
+; 4. Experimental / vendor-specific endpoints (illustrative)
+;    Use numeric `keyNNNNN` SvcParamKey names for experimental DNS-AID
+;    custom parameters until they are registered with IANA.
+;
+;    key65001 = "agent-description-uri"  (informational, non-routing)
+;    key65002 = "agent-version"          (semver, non-routing)
+;    key65003 = "agent-capabilities"     (comma-separated list, non-routing)
+; ---------------------------------------------------------------------------
+_mcp            3600  IN  SVCB  1 breastcalculator.com. alpn="mcp" port=443 mandatory=alpn,port key65001="https://breastcalculator.com/.well-known/llms.txt" key65002="1.0.0" key65003="calculator,article,wellness,bra-size"
+_llm            3600  IN  SVCB  1 breastcalculator.com. alpn="llm" port=443 mandatory=alpn,port key65001="https://breastcalculator.com/.well-known/llms.txt" key65002="1.0.0" key65003="qa,summarize,extract"
+_search         3600  IN  SVCB  1 breastcalculator.com. alpn="search" port=443 mandatory=alpn,port key65001="https://breastcalculator.com/sitemap.xml" key65002="1.0.0" key65003="boolean,keyword"
+
+; ============================================================================
+; DNSSEC
+; ============================================================================
+; DNSSEC is enabled at the zone apex (breastcalculator.com) in Cloudflare.
+; Cloudflare automatically signs all records in the zone, including those
+; under _agents.breastcalculator.com. Validating resolvers will return AD=1
+; for queries against this zone.
+;
+; To enable in Cloudflare:
+;   Dashboard -> breastcalculator.com -> DNS -> Settings -> DNSSEC -> Enable
+; ============================================================================

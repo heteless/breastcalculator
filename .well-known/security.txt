@@ -1,0 +1,4 @@
+Contact: mailto:security@breastcalculator.com
+Expires: 2027-12-31T23:59:59z
+Preferred-Languages: en
+Canonical: https://breastcalculator.com/.well-known/security.txt

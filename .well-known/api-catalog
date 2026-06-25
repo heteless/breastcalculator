@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json.schemastore.org/api-catalog.json",
+  "id": "https://breastcalculator.com/.well-known/api-catalog",
+  "title": "Breast Calculator \u2014 Resource Catalog",
+  "version": "1.0.0",
+  "host": "breastcalculator.com",
+  "description": "Machine-readable catalog of every interactive tool, content hub, and structured resource on breastcalculator.com. Designed for autonomous AI agents to discover capabilities without crawling HTML.",
+  "homepage": "https://breastcalculator.com/",
+  "sitemap": "https://breastcalculator.com/sitemap.xml",
+  "robots": "https://breastcalculator.com/robots.txt",
+  "languages": {
+    "primary": "en",
+    "available": ["en"]
+  },
+  "llms_txt": "https://breastcalculator.com/.well-known/llms.txt",
+  "categories": {
+    "calculators": {
+      "description": "Interactive measurement and estimation tools that run entirely in the browser. No data leaves the device.",
+      "endpoints": [
+        { "id": "bra-size-calc", "title": "Bra Size Calculator", "path": "/bra-size-calculator/", "method": "GET", "input": "band_underbust_cm, bust_cm", "output": "uk_size, us_size, eu_size, sister_size_set" },
+        { "id": "breast-weight", "title": "Breast Weight Calculator", "path": "/tools/breast-weight-calculator/", "method": "GET", "input": "band, cup, density", "output": "weight_grams, weight_oz, weight_lb" },
+        { "id": "breast-volume", "title": "Breast Volume Calculator", "path": "/tools/breast-volume-calculator/", "method": "GET", "input": "band, cup, breast_width, breast_height", "output": "volume_cc_per_breast, asymmetry_delta" },
+        { "id": "breast-shape", "title": "Breast Shape Calculator", "path": "/tools/breast-shape-calculator/", "method": "GET", "input": "stance, fullness, root_position, projection", "output": "shape_class, fit_recommendations[]" },
+        { "id": "breast-ptosis", "title": "Breast Ptosis Calculator", "path": "/tools/breast-ptosis-calculator/", "method": "GET", "input": "nipple_position_relative_to_inframammary_fold", "output": "regnault_grade" },
+        { "id": "breast-expansion", "title": "Breast Expansion Calculator", "path": "/tools/breast-expansion-calculator/", "method": "GET", "input": "cycle_phase, current_size, target_size", "output": "timeline_weeks, expected_size_progression[]" },
+        { "id": "length-converter", "title": "Length Converter", "path": "/tools/length-converter/", "method": "GET", "input": "value, from_unit", "output": "cm, inches, feet" },
+        { "id": "weight-converter", "title": "Weight Converter", "path": "/tools/weight-converter/", "method": "GET", "input": "value, from_unit", "output": "grams, ounces, pounds, kilograms" }
+      ]
+    },
+    "content_hubs": {
+      "description": "Long-form articles and structured guides.",
+      "endpoints": [
+        { "id": "articles", "title": "All Articles", "path": "/articles/", "count": 14 },
+        { "id": "wellness", "title": "Health & Wellness Hub", "path": "/wellness/", "count": 15 },
+        { "id": "specials", "title": "Special Topics", "path": "/specials/", "count": 7 },
+        { "id": "bra-size-guide", "title": "Bra Size Guide", "path": "/bra-size-guide/", "count": 19 },
+        { "id": "bra-buying-guide", "title": "Bra Buying Guide", "path": "/bra-buying-guide/", "count": 1 },
+        { "id": "tools-hub", "title": "All Tools", "path": "/tools/", "count": 7 }
+      ]
+    },
+    "structured_data": {
+      "description": "Machine-readable indexes and metadata.",
+      "endpoints": [
+        { "id": "sitemap", "title": "XML Sitemap", "path": "/sitemap.xml", "format": "application/xml" },
+        { "id": "robots", "title": "Robots Policy", "path": "/robots.txt", "format": "text/plain" },
+        { "id": "rss", "title": "Feed", "path": null, "format": "application/rss+xml", "status": "not-implemented" }
+      ]
+    }
+  },
+  "policies": {
+    "ai_training": "denied",
+    "ai_search": "allowed",
+    "rate_limit": "no-auth-no-rate-limit",
+    "auth": "none-required",
+    "data_retention": "no-data-collected",
+    "analytics": "google-analytics-4-anonymized-ip"
+  },
+  "crawler_directives": {
+    "GPTBot": "Disallow: /",
+    "ClaudeBot": "Disallow: /",
+    "Google-Extended": "Disallow: /",
+    "Applebot-Extended": "Disallow: /",
+    "meta-externalagent": "Disallow: /",
+    "CCBot": "Allow: /",
+    "Bytespider": "Allow: /",
+    "Amazonbot": "Allow: /"
+  },
+  "contact": {
+    "security": "https://breastcalculator.com/.well-known/security.txt"
+  }
+}

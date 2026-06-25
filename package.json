@@ -4,7 +4,9 @@
   "private": true,
   "description": "Breast Calculator — static site deployed to Cloudflare Workers.",
   "scripts": {
-    "build": "node scripts/build-tailwind.js && node scripts/optimize.js && node scripts/cache-bust.js && node scripts/build-dist.js && echo 'Static site ready in dist/.'",
+    "build": "node scripts/build-tailwind.js && node scripts/build-css.js && node scripts/split-script.js && node scripts/reflow-fix.js && node scripts/dom-reduce.js && node scripts/optimize.js && node scripts/perf-fixes.js && node scripts/cache-bust.js && node scripts/build-dist.js && echo 'Static site ready in dist/.'",
+    "reflow-fix": "node scripts/reflow-fix.js",
+    "dom-reduce": "node scripts/dom-reduce.js",
     "dev": "echo 'Open index.html in a browser, or run: npx http-server -p 8000'",
     "optimize": "node scripts/optimize.js",
     "tailwind": "node scripts/build-tailwind.js",
@@ -12,6 +14,8 @@
     "purge:verify": "node scripts/verify-purge.js",
     "cache-bust": "node scripts/cache-bust.js",
     "build:dist": "node scripts/build-dist.js",
+    "inject:ga4": "node scripts/inject-ga4.js",
+    "inject:ga4:check": "node scripts/inject-ga4.js --check",
     "deploy": "npm run build && wrangler deploy",
     "deploy:preview": "npm run build && wrangler deploy --env preview",
     "deploy:clean": "npm run build && wrangler deploy --clean"
@@ -24,6 +28,7 @@
     "cloudflare-workers"
   ],
   "devDependencies": {
+    "acorn": "^8.17.0",
     "purgecss": "^8.0.0",
     "tailwindcss": "^3.4.19",
     "wrangler": "^4.99.0"

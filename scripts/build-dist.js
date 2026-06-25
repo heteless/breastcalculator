@@ -48,6 +48,14 @@ const EXCLUDE_FILES = new Set([
   '.prettierrc',
   '.prettierrc.json',
   'purgecss.config.cjs',
+  // Source artifacts no longer referenced after the script.js →
+  // common.js/calculator.js split. Keep on disk for the build pipeline
+  // (split-script.js reads script.js) but never ship to production.
+  'script.js',
+  'style.css',
+  'tailwind-built.css',
+  // Replaced by main.css in the consolidated stylesheet.
+  'assets/bra-calculator.css',
 ]);
 
 const SKIP_PATTERNS = [

@@ -53,8 +53,41 @@
 # with the origin on every request. Origin response is static and free,
 # so the cost is negligible and content is always fresh.
 
+# === AI Agent Discovery: RFC 8288 Link headers + RFC 9727 ===
+# The homepage advertises machine-readable resources to agents and crawlers
+# via the standard HTTP Link header. See:
+#   https://isitagentready.com/.well-known/agent-skills/link-headers/SKILL.md
+#   https://www.rfc-editor.org/rfc/rfc8288
+#   https://www.rfc-editor.org/rfc/rfc9727#section-3
+
 /index.html
   Cache-Control: public, no-cache, must-revalidate
+  Link: </.well-known/api-catalog>; rel="api-catalog"; type="application/json", </.well-known/agent-skills/link-headers/SKILL.md>; rel="service-doc"; type="text/markdown", </.well-known/llms.txt>; rel="service-desc"; type="text/plain", </sitemap.xml>; rel="describedby"; type="application/xml", </robots.txt>; rel="describedby"; type="text/plain"
+
+/*
+  Link: </.well-known/api-catalog>; rel="api-catalog"; type="application/json", </.well-known/agent-skills/link-headers/SKILL.md>; rel="service-doc"; type="text/markdown", </.well-known/llms.txt>; rel="service-desc"; type="text/plain", </robots.txt>; rel="describedby"; type="text/plain"
+
+/.well-known/*
+  Cache-Control: public, max-age=3600, must-revalidate
+  Content-Type: application/json; charset=utf-8
+
+/.well-known/llms.txt
+  Content-Type: text/plain; charset=utf-8
+
+/.well-known/security.txt
+  Content-Type: text/plain; charset=utf-8
+
+/.well-known/agent-skills/link-headers/SKILL.md
+  Content-Type: text/markdown; charset=utf-8
+
+/.well-known/agent-skills/dns-aid/SKILL.md
+  Content-Type: text/markdown; charset=utf-8
+
+/.well-known/agent-skills/dns-aid/zone.txt
+  Content-Type: text/plain; charset=utf-8
+
+/.well-known/agent-skills/markdown-negotiation/SKILL.md
+  Content-Type: text/markdown; charset=utf-8
 
 /about/index.html
   Cache-Control: public, no-cache, must-revalidate
@@ -148,11 +181,13 @@
   Cross-Origin-Opener-Policy: same-origin
 
 # iOS / macOS specific MIME and behavior hints
-/style.css
+/main.css
   Content-Type: text/css; charset=utf-8
-/script.js
+/common.js
   Content-Type: application/javascript; charset=utf-8
-/site.webmanifest
+/calculator.js
+  Content-Type: application/javascript; charset=utf-8
+-/site.webmanifest
   Content-Type: application/manifest+json; charset=utf-8
 
 # Apple touch icon served with proper MIME
