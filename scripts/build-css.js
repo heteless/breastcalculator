@@ -38,6 +38,35 @@ const BANNER = `/*!
  */
 `;
 
+// Post-process combined CSS to eliminate non-composited border-color animations.
+// - Removes `,border-color` from `transition-property:` lists (Tailwind's `*` and `.transition-colors`).
+// - Neutralizes Tailwind's `.hover\:border-\[\#6b5344\]:hover` rule (overridden by style.css box-shadow rule).
+function removeBorderColorAnimations(css) {
+  let out = css;
+  let removed = 0;
+
+  // 1) Remove `,border-color` and `border-color,` from transition-property declarations.
+  //    Allow optional spaces for both minified and unminified CSS.
+  out = out.replace(/transition-property:\s*([^;}]*),\s*border-color\s*([^;}]*)([;}])/g, (m, before, after, term) => {
+    removed++;
+    return `transition-property:${before}${after}${term}`;
+  });
+  out = out.replace(/transition-property:\s*border-color\s*,\s*([^;}]*)([;}])/g, (m, rest, term) => {
+    removed++;
+    return `transition-property:${rest}${term}`;
+  });
+
+  // 2) Neutralize Tailwind hover:border-[#6b5344]:hover rule (sets border-color, overridden by style.css)
+  //    Replace the border-color declaration with transparent so the rule is harmless.
+  out = out.replace(
+    /border-color:\s*rgb\(\s*107\s+83\s+68\s*\/\s*var\(--tw-border-opacity,\s*1\)\s*\)/g,
+    (m) => { removed++; return 'border-color:transparent'; }
+  );
+
+  console.log(`[build-css] border-color animations neutralized: ${removed}`);
+  return out;
+}
+
 function build() {
   let total = 0;
   const parts = [BANNER];
@@ -53,7 +82,8 @@ function build() {
     total += content.length;
     console.log(`[build-css] + ${path.relative(ROOT, p).padEnd(38)} ${(content.length / 1024).toFixed(1).padStart(6)} KB`);
   }
-  const out = parts.join('');
+  let out = parts.join('');
+  out = removeBorderColorAnimations(out);
   fs.writeFileSync(OUT, out, 'utf8');
   console.log(`[build-css] main.css written: ${(out.length / 1024).toFixed(1)} KB (${(total / 1024).toFixed(1)} KB combined sources)`);
 }

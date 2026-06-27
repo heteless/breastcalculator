@@ -41,6 +41,14 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
+// Only minify files in dist/ — source files stay human-readable.
+// optimize.js now runs AFTER build-dist.js in the build pipeline.
+const DIST = path.join(ROOT, 'dist');
+
+if (!fs.existsSync(DIST)) {
+  console.error('[optimize] dist/ not found. build-dist must run before optimize.');
+  process.exit(1);
+}
 
 // Files we never touch.
 const SKIP_DIRS = new Set(['node_modules', '.git', 'scripts', '.wrangler', '.vscode']);
@@ -162,7 +170,7 @@ const minifiers = [
   { ext: '.svg',  label: 'SVG',  fn: minifySVG  },
 ];
 
-const allFiles = walk(ROOT);
+const allFiles = walk(DIST);
 const stats = { HTML: { n: 0, before: 0, after: 0 },
                 CSS:  { n: 0, before: 0, after: 0 },
                 JS:   { n: 0, before: 0, after: 0 },

@@ -4,7 +4,7 @@
   "private": true,
   "description": "Breast Calculator — static site deployed to Cloudflare Workers.",
   "scripts": {
-    "build": "node scripts/build-tailwind.js && node scripts/purgecss.js && node scripts/build-css.js && node scripts/split-script.js && node scripts/reflow-fix.js && node scripts/idle-schedule.js && node scripts/dom-reduce.js && node scripts/layout-normalize.js && node scripts/optimize.js && node scripts/perf-fixes.js && node scripts/cache-bust.js && node scripts/build-dist.js && echo 'Static site ready in dist/.'",
+    "build": "node scripts/build-tailwind.js && node scripts/purgecss.js && node scripts/build-css.js && node scripts/split-script.js && node scripts/reflow-fix.js && node scripts/idle-schedule.js && node scripts/dom-reduce.js && node scripts/layout-normalize.js && node scripts/perf-fixes.js && node scripts/build-dist.js && node scripts/optimize.js && node scripts/cache-bust.js && echo 'Static site ready in dist/.'",
     "reflow-fix": "node scripts/reflow-fix.js",
     "idle-schedule": "node scripts/idle-schedule.js",
     "dom-reduce": "node scripts/dom-reduce.js",

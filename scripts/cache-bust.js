@@ -27,12 +27,15 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
-const MAIN_CSS_FILE = path.join(ROOT, 'main.css');
-const COMMON_JS_FILE = path.join(ROOT, 'common.js');
-const CALC_JS_FILE = path.join(ROOT, 'calculator.js');
+// cache-bust now runs AFTER build-dist + optimize, so it operates on
+// the minified files in dist/ and updates the HTML copies in dist/.
+const DIST = path.join(ROOT, 'dist');
+const MAIN_CSS_FILE = path.join(DIST, 'main.css');
+const COMMON_JS_FILE = path.join(DIST, 'common.js');
+const CALC_JS_FILE = path.join(DIST, 'calculator.js');
 
 if (!fs.existsSync(MAIN_CSS_FILE) || !fs.existsSync(COMMON_JS_FILE) || !fs.existsSync(CALC_JS_FILE)) {
-  console.error('[cache-bust] main.css, common.js, or calculator.js not found at repo root.');
+  console.error('[cache-bust] main.css, common.js, or calculator.js not found in dist/.');
   process.exit(1);
 }
 
@@ -63,7 +66,7 @@ function listHtml(dir) {
   return out;
 }
 
-const htmlFiles = listHtml(ROOT);
+const htmlFiles = listHtml(DIST);
 let touched = 0;
 let metaInserted = 0;
 let assetLinksUpdated = 0;

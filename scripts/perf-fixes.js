@@ -67,25 +67,51 @@ function dedupGtagLoader(html) {
 }
 
 function combineCss(html) {
-  // Strip the three existing <link rel="stylesheet"> tags.
+  // Strip the three existing source-CSS <link rel="stylesheet"> tags
+  // (style.css / tailwind-built.css / assets/bra-calculator.css) so
+  // we can replace them with the consolidated /main.css preload+swap.
   let out = html.replace(STYLE_CSS_RE, '');
   out = out.replace(TAILWIND_RE, '');
   out = out.replace(BRA_CALC_CSS_RE, '');
 
-  // Inject the preload + swap pattern just before the first
-  // <link rel="stylesheet" …> in the document. If none exists,
-  // insert it just after <head>.
+  // Also strip every existing /main.css preload/stylesheet link tag
+  // that lives inside <head>. Older versions of this script left
+  // *nested* <noscript> blocks behind when run multiple times after
+  // cache-bust had bumped the version hash (the substring idempotency
+  // check failed to match `href="/main.css?v=…"` URLs). The cleanup
+  // below collapses that mess before we re-inject a single canonical
+  // preload+swap pair, so the function is now truly idempotent.
+  out = out.replace(/(<head\b[^>]*>)([\s\S]*?)(<\/head>)/i,
+    (full, open, inner, close) => {
+      let cleaned = inner;
+      // Remove every <link> referencing /main.css (any query string,
+      // any attribute order, any rel value).
+      cleaned = cleaned.replace(
+        /<link\b[^>]*href=["']\/main\.css(?:\?v=[a-z0-9]+)?["'][^>]*>/gi,
+        '',
+      );
+      // Drop now-empty <noscript></noscript> pairs (any nesting depth).
+      let prev;
+      do {
+        prev = cleaned;
+        cleaned = cleaned.replace(/<noscript>\s*<\/noscript>/gi, '');
+      } while (cleaned !== prev);
+      // Remove stray <noscript> / </noscript> tokens left after their
+      // inner content was stripped. (Head should never contain noscripts
+      // other than the main.css fallback we're about to re-create.)
+      cleaned = cleaned.replace(/<\/?noscript>/gi, '');
+      return open + cleaned + close;
+    },
+  );
+
+  // Inject the canonical preload + swap pattern right after <head>.
+  // Because we just stripped every prior main.css reference, this is
+  // safe to run on every build — the result is always one clean pair.
   const PRELOAD_TAG =
     `<link rel="preload" href="${MAIN_CSS}" as="style" ` +
     `onload="this.onload=null;this.rel='stylesheet'"/>` +
     `<noscript><link rel="stylesheet" href="${MAIN_CSS}"/></noscript>`;
 
-  if (out.includes('rel="preload" href="/main.css"')) {
-    return out; // already converted
-  }
-  if (out.includes('rel="stylesheet"')) {
-    return out.replace(/(<link\b[^>]*rel="stylesheet"[^>]*>)/, `${PRELOAD_TAG}$1`);
-  }
   return out.replace(/<head\b[^>]*>/i, (m) => `${m}${PRELOAD_TAG}`);
 }
 
