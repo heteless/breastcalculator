@@ -42,3 +42,10 @@ dist-dryrun/
 .indexnow-hashes.json
 .indexnow-sitemap-prev.json
 bing_index_status.json
+
+# === SEO audit scripts (scripts/seo/) ===
+reports/
+.backup/
+sitemap_fixed.xml
+sitemap.xml.bak
+.tmp-sitemap.xml
