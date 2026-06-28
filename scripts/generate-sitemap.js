@@ -6,7 +6,8 @@ const path = require('path');
 const ROOT = path.resolve(__dirname, '..');
 const SITEMAP_PATH = path.join(ROOT, 'sitemap.xml');
 const BASE_URL = 'https://breastcalculator.com';
-const TODAY = '2026-06-10';
+// Dynamic lastmod: today's date in YYYY-MM-DD (UTC)
+const TODAY = new Date().toISOString().slice(0, 10);
 
 // 排除的目录（不进入 sitemap）
 const EXCLUDE_DIRS = new Set([

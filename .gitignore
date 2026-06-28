@@ -36,3 +36,9 @@ dist-dryrun/
 
 # === Local generation cache used by hub builders ===
 .tmp-gen/
+
+# === IndexNow state ===
+.indexnow-key
+.indexnow-hashes.json
+.indexnow-sitemap-prev.json
+bing_index_status.json
