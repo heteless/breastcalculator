@@ -60,7 +60,8 @@ function loadSitemapUrls() {
     throw new Error(`sitemap.xml not found at ${SITEMAP}`);
   }
   const xml = fs.readFileSync(SITEMAP, 'utf8');
-  const re = /<loc>([^<]+)<\/loc>/g;
+  // Namespace-tolerant: matches both <loc> and <ns0:loc>, <sitemap:loc>, etc.
+  const re = /<[a-zA-Z0-9_]*:?loc[^>]*>([^<]+)<\/[a-zA-Z0-9_]*:?loc>/g;
   const out = [];
   let m;
   while ((m = re.exec(xml)) !== null) {
