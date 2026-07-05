@@ -10,9 +10,11 @@
 //
 //   2. Replace the three render-blocking <link rel="stylesheet">
 //      (style.css + tailwind-built.css + assets/bra-calculator.css)
-//      with one <link rel="preload" … as="style" onload="…"> that
-//      swaps to stylesheet after parse. Also add a <noscript> fallback
-//      for JS-disabled clients.
+//      with one consolidated synchronous <link rel="stylesheet"
+//      href="/main.css">. We deliberately do NOT use the
+//      <link rel="preload" as="style" onload="…"> swap pattern
+//      because /main.css contains the site chrome and the swap
+//      causes a visible FOUT / CLS flash on first paint.
 //
 //   3. Switch the global <script src="/script.js" defer> to
 //      <script src="/common.js" defer>. The 45 KB minified bundle
@@ -104,15 +106,19 @@ function combineCss(html) {
     },
   );
 
-  // Inject the canonical preload + swap pattern right after <head>.
-  // Because we just stripped every prior main.css reference, this is
-  // safe to run on every build — the result is always one clean pair.
-  const PRELOAD_TAG =
-    `<link rel="preload" href="${MAIN_CSS}" as="style" ` +
-    `onload="this.onload=null;this.rel='stylesheet'"/>` +
-    `<noscript><link rel="stylesheet" href="${MAIN_CSS}"/></noscript>`;
+  // Inject a single synchronous, render-blocking <link rel="stylesheet">
+  // right after <head>. We intentionally do NOT use the
+  // <link rel="preload" as="style" onload="…"> swap pattern here:
+  // /main.css contains the entire site chrome (layout, navbar, theme)
+  // and the swap pattern causes a visible FOUT / CLS flash on first
+  // paint, especially on slow 3G/4G mobile connections. Because the
+  // stylesheet lives in the critical rendering path, blocking on it
+  // is the correct trade-off. We still emit a <noscript> fallback for
+  // theoretical no-JS clients (harmless when JS is on).
+  const STYLE_TAG =
+    `<link rel="stylesheet" href="${MAIN_CSS}"/>`;
 
-  return out.replace(/<head\b[^>]*>/i, (m) => `${m}${PRELOAD_TAG}`);
+  return out.replace(/<head\b[^>]*>/i, (m) => `${m}${STYLE_TAG}`);
 }
 
 function switchScriptTag(html) {

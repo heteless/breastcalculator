@@ -21,6 +21,7 @@
     "inject:adsense": "node scripts/inject-adsense.js",
     "inject:adsense:check": "node scripts/inject-adsense.js --check",
     "inject:adsense:upgrade": "node scripts/inject-adsense.js --upgrade",
+    "fix:css-preload": "node scripts/fix-css-preload.js",
     "indexnow": "node scripts/indexnow.js changed",
     "indexnow:submit": "node scripts/indexnow.js submit",
     "indexnow:force": "node scripts/indexnow.js submit --force",
