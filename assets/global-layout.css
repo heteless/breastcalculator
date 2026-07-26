@@ -294,9 +294,31 @@ article.article :where(iframe, video),
 .result-card-v2,
 .psb-bar,
 article.article,
-.page-content,
-main {
+/* ── 注意: main 元素本身不居中, 避免影响所有正文段落 (尤其 .specials-sub) ──
+   main 内的按钮/链接由下方 main a / main button 专门处理。 */
+.page-content {
   text-align: center;             /* 兜底: 让 inline/inline-block 元素居中 */
+}
+
+/* 文章正文左对齐 (新闻报道格式): article.article 内的段落/标题/列表左对齐。
+   保留 h1.text-center 等显式居中类 (例如 article/us-vs-uk-bra-sizes/ 的 h1 居中)。
+   此规则同时覆盖 bra-size-guide/compare/*、article/*、bra-size-guide/h-cup 等
+   所有使用 <article class="article"> 的长文页面。 */
+article.article p,
+article.article h2,
+article.article h3,
+article.article h4,
+article.article h5,
+article.article h6,
+article.article h1:not(.text-center),
+article.article ul,
+article.article ol,
+article.article li,
+article.article blockquote,
+article.article .article-intro,
+article.article .byline,
+article.article .table-wrap {
+  text-align: left;
 }
 
 main a,
