@@ -105,11 +105,14 @@ header-wellness-popup.html
 skills-lock.json
 
 # Tailwind dev sources (production CSS lives in /main.css and /assets/*.css)
-tailwind-input.css
-tailwind.config.js
-tailwind-built.css
+# Tracked so Cloudflare Pages can run `npm run build` and regenerate the
+# dist/ tree on the edge. If you don't want Cloudflare to rebuild, change
+# the Pages build command to `true` and rely on the committed dist/ instead.
+!tailwind-input.css
+!tailwind.config.js
+!tailwind-built.css
 # PurgeCSS dev config
-purgecss.config.cjs
+!purgecss.config.cjs
 
 # Sitemap XML used only by the dev SEO tooling
 # (Cloudflare Pages reads /sitemap.xml from the repo root in production)
