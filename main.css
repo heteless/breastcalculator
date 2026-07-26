@@ -8,7 +8,7 @@
  * <link> pattern.
  */
 
-/* ─── tailwind-built.css (13419 B) ─── */
+/* ─── tailwind-built.css (13388 B) ─── */
 .pointer-events-none {
   pointer-events: none
 }
@@ -163,10 +163,6 @@
 
 .inline-block {
   display: inline-block
-}
-
-.inline {
-  display: inline
 }
 
 .flex {
