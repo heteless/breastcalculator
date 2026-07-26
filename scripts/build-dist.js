@@ -32,6 +32,10 @@ const EXCLUDE_DIRS = new Set([
   '__tests__',
   '.wrangler',
   '.cache',
+  // SEO audit reports — kept on disk for the audit scripts to read,
+  // but they contain raw crawl output that should never be served as
+  // a public web asset.
+  'reports',
 ]);
 
 const EXCLUDE_FILES = new Set([
@@ -56,6 +60,11 @@ const EXCLUDE_FILES = new Set([
   'tailwind-built.css',
   // Replaced by main.css in the consolidated stylesheet.
   'assets/bra-calculator.css',
+  // Leftover backup of sitemap.xml (kept in .gitignore so it never
+  // reaches the repo, but it lived at the project root and was being
+  // copied to dist/ by the walker). Excluding it here too so the
+  // build is self-cleaning.
+  'sitemap.xml.bak',
 ]);
 
 const SKIP_PATTERNS = [

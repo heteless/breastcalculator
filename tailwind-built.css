@@ -154,6 +154,10 @@
   display: inline-block
 }
 
+.inline {
+  display: inline
+}
+
 .flex {
   display: flex
 }
@@ -178,24 +182,8 @@
   height: 3rem
 }
 
-.h-3 {
-  height: 0.75rem
-}
-
-.h-3\.5 {
-  height: 0.875rem
-}
-
-.h-4 {
-  height: 1rem
-}
-
 .h-5 {
   height: 1.25rem
-}
-
-.min-h-\[28px\] {
-  min-height: 28px
 }
 
 .min-h-\[48px\] {
@@ -214,32 +202,12 @@
   width: 3rem
 }
 
-.w-3 {
-  width: 0.75rem
-}
-
-.w-3\.5 {
-  width: 0.875rem
-}
-
-.w-4 {
-  width: 1rem
-}
-
 .w-5 {
   width: 1.25rem
 }
 
 .w-full {
   width: 100%
-}
-
-.min-w-\[48px\] {
-  min-width: 48px
-}
-
-.max-w-6xl {
-  max-width: 72rem
 }
 
 .max-w-\[720px\] {
@@ -254,10 +222,6 @@
   max-width: 36rem
 }
 
-.flex-shrink-0 {
-  flex-shrink: 0
-}
-
 .shrink {
   flex-shrink: 1
 }
@@ -266,17 +230,8 @@
   border-collapse: collapse
 }
 
-.rotate-180 {
-  --tw-rotate: 180deg;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
-}
-
 .transform {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
-}
-
-.cursor-pointer {
-  cursor: pointer
 }
 
 .resize {
@@ -291,24 +246,12 @@
   list-style-type: disc
 }
 
-.list-none {
-  list-style-type: none
-}
-
 .grid-cols-2 {
   grid-template-columns: repeat(2, minmax(0, 1fr))
 }
 
-.grid-cols-4 {
-  grid-template-columns: repeat(4, minmax(0, 1fr))
-}
-
 .flex-col {
   flex-direction: column
-}
-
-.flex-wrap {
-  flex-wrap: wrap
 }
 
 .items-center {
@@ -319,38 +262,8 @@
   justify-content: center
 }
 
-.justify-between {
-  justify-content: space-between
-}
-
-.gap-1 {
-  gap: 0.25rem
-}
-
-.gap-1\.5 {
-  gap: 0.375rem
-}
-
 .gap-3 {
   gap: 0.75rem
-}
-
-.gap-x-10 {
-  -moz-column-gap: 2.5rem;
-       column-gap: 2.5rem
-}
-
-.gap-x-6 {
-  -moz-column-gap: 1.5rem;
-       column-gap: 1.5rem
-}
-
-.gap-y-1 {
-  row-gap: 0.25rem
-}
-
-.gap-y-8 {
-  row-gap: 2rem
 }
 
 .space-y-1 > :not([hidden]) ~ :not([hidden]) {
@@ -359,27 +272,10 @@
   margin-bottom: calc(0.25rem * var(--tw-space-y-reverse))
 }
 
-.space-y-1\.5 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-y-reverse: 0;
-  margin-top: calc(0.375rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(0.375rem * var(--tw-space-y-reverse))
-}
-
 .space-y-2 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
   margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(0.5rem * var(--tw-space-y-reverse))
-}
-
-.divide-y > :not([hidden]) ~ :not([hidden]) {
-  --tw-divide-y-reverse: 0;
-  border-top-width: calc(1px * calc(1 - var(--tw-divide-y-reverse)));
-  border-bottom-width: calc(1px * var(--tw-divide-y-reverse))
-}
-
-.divide-\[\#e6d5c3\] > :not([hidden]) ~ :not([hidden]) {
-  --tw-divide-opacity: 1;
-  border-color: rgb(230 213 195 / var(--tw-divide-opacity, 1))
 }
 
 .truncate {
@@ -408,20 +304,12 @@
   border-width: 1px
 }
 
-.border-0 {
-  border-width: 0px
-}
-
 .border-b {
   border-bottom-width: 1px
 }
 
 .border-l-4 {
   border-left-width: 4px
-}
-
-.border-t {
-  border-top-width: 1px
 }
 
 .border-\[\#c8a27b\] {
@@ -497,10 +385,6 @@
   background-color: rgb(253 242 248 / 0.6)
 }
 
-.bg-transparent {
-  background-color: transparent
-}
-
 .bg-gradient-to-br {
   background-image: linear-gradient(to bottom right, var(--tw-gradient-stops))
 }
@@ -529,10 +413,6 @@
   --tw-gradient-to: #ec4899 var(--tw-gradient-to-position)
 }
 
-.p-0 {
-  padding: 0px
-}
-
 .p-1 {
   padding: 0.25rem
 }
@@ -557,19 +437,9 @@
   padding: 1.5rem
 }
 
-.px-0 {
-  padding-left: 0px;
-  padding-right: 0px
-}
-
 .px-2\.5 {
   padding-left: 0.625rem;
   padding-right: 0.625rem
-}
-
-.px-3 {
-  padding-left: 0.75rem;
-  padding-right: 0.75rem
 }
 
 .px-4 {
@@ -592,19 +462,9 @@
   padding-bottom: 0.25rem
 }
 
-.py-1\.5 {
-  padding-top: 0.375rem;
-  padding-bottom: 0.375rem
-}
-
 .py-16 {
   padding-top: 4rem;
   padding-bottom: 4rem
-}
-
-.py-2 {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem
 }
 
 .py-3 {
@@ -612,29 +472,8 @@
   padding-bottom: 0.75rem
 }
 
-.py-4 {
-  padding-top: 1rem;
-  padding-bottom: 1rem
-}
-
-.pb-10 {
-  padding-bottom: 2.5rem
-}
-
-.pb-3 {
-  padding-bottom: 0.75rem
-}
-
-.pb-8 {
-  padding-bottom: 2rem
-}
-
 .pl-6 {
   padding-left: 1.5rem
-}
-
-.pt-12 {
-  padding-top: 3rem
 }
 
 .text-left {
@@ -687,16 +526,8 @@
   font-size: 0.92rem
 }
 
-.text-\[0\.9rem\] {
-  font-size: 0.9rem
-}
-
 .text-\[1\.1rem\] {
   font-size: 1.1rem
-}
-
-.text-\[1\.35rem\] {
-  font-size: 1.35rem
 }
 
 .text-\[1rem\] {
@@ -735,20 +566,8 @@
   font-weight: 600
 }
 
-.uppercase {
-  text-transform: uppercase
-}
-
-.leading-\[1\.6\] {
-  line-height: 1.6
-}
-
 .leading-\[1\.8\] {
   line-height: 1.8
-}
-
-.leading-\[28px\] {
-  line-height: 28px
 }
 
 .leading-relaxed {
@@ -761,14 +580,6 @@
 
 .leading-tight {
   line-height: 1.25
-}
-
-.tracking-\[0\.06em\] {
-  letter-spacing: 0.06em
-}
-
-.tracking-\[0\.1em\] {
-  letter-spacing: 0.1em
 }
 
 .tracking-\[0\.2em\] {
@@ -867,14 +678,6 @@
   text-decoration-line: none
 }
 
-.decoration-1 {
-  text-decoration-thickness: 1px
-}
-
-.underline-offset-2 {
-  text-underline-offset: 2px
-}
-
 .opacity-0 {
   opacity: 0
 }
@@ -924,16 +727,6 @@
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms
-}
-
-.transition-transform {
-  transition-property: transform;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms
-}
-
-.duration-200 {
-  transition-duration: 200ms
 }
 
 .duration-300 {
@@ -987,43 +780,12 @@
 }
 
 @media (min-width: 640px) {
-  .sm\:inline {
-    display: inline
-  }
-
-  .sm\:min-h-0 {
-    min-height: 0px
-  }
-
-  .sm\:min-w-0 {
-    min-width: 0px
-  }
-
   .sm\:flex-row {
     flex-direction: row
-  }
-
-  .sm\:px-6 {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem
-  }
-
-  .sm\:text-left {
-    text-align: left
   }
 
   .sm\:text-4xl {
     font-size: 2.25rem;
     line-height: 2.5rem
-  }
-}
-
-@media (min-width: 768px) {
-  .md\:grid {
-    display: grid
-  }
-
-  .md\:hidden {
-    display: none
   }
 }

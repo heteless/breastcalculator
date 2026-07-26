@@ -1,0 +1,4910 @@
+/* ==========================================================================
+   global-layout.css — 全站统一布局规范 (Single Source of Truth)
+   --------------------------------------------------------------------------
+   目标:
+     1) 任何页面在任何断点都不允许出现水平溢出。
+     2) 所有可读/交互内容必须在统一宽度轨道内 (默认 720px, Hero 960px, Footer 1152px)。
+     3) 全局安全网: html/body/水平方向 + 媒体/表格/代码块响应式。
+
+   使用方式:
+     - 所有页面无需显式套用容器类,默认 body > main 已由 :where() 规则约束到 720px 轨道。
+     - Hero / 大型介绍区: 增加 .page-hero 或 .container-wide (最大 960px)。
+     - Footer / 站底: 已统一为 1152px,移动端自动安全边距 16px。
+     - 表格必须用 <div class="table-wrap"> 包裹,长代码/长链接会自动换行。
+
+   不修改任何 page-specific layout (calculator, table, quiz, form) 内部结构。
+   ========================================================================== */
+
+/* ── 0. 全局 Box Model 与溢出防御 (低优先级) ────────────────────────── */
+html, body {
+  max-width: 100%;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* ── 1. 媒体/嵌入元素最大宽度 (lowest specificity, but enforced) ────── */
+:where(img, svg, video, canvas, iframe, embed, object, audio) {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ── 2. 长文本/单词溢出保护 (默认对所有可见元素生效) ────────────────── */
+:where(p, li, h1, h2, h3, h4, h5, h6, span, a, small, blockquote, dd, dt, td, th, code) {
+  overflow-wrap: anywhere;
+  word-wrap: break-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+/* ── 3. 表格响应式 (仅在窄屏强制可滚动) ─────────────────────────────── */
+:where(table) {
+  max-width: 100%;
+}
+
+@media (max-width: 768px) {
+  :where(table.data-table, table.w-full) {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    font-size: 0.86em;
+  }
+  :where(table.data-table th, table.data-table td) {
+    white-space: nowrap;
+  }
+  :where(table.data-table th:first-child, table.data-table td:first-child) {
+    white-space: normal;
+  }
+}
+
+/* ── 4. 代码块默认响应式 ───────────────────────────────────────────── */
+:where(pre) {
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 12px 14px;
+  background: var(--cream, #fff9f5);
+  border: 1px solid var(--border, #e7dbd1);
+  border-radius: var(--radius-sm, 8px);
+  font-size: 0.85em;
+  line-height: 1.55;
+}
+
+:where(code) {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.9em;
+}
+
+/* ── 5. 块引用 ──────────────────────────────────────────────────────── */
+:where(blockquote) {
+  margin: 1rem 0;
+  padding: 12px 16px;
+  border-left: 3px solid var(--rose, #8b6f5f);
+  background: var(--rose-lighter, #fdf6f1);
+  border-radius: 0 var(--radius-xs, 6px) var(--radius-xs, 6px) 0;
+  color: var(--text-light, #5a4540);
+  font-size: 0.95em;
+}
+
+/* ── 6. 默认内容容器: 所有可见页面 body > * 都受限于 720px ──────────── */
+:where(body > :not(script):not(style):not(link):not(meta):not(nav):not(header)) {
+  width: 100%;
+}
+
+/* body > main / #main / .main-content / .page-content / article.article /
+   .tool-calculator-shell / .inputs-panel / .result-card-v2 /
+   .interpretation-v2 / .how-to-measure / .tool-faq / .tool-faq-v2 /
+   .quick-actions-v2 / .tool-cta / .tool-ref / .psb-bar /
+   .specials-sub / .size-guide-content / .page-content / .size-result ──── 720px 居中轨道。                            */
+:where(main, #main, .main-content, .page-content, article.article,
+       .tool-calculator-shell, .inputs-panel, .result-card-v2,
+       .interpretation-v2, .how-to-measure, .tool-faq, .tool-faq-v2,
+       .quick-actions-v2, .tool-cta, .tool-ref, .psb-bar,
+       .specials-sub, .size-guide-content, .size-result) {
+  width: min(calc(100% - 32px), 720px);
+  margin-inline: auto;
+  display: block;
+}
+
+/* .bc-history: 姐妹尺码比较器需要更宽的轨道, 设为 960px 让 7 张卡装下所有数据 */
+.bc-history {
+  width: min(calc(100% - 32px), 960px) !important;
+  margin-inline: auto !important;
+  display: block !important;
+}
+
+/* 关键: 当 main 包含 .bc-history 时, 解除 720px 限制, 让 .bc-history 真正达到 960px
+   否则 main 的 720px 约束会把 .bc-history 挤压到 ~480px, 7 张卡被挤到 57-78px 宽, 严重溢出 */
+body > main:has(.bc-history) {
+  width: min(calc(100% - 32px), 980px) !important;
+  max-width: 980px !important;
+}
+
+/* 关键: 当页面上有 .bc-history 时, 让 .size-result (顶部白色结果框) 也扩展到 960px
+   保持 .size-result 与 .bc-history 视觉上等宽, 7 张卡 + 推荐结果框统一在一个对齐轨道内 */
+body > main:has(.bc-history) .size-result {
+  width: min(calc(100% - 32px), 960px) !important;
+  max-width: 960px !important;
+}
+
+/* ── 7. Hero 容器: 较大的介绍/封面区,最大 960px ──────────────────────── */
+:where(.tool-hero-v2, .tool-hero, .hero, .article-hero, .size-guide-header, .home-hero) {
+  width: min(calc(100% - 32px), 960px);
+  margin-inline: auto;
+  padding-inline: 0;
+}
+
+/* ── 8. Footer / 站底 容器: 最宽 1152px ─────────────────────────────── */
+:where(footer, .site-footer, .footer-legal) {
+  width: min(calc(100% - 32px), 1152px);
+  margin-inline: auto;
+}
+
+/* ── 9. 通用内容块 (已存在于不同页面) ───────────────────────────────── */
+:where(.container, .section-inner, .related-guides, .all-calculators, .explore-resources) {
+  width: min(calc(100% - 32px), 1080px);
+  margin-inline: auto;
+}
+
+/* ── 10. 卡片网格: 内部已自适应,但要确保不撑开外层 ──────────────────── */
+:where(.card-grid, .related-grid, .tools-grid, .specials-grid) {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+/* ── 11. Flex/Grid 子项必须能收缩,防止内容把容器撑宽 ────────────────── */
+:where(.card, .tool-tile, .article-card, .special-card, .size-choice-card) {
+  min-width: 0;
+}
+
+/* ── 12. 文章内容内联元素 (ul/ol/img/figure) 限宽 ───────────────────── */
+article.article :where(ul, ol),
+.page-content :where(ul, ol),
+.size-guide-content :where(ul, ol),
+.specials-sub :where(ul, ol) {
+  max-width: 100%;
+}
+
+article.article :where(iframe, video),
+.page-content :where(iframe, video),
+.specials-sub :where(iframe, video) {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* ── 13. 移动端断点 (≤ 640px) ───────────────────────────────────────── */
+@media (max-width: 640px) {
+  :where(main, #main, .main-content, .page-content, article.article,
+         .tool-calculator-shell, .inputs-panel, .result-card-v2,
+         .interpretation-v2, .how-to-measure, .tool-faq, .tool-faq-v2,
+         .quick-actions-v2, .tool-cta, .tool-ref, .psb-bar,
+         .specials-sub, .size-guide-content, .size-result) {
+    width: min(calc(100% - 24px), 720px);
+  }
+  .bc-history { width: calc(100% - 24px) !important; }
+
+  :where(.tool-hero-v2, .tool-hero, .hero, .article-hero, .size-guide-header) {
+    width: min(calc(100% - 24px), 960px);
+  }
+
+  :where(footer, .site-footer) {
+    width: min(calc(100% - 24px), 1152px);
+  }
+
+  :where(.container, .section-inner, .related-guides, .all-calculators, .explore-resources) {
+    width: calc(100% - 24px);
+  }
+
+  :where(p, li) {
+    font-size: 0.96em;
+  }
+
+  :where(ul, ol) {
+    padding-left: 1.25rem;
+  }
+
+  :where(.form-row) {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+
+  :where(.form-group) {
+    min-width: 0 !important;
+  }
+}
+
+/* ── 14. 极窄屏 (≤ 380px) ──────────────────────────────────────────── */
+@media (max-width: 380px) {
+  :where(main, #main, .main-content, .page-content, article.article,
+         .tool-calculator-shell, .inputs-panel, .result-card-v2,
+         .specials-sub, .size-guide-content, .size-result) {
+    width: calc(100% - 20px);
+  }
+  .bc-history { width: calc(100% - 20px) !important; }
+
+  :where(.tool-hero-v2, .tool-hero, .hero, .article-hero) {
+    width: calc(100% - 20px);
+  }
+
+  :where(p, li) {
+    font-size: 0.94em;
+  }
+}
+
+/* ── 15. 表格外层 .table-wrap 优化 (移动端可滚动) ───────────────────── */
+.table-wrap {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 1rem 0;
+}
+
+.table-wrap > table {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* ── 16. 打印: 解除宽度约束,允许打印时使用 A4 宽度 ──────────────────── */
+@media print {
+  html, body {
+    overflow-x: visible;
+    max-width: none;
+  }
+  :where(main, .page-content, .tool-calculator-shell, .inputs-panel) {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* ── 17. 减少动效偏好 (复用 style.css 设定) ─────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  :where(*, *::before, *::after) {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ==========================================================================
+   18. 全站 body 内部按钮统一样式 (Header / Footer / Nav / Drawer 之外)
+   --------------------------------------------------------------------------
+   设计目标:
+     1) 按钮自身: 文字水平/垂直居中, 水平 padding ≥ 20px, 垂直 ≥ 10px。
+     2) 父容器: 必须是 flex 居中 或 text-align:center, 否则按钮虽自己居中
+        但会贴左显示。
+     3) 仅作用于 body > main 及类工具页可见按钮, 不覆盖 header/nav 现有
+        .btn-primary/.btn-secondary/.btn-tool/.nav-cta a 样式。
+
+   实现策略:
+     - 使用 :is() 选择器, 提供与现有类同等的具体度 (0,2,0), 同时保持选择器
+       简洁。
+     - 关键 padding / display 使用 !important, 覆盖 style.css 中更早的规则。
+     - 为每个工具页的按钮父容器单独提供 flex/text-align 居中规则。
+   ========================================================================== */
+
+/* ── A. 父容器居中规则: 先确保按钮组水平居中 ─────────────────────── */
+.tool-calculator-shell,
+.inputs-panel,
+.result-card-v2,
+.psb-bar,
+article.article,
+.page-content,
+main {
+  text-align: center;             /* 兜底: 让 inline/inline-block 元素居中 */
+}
+
+main a,
+main button,
+main .tool-cta-btn,
+main .size-save,
+main .btn-calc,
+main .btn-reset,
+main .contact-submit,
+main input[type="submit"],
+main input[type="button"] {
+  text-align: center;
+}
+
+/* 关键: 每个按钮组的父容器用 flex 居中 */
+.calc-secondary,
+.result-card-v2 .result-actions,
+.psb-bar .psb-actions,
+.size-save-row,
+.bc-history-item-actions,
+.quiz-nav,
+.bc-history-head,
+.cookie-btns,
+.hero-cta-group,
+.size-choice-grid {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  align-items: center !important;
+  text-align: center !important;
+  gap: 8px !important;
+}
+
+.size-save-row {
+  flex-direction: column !important;
+  align-items: center !important;
+}
+
+.bc-history-item-actions {
+  flex-wrap: wrap;
+}
+
+/* quick-actions-v2 已经是 grid 居中, 仅需确保内容居中 */
+.quick-actions-v2 {
+  justify-content: center !important;
+  justify-items: center !important;
+  text-align: center !important;
+}
+.quick-actions-v2 a {
+  text-align: center !important;
+  justify-self: center !important;
+}
+
+/* ── B. 基础按钮规则 (使用 :is() 获得真实优先级) ────────────────── */
+main :is(button):not([class*="nav"]):not([class*="drawer"]):not([class*="back-to-top"]):not([class*="back-btn"]):not(.btn-link-secondary):not(.bc-compass-sister),
+main :is(input[type="button"]):not(.btn-link-secondary),
+main :is(input[type="submit"]):not(.btn-link-secondary),
+main :is(input[type="reset"]),
+.tool-calculator-shell :is(button),
+.tool-calculator-shell :is(input[type="button"]),
+.tool-calculator-shell :is(input[type="submit"]),
+.result-card-v2 :is(button),
+.psb-bar :is(button),
+.tool-faq-v2 :is(button),
+article.article :is(button),
+.size-guide-content :is(button),
+.specials-sub :is(button),
+.page-content :is(button):not(.bc-compass-sister) {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  min-height: 42px !important;
+  padding: 11px 22px !important;
+  font-family: inherit !important;
+  font-size: 0.92rem !important;
+  font-weight: 600 !important;
+  line-height: 1.25 !important;
+  letter-spacing: 0.01em;
+  white-space: normal;
+  border-radius: var(--radius-sm, 8px) !important;
+  border: 1px solid var(--border, #e7dbd1);
+  background: var(--bg-card, #fff);
+  color: var(--heading-warm, #3d2a26);
+  cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease,
+              transform 0.18s ease, box-shadow 0.18s ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  gap: 6px;
+}
+
+main :is(button):hover:not(:disabled),
+.tool-calculator-shell :is(button):hover:not(:disabled),
+.result-card-v2 :is(button):hover:not(:disabled),
+.psb-bar :is(button):hover:not(:disabled),
+article.article :is(button):hover:not(:disabled) {
+  background: var(--sand-light, #f5ede8);
+  border-color: var(--rose-light, #f5ede8);
+  color: var(--heading, #1f1412);
+}
+
+main :is(button):focus-visible,
+.tool-calculator-shell :is(button):focus-visible,
+.result-card-v2 :is(button):focus-visible,
+.psb-bar :is(button):focus-visible,
+article.article :is(button):focus-visible {
+  outline: 3px solid rgba(220, 180, 165, 0.45);
+  outline-offset: 2px;
+}
+
+main :is(button):active:not(:disabled),
+.tool-calculator-shell :is(button):active:not(:disabled),
+.result-card-v2 :is(button):active:not(:disabled),
+.psb-bar :is(button):active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+main :is(button):disabled,
+.tool-calculator-shell :is(button):disabled,
+.result-card-v2 :is(button):disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ── C. <a> 充当按钮 ──────────────────────────────────────────────── */
+main :is(a.btn, a.btn-primary, a.btn-secondary, a.btn-tool),
+main .card,
+main .related-grid a,
+.tool-calculator-shell :is(a),
+.result-card-v2 :is(a),
+.psb-bar :is(a),
+article.article .related-grid a,
+main a.tool-cta-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  gap: 6px;
+  padding: 10px 20px !important;
+  font-size: 0.92rem !important;
+  font-weight: 600 !important;
+  line-height: 1.25 !important;
+  border-radius: var(--radius-sm, 8px) !important;
+  text-decoration: none;
+}
+
+/* ── D. 收紧各既有按钮类 ────────────────────────────────────────── */
+.psb-btn,
+main .psb-btn {
+  padding: 9px 16px !important;       /* 之前 7px 11px */
+  min-height: 38px !important;
+  font-size: 0.82rem !important;
+}
+
+.calc-cta,
+main .calc-cta,
+.tool-calculator-shell .calc-cta {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 16px 28px !important;     /* 加大左右 padding */
+  font-size: 1rem !important;
+  letter-spacing: 0.01em !important;
+  text-align: center !important;
+  margin: 18px 0 0 !important;
+  border-radius: var(--radius-sm, 8px) !important;
+}
+
+.calc-secondary button,
+.tool-calculator-shell .calc-secondary button {
+  padding: 12px 24px !important;     /* 加大水平留白 */
+  min-height: 44px !important;
+  font-size: 0.88rem !important;
+  flex: 0 1 auto !important;          /* 不强制拉满 */
+}
+
+.result-card-v2 .result-actions button,
+.tool-calculator-shell .result-actions button {
+  padding: 12px 22px !important;
+  min-height: 44px !important;
+  font-size: 0.86rem !important;
+  flex: 0 1 auto !important;
+}
+
+.quick-actions-v2 a,
+.tool-calculator-shell .quick-actions-v2 a {
+  padding: 12px 18px !important;
+  min-height: 44px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  font-size: 0.82rem !important;
+}
+
+/* Shape calculator 问卷按钮 */
+.quiz-btn,
+main .quiz-btn,
+.tool-calculator-shell .quiz-btn {
+  padding: 12px 24px !important;
+  min-height: 46px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  gap: 6px;
+  font-size: 0.92rem !important;
+}
+
+.back-btn,
+main .back-btn {
+  padding: 10px 18px !important;
+  min-height: 40px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  font-size: 0.84rem !important;
+}
+
+.size-save,
+main .size-save {
+  padding: 14px 28px !important;
+  min-height: 48px !important;
+  font-size: 0.94rem !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+.bc-history-btn,
+main .bc-history-btn {
+  padding: 8px 16px !important;
+  min-height: 36px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  font-size: 0.8rem !important;
+}
+
+.bc-history-clear,
+main .bc-history-clear {
+  padding: 6px 14px !important;
+  min-height: 32px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  font-size: 0.76rem !important;
+}
+
+.cookie-btns .btn-primary,
+.cookie-btns .btn-secondary {
+  padding: 12px 22px !important;
+  min-height: 44px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  white-space: normal;
+  flex: 0 1 auto !important;
+}
+
+/* Weight Calculator 特殊按钮 */
+.btn-calc,
+main .btn-calc,
+.tool-calculator-shell .btn-calc {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  padding: 14px 28px !important;
+  min-height: 48px !important;
+  font-size: 1rem !important;
+  border-radius: var(--radius-sm, 8px) !important;
+  margin: 0 auto !important;
+}
+
+.btn-reset,
+main .btn-reset,
+.tool-calculator-shell .btn-reset {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  padding: 12px 22px !important;
+  min-height: 44px !important;
+  font-size: 0.9rem !important;
+  border-radius: var(--radius-sm, 8px) !important;
+  margin: 0 auto !important;
+}
+
+/* Contact form submit */
+.contact-submit,
+main .contact-submit {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  padding: 12px 28px !important;
+  min-height: 46px !important;
+  font-size: 0.95rem !important;
+  border-radius: 8px !important;
+  margin: 0 auto !important;
+}
+
+/* Tool CTA banner link */
+.tool-cta-btn,
+main .tool-cta-btn,
+.tool-cta .tool-cta-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  padding: 12px 24px !important;
+  min-height: 44px !important;
+  font-size: 0.92rem !important;
+  border-radius: 999px !important;
+  gap: 6px;
+}
+
+/* 结果卡内单独的分享/重算按钮 */
+main button[onclick*="shareResult"],
+main button[onclick*="window.print"],
+main button[onclick*="resetForm"] {
+  padding: 12px 24px !important;
+  min-height: 44px !important;
+  font-size: 0.88rem !important;
+}
+
+/* ── E. 移动端: 进一步加大内边距, 避免太紧 ─────────────────────── */
+@media (max-width: 640px) {
+  main :is(button),
+  .tool-calculator-shell :is(button),
+  .result-card-v2 :is(button),
+  .psb-bar :is(button),
+  article.article :is(button) {
+    padding: 12px 20px !important;
+    min-height: 44px !important;
+  }
+  .calc-cta { padding: 16px 20px !important; }
+  .calc-secondary button { padding: 12px 20px !important; }
+  .quick-actions-v2 a { padding: 12px 14px !important; }
+  .quiz-btn { padding: 12px 20px !important; }
+  .size-save { padding: 14px 20px !important; width: 100% !important; max-width: 280px; }
+  .btn-calc, .btn-reset { width: 100% !important; max-width: 280px; }
+  .contact-submit { width: 100% !important; max-width: 280px; }
+}
+
+@media (max-width: 380px) {
+  main :is(button),
+  .tool-calculator-shell :is(button),
+  .result-card-v2 :is(button),
+  .psb-bar :is(button),
+  article.article :is(button) {
+    padding: 11px 16px !important;
+    font-size: 0.88rem !important;
+  }
+  .psb-btn { padding: 8px 12px !important; }
+}
+
+/* ==========================================================================
+   19. 首页 index.html 按钮专项修复
+   --------------------------------------------------------------------------
+   目标: 让首屏 .hero .bra-calculator.embedded 内的 "Calculate My Bra Size" 按钮
+   与 FAQ 区 "View All Bra Fitting Guides" 内联样式按钮在水平/垂直方向都居中,
+   文字与边框保留合理 padding。
+
+   由于首页这两个按钮一个使用 .btn-primary + .calc-actions 包裹层,
+   另一个使用 <a class="btn-secondary" style="..."> 内联样式, 必须用
+   最高优先级选择器 + !important 强制覆盖。
+   ========================================================================== */
+
+/* A. 首屏 .hero 计算器主按钮: 整段居中 + 按钮自身居中文字 */
+.hero .bra-calculator.embedded .calc-actions {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  text-align: center !important;
+  margin: 20px auto 0 !important;
+  width: 100% !important;
+}
+
+.hero .bra-calculator.embedded .calc-actions .btn-primary,
+.hero .bra-calculator.embedded .calc-actions button[type="submit"] {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  width: auto !important;
+  min-width: 200px !important;
+  max-width: 100% !important;
+  padding: 14px 32px !important;
+  min-height: 50px !important;
+  font-size: 0.98rem !important;
+  font-weight: 600 !important;
+  line-height: 1.2 !important;
+  letter-spacing: 0.01em !important;
+  margin: 0 auto !important;
+  border-radius: 999px !important;
+  gap: 8px !important;
+}
+
+.hero .bra-calculator.embedded .calc-actions .btn-secondary {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  width: auto !important;
+  padding: 12px 24px !important;
+  min-height: 46px !important;
+  font-size: 0.95rem !important;
+  line-height: 1.2 !important;
+  margin: 0 !important;
+  border-radius: 999px !important;
+}
+
+/* B. "View All ..." 系列内联按钮: 强制覆盖内联 style */
+main a.btn-secondary[href*="/articles/"],
+main a.btn-secondary[href*="/bra-size-guide/"],
+main a.btn-secondary[href*="/bra-sister-sizes"],
+main p > a.btn-secondary[style*="background:#b89782"] {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+  padding: 13px 30px !important;
+  min-height: 48px !important;
+  min-width: 220px !important;
+  max-width: 100% !important;
+  font-size: 0.94rem !important;
+  font-weight: 600 !important;
+  line-height: 1.2 !important;
+  letter-spacing: 0.005em !important;
+  border-radius: 999px !important;
+  border: none !important;
+  background: var(--rose, #8b6f5f) !important;
+  color: #fff !important;
+  text-decoration: none !important;
+  gap: 6px !important;
+  margin: 8px auto 0 !important;
+  white-space: nowrap !important;
+  box-shadow: 0 2px 8px rgba(139, 111, 95, 0.25) !important;
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease !important;
+  box-sizing: border-box !important;
+  /* 关键: 消除 HTML 格式化带来的 leading/trailing whitespace 视觉偏移 */
+  text-indent: 0 !important;
+  position: relative;
+}
+
+main a.btn-secondary[href*="/articles/"]::before,
+main a.btn-secondary[href*="/bra-size-guide/"]::before,
+main a.btn-secondary[href*="/bra-sister-sizes"]::before,
+main p > a.btn-secondary[style*="background:#b89782"]::before {
+  content: none;
+}
+
+/* 去掉 inline onclick 干扰, 用 :hover/:active 替代 */
+main a.btn-secondary[href*="/articles/"]:hover,
+main a.btn-secondary[href*="/bra-size-guide/"]:hover,
+main a.btn-secondary[href*="/bra-sister-sizes"]:hover,
+main p > a.btn-secondary[style*="background:#b89782"]:hover {
+  background: var(--rose-dark, #6b5344) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 14px rgba(139, 111, 95, 0.32) !important;
+  color: #fff !important;
+}
+
+main a.btn-secondary[href*="/articles/"]:active,
+main a.btn-secondary[href*="/bra-size-guide/"]:active,
+main a.btn-secondary[href*="/bra-sister-sizes"]:active,
+main p > a.btn-secondary[style*="background:#b89782"]:active {
+  transform: translateY(0) scale(0.98) !important;
+}
+
+main a.btn-secondary[href*="/articles/"]:focus-visible,
+main a.btn-secondary[href*="/bra-size-guide/"]:focus-visible,
+main a.btn-secondary[href*="/bra-sister-sizes"]:focus-visible {
+  outline: 3px solid rgba(220, 180, 165, 0.5) !important;
+  outline-offset: 2px;
+}
+
+/* C. View All 卡片链: 确保卡片内文字也居中 */
+main a.card.card-cta,
+main a.card[href*="/bra-sister-sizes"],
+main a.card[href*="/bra-size-guide"] {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  padding: 24px 20px !important;
+  gap: 10px !important;
+}
+
+main a.card.card-cta h3,
+main a.card[href*="/bra-sister-sizes"] h3,
+main a.card[href*="/bra-size-guide"] h3 {
+  text-align: center !important;
+  margin: 0 auto !important;
+  width: 100% !important;
+  display: block !important;
+}
+
+main a.card.card-cta p,
+main a.card[href*="/bra-sister-sizes"] p,
+main a.card[href*="/bra-size-guide"] p {
+  text-align: center !important;
+  margin: 0 auto !important;
+  width: 100% !important;
+}
+
+/* D. btn-link-secondary (Open Full Calculator) 居中 */
+main a.btn-link-secondary[href*="/bra-size-calculator/"] {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  padding: 10px 20px !important;
+  font-size: 0.88rem !important;
+  gap: 6px;
+  text-decoration: none !important;
+}
+
+/* E. 移动端: 主按钮全宽, View All 居中 */
+@media (max-width: 640px) {
+  .hero .bra-calculator.embedded .calc-actions .btn-primary,
+  .hero .bra-calculator.embedded .calc-actions button[type="submit"] {
+    width: 100% !important;
+    max-width: 320px !important;
+    padding: 14px 24px !important;
+  }
+  main a.btn-secondary[href*="/articles/"],
+  main a.btn-secondary[href*="/bra-size-guide/"],
+  main a.btn-secondary[href*="/bra-sister-sizes"] {
+    padding: 12px 20px !important;
+    width: auto !important;
+    max-width: 320px;
+  }
+}
+
+@media (max-width: 380px) {
+  .hero .bra-calculator.embedded .calc-actions .btn-primary {
+    padding: 12px 18px !important;
+    font-size: 0.92rem !important;
+  }
+  main a.btn-secondary[href*="/articles/"] {
+    padding: 11px 16px !important;
+    font-size: 0.86rem !important;
+  }
+}
+
+
+/* ==========================================================================
+   20. 首页 Bra Calculator — 整齐布局 + Calculate 按钮质感发光环
+   --------------------------------------------------------------------------
+   - 每个 calc-field 在两列网格中垂直对齐(顶部 + 底部)
+   - Underbust / Bust 字段对得齐(同高 input, 同高 hint)
+   - Unit <select> 单独占整行(全宽),与 Brand 视觉分层
+   - Brand select 单行显示完整文字
+   - Quick fill 按钮整齐排布,等宽
+   - Calculate 按钮:外圈柔和光晕 + 内阴影 + 渐变 + 按下反馈
+   ========================================================================== */
+
+/* A. 计算卡片整体:更宽 + 更舒适的内部留白 */
+.hero .bra-calculator.embedded,
+.bra-calculator.embedded {
+  width: min(calc(100% - 24px), 580px) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding: 26px 26px 22px !important;
+  box-sizing: border-box !important;
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius) !important;
+  box-shadow: 0 4px 24px rgba(61, 44, 42, 0.08), 0 1px 3px rgba(61, 44, 42, 0.04) !important;
+  text-align: left !important;
+  position: relative;
+  overflow: visible !important;
+}
+
+/* B. 字段网格:2 列,行/列 gap 统一 */
+.hero .bra-calculator.embedded .calc-fields,
+.bra-calculator.embedded .calc-fields {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  column-gap: 14px !important;
+  row-gap: 16px !important;
+  margin-bottom: 18px !important;
+  align-items: stretch !important;
+  width: 100% !important;
+}
+
+/* 让 Unit 单独占整行(更整齐) — 第 3 个字段 + 含 #unit select 的字段都全宽 */
+.hero .bra-calculator.embedded .calc-field:nth-child(3),
+.bra-calculator.embedded .calc-field:nth-child(3),
+.hero .bra-calculator.embedded .calc-field:has(select#unit),
+.bra-calculator.embedded .calc-field:has(select#unit),
+.hero .bra-calculator.embedded .calc-field:has(.bc-brand-field),
+.bra-calculator.embedded .calc-field:has(.bc-brand-field),
+.hero .bra-calculator.embedded .calc-field.bc-brand-field,
+.bra-calculator.embedded .calc-field.bc-brand-field {
+  grid-column: 1 / -1 !important;
+}
+
+/* C. calc-field:垂直 flex 等高对齐(让 Underbust 和 Bust hint 底部对齐) */
+.hero .bra-calculator.embedded .calc-field,
+.bra-calculator.embedded .calc-field {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+  min-width: 0 !important;
+  justify-content: flex-start !important;
+  /* 让所有 calc-field 的 hint 区域使用同样的最小高度,保证底部对齐 */
+}
+
+/* D. label 高度统一, 让两个字段 input 在同一基线 */
+.hero .bra-calculator.embedded .calc-field label,
+.bra-calculator.embedded .calc-field label {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  height: 22px !important;
+  min-height: 22px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 0.84rem !important;
+  font-weight: 600 !important;
+  color: var(--text-light) !important;
+  letter-spacing: 0.01em;
+  line-height: 1.2 !important;
+  text-align: left !important;
+  vertical-align: middle !important;
+}
+
+/* E. input + tip 容器:固定高度,让两个 input 同行对齐 */
+.hero .bra-calculator.embedded .input-with-tip,
+.bra-calculator.embedded .input-with-tip {
+  display: flex !important;
+  align-items: stretch !important;
+  gap: 6px !important;
+  min-width: 0 !important;
+  width: 100% !important;
+  position: relative;
+}
+
+.hero .bra-calculator.embedded .input-with-tip input,
+.bra-calculator.embedded .input-with-tip input {
+  flex: 1 1 0 !important;
+  min-width: 0 !important;
+  width: auto !important;
+  height: 44px !important;
+  min-height: 44px !important;
+  padding: 0 12px !important;
+  border: 1.5px solid var(--border) !important;
+  border-radius: var(--radius-xs, 8px) !important;
+  font-size: 0.95rem !important;
+  font-weight: 500 !important;
+  line-height: 1.4 !important;
+  background: var(--cream) !important;
+  text-align: left !important;
+  vertical-align: middle !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  display: block !important;
+  align-items: center !important;
+  transition: box-shadow 0.18s ease, border-color 0.18s ease !important;
+  box-sizing: border-box !important;
+  color: var(--text) !important;
+}
+
+.hero .bra-calculator.embedded .input-with-tip input::placeholder,
+.bra-calculator.embedded .input-with-tip input::placeholder {
+  color: var(--text-muted) !important;
+  text-align: left !important;
+}
+
+.hero .bra-calculator.embedded .input-with-tip input:focus,
+.bra-calculator.embedded .input-with-tip input:focus {
+  outline: none !important;
+  border-color: var(--rose) !important;
+  box-shadow: 0 0 0 3px rgba(220, 180, 165, 0.22) !important;
+}
+/* ─── 联动增强 2: form 字段 → 实时数字闪烁 → sister 卡联动 ───
+   数字输入时, 边框微微发光, 强化 "这里和下面的卡是连着的" */
+.hero .bra-calculator.embedded .input-with-tip input.bc-input-linked,
+.bra-calculator.embedded .input-with-tip input.bc-input-linked {
+  border-color: rgba(184, 122, 90, 0.45) !important;
+  box-shadow: 0 0 0 3px rgba(245, 212, 176, 0.20) !important;
+}
+/* ─── 联动增强 3: form 计算完成 → form 视觉强提示 + 连接到 sister 卡 ───
+   当 runCalculation 完成后, 给 form 加 .bc-form-calculated 类:
+   · form 顶部出现一条闪光的横向连线 (animated underline)
+   · 输入框边框变成深玫瑰金, 提示"已经计算过了"
+   · calc-actions 区域出现微妙的发光效果
+   · sister 卡区域顶部装饰线(在 bc-history 内的)变亮
+   设计目的: 让用户清楚感知 "form → sister comparator" 的连接
+*/
+.bra-calculator.embedded .calc-form.bc-form-calculated {
+  position: relative !important;
+  border-radius: 14px !important;
+  transition: background 0.42s ease !important;
+  background:
+    linear-gradient(180deg, rgba(255, 248, 240, 0.55) 0%, rgba(252, 232, 218, 0.18) 100%) !important;
+}
+/* 顶部装饰连线 — 从 form 指向 sister 卡区域 */
+.bra-calculator.embedded .calc-form.bc-form-calculated::before {
+  content: '' !important;
+  position: absolute !important;
+  top: -1px !important;
+  left: 8% !important;
+  right: 8% !important;
+  height: 2px !important;
+  border-radius: 999px !important;
+  background: linear-gradient(90deg, transparent 0%, #b87a5a 30%, #d68b6c 50%, #b87a5a 70%, transparent 100%) !important;
+  opacity: 0 !important;
+  animation: bcFormLinkIn 0.7s ease-out 0.1s forwards !important;
+  pointer-events: none !important;
+  z-index: 2 !important;
+}
+@keyframes bcFormLinkIn {
+  0%   { opacity: 0; transform: translateY(-4px) scaleX(0.5); }
+  60%  { opacity: 1; transform: translateY(0) scaleX(1.05); }
+  100% { opacity: 0.85; transform: translateY(0) scaleX(1); }
+}
+/* 计算完成后, 输入框边框变深 + 持续微微发光 */
+.bra-calculator.embedded .bc-form-calculated .input-with-tip input {
+  border-color: rgba(184, 122, 90, 0.55) !important;
+  box-shadow: 0 0 0 2px rgba(245, 212, 176, 0.18) !important;
+  background: rgba(255, 250, 244, 0.7) !important;
+  transition: border-color 0.42s ease, box-shadow 0.42s ease, background 0.42s ease !important;
+}
+/* Calculate 按钮颜色微调 — 提示"已计算" */
+.bra-calculator.embedded .bc-form-calculated .btn-primary {
+  background: linear-gradient(180deg, #b87a5a 0%, #a85d3e 100%) !important;
+  color: #fff !important;
+  box-shadow: 0 4px 12px -4px rgba(184, 96, 84, 0.4) !important;
+  transition: all 0.32s ease !important;
+}
+.bra-calculator.embedded .bc-form-calculated .btn-primary::after {
+  content: '✓' !important;
+  margin-left: 8px !important;
+  font-weight: 800 !important;
+  display: inline-block !important;
+  animation: bcFormCheckPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+@keyframes bcFormCheckPop {
+  0%   { transform: scale(0); opacity: 0; }
+  60%  { transform: scale(1.4); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* F. ? 提示按钮:固定 44x44(等于 input 高度),紧贴 input 右侧 */
+.hero .bra-calculator.embedded .measure-tip,
+.bra-calculator.embedded .measure-tip {
+  flex: 0 0 44px !important;
+  width: 44px !important;
+  height: 44px !important;
+  min-height: 44px !important;
+  min-width: 44px !important;
+  border-radius: 8px !important;
+  font-size: 0.95rem !important;
+  font-weight: 700 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1 !important;
+  text-align: center !important;
+  background: var(--sand-light) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text-light) !important;
+  cursor: pointer !important;
+  box-sizing: border-box !important;
+  align-self: center !important;
+  /* 视觉对齐 input 的中心 */
+}
+
+/* G. hint 文字:固定 2 行(约 36px),让两个字段底部对齐 */
+.hero .bra-calculator.embedded .field-hint,
+.bra-calculator.embedded .field-hint {
+  min-height: 36px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 0.74rem !important;
+  color: var(--text-muted) !important;
+  line-height: 1.45 !important;
+  font-style: italic !important;
+  text-align: left !important;
+  /* 用 ::before 创建空行,确保短文字也保持 2 行高度 */
+  display: block !important;
+}
+
+.hero .bra-calculator.embedded .field-hint:empty,
+.bra-calculator.embedded .field-hint:empty {
+  min-height: 0 !important;
+}
+
+/* H. Unit select:文字水平/垂直居中,全宽 */
+.hero .bra-calculator.embedded .calc-field select,
+.bra-calculator.embedded .calc-field select {
+  width: 100% !important;
+  height: 44px !important;
+  min-height: 44px !important;
+  padding: 0 38px 0 12px !important;
+  border: 1.5px solid var(--border) !important;
+  border-radius: var(--radius-xs, 8px) !important;
+  font-size: 0.95rem !important;
+  font-weight: 500 !important;
+  line-height: 1.4 !important;
+  background-color: var(--cream) !important;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'><path d='M1 1.5L6 6.5L11 1.5' stroke='%238b6f5f' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/></svg>") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 12px center !important;
+  background-size: 12px 8px !important;
+  color: var(--text) !important;
+  text-align: left !important;
+  vertical-align: middle !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  transition: box-shadow 0.18s ease, border-color 0.18s ease !important;
+  box-sizing: border-box !important;
+  cursor: pointer !important;
+  display: block !important;
+  align-items: center !important;
+}
+
+.hero .bra-calculator.embedded .calc-field select:focus,
+.bra-calculator.embedded .calc-field select:focus {
+  outline: none !important;
+  border-color: var(--rose) !important;
+  box-shadow: 0 0 0 3px rgba(220, 180, 165, 0.22) !important;
+}
+
+/* I. Brand (可选品牌) 字段:全宽,与 Unit 分行 */
+.hero .bra-calculator.embedded .calc-field.bc-brand-field,
+.bra-calculator.embedded .calc-field.bc-brand-field,
+.hero .bra-calculator.embedded .bc-brand-field,
+.bra-calculator.embedded .bc-brand-field {
+  grid-column: 1 / -1 !important;
+  width: 100% !important;
+}
+
+.hero .bra-calculator.embedded .bc-brand-field select,
+.bra-calculator.embedded .bc-brand-field select,
+.hero .bra-calculator.embedded .bc-brand-field .bc-brand-select,
+.bra-calculator.embedded .bc-brand-field .bc-brand-select {
+  width: 100% !important;
+  max-width: 100% !important;
+  text-align: left !important;
+  height: 44px !important;
+  min-height: 44px !important;
+  padding: 0 38px 0 12px !important;
+  border: 1.5px solid var(--border) !important;
+  border-radius: var(--radius-xs, 8px) !important;
+  font-size: 0.95rem !important;
+  font-weight: 500 !important;
+  line-height: 1.4 !important;
+  background-color: var(--cream) !important;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'><path d='M1 1.5L6 6.5L11 1.5' stroke='%238b6f5f' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/></svg>") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 12px center !important;
+  background-size: 12px 8px !important;
+  color: var(--text) !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  cursor: pointer !important;
+  display: block !important;
+  text-overflow: ellipsis !important;
+  box-sizing: border-box !important;
+}
+
+/* J. actions 容器:整行宽度,按钮满宽 */
+.hero .bra-calculator.embedded .calc-actions,
+.bra-calculator.embedded .calc-actions {
+  display: flex !important;
+  width: 100% !important;
+  margin-top: 4px !important;
+  gap: 10px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-wrap: wrap !important;
+}
+.bra-calculator.embedded .calc-actions .btn-primary,
+.bra-calculator.embedded .calc-actions button[type="submit"] {
+  flex: 0 0 auto !important;
+  min-width: 240px !important;
+  max-width: 100% !important;
+}
+
+/* ──────────────────────────────────────────────────────────
+   Live Preview — 实时尺码预览, 数字输入时立刻反馈
+   设计: 紧凑胶囊, 与 submit 按钮同高, 暗玫瑰金渐变文字
+   联动: 闪烁动画 + 数字微弹
+   ────────────────────────────────────────────────────────── */
+.bc-live-preview {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  padding: 12px 18px !important;
+  border-radius: 999px !important;
+  background:
+    linear-gradient(135deg, rgba(255, 245, 235, 0.92) 0%, rgba(252, 232, 218, 0.72) 100%) !important;
+  border: 1px solid rgba(184, 122, 90, 0.32) !important;
+  box-shadow:
+    0 4px 12px -4px rgba(184, 96, 84, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6) !important;
+  min-width: 0 !important;
+  flex: 0 0 auto !important;
+  white-space: nowrap !important;
+  transition: opacity 0.18s ease, transform 0.18s ease !important;
+  animation: bcLivePreviewIn 0.3s ease-out !important;
+  position: relative !important;
+}
+/* Live Preview 顶部细装饰线 — 强化 "preview" 概念 */
+.bc-live-preview::before {
+  content: '' !important;
+  position: absolute !important;
+  top: -1px !important;
+  left: 24% !important;
+  right: 24% !important;
+  height: 1px !important;
+  background: linear-gradient(90deg, transparent 0%, rgba(184, 122, 90, 0.4) 50%, transparent 100%) !important;
+  border-radius: 0 !important;
+}
+.bc-live-preview[hidden] { display: none !important; }
+.bc-live-preview-label {
+  font-family: var(--font-sans) !important;
+  font-size: 0.6rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  color: #a87a5e !important;
+  line-height: 1 !important;
+}
+.bc-live-preview-value {
+  font-family: var(--font-serif) !important;
+  font-style: italic !important;
+  font-weight: 700 !important;
+  font-size: 1.15rem !important;
+  letter-spacing: -0.01em !important;
+  line-height: 1 !important;
+  background: linear-gradient(180deg, #8b4a3a 0%, #d68b6c 60%, #c08560 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  filter: drop-shadow(0 1px 0 rgba(255, 250, 240, 0.7)) !important;
+}
+@keyframes bcLivePreviewIn {
+  from { opacity: 0; transform: translateY(4px) scale(0.95); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+/* 数字变化时闪烁动画 */
+.bc-live-preview.bc-live-preview-pulse {
+  animation: bcLivePreviewPulse 0.42s ease-out !important;
+}
+@keyframes bcLivePreviewPulse {
+  0%   { transform: scale(1); box-shadow: 0 4px 12px -4px rgba(184, 96, 84, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.6); }
+  40%  { transform: scale(1.06); box-shadow: 0 6px 18px -4px rgba(184, 96, 84, 0.32), 0 0 0 6px rgba(245, 212, 176, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.7); }
+  100% { transform: scale(1); box-shadow: 0 4px 12px -4px rgba(184, 96, 84, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.6); }
+}
+/* 联动箭头 — 从 preview → 卡片时显示的指示线 */
+.bc-live-preview-link-arrow {
+  display: inline-block !important;
+  margin: 0 2px !important;
+  color: #b87a5a !important;
+  font-size: 0.8em !important;
+  opacity: 0.8 !important;
+  animation: bcLinkArrowSlide 1.6s ease-in-out infinite !important;
+}
+@keyframes bcLinkArrowSlide {
+  0%, 100% { transform: translateX(0); opacity: 0.5; }
+  50%      { transform: translateX(2px); opacity: 1; }
+}
+@media (max-width: 540px) {
+  .bc-live-preview { padding: 9px 14px !important; gap: 6px !important; }
+  .bc-live-preview-label { font-size: 0.52rem !important; }
+  .bc-live-preview-value { font-size: 1rem !important; }
+}
+
+
+/* ==========================================================================
+   21. Quick Fill — 美国女性最常见体型 + 优雅编辑风排版
+   --------------------------------------------------------------------------
+   - 数据来源:Intimacy Bra Fit / Brava / Triumph 调研
+   - 美国最常见 5 个尺码 + 1 个 Plus 体型,全部使用 inch(美式)
+   - 排版风格:Vogue / Harper's Bazaar 时尚杂志范
+     · 主尺码:Georgia 衬线斜体,搭配 letter-spacing 表现高级感
+     · 体型标签:无衬线小写大写,精致留白
+     · 36C(US avg)用深玫瑰色高亮,带 ★ 角标
+   - 3+3 两行网格,等宽 chip,文字水平/垂直居中
+   ========================================================================== */
+.bc-quick-templates {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 12px !important;
+  margin: 20px 0 4px !important;
+  padding: 18px 18px 16px !important;
+  background:
+    linear-gradient(135deg, rgba(255, 252, 248, 0.9) 0%, rgba(248, 238, 226, 0.7) 100%),
+    radial-gradient(ellipse at top left, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 60%) !important;
+  border: 1px solid rgba(184, 151, 130, 0.22) !important;
+  border-radius: 16px !important;
+  box-shadow:
+    0 1px 2px rgba(61, 44, 42, 0.04),
+    0 8px 24px -8px rgba(184, 151, 130, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7) !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  text-align: center !important;
+  position: relative !important;
+}
+
+.bc-quick-label {
+  display: flex !important;
+  align-items: baseline !important;
+  justify-content: flex-start !important;
+  gap: 8px !important;
+  font-size: 0.78rem !important;
+  font-weight: 600 !important;
+  color: var(--text-light) !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  text-align: left !important;
+  margin: 0 0 4px 4px !important;
+  padding: 0 !important;
+  font-family: var(--font-sans) !important;
+}
+
+.bc-quick-label::before {
+  content: "" !important;
+  display: inline-block !important;
+  width: 18px !important;
+  height: 1px !important;
+  background: linear-gradient(90deg, var(--rose) 0%, transparent 100%) !important;
+  vertical-align: middle !important;
+  flex-shrink: 0 !important;
+}
+
+.bc-quick-label-text {
+  font-family: var(--font-serif) !important;
+  font-style: italic !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.04em !important;
+  text-transform: none !important;
+  font-size: 0.95rem !important;
+  color: var(--text) !important;
+}
+
+.bc-quick-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 10px !important;
+  width: 100% !important;
+}
+
+.bc-quick-btn {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 5px !important;
+  padding: 12px 6px 10px !important;
+  min-height: 64px !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(252, 247, 240, 0.98) 100%) !important;
+  border: 1px solid rgba(184, 151, 130, 0.28) !important;
+  border-radius: 12px !important;
+  font-family: var(--font-sans) !important;
+  cursor: pointer !important;
+  transition: transform 0.22s cubic-bezier(0.34, 1.4, 0.64, 1), box-shadow 0.22s ease, border-color 0.22s ease, background 0.22s ease !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+  box-sizing: border-box !important;
+  position: relative !important;
+  overflow: hidden !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+.bc-quick-btn::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 45%, rgba(184, 151, 130, 0.08) 100%) !important;
+  pointer-events: none !important;
+  opacity: 0.8 !important;
+  transition: opacity 0.22s ease !important;
+}
+
+.bc-quick-btn::after {
+  content: "" !important;
+  position: absolute !important;
+  left: 12px !important;
+  right: 12px !important;
+  top: 50% !important;
+  height: 1px !important;
+  background: linear-gradient(90deg, transparent 0%, rgba(184, 151, 130, 0.35) 50%, transparent 100%) !important;
+  pointer-events: none !important;
+  opacity: 0.5 !important;
+}
+
+.bc-quick-size {
+  font-family: var(--font-serif) !important;
+  font-style: italic !important;
+  font-size: 1.25rem !important;
+  font-weight: 600 !important;
+  color: var(--text) !important;
+  line-height: 1 !important;
+  letter-spacing: 0.01em !important;
+  position: relative !important;
+  z-index: 1 !important;
+  text-rendering: optimizeLegibility !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+  transition: color 0.22s ease, transform 0.22s cubic-bezier(0.34, 1.4, 0.64, 1) !important;
+}
+
+.bc-quick-hint {
+  font-family: var(--font-sans) !important;
+  font-size: 0.62rem !important;
+  font-weight: 500 !important;
+  color: var(--text-muted) !important;
+  line-height: 1.1 !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase !important;
+  position: relative !important;
+  z-index: 1 !important;
+  transition: color 0.22s ease !important;
+}
+
+.bc-quick-btn:hover {
+  background:
+    linear-gradient(180deg, #ffffff 0%, #fdf6ed 100%) !important;
+  border-color: rgba(184, 96, 84, 0.55) !important;
+  box-shadow:
+    0 2px 4px rgba(61, 44, 42, 0.05),
+    0 10px 24px -6px rgba(184, 96, 84, 0.22),
+    0 0 0 3px rgba(220, 180, 165, 0.18) !important;
+  transform: translateY(-3px) !important;
+}
+
+.bc-quick-btn:hover::before {
+  opacity: 1 !important;
+}
+
+.bc-quick-btn:hover::after {
+  background: linear-gradient(90deg, transparent 0%, rgba(184, 96, 84, 0.5) 50%, transparent 100%) !important;
+  opacity: 1 !important;
+}
+
+.bc-quick-btn:hover .bc-quick-size {
+  color: #8b4a3a !important;
+  transform: scale(1.04) !important;
+}
+
+.bc-quick-btn:hover .bc-quick-hint {
+  color: #8b4a3a !important;
+}
+
+.bc-quick-btn:active {
+  transform: translateY(-1px) scale(0.98) !important;
+  box-shadow: 0 2px 6px rgba(61, 44, 42, 0.08) !important;
+  transition-duration: 0.08s !important;
+}
+
+.bc-quick-btn:focus-visible {
+  outline: 2px solid var(--rose) !important;
+  outline-offset: 3px !important;
+}
+
+/* 中间按钮(US avg)做强调高亮 */
+.bc-quick-btn-avg,
+.bc-quick-btn:nth-child(3) {
+  background:
+    linear-gradient(180deg, #faf3ec 0%, #f0e2d0 100%) !important;
+  border-color: rgba(184, 96, 84, 0.45) !important;
+  box-shadow:
+    0 1px 3px rgba(184, 96, 84, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6) !important;
+}
+
+.bc-quick-btn-avg .bc-quick-size,
+.bc-quick-btn:nth-child(3) .bc-quick-size {
+  color: #6b3328 !important;
+}
+
+.bc-quick-btn-avg .bc-quick-hint,
+.bc-quick-btn:nth-child(3) .bc-quick-hint {
+  color: #8b4a3a !important;
+  font-weight: 600 !important;
+}
+
+.bc-quick-btn-avg::after,
+.bc-quick-btn:nth-child(3)::after {
+  background: linear-gradient(90deg, transparent 0%, rgba(184, 96, 84, 0.6) 50%, transparent 100%) !important;
+  opacity: 0.7 !important;
+}
+
+.bc-quick-star {
+  position: absolute !important;
+  top: 4px !important;
+  right: 6px !important;
+  font-size: 0.7rem !important;
+  color: #8b4a3a !important;
+  z-index: 2 !important;
+  font-family: var(--font-sans) !important;
+  font-style: normal !important;
+  line-height: 1 !important;
+  animation: bcStarPulse 2.4s ease-in-out infinite !important;
+}
+
+.bc-quick-btn-avg .bc-quick-star,
+.bc-quick-btn:nth-child(3) .bc-quick-star {
+  animation: bcStarPulse 2.4s ease-in-out infinite !important;
+}
+
+@keyframes bcStarPulse {
+  0%, 100% { opacity: 0.55; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bc-quick-star,
+  .bc-quick-btn-avg .bc-quick-star,
+  .bc-quick-btn:nth-child(3) .bc-quick-star {
+    animation: none !important;
+  }
+  .bc-quick-btn {
+    transition: none !important;
+  }
+  .bc-quick-size {
+    transition: none !important;
+  }
+}
+
+/* Quick fill — clicked/active state */
+.bc-quick-btn-active {
+  background: linear-gradient(135deg, #6b8a5e 0%, #557347 100%) !important;
+  border-color: #4a6240 !important;
+  box-shadow: 0 6px 18px -4px rgba(74,98,64,0.4) !important;
+  transform: translateY(-2px) !important;
+}
+.bc-quick-btn-active .bc-quick-size,
+.bc-quick-btn-active .bc-quick-hint {
+  color: #fff !important;
+}
+.bc-quick-btn-active::before {
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.6) 50%, transparent 100%) !important;
+}
+
+@media (max-width: 420px) {
+  .bc-quick-templates {
+    padding: 14px 14px 12px !important;
+    gap: 10px !important;
+  }
+  .bc-quick-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+  }
+  .bc-quick-btn {
+    min-height: 56px !important;
+    padding: 10px 4px 8px !important;
+  }
+  .bc-quick-size {
+    font-size: 1.1rem !important;
+  }
+  .bc-quick-hint {
+    font-size: 0.58rem !important;
+    letter-spacing: 0.12em !important;
+  }
+  .bc-quick-label {
+    font-size: 0.72rem !important;
+  }
+  .bc-quick-label-text {
+    font-size: 0.88rem !important;
+  }
+}
+
+/* J. ★★★ Calculate 按钮:质感外发光环 ★★★ */
+.hero .bra-calculator.embedded .calc-actions .btn-primary,
+.bra-calculator.embedded .calc-actions .btn-primary,
+.hero .bra-calculator.embedded .calc-actions button[type="submit"],
+.bra-calculator.embedded .calc-actions button[type="submit"] {
+  position: relative !important;
+  flex: 1 1 100% !important;
+  width: 100% !important;
+  max-width: 360px !important;
+  margin: 8px auto 0 !important;
+  padding: 16px 28px !important;
+  min-height: 56px !important;
+  font-size: 1rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.015em !important;
+  line-height: 1.2 !important;
+  text-align: center !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #fff !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border-radius: 999px !important;
+  background: linear-gradient(135deg, #b89782 0%, #8b6f5f 60%, #6b5344 100%) !important;
+  box-shadow:
+    0 0 0 4px rgba(220, 180, 165, 0.22),
+    0 0 24px 6px rgba(220, 180, 165, 0.35),
+    0 0 48px 10px rgba(220, 180, 165, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.12),
+    0 6px 18px rgba(107, 83, 68, 0.28) !important;
+  cursor: pointer !important;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease !important;
+  -webkit-tap-highlight-color: transparent !important;
+  overflow: visible !important;
+  text-decoration: none !important;
+  font-family: inherit !important;
+  box-sizing: border-box !important;
+  /* 文字基线对齐 */
+  white-space: nowrap !important;
+}
+
+.hero .bra-calculator.embedded .calc-actions .btn-primary::before,
+.bra-calculator.embedded .calc-actions .btn-primary::before,
+.hero .bra-calculator.embedded .calc-actions button[type="submit"]::before,
+.bra-calculator.embedded .calc-actions button[type="submit"]::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: -3px !important;
+  border-radius: inherit !important;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.2) 100%) !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+  opacity: 0.7 !important;
+}
+
+.hero .bra-calculator.embedded .calc-actions .btn-primary::after,
+.bra-calculator.embedded .calc-actions .btn-primary::after,
+.hero .bra-calculator.embedded .calc-actions button[type="submit"]::after,
+.bra-calculator.embedded .calc-actions button[type="submit"]::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: -10px !important;
+  border-radius: inherit !important;
+  background: radial-gradient(ellipse at center, rgba(220, 180, 165, 0.4) 0%, rgba(220, 180, 165, 0) 70%) !important;
+  filter: blur(8px) !important;
+  pointer-events: none !important;
+  z-index: -1 !important;
+  animation: bcGlowPulse 2.8s ease-in-out infinite !important;
+}
+
+@keyframes bcGlowPulse {
+  0%, 100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.95;
+    transform: scale(1.04);
+  }
+}
+
+.hero .bra-calculator.embedded .calc-actions .btn-primary:hover,
+.bra-calculator.embedded .calc-actions .btn-primary:hover,
+.hero .bra-calculator.embedded .calc-actions button[type="submit"]:hover,
+.bra-calculator.embedded .calc-actions button[type="submit"]:hover {
+  background: linear-gradient(135deg, #c4a08a 0%, #9a7d6a 60%, #7a604c 100%) !important;
+  transform: translateY(-2px) !important;
+  box-shadow:
+    0 0 0 5px rgba(220, 180, 165, 0.3),
+    0 0 32px 8px rgba(220, 180, 165, 0.45),
+    0 0 64px 14px rgba(220, 180, 165, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.36),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.14),
+    0 10px 26px rgba(107, 83, 68, 0.4) !important;
+}
+
+.hero .bra-calculator.embedded .calc-actions .btn-primary:active,
+.bra-calculator.embedded .calc-actions .btn-primary:active,
+.hero .bra-calculator.embedded .calc-actions button[type="submit"]:active,
+.bra-calculator.embedded .calc-actions button[type="submit"]:active {
+  transform: translateY(0) scale(0.98) !important;
+  box-shadow:
+    0 0 0 3px rgba(220, 180, 165, 0.25),
+    0 0 18px 5px rgba(220, 180, 165, 0.3),
+    inset 0 2px 4px rgba(0, 0, 0, 0.18),
+    0 3px 8px rgba(107, 83, 68, 0.3) !important;
+}
+
+.hero .bra-calculator.embedded .calc-actions .btn-primary:focus-visible,
+.bra-calculator.embedded .calc-actions .btn-primary:focus-visible {
+  outline: 3px solid rgba(255, 255, 255, 0.6) !important;
+  outline-offset: 3px !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero .bra-calculator.embedded .calc-actions .btn-primary::after,
+  .bra-calculator.embedded .calc-actions .btn-primary::after,
+  .hero .bra-calculator.embedded .calc-actions button[type="submit"]::after,
+  .bra-calculator.embedded .calc-actions button[type="submit"]::after {
+    animation: none !important;
+  }
+}
+
+/* K. 移动端:字段改单列,按钮全宽 */
+@media (max-width: 520px) {
+  .hero .bra-calculator.embedded,
+  .bra-calculator.embedded {
+    padding: 22px 18px 18px !important;
+    width: min(calc(100% - 24px), 100%) !important;
+  }
+  .hero .bra-calculator.embedded .calc-fields,
+  .bra-calculator.embedded .calc-fields {
+    grid-template-columns: 1fr !important;
+    column-gap: 0 !important;
+    row-gap: 14px !important;
+  }
+  .hero .bra-calculator.embedded .calc-field:nth-child(3),
+  .bra-calculator.embedded .calc-field:nth-child(3) {
+    grid-column: 1 !important;
+  }
+  .hero .bra-calculator.embedded .calc-actions .btn-primary,
+  .bra-calculator.embedded .calc-actions .btn-primary {
+    max-width: 100% !important;
+    padding: 14px 20px !important;
+    min-height: 52px !important;
+    font-size: 0.96rem !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .hero .bra-calculator.embedded,
+  .bra-calculator.embedded {
+    padding: 18px 14px 14px !important;
+  }
+  .hero .bra-calculator.embedded .calc-actions .btn-primary,
+  .bra-calculator.embedded .calc-actions .btn-primary {
+    padding: 13px 16px !important;
+    font-size: 0.92rem !important;
+  }
+}
+
+
+/* ==========================================================================
+   22. Celebration Result Card — 杂志风 + 惊喜弹窗
+   --------------------------------------------------------------------------
+   - 点击 Calculate My Bra Size 后,显示华丽大字号尺码 + confetti
+   - 包含 12 个 cup size 的个性化文案 + 4 种体形分类
+   - 3 段式:celebrate(庆祝) / styles(推荐) / tip(贴士)
+   ========================================================================== */
+.bc-celebrate {
+  position: relative !important;
+  display: block !important;
+  margin: 24px 0 18px !important;
+  padding: 32px 28px 28px !important;
+  background:
+    radial-gradient(ellipse at top, rgba(255, 240, 220, 0.95) 0%, rgba(252, 232, 214, 0.85) 50%, rgba(244, 215, 188, 0.75) 100%),
+    linear-gradient(180deg, rgba(255, 252, 248, 0.95) 0%, rgba(252, 232, 214, 0.85) 100%) !important;
+  border: 1.5px solid rgba(184, 96, 84, 0.22) !important;
+  border-radius: 22px !important;
+  text-align: center !important;
+  box-shadow:
+    0 1px 2px rgba(61, 44, 42, 0.05),
+    0 10px 32px -8px rgba(184, 96, 84, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+  animation: bcCelebrateFade 0.6s cubic-bezier(0.34, 1.4, 0.64, 1) both !important;
+}
+
+.bc-celebrate[hidden] {
+  display: none !important;
+}
+
+.bc-celebrate-show {
+  display: block !important;
+  animation: bcCelebrateFade 0.6s cubic-bezier(0.34, 1.4, 0.64, 1) both !important;
+}
+
+@keyframes bcCelebrateFade {
+  0% { opacity: 0; transform: translateY(20px) scale(0.96); }
+  60% { opacity: 1; transform: translateY(-2px) scale(1.005); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bc-celebrate { animation: none !important; }
+}
+
+.bc-celebrate-confetti {
+  position: absolute !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+  z-index: 1 !important;
+  overflow: hidden !important;
+}
+
+.bc-confetti-piece {
+  position: absolute !important;
+  display: block !important;
+  font-family: var(--font-sans) !important;
+  line-height: 1 !important;
+  animation: bcConfettiFall cubic-bezier(0.45, 0.05, 0.55, 0.95) forwards !important;
+  user-select: none !important;
+  z-index: 1 !important;
+}
+
+@keyframes bcConfettiFall {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(360px) rotate(540deg); opacity: 0; }
+}
+
+.bc-celebrate-icon {
+  font-size: 2.4rem !important;
+  display: inline-block !important;
+  margin: 0 0 4px !important;
+  line-height: 1 !important;
+  position: relative !important;
+  z-index: 2 !important;
+  animation: bcIconPop 0.8s 0.2s cubic-bezier(0.34, 1.7, 0.64, 1) both !important;
+}
+
+@keyframes bcIconPop {
+  0% { opacity: 0; transform: scale(0.3) rotate(-20deg); }
+  60% { opacity: 1; transform: scale(1.2) rotate(8deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0); }
+}
+
+.bc-celebrate-eyebrow {
+  display: inline-block !important;
+  font-family: var(--font-sans) !important;
+  font-size: 0.72rem !important;
+  font-weight: 600 !important;
+  color: #8b4a3a !important;
+  letter-spacing: 0.22em !important;
+  text-transform: uppercase !important;
+  margin: 8px 0 2px !important;
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+.bc-celebrate-eyebrow::before,
+.bc-celebrate-eyebrow::after {
+  content: "" !important;
+  display: inline-block !important;
+  width: 22px !important;
+  height: 1px !important;
+  background: linear-gradient(90deg, transparent 0%, #b86054 50%, transparent 100%) !important;
+  vertical-align: middle !important;
+  margin: 0 10px !important;
+}
+
+.bc-celebrate-size-wrap {
+  position: relative !important;
+  z-index: 2 !important;
+  margin: 6px 0 4px !important;
+  display: inline-block !important;
+}
+
+.bc-celebrate-size {
+  font-family: var(--font-serif) !important;
+  font-style: italic !important;
+  font-weight: 600 !important;
+  font-size: 5.5rem !important;
+  line-height: 1 !important;
+  color: #6b3328 !important;
+  letter-spacing: -0.02em !important;
+  display: inline-block !important;
+  text-rendering: optimizeLegibility !important;
+  -webkit-font-smoothing: antialiased !important;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6), 0 2px 12px rgba(184, 96, 84, 0.18) !important;
+  animation: bcSizeReveal 0.9s 0.25s cubic-bezier(0.34, 1.5, 0.64, 1) both !important;
+  background: linear-gradient(180deg, #8b4a3a 0%, #6b3328 50%, #4a211a 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  color: transparent !important;
+}
+
+@keyframes bcSizeReveal {
+  0% { opacity: 0; transform: scale(0.5) translateY(20px); letter-spacing: -0.08em; }
+  50% { opacity: 1; }
+  100% { opacity: 1; transform: scale(1) translateY(0); letter-spacing: -0.02em; }
+}
+
+.bc-celebrate-rare-pct {
+  font-family: var(--font-serif) !important;
+  font-style: italic !important;
+  font-size: 0.92rem !important;
+  color: #8b4a3a !important;
+  font-weight: 500 !important;
+  max-width: 380px !important;
+  margin: 10px auto 0 !important;
+  line-height: 1.45 !important;
+  letter-spacing: 0.005em !important;
+  position: relative !important;
+  z-index: 2 !important;
+  animation: bcFadeIn 0.7s 0.6s ease both !important;
+}
+
+.bc-celebrate-headline {
+  font-family: var(--font-serif) !important;
+  font-style: italic !important;
+  font-size: 1.35rem !important;
+  font-weight: 600 !important;
+  color: #4a211a !important;
+  margin: 16px auto 6px !important;
+  line-height: 1.3 !important;
+  max-width: 460px !important;
+  position: relative !important;
+  z-index: 2 !important;
+  animation: bcFadeIn 0.6s 0.45s ease both !important;
+}
+
+.bc-celebrate-sub {
+  font-family: var(--font-sans) !important;
+  font-size: 0.95rem !important;
+  font-weight: 400 !important;
+  color: #5a3a30 !important;
+  line-height: 1.6 !important;
+  max-width: 480px !important;
+  margin: 0 auto 18px !important;
+  position: relative !important;
+  z-index: 2 !important;
+  animation: bcFadeIn 0.6s 0.55s ease both !important;
+}
+
+@keyframes bcFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.bc-celebrite-styles {
+  position: relative !important;
+  z-index: 2 !important;
+  margin: 18px 0 16px !important;
+  animation: bcFadeIn 0.6s 0.7s ease both !important;
+}
+
+.bc-celebrate-styles-title {
+  font-family: var(--font-sans) !important;
+  font-size: 0.7rem !important;
+  font-weight: 600 !important;
+  color: #8b4a3a !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  margin: 0 0 10px !important;
+}
+
+.bc-celebrate-styles-title::before,
+.bc-celebrate-styles-title::after {
+  content: "—" !important;
+  display: inline-block !important;
+  color: #c8956d !important;
+  margin: 0 8px !important;
+  vertical-align: middle !important;
+  font-weight: 400 !important;
+}
+
+.bc-celebrate-styles-list {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  max-width: 520px !important;
+  margin: 0 auto !important;
+}
+
+.bc-celebrate-style-chip {
+  display: inline-flex !important;
+  align-items: center !important;
+  padding: 7px 14px !important;
+  background: rgba(255, 255, 255, 0.85) !important;
+  border: 1px solid rgba(184, 96, 84, 0.28) !important;
+  border-radius: 999px !important;
+  font-family: var(--font-serif) !important;
+  font-style: italic !important;
+  font-size: 0.88rem !important;
+  color: #5a3a30 !important;
+  line-height: 1.2 !important;
+  letter-spacing: 0.01em !important;
+  white-space: nowrap !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+  cursor: pointer !important;
+  text-decoration: none !important;
+  position: relative !important;
+}
+
+.bc-celebrate-style-chip::after {
+  content: " →" !important;
+  display: inline-block !important;
+  margin-left: 4px !important;
+  color: #b86054 !important;
+  font-style: normal !important;
+  font-family: var(--font-sans) !important;
+  font-weight: 600 !important;
+  transition: transform 0.2s ease !important;
+}
+
+.bc-celebrate-style-chip:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 12px rgba(184, 96, 84, 0.22) !important;
+  background: #ffffff !important;
+  color: #6b3328 !important;
+}
+
+.bc-celebrate-style-chip:hover::after {
+  transform: translateX(3px) !important;
+}
+
+.bc-celebrate-style-chip:active {
+  transform: translateY(0) scale(0.97) !important;
+}
+
+.bc-celebrate-style-chip:focus-visible {
+  outline: 2px solid #b86054 !important;
+  outline-offset: 2px !important;
+}
+
+.size-save-saved {
+  background: linear-gradient(135deg, #6b8a5e 0%, #52754a 100%) !important;
+  border-color: #52754a !important;
+  color: #ffffff !important;
+}
+
+/* History list items */
+.bc-history-item {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  padding: 12px 16px !important;
+  background: rgba(255, 255, 255, 0.85) !important;
+  border: 1px solid rgba(184, 96, 84, 0.18) !important;
+  border-radius: 10px !important;
+  margin: 0 0 8px !important;
+  transition: box-shadow 0.18s ease, transform 0.18s ease !important;
+}
+
+.bc-history-item:hover {
+  box-shadow: 0 4px 12px rgba(184, 96, 84, 0.12) !important;
+  transform: translateY(-1px) !important;
+}
+
+.bc-history-item-main {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+}
+
+.bc-history-item-size {
+  font-family: var(--font-serif) !important;
+  font-style: italic !important;
+  font-weight: 600 !important;
+  font-size: 1.1rem !important;
+  color: #6b3328 !important;
+  line-height: 1.2 !important;
+}
+
+.bc-history-item-meta {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  margin-top: 2px !important;
+  font-size: 0.75rem !important;
+  color: #8b4a3a !important;
+}
+
+.bc-history-item-actions {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  flex-shrink: 0 !important;
+}
+
+.bc-celebrate-tip {
+  position: relative !important;
+  z-index: 2 !important;
+  margin: 16px auto 0 !important;
+  padding: 14px 18px !important;
+  max-width: 500px !important;
+  background: rgba(255, 255, 255, 0.6) !important;
+  border-left: 3px solid #b86054 !important;
+  border-radius: 0 8px 8px 0 !important;
+  font-family: var(--font-sans) !important;
+  font-size: 0.88rem !important;
+  line-height: 1.55 !important;
+  color: #5a3a30 !important;
+  font-style: italic !important;
+  text-align: left !important;
+  animation: bcFadeIn 0.6s 0.85s ease both !important;
+}
+
+.bc-celebrate-tip::before {
+  content: "✦ Pro tip" !important;
+  display: block !important;
+  font-family: var(--font-sans) !important;
+  font-style: normal !important;
+  font-size: 0.62rem !important;
+  font-weight: 700 !important;
+  color: #b86054 !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  margin: 0 0 4px !important;
+}
+
+/* Action buttons (Save / Print / Share / Reset) */
+.bc-celebrate-actions {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  margin: 18px auto 8px !important;
+  max-width: 520px !important;
+  position: relative !important;
+  z-index: 2 !important;
+  animation: bcFadeIn 0.6s 0.8s ease both !important;
+}
+
+.bc-celebrate-action {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  padding: 10px 16px !important;
+  min-height: 42px !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 1.5px solid rgba(184, 96, 84, 0.32) !important;
+  border-radius: 999px !important;
+  font-family: var(--font-sans) !important;
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
+  color: #6b3328 !important;
+  cursor: pointer !important;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease, border-color 0.18s ease !important;
+  white-space: nowrap !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+  box-sizing: border-box !important;
+  position: relative !important;
+  overflow: hidden !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+.bc-celebrate-action span {
+  display: inline-block !important;
+  line-height: 1 !important;
+}
+
+.bc-celebrate-action:hover {
+  transform: translateY(-2px) !important;
+  background: #ffffff !important;
+  border-color: #8b4a3a !important;
+  box-shadow: 0 4px 12px rgba(184, 96, 84, 0.22) !important;
+}
+
+.bc-celebrate-action:active {
+  transform: translateY(0) scale(0.97) !important;
+  transition-duration: 0.08s !important;
+}
+
+.bc-celebrate-action:focus-visible {
+  outline: 2px solid #b86054 !important;
+  outline-offset: 2px !important;
+}
+
+.bc-celebrate-action-primary {
+  background: linear-gradient(135deg, #b86054 0%, #8b4a3a 100%) !important;
+  border-color: #8b4a3a !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 6px rgba(139, 74, 58, 0.28) !important;
+}
+
+.bc-celebrate-action-primary:hover {
+  background: linear-gradient(135deg, #c87064 0%, #9b5a4a 100%) !important;
+  border-color: #9b5a4a !important;
+  box-shadow: 0 6px 16px rgba(139, 74, 58, 0.35) !important;
+}
+
+.bc-celebrate-action-reset {
+  background: transparent !important;
+  border-color: rgba(184, 96, 84, 0.22) !important;
+  color: #8b4a3a !important;
+}
+
+.bc-celebrate-action-reset:hover {
+  background: rgba(184, 96, 84, 0.06) !important;
+}
+
+/* Privacy notice inside celebration */
+.bc-celebrate-privacy {
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  margin: 18px auto 0 !important;
+  padding: 12px 16px !important;
+  max-width: 480px !important;
+  background: rgba(255, 255, 255, 0.55) !important;
+  border: 1px dashed rgba(184, 96, 84, 0.32) !important;
+  border-radius: 10px !important;
+  font-family: var(--font-sans) !important;
+  font-size: 0.78rem !important;
+  line-height: 1.5 !important;
+  color: #6b3328 !important;
+  text-align: left !important;
+  position: relative !important;
+  z-index: 2 !important;
+  animation: bcFadeIn 0.6s 1s ease both !important;
+}
+
+.bc-celebrate-privacy-icon {
+  font-size: 0.95rem !important;
+  flex-shrink: 0 !important;
+  line-height: 1.4 !important;
+}
+
+/* Privacy notice near form (calc-privacy-note) */
+.calc-privacy-note {
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  margin: 14px auto 0 !important;
+  padding: 10px 14px !important;
+  max-width: 540px !important;
+  background: linear-gradient(135deg, rgba(255, 252, 248, 0.95) 0%, rgba(252, 232, 214, 0.6) 100%) !important;
+  border: 1px solid rgba(184, 96, 84, 0.18) !important;
+  border-radius: 10px !important;
+  font-family: var(--font-sans) !important;
+  font-size: 0.78rem !important;
+  line-height: 1.5 !important;
+  color: #6b3328 !important;
+  text-align: left !important;
+  box-sizing: border-box !important;
+}
+
+.calc-privacy-icon {
+  font-size: 0.95rem !important;
+  flex-shrink: 0 !important;
+  line-height: 1.4 !important;
+}
+
+.calc-privacy-text strong {
+  color: #4a211a !important;
+  font-weight: 700 !important;
+}
+
+.calc-privacy-link {
+  color: #8b4a3a !important;
+  text-decoration: underline !important;
+  text-underline-offset: 2px !important;
+  font-weight: 500 !important;
+}
+
+.calc-privacy-link:hover {
+  color: #6b3328 !important;
+}
+
+.bc-result-card-secondary {
+  margin: 18px 0 8px !important;
+  padding: 20px 22px !important;
+  background: rgba(255, 255, 255, 0.75) !important;
+  border: 1px solid rgba(184, 151, 130, 0.22) !important;
+  border-radius: 14px !important;
+  box-shadow: 0 1px 3px rgba(61, 44, 42, 0.04) !important;
+  animation: bcFadeIn 0.5s 0.9s ease both !important;
+}
+
+.bc-result-card-secondary .bc-result-title {
+  font-family: var(--font-serif) !important;
+  font-style: italic !important;
+  font-size: 1rem !important;
+  color: #5a3a30 !important;
+  text-align: center !important;
+  margin: 0 0 14px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.01em !important;
+}
+
+.bc-result-card-secondary .bc-result-grid {
+  display: grid !important;
+  grid-template-columns: repeat(6, 1fr) !important;
+  gap: 6px !important;
+  margin: 0 !important;
+}
+
+.bc-result-card-secondary .bc-result-cell {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 2px !important;
+  padding: 8px 4px !important;
+  background: rgba(255, 255, 255, 0.6) !important;
+  border-radius: 8px !important;
+  border: 1px solid rgba(184, 151, 130, 0.12) !important;
+}
+
+.bc-result-card-secondary .bc-result-label {
+  font-size: 0.65rem !important;
+  font-weight: 600 !important;
+  color: #8b4a3a !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+}
+
+.bc-result-card-secondary .bc-result-value {
+  font-family: var(--font-serif) !important;
+  font-style: italic !important;
+  font-weight: 600 !important;
+  font-size: 0.95rem !important;
+  color: #4a211a !important;
+}
+
+.bc-result-card-secondary .bc-result-recommendation {
+  margin: 14px 0 0 !important;
+  font-size: 0.85rem !important;
+  line-height: 1.55 !important;
+  color: #5a3a30 !important;
+  text-align: center !important;
+  font-style: italic !important;
+  font-family: var(--font-serif) !important;
+}
+
+@media (max-width: 520px) {
+  .bc-celebrate {
+    padding: 24px 18px 22px !important;
+    border-radius: 18px !important;
+  }
+  .bc-celebrate-size {
+    font-size: 4.2rem !important;
+  }
+  .bc-celebrate-headline {
+    font-size: 1.15rem !important;
+  }
+  .bc-celebrate-sub {
+    font-size: 0.88rem !important;
+  }
+  .bc-celebrate-rare-pct {
+    font-size: 0.85rem !important;
+  }
+  .bc-celebrate-style-chip {
+    font-size: 0.82rem !important;
+    padding: 6px 12px !important;
+  }
+  .bc-result-card-secondary .bc-result-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .bc-celebrate-size {
+    font-size: 3.6rem !important;
+  }
+  .bc-celebrate-styles-list {
+    gap: 6px !important;
+  }
+  .bc-celebrate-style-chip {
+    font-size: 0.78rem !important;
+    padding: 5px 10px !important;
+  }
+  .bc-celebrate-eyebrow::before,
+  .bc-celebrate-eyebrow::after {
+    width: 14px !important;
+    margin: 0 6px !important;
+  }
+}
+
+
+
+/* ════════════════════════════════════════════════════════════════
+   section 24 �?My Saved Measurements 卡片�?+ Sizes 网格 + Brand 网格
+   ════════════════════════════════════════════════════════════════ */
+
+/* History 整卡 — 杂志档案柜风 (960px 让姐妹尺码比较器完整显示) */
+.bc-history {
+  margin: 28px auto 0 !important;
+  max-width: 960px !important;
+  padding: 0 !important;
+}
+.bc-history-frame {
+  position: relative !important;
+  padding: 28px 32px 26px !important;
+  background:
+    linear-gradient(135deg, rgba(255,250,244,0.95) 0%, rgba(248,238,224,0.95) 100%) !important;
+  border: 1px solid rgba(184,151,130,0.32) !important;
+  border-radius: 18px !important;
+  box-shadow:
+    0 2px 8px rgba(184,151,130,0.10),
+    0 18px 48px -16px rgba(107,83,68,0.16) !important;
+  overflow: hidden !important;
+}
+.bc-history-frame::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 60px !important;
+  height: 60px !important;
+  background: linear-gradient(135deg, rgba(255,255,255,0.6) 0%, transparent 70%) !important;
+  pointer-events: none !important;
+}
+.bc-history-head {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: flex-start !important;
+  gap: 20px !important;
+  margin-bottom: 18px !important;
+}
+.bc-history-head-left {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+}
+.bc-history-eyebrow {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  font-family: var(--font-sans) !important;
+  font-size: 0.62rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  color: #8b4a3a !important;
+  margin-bottom: 6px !important;
+}
+.bc-history-dot {
+  display: inline-block !important;
+  width: 7px !important;
+  height: 7px !important;
+  border-radius: 50% !important;
+  background: #6b8a5e !important;
+  box-shadow: 0 0 0 3px rgba(107,138,94,0.18) !important;
+  animation: bcDotPulse 2.2s ease-in-out infinite !important;
+}
+@keyframes bcDotPulse {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(107,138,94,0.18); }
+  50% { box-shadow: 0 0 0 6px rgba(107,138,94,0.08); }
+}
+.bc-history-title {
+  font-family: var(--font-serif) !important;
+  font-size: 1.55rem !important;
+  font-weight: 600 !important;
+  font-style: italic !important;
+  color: #6b3328 !important;
+  margin: 0 0 6px !important;
+  line-height: 1.15 !important;
+  letter-spacing: 0.005em !important;
+}
+.bc-history-sub {
+  font-family: var(--font-sans) !important;
+  font-size: 0.85rem !important;
+  line-height: 1.55 !important;
+  color: #5a3a30 !important;
+  margin: 0 !important;
+  font-style: italic !important;
+}
+.bc-history-clear {
+  flex-shrink: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  padding: 9px 16px !important;
+  font-family: var(--font-sans) !important;
+  font-size: 0.78rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.04em !important;
+  color: #8b4a3a !important;
+  background: rgba(255,255,255,0.7) !important;
+  border: 1px solid rgba(184,151,130,0.4) !important;
+  border-radius: 10px !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+.bc-history-clear:hover {
+  background: #fff5ec !important;
+  border-color: #b86054 !important;
+  color: #6b3328 !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Empty state */
+.bc-history-empty {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 16px !important;
+  padding: 12px 0 8px !important;
+  background: transparent !important;
+  border: 1px dashed rgba(184,151,130,0.45) !important;
+  border-radius: 12px !important;
+  font-family: var(--font-sans) !important;
+  font-size: 0.9rem !important;
+  line-height: 1.55 !important;
+  color: #6b4a3a !important;
+  font-style: italic !important;
+}
+.bc-history-empty-icon {
+  flex-shrink: 0 !important;
+  font-size: 1.4rem !important;
+  color: #b86054 !important;
+  font-style: normal !important;
+}
+.bc-compass-empty-text { text-align: center !important; margin: 0 auto !important; max-width: 540px !important; font-size: 0.9rem !important; }
+.bc-compass-empty-icon { color: #b86054 !important; font-style: normal !important; font-size: 1.4rem !important; display: block !important; margin-bottom: 6px !important; }
+
+/* 列表项目(精致卡片) */
+.bc-history-list {
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+}
+.bc-history-item {
+  position: relative !important;
+  display: grid !important;
+  grid-template-columns: 4px 1fr auto !important;
+  align-items: center !important;
+  gap: 14px !important;
+  padding: 14px 18px 14px 14px !important;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.92) 0%, rgba(252,247,240,0.92) 100%) !important;
+  border: 1px solid rgba(184,151,130,0.25) !important;
+  border-radius: 12px !important;
+  transition: all 0.2s ease !important;
+}
+.bc-history-item::before {
+  content: '' !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: 8px !important;
+  bottom: 8px !important;
+  width: 3px !important;
+  background: linear-gradient(180deg, #d4a574 0%, #8b6f5f 100%) !important;
+  border-radius: 2px !important;
+}
+.bc-history-item:hover {
+  border-color: rgba(184,151,130,0.5) !important;
+  transform: translateX(2px) !important;
+  box-shadow: 0 6px 18px -6px rgba(184,151,130,0.3) !important;
+}
+.bc-history-item-main {
+  min-width: 0 !important;
+}
+.bc-history-item-top {
+  display: flex !important;
+  align-items: baseline !important;
+  gap: 8px !important;
+  margin-bottom: 2px !important;
+}
+.bc-history-item-size {
+  font-family: var(--font-serif) !important;
+  font-style: italic !important;
+  font-weight: 600 !important;
+  font-size: 1.25rem !important;
+  color: #6b3328 !important;
+  line-height: 1.1 !important;
+  letter-spacing: 0.01em !important;
+}
+.bc-history-item-region {
+  font-family: var(--font-sans) !important;
+  font-size: 0.6rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.2em !important;
+  text-transform: uppercase !important;
+  color: #b86054 !important;
+  padding: 2px 6px !important;
+  background: rgba(184,96,84,0.08) !important;
+  border-radius: 3px !important;
+}
+.bc-history-item-meta {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  font-family: var(--font-sans) !important;
+  font-size: 0.74rem !important;
+  color: #8b6f5f !important;
+  flex-wrap: wrap !important;
+}
+.bc-history-item-dot { color: #c4a08a !important; }
+.bc-history-item-meas { color: #6b4a3a !important; font-weight: 500 !important; }
+.bc-history-item-actions {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  flex-shrink: 0 !important;
+}
+.bc-history-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  padding: 7px 12px !important;
+  font-family: var(--font-sans) !important;
+  font-size: 0.78rem !important;
+  font-weight: 500 !important;
+  border-radius: 8px !important;
+  cursor: pointer !important;
+  transition: all 0.18s ease !important;
+  background: transparent !important;
+}
+.bc-history-restore {
+  color: #6b3328 !important;
+  background: rgba(184,151,130,0.12) !important;
+  border: 1px solid rgba(184,151,130,0.3) !important;
+}
+.bc-history-restore:hover {
+  background: rgba(184,151,130,0.22) !important;
+  border-color: #8b4a3a !important;
+  transform: translateY(-1px) !important;
+}
+.bc-history-delete {
+  width: 28px !important;
+  height: 28px !important;
+  padding: 0 !important;
+  justify-content: center !important;
+  color: #b86054 !important;
+  background: transparent !important;
+  border: 1px solid transparent !important;
+  font-size: 1.1rem !important;
+  line-height: 1 !important;
+}
+.bc-history-delete:hover {
+  color: #fff !important;
+  background: #b86054 !important;
+  border-color: #b86054 !important;
+}
+
+/* ════ Celebrate �?Recommended Sizes by Region ════ */
+.bc-celebrate-sizes-card {
+  position: relative !important;
+  z-index: 2 !important;
+  margin: 22px auto 0 !important;
+  padding: 22px 24px 24px !important;
+  max-width: 560px !important;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(252,247,240,0.95) 100%) !important;
+  border: 1px solid rgba(184,151,130,0.3) !important;
+  border-radius: 14px !important;
+  box-shadow: 0 8px 24px -8px rgba(184,151,130,0.22) !important;
+}
+.bc-celebrate-sizes-head { margin-bottom: 14px !important; }
+.bc-celebrate-sizes-title {
+  font-family: var(--font-serif) !important;
+  font-style: italic !important;
+  font-weight: 600 !important;
+  font-size: 1.05rem !important;
+  color: #6b3328 !important;
+  margin: 0 0 4px !important;
+}
+.bc-celebrate-sizes-sub {
+  font-family: var(--font-sans) !important;
+  font-size: 0.78rem !important;
+  line-height: 1.5 !important;
+  color: #8b6f5f !important;
+  margin: 0 !important;
+}
+.bc-celebrate-sizes-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 8px !important;
+}
+.bc-celebrate-size-region {
+  text-align: center !important;
+  padding: 10px 6px 12px !important;
+  background: rgba(255,255,255,0.65) !important;
+  border: 1px solid rgba(184,151,130,0.22) !important;
+  border-radius: 10px !important;
+  transition: all 0.2s ease !important;
+}
+.bc-celebrate-size-region:hover {
+  transform: translateY(-2px) !important;
+  border-color: rgba(184,96,84,0.5) !important;
+  box-shadow: 0 4px 12px -4px rgba(184,151,130,0.4) !important;
+}
+.bc-celebrate-size-region-name {
+  font-family: var(--font-sans) !important;
+  font-size: 0.6rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  color: #b86054 !important;
+  margin-bottom: 4px !important;
+}
+.bc-celebrate-size-region-value {
+  font-family: var(--font-serif) !important;
+  font-style: italic !important;
+  font-weight: 600 !important;
+  font-size: 1.3rem !important;
+  color: #6b3328 !important;
+  line-height: 1 !important;
+  letter-spacing: 0.01em !important;
+}
+
+/* ════ Celebrate �?Brand-specific size card ════ */
+.bc-celebrate-brand-card {
+  position: relative !important;
+  z-index: 2 !important;
+  margin: 16px auto 0 !important;
+  padding: 20px 22px 22px !important;
+  max-width: 560px !important;
+  background: linear-gradient(135deg, #faf3ec 0%, #f0e2d0 100%) !important;
+  border: 1px solid rgba(184,151,130,0.4) !important;
+  border-radius: 14px !important;
+  box-shadow: 0 6px 18px -6px rgba(184,151,130,0.3) !important;
+}
+.bc-celebrate-brand-head { margin-bottom: 14px !important; }
+.bc-celebrate-brand-title {
+  font-family: var(--font-serif) !important;
+  font-style: italic !important;
+  font-weight: 600 !important;
+  font-size: 1rem !important;
+  color: #6b3328 !important;
+  margin: 0 0 4px !important;
+}
+.bc-celebrate-brand-sub {
+  font-family: var(--font-sans) !important;
+  font-size: 0.76rem !important;
+  line-height: 1.5 !important;
+  color: #8b6f5f !important;
+  margin: 0 !important;
+  font-style: italic !important;
+}
+.bc-celebrate-brand-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 8px !important;
+}
+.bc-celebrate-brand-cell {
+  position: relative !important;
+  text-align: center !important;
+  padding: 10px 6px 12px !important;
+  background: rgba(255,255,255,0.7) !important;
+  border: 1px solid rgba(184,151,130,0.25) !important;
+  border-radius: 10px !important;
+}
+.bc-celebrate-brand-cell-name {
+  font-family: var(--font-sans) !important;
+  font-size: 0.6rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  color: #8b4a3a !important;
+  margin-bottom: 4px !important;
+}
+.bc-celebrate-brand-cell-value {
+  font-family: var(--font-serif) !important;
+  font-style: italic !important;
+  font-weight: 600 !important;
+  font-size: 1.2rem !important;
+  color: #6b3328 !important;
+  line-height: 1 !important;
+}
+.bc-celebrate-brand-changed {
+  color: #6b8a5e !important;
+  position: relative !important;
+}
+.bc-celebrate-brand-cell-orig {
+  font-family: var(--font-sans) !important;
+  font-size: 0.65rem !important;
+  color: #8b6f5f !important;
+  margin-top: 3px !important;
+  font-style: italic !important;
+}
+
+/* 移动�?*/
+@media (max-width: 540px) {
+  .bc-history-frame { padding: 22px 20px 20px !important; }
+  .bc-history-head { flex-direction: column !important; align-items: flex-start !important; }
+  .bc-history-clear { align-self: flex-end !important; }
+  .bc-history-title { font-size: 1.3rem !important; }
+  .bc-celebrate-sizes-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .bc-celebrate-brand-grid { grid-template-columns: repeat(2, 1fr) !important; }
+}
+/* ════ Celebrate �?4-column grid for 8 region sizes ════ */
+.bc-celebrate-sizes-card { max-width: 640px !important; }
+.bc-celebrate-sizes-grid {
+  grid-template-columns: repeat(4, 1fr) !important;
+}
+.bc-celebrate-sizes-grid .bc-celebrate-size-region-value {
+  font-size: 1.2rem !important;
+}
+@media (max-width: 540px) {
+  .bc-celebrate-sizes-grid { grid-template-columns: repeat(2, 1fr) !important; }
+}
+
+/* ════ Celebrate �?Brand Info detailed card ════ */
+.bc-celebrate-brand-info {
+  margin-top: 14px !important;
+  padding: 16px 18px !important;
+  background: rgba(255,255,255,0.55) !important;
+  border: 1px solid rgba(184,151,130,0.25) !important;
+  border-radius: 10px !important;
+}
+.bc-celebrate-brand-info-title {
+  font-family: var(--font-serif) !important;
+  font-style: italic !important;
+  font-weight: 600 !important;
+  font-size: 1.1rem !important;
+  color: #6b3328 !important;
+  margin: 0 0 10px !important;
+  padding-bottom: 8px !important;
+  border-bottom: 1px solid rgba(184,151,130,0.3) !important;
+}
+.bc-celebrate-brand-info-row {
+  display: grid !important;
+  grid-template-columns: 110px 1fr !important;
+  gap: 12px !important;
+  padding: 5px 0 !important;
+  font-family: var(--font-sans) !important;
+  font-size: 0.78rem !important;
+  line-height: 1.5 !important;
+}
+.bc-celebrate-brand-info-label {
+  font-weight: 600 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: #8b4a3a !important;
+  font-size: 0.68rem !important;
+  align-self: start !important;
+  padding-top: 2px !important;
+}
+.bc-celebrate-brand-info-value {
+  color: #5a3a30 !important;
+  font-style: italic !important;
+}
+
+/* ════ Brand select in form ════ */
+.bc-brand-field select {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  background: rgba(255,255,255,0.95) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'><path fill='%238b4a3a' d='M7 10L2 5h10z'/></svg>") no-repeat right 14px center !important;
+  padding-right: 36px !important;
+  font-family: var(--font-sans) !important;
+  font-style: italic !important;
+  font-weight: 500 !important;
+  cursor: pointer !important;
+}
+.bc-brand-field select:focus {
+  outline: none !important;
+  border-color: #b86054 !important;
+  box-shadow: 0 0 0 3px rgba(184,151,130,0.25) !important;
+}
+.calc-field-optional {
+  font-family: var(--font-sans) !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  color: #a08a78 !important;
+  font-size: 0.78rem !important;
+  margin-left: 4px !important;
+}
+
+/* ════ History item brand tag ════ */
+.bc-history-item-brand {
+  font-family: var(--font-sans) !important;
+  font-size: 0.6rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.05em !important;
+  font-style: italic !important;
+  color: #8b4a3a !important;
+  background: rgba(184,151,130,0.12) !important;
+  padding: 2px 8px !important;
+  border-radius: 3px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  max-width: 200px !important;
+}
+/* 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲
+   section 26 鈥?浼橀泤鐘舵€佹寚绀哄櫒(鏇夸唬鍘熻皟璇曟潯)
+   鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲 */
+.bc-debug {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  margin: 14px auto 4px !important;
+  padding: 8px 16px 8px 12px !important;
+  background: linear-gradient(135deg, rgba(255,250,244,0.95) 0%, rgba(248,238,224,0.85) 100%) !important;
+  border: 1px solid rgba(184,151,130,0.32) !important;
+  border-radius: 100px !important;
+  box-shadow: 0 2px 8px -2px rgba(107,83,68,0.10) !important;
+  font-family: var(--font-sans) !important;
+  font-size: 0.82rem !important;
+  color: #6b4a3a !important;
+  max-width: max-content !important;
+  text-align: left !important;
+  position: relative !important;
+  animation: bcDebugFade 0.4s ease-out !important;
+}
+.bc-debug[hidden] { display: none !important; }
+@keyframes bcDebugFade {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.bc-debug-mark {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 22px !important;
+  height: 22px !important;
+  border-radius: 50% !important;
+  font-family: var(--font-serif) !important;
+  font-style: italic !important;
+  font-weight: 600 !important;
+  font-size: 0.9rem !important;
+  line-height: 1 !important;
+  flex-shrink: 0 !important;
+  color: #fff !important;
+}
+.bc-debug-body {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  flex-wrap: wrap !important;
+}
+.bc-debug-msg {
+  font-weight: 500 !important;
+  letter-spacing: 0.005em !important;
+  color: #6b3328 !important;
+}
+.bc-debug-sub {
+  font-size: 0.72rem !important;
+  color: #8b6f5f !important;
+  font-style: italic !important;
+  border-left: 1px solid rgba(184,151,130,0.4) !important;
+  padding-left: 8px !important;
+}
+.bc-debug-success .bc-debug-mark {
+  background: linear-gradient(135deg, #6b8a5e 0%, #557347 100%) !important;
+  box-shadow: 0 0 0 3px rgba(107,138,94,0.18) !important;
+}
+.bc-debug-success {
+  border-color: rgba(107,138,94,0.4) !important;
+  background: linear-gradient(135deg, rgba(245,250,242,0.95) 0%, rgba(232,242,228,0.85) 100%) !important;
+}
+.bc-debug-loading .bc-debug-mark {
+  background: linear-gradient(135deg, #d4a574 0%, #b88a5a 100%) !important;
+  box-shadow: 0 0 0 3px rgba(212,165,116,0.18) !important;
+  animation: bcDebugSpin 1.4s linear infinite !important;
+}
+@keyframes bcDebugSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.bc-debug-loading {
+  border-color: rgba(212,165,116,0.4) !important;
+}
+.bc-debug-error .bc-debug-mark {
+  background: linear-gradient(135deg, #b86054 0%, #8b4a3a 100%) !important;
+  box-shadow: 0 0 0 3px rgba(184,96,84,0.18) !important;
+}
+.bc-debug-error {
+  border-color: rgba(184,96,84,0.4) !important;
+  background: linear-gradient(135deg, rgba(252,242,238,0.95) 0%, rgba(245,225,217,0.85) 100%) !important;
+}
+form.calc-form + .bc-debug,
+.calc-form .bc-debug {
+  display: inline-flex !important;
+  position: relative !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+}
+
+/* section 27 */
+.size-primary { text-align: center !important; padding: 36px 24px 32px !important; margin: 0 auto !important; max-width: 560px !important; position: relative !important; }
+.size-primary::before { content: '' !important; display: block !important; width: 32px !important; height: 1px !important; background: linear-gradient(90deg, transparent 0%, #b89782 50%, transparent 100%) !important; margin: 0 auto 18px !important; }
+.size-primary-label { display: block !important; font-family: var(--font-sans) !important; font-size: 0.7rem !important; font-weight: 600 !important; letter-spacing: 0.32em !important; text-transform: uppercase !important; color: #8b4a3a !important; margin-bottom: 12px !important; position: relative !important; padding-left: 0 !important; text-indent: 0 !important; }
+.size-primary-value { display: block !important; font-family: var(--font-serif) !important; font-style: italic !important; font-weight: 600 !important; font-size: 6.5rem !important; line-height: 1 !important; letter-spacing: -0.01em !important; background: linear-gradient(135deg, #6b3328 0%, #8b4a3a 45%, #b86054 100%) !important; -webkit-background-clip: text !important; -webkit-text-fill-color: transparent !important; background-clip: text !important; text-shadow: 0 2px 8px rgba(184,151,130,0.18) !important; margin: 8px 0 12px !important; text-rendering: optimizeLegibility !important; -webkit-font-smoothing: antialiased !important; -moz-osx-font-smoothing: grayscale !important; }
+.size-primary-value::after { content: '' !important; display: block !important; width: 56px !important; height: 2px !important; background: linear-gradient(90deg, #8b4a3a 0%, #b86054 50%, transparent 100%) !important; margin: 14px auto 0 !important; border-radius: 2px !important; }
+.size-primary-note { font-family: var(--font-serif) !important; font-style: italic !important; font-size: 1.05rem !important; line-height: 1.65 !important; color: #5a3a30 !important; margin: 18px auto 0 !important; max-width: 480px !important; letter-spacing: 0.005em !important; }
+.size-grid { display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 10px !important; margin: 24px auto 18px !important; max-width: 600px !important; }
+.size-cell { text-align: center !important; padding: 14px 8px 16px !important; background: linear-gradient(135deg, rgba(255,255,255,0.92) 0%, rgba(252,247,240,0.92) 100%) !important; border: 1px solid rgba(184,151,130,0.25) !important; border-radius: 10px !important; transition: all 0.25s ease !important; }
+.size-cell:hover { transform: translateY(-2px) !important; border-color: rgba(184,96,84,0.45) !important; box-shadow: 0 6px 16px -4px rgba(184,151,130,0.32) !important; }
+.size-cell span { display: block !important; font-family: var(--font-sans) !important; font-size: 0.62rem !important; font-weight: 700 !important; letter-spacing: 0.22em !important; text-transform: uppercase !important; color: #b86054 !important; margin-bottom: 5px !important; }
+.size-cell strong { display: block !important; font-family: var(--font-serif) !important; font-style: italic !important; font-weight: 600 !important; font-size: 1.35rem !important; color: #6b3328 !important; line-height: 1 !important; letter-spacing: 0.005em !important; }
+.size-cup-info { font-family: var(--font-serif) !important; font-style: italic !important; font-size: 0.9rem !important; color: #8b6f5f !important; text-align: center !important; margin: 12px 0 0 !important; }
+.size-cup-info strong { font-weight: 600 !important; color: #6b3328 !important; font-style: normal !important; font-family: var(--font-sans) !important; letter-spacing: 0.06em !important; }
+.bc-celebrate-eyebrow { font-family: var(--font-sans) !important; font-size: 0.68rem !important; font-weight: 700 !important; letter-spacing: 0.3em !important; text-transform: uppercase !important; color: #8b4a3a !important; margin-bottom: 6px !important; }
+.bc-celebrate-size { font-family: var(--font-serif) !important; font-style: italic !important; font-weight: 600 !important; font-size: 5.5rem !important; line-height: 1 !important; background: linear-gradient(135deg, #6b3328 0%, #b86054 100%) !important; -webkit-background-clip: text !important; -webkit-text-fill-color: transparent !important; background-clip: text !important; letter-spacing: -0.01em !important; text-shadow: 0 2px 12px rgba(184,151,130,0.2) !important; text-rendering: optimizeLegibility !important; -webkit-font-smoothing: antialiased !important; }
+.bc-celebrate-headline { font-family: var(--font-serif) !important; font-style: italic !important; font-weight: 600 !important; font-size: 1.25rem !important; line-height: 1.4 !important; color: #6b3328 !important; margin: 14px auto 8px !important; max-width: 460px !important; letter-spacing: 0.005em !important; }
+.bc-celebrate-sub { font-family: var(--font-sans) !important; font-size: 0.88rem !important; line-height: 1.6 !important; color: #5a3a30 !important; margin: 6px auto 0 !important; max-width: 460px !important; }
+.bc-celebrate-rare-pct { font-family: var(--font-serif) !important; font-size: 0.78rem !important; font-style: italic !important; letter-spacing: 0.04em !important; color: #8b6f5f !important; margin-top: 6px !important; }
+.bc-celebrate-styles-title { font-family: var(--font-sans) !important; font-size: 0.66rem !important; font-weight: 700 !important; letter-spacing: 0.26em !important; text-transform: uppercase !important; color: #8b4a3a !important; margin-bottom: 10px !important; }
+.bc-celebrate-style-chip { font-family: var(--font-serif) !important; font-style: italic !important; font-size: 0.92rem !important; font-weight: 500 !important; letter-spacing: 0.01em !important; }
+.bc-celebrate-sizes-title { font-family: var(--font-serif) !important; font-style: italic !important; font-weight: 600 !important; font-size: 1.1rem !important; color: #6b3328 !important; margin: 0 0 4px !important; letter-spacing: 0.005em !important; }
+.bc-celebrate-sizes-sub { font-family: var(--font-sans) !important; font-size: 0.78rem !important; line-height: 1.55 !important; color: #8b6f5f !important; margin: 0 !important; font-style: italic !important; }
+.bc-celebrate-brand-title { font-family: var(--font-serif) !important; font-style: italic !important; font-weight: 600 !important; font-size: 1.05rem !important; color: #6b3328 !important; margin: 0 0 4px !important; }
+.bc-celebrate-brand-sub { font-family: var(--font-sans) !important; font-size: 0.78rem !important; line-height: 1.5 !important; color: #8b6f5f !important; margin: 0 !important; font-style: italic !important; }
+.bc-celebrate-brand-cell-name { font-family: var(--font-sans) !important; font-size: 0.58rem !important; font-weight: 700 !important; letter-spacing: 0.22em !important; text-transform: uppercase !important; color: #8b4a3a !important; margin-bottom: 5px !important; }
+.bc-celebrate-brand-cell-value { font-family: var(--font-serif) !important; font-style: italic !important; font-weight: 600 !important; font-size: 1.2rem !important; color: #6b3328 !important; line-height: 1 !important; }
+.bc-celebrate-brand-cell-orig { font-family: var(--font-sans) !important; font-size: 0.62rem !important; color: #8b6f5f !important; margin-top: 3px !important; font-style: italic !important; letter-spacing: 0.02em !important; }
+.bc-celebrate-brand-info-title { font-family: var(--font-serif) !important; font-style: italic !important; font-weight: 600 !important; font-size: 1.05rem !important; color: #6b3328 !important; margin: 0 0 10px !important; padding-bottom: 8px !important; border-bottom: 1px solid rgba(184,151,130,0.3) !important; }
+.bc-celebrate-brand-info-label { font-family: var(--font-sans) !important; font-weight: 700 !important; letter-spacing: 0.18em !important; text-transform: uppercase !important; color: #8b4a3a !important; font-size: 0.64rem !important; align-self: start !important; padding-top: 2px !important; }
+.bc-celebrate-brand-info-value { font-family: var(--font-sans) !important; font-size: 0.82rem !important; line-height: 1.55 !important; color: #5a3a30 !important; font-style: italic !important; }
+.bc-celebrate-privacy { font-family: var(--font-sans) !important; font-size: 0.76rem !important; line-height: 1.6 !important; color: #8b6f5f !important; font-style: italic !important; letter-spacing: 0.01em !important; }
+.bc-celebrate-tip { font-family: var(--font-sans) !important; font-size: 0.85rem !important; line-height: 1.6 !important; color: #5a3a30 !important; font-style: italic !important; border-left: 3px solid #b86054 !important; padding: 10px 14px !important; margin: 16px auto 0 !important; max-width: 540px !important; background: rgba(255,250,244,0.5) !important; border-radius: 0 8px 8px 0 !important; }
+@media (max-width: 540px) {
+  .size-primary-value { font-size: 4.5rem !important; }
+  .bc-celebrate-size { font-size: 4rem !important; }
+  .size-grid { grid-template-columns: repeat(2, 1fr) !important; }
+}
+
+/* section 28 鈥?Sister Size Spectrum 绮惧瘑浠櫒 */
+.bc-celebrate-sister-card { max-width: 700px !important; margin: 24px auto 0 !important; padding: 28px 24px 22px !important; background: linear-gradient(180deg, rgba(255,250,244,0.85) 0%, rgba(252,247,240,0.75) 100%) !important; border: 1px solid rgba(184,151,130,0.3) !important; border-radius: 14px !important; box-shadow: 0 6px 24px -8px rgba(107,83,68,0.15) !important; position: relative !important; }
+.bc-celebrate-sister-head { text-align: center !important; margin-bottom: 22px !important; padding-bottom: 18px !important; border-bottom: 1px dashed rgba(184,151,130,0.35) !important; }
+.bc-celebrate-sister-eyebrow { display: inline-flex !important; align-items: center !important; gap: 8px !important; font-family: var(--font-sans) !important; font-size: 0.62rem !important; font-weight: 700 !important; letter-spacing: 0.32em !important; text-transform: uppercase !important; color: #6b8a5e !important; margin-bottom: 8px !important; padding: 4px 12px !important; background: rgba(107,138,94,0.1) !important; border-radius: 100px !important; }
+.bc-celebrate-sister-dot { width: 8px !important; height: 8px !important; border-radius: 50% !important; background: #6b8a5e !important; box-shadow: 0 0 0 3px rgba(107,138,94,0.25) !important; animation: bcSisterPulse 2.2s ease-in-out infinite !important; }
+@keyframes bcSisterPulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.6; transform: scale(0.85); } }
+.bc-celebrate-sister-title { font-family: var(--font-serif) !important; font-style: italic !important; font-weight: 600 !important; font-size: 1.35rem !important; color: #6b3328 !important; margin: 0 0 6px !important; letter-spacing: 0.005em !important; }
+.bc-celebrate-sister-sub { font-family: var(--font-sans) !important; font-size: 0.8rem !important; line-height: 1.5 !important; color: #8b6f5f !important; font-style: italic !important; max-width: 480px !important; margin: 0 auto !important; }
+/* Gauge 涓讳綋 */
+.bc-celebrate-sister-gauge { position: relative !important; padding: 12px 8px 8px !important; }
+.bc-celebrate-sister-gear { position: absolute !important; left: -2px !important; right: -2px !important; height: 8px !important; background: repeating-linear-gradient(90deg, rgba(184,151,130,0.6) 0 2px, transparent 2px 8px) !important; pointer-events: none !important; }
+.bc-celebrate-sister-gear-top { top: 0 !important; }
+.bc-celebrate-sister-gear-bottom { bottom: 0 !important; }
+.bc-celebrate-sister-track { position: relative !important; height: 130px !important; margin: 0 0 8px !important; padding: 0 4% !important; background: linear-gradient(180deg, transparent 0%, transparent 30%, rgba(255,255,255,0.4) 30%, rgba(255,255,255,0.4) 70%, transparent 70%, transparent 100%) !important; }
+.bc-celebrate-sister-ruler { position: absolute !important; inset: 0 !important; }
+.bc-celebrate-sister-tick { position: absolute !important; top: 0 !important; bottom: 0 !important; transform: translateX(-50%) !important; width: 0 !important; }
+.bc-celebrate-sister-tick-line { position: absolute !important; left: 50% !important; transform: translateX(-50%) !important; top: 40px !important; height: 50px !important; width: 1px !important; background: rgba(184,151,130,0.55) !important; }
+.bc-celebrate-sister-tick-you .bc-celebrate-sister-tick-line { width: 2px !important; height: 64px !important; top: 32px !important; background: linear-gradient(180deg, #6b8a5e 0%, #b86054 100%) !important; }
+.bc-celebrate-sister-tick-sister .bc-celebrate-sister-tick-line { width: 1.5px !important; height: 56px !important; top: 36px !important; background: rgba(184,96,84,0.7) !important; }
+.bc-celebrate-sister-tick-ext .bc-celebrate-sister-tick-line { width: 1px !important; height: 50px !important; top: 40px !important; background: rgba(184,151,130,0.4) !important; border-top: 1px dashed rgba(184,151,130,0.4) !important; }
+.bc-celebrate-sister-tick-minor { position: absolute !important; top: 60px !important; height: 24px !important; width: 1px !important; background: rgba(184,151,130,0.3) !important; transform: translateX(-50%) !important; }
+.bc-celebrate-sister-tick-cup { position: absolute !important; bottom: 0 !important; left: 50% !important; transform: translateX(-50%) !important; font-family: var(--font-sans) !important; font-size: 0.68rem !important; font-weight: 700 !important; letter-spacing: 0.06em !important; color: #8b4a3a !important; padding-top: 6px !important; }
+.bc-celebrate-sister-tick-you .bc-celebrate-sister-tick-cup { color: #6b8a5e !important; font-size: 0.78rem !important; font-weight: 800 !important; }
+.bc-celebrate-sister-tick-pct { position: absolute !important; top: 4px !important; left: 50% !important; transform: translateX(-50%) !important; font-family: var(--font-sans) !important; font-size: 0.55rem !important; font-weight: 500 !important; color: #8b6f5f !important; opacity: 0.75 !important; }
+/* Bars (US female share) */
+.bc-celebrate-sister-bars { position: absolute !important; inset: 0 !important; padding-top: 14px !important; }
+.bc-celebrate-sister-bar { position: absolute !important; bottom: 18px !important; transform: translateX(-50%) !important; width: 5% !important; min-width: 14px !important; max-width: 28px !important; background: linear-gradient(180deg, rgba(212,165,116,0.5) 0%, rgba(184,151,130,0.3) 100%) !important; border-radius: 2px 2px 0 0 !important; transition: all 0.3s ease !important; cursor: help !important; }
+.bc-celebrate-sister-bar-sister { background: linear-gradient(180deg, rgba(184,96,84,0.6) 0%, rgba(184,96,84,0.35) 100%) !important; }
+.bc-celebrate-sister-bar-ext { background: linear-gradient(180deg, rgba(184,151,130,0.4) 0%, rgba(184,151,130,0.2) 100%) !important; opacity: 0.7 !important; }
+.bc-celebrate-sister-bar-you { background: linear-gradient(180deg, #6b8a5e 0%, #557347 100%) !important; box-shadow: 0 0 0 2px rgba(107,138,94,0.18) !important; }
+.bc-celebrate-sister-bar:hover { filter: brightness(1.1) !important; }
+.bc-celebrate-sister-bar span { position: absolute !important; top: -14px !important; left: 50% !important; transform: translateX(-50%) !important; font-family: var(--font-sans) !important; font-size: 0.55rem !important; font-weight: 700 !important; color: #5a3a30 !important; white-space: nowrap !important; opacity: 0 !important; transition: opacity 0.2s !important; }
+.bc-celebrate-sister-bar:hover span { opacity: 1 !important; }
+/* Needle */
+.bc-celebrate-sister-needle { position: absolute !important; top: -6px !important; bottom: -6px !important; transform: translateX(-50%) !important; z-index: 5 !important; pointer-events: none !important; transition: left 0.6s cubic-bezier(0.34, 1.4, 0.64, 1) !important; }
+.bc-celebrate-sister-needle-pin { position: absolute !important; top: 32px !important; left: 50% !important; transform: translateX(-50%) !important; width: 14px !important; height: 14px !important; border-radius: 50% !important; background: linear-gradient(135deg, #b86054 0%, #6b3328 100%) !important; box-shadow: 0 0 0 3px rgba(255,255,255,0.95), 0 0 0 5px rgba(184,96,84,0.5), 0 4px 8px rgba(107,51,40,0.4) !important; }
+.bc-celebrate-sister-needle-line { position: absolute !important; top: 38px !important; bottom: 18px !important; left: 50% !important; transform: translateX(-50%) !important; width: 2px !important; background: linear-gradient(180deg, #b86054 0%, transparent 100%) !important; }
+.bc-celebrate-sister-needle-flag { position: absolute !important; bottom: -34px !important; left: 50% !important; transform: translateX(-50%) !important; background: linear-gradient(135deg, #6b3328 0%, #b86054 100%) !important; color: #fff !important; padding: 3px 9px 4px !important; border-radius: 4px !important; white-space: nowrap !important; box-shadow: 0 3px 10px rgba(107,51,40,0.3) !important; }
+.bc-celebrate-sister-needle-cup { font-family: var(--font-serif) !important; font-style: italic !important; font-weight: 600 !important; font-size: 0.95rem !important; line-height: 1 !important; }
+.bc-celebrate-sister-needle-lbl { font-family: var(--font-sans) !important; font-size: 0.5rem !important; font-weight: 700 !important; letter-spacing: 0.18em !important; text-transform: uppercase !important; margin-top: 1px !important; opacity: 0.9 !important; }
+/* Axis (0% 鈥?100% scale) */
+.bc-celebrate-sister-axis { display: flex !important; justify-content: space-between !important; padding: 4px 4% 0 !important; font-family: var(--font-sans) !important; font-size: 0.55rem !important; color: #8b6f5f !important; font-weight: 600 !important; letter-spacing: 0.08em !important; }
+/* Readout 4 涓暟鎹 */
+.bc-celebrate-sister-readout { display: grid !important; grid-template-columns: repeat(4, 1fr) !important; gap: 0 !important; margin: 24px 0 16px !important; padding: 12px 0 !important; border-top: 1px solid rgba(184,151,130,0.25) !important; border-bottom: 1px solid rgba(184,151,130,0.25) !important; }
+.bc-celebrate-sister-readout-row { display: flex !important; flex-direction: column !important; align-items: center !important; gap: 4px !important; padding: 0 8px !important; border-right: 1px solid rgba(184,151,130,0.18) !important; }
+.bc-celebrate-sister-readout-row:last-child { border-right: none !important; }
+.bc-celebrate-sister-readout-label { font-family: var(--font-sans) !important; font-size: 0.58rem !important; font-weight: 700 !important; letter-spacing: 0.18em !important; text-transform: uppercase !important; color: #8b4a3a !important; }
+.bc-celebrate-sister-readout-value { font-family: var(--font-serif) !important; font-style: italic !important; font-weight: 600 !important; font-size: 0.95rem !important; color: #6b3328 !important; line-height: 1.2 !important; }
+/* Legend */
+.bc-celebrate-sister-legend { display: flex !important; justify-content: center !important; gap: 18px !important; flex-wrap: wrap !important; font-family: var(--font-sans) !important; font-size: 0.66rem !important; color: #8b6f5f !important; font-style: italic !important; padding-top: 8px !important; }
+.bc-celebrate-sister-legend-item { display: inline-flex !important; align-items: center !important; gap: 5px !important; }
+.bc-celebrate-sister-legend-dot { width: 10px !important; height: 10px !important; border-radius: 50% !important; display: inline-block !important; }
+.bc-celebrate-sister-legend-you { background: linear-gradient(135deg, #6b8a5e 0%, #557347 100%) !important; }
+.bc-celebrate-sister-legend-sister { background: linear-gradient(135deg, #b86054 0%, #8b4a3a 100%) !important; }
+.bc-celebrate-sister-legend-ext { background: linear-gradient(135deg, #d4a574 0%, #b88a5a 100%) !important; opacity: 0.7 !important; }
+.bc-celebrate-sister-legend-bar { display: inline-block !important; width: 16px !important; height: 4px !important; background: linear-gradient(90deg, rgba(212,165,116,0.5) 0%, rgba(184,151,130,0.3) 100%) !important; border-radius: 1px !important; }
+@media (max-width: 540px) {
+  .bc-celebrate-sister-card { padding: 18px 12px 16px !important; }
+  .bc-celebrate-sister-track { height: 110px !important; }
+  .bc-celebrate-sister-tick-pct { display: none !important; }
+  .bc-celebrate-sister-tick-cup { font-size: 0.62rem !important; }
+  .bc-celebrate-sister-readout { grid-template-columns: repeat(2, 1fr) !important; gap: 12px 0 !important; }
+  .bc-celebrate-sister-readout-row:nth-child(2) { border-right: none !important; }
+  .bc-celebrate-sister-readout-value { font-size: 0.85rem !important; }
+  .bc-celebrate-sister-legend { gap: 10px !important; font-size: 0.6rem !important; }
+}
+
+/* section 30 — Breast Brand eyebrow */
+.calc-field-eyebrow { display: inline-flex !important; align-items: center !important; gap: 8px !important; font-family: var(--font-sans) !important; font-size: 0.62rem !important; font-weight: 700 !important; letter-spacing: 0.32em !important; text-transform: uppercase !important; color: #6b8a5e !important; margin-bottom: 6px !important; padding: 4px 12px 4px 8px !important; background: rgba(107,138,94,0.1) !important; border-radius: 100px !important; border: 1px solid rgba(107,138,94,0.18) !important; }
+.calc-field-eyebrow-dot { width: 6px !important; height: 6px !important; border-radius: 50% !important; background: #6b8a5e !important; box-shadow: 0 0 0 2px rgba(107,138,94,0.3) !important; animation: bcSisterPulse 2.2s ease-in-out infinite !important; }
+.calc-field-eyebrow-sub { font-family: var(--font-serif) !important; font-style: italic !important; font-weight: 500 !important; font-size: 0.66rem !important; letter-spacing: 0.04em !important; text-transform: lowercase !important; color: #8b6f5f !important; margin-left: 2px !important; }
+
+/* section 29 — Sister Size Comparator (soft feminine instrument) */
+/* ═══════════════════════════════════════════════════════════════════════════
+   姐妹尺码比较器 — 主仪器容器
+   设计: 充分利用父容器 (bc-history = 960px) 的宽度, 让 7 张卡每张都有
+   足够空间装下体积/底围/US+EU 换算
+   ═══════════════════════════════════════════════════════════════════════════ */
+.bc-compass-instrument {
+  position: relative !important;
+  width: 100% !important;
+  max-width: 920px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  box-sizing: border-box !important;
+  padding: 32px 28px 28px !important;
+  margin-top: 0 !important;
+  margin-bottom: 12px !important;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(245, 212, 176, 0.18) 0%, rgba(245, 212, 176, 0) 60%),
+    linear-gradient(180deg, rgba(255,247,242,0.5) 0%, rgba(252,238,228,0.18) 100%) !important;
+  border-radius: 20px !important;
+  border: 1px solid rgba(220,190,170,0.25) !important;
+  box-shadow:
+    0 8px 28px -16px rgba(184,96,84,0.18),
+    0 2px 6px -3px rgba(58,46,38,0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.55) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  overflow: hidden !important;
+}
+.bc-compass-instrument::after {
+  content: '' !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background:
+    repeating-linear-gradient(135deg, rgba(184,122,90,0.012) 0px, rgba(184,122,90,0.012) 1px, transparent 1px, transparent 8px) !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+}
+.bc-compass-sisters,
+.bc-compass-summary { position: relative !important; z-index: 1 !important; }
+/* ═══════════════════════════════════════════════════════════════════════════
+   7 张卡 — 统一等宽布局: 7 张卡宽度完全一致, YOU 卡用 transform: scale() 突出
+   这样 7 张卡在视觉上呈现整齐的"频谱"结构, 像琴键一样排列
+   ═══════════════════════════════════════════════════════════════════════════ */
+.bc-compass-sisters {
+  position: relative !important;
+  display: grid !important;
+  grid-template-columns: repeat(7, minmax(0, 1fr)) !important;
+  gap: 6px !important;
+  align-items: stretch !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  margin: 0 auto !important;
+  padding: 12px 2px 0 !important;
+  justify-content: stretch !important;
+  justify-items: stretch !important;
+  box-sizing: border-box !important;
+  overflow: visible !important;
+}
+
+/* Awaiting state — shown until user calculates */
+.bc-compass-awaiting {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  width: 100% !important;
+  max-width: 520px !important;
+  margin: 0 auto !important;
+  padding: 32px 24px 28px !important;
+  gap: 8px !important;
+}
+.bc-compass-awaiting-icon {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 42px !important;
+  height: 42px !important;
+  margin-bottom: 6px !important;
+  font-size: 1.4rem !important;
+  color: #b87a5a !important;
+  background: radial-gradient(circle at 30% 30%, rgba(245, 212, 176, 0.45) 0%, rgba(245, 212, 176, 0) 70%) !important;
+  border: 1px solid rgba(184, 122, 90, 0.30) !important;
+  border-radius: 50% !important;
+  box-shadow:
+    0 0 0 4px rgba(255, 255, 255, 0.6),
+    0 4px 14px -6px rgba(184, 96, 84, 0.20) !important;
+  animation: bcAwaitPulse 2.4s ease-in-out infinite !important;
+}
+@keyframes bcAwaitPulse {
+  0%, 100% { box-shadow: 0 0 0 4px rgba(255,255,255,0.6), 0 4px 14px -6px rgba(184,96,84,0.20); }
+  50%      { box-shadow: 0 0 0 8px rgba(245,212,176,0.18), 0 4px 18px -4px rgba(184,96,84,0.28); }
+}
+.bc-compass-awaiting-title {
+  font-family: var(--font-serif) !important;
+  font-style: italic !important;
+  font-weight: 600 !important;
+  font-size: 1.18rem !important;
+  letter-spacing: 0.005em !important;
+  color: #6b3328 !important;
+  line-height: 1.25 !important;
+  margin: 0 !important;
+}
+.bc-compass-awaiting-text {
+  font-family: var(--font-serif) !important;
+  font-style: italic !important;
+  font-weight: 400 !important;
+  font-size: 0.95rem !important;
+  line-height: 1.65 !important;
+  color: #8a6850 !important;
+  margin: 0 !important;
+  max-width: 460px !important;
+}
+.bc-compass-awaiting-text em {
+  font-style: normal !important;
+  font-weight: 700 !important;
+  color: #b87a5a !important;
+  letter-spacing: 0.01em !important;
+}
+.bc-compass-awaiting-actions {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 10px !important;
+  margin-top: 14px !important;
+  width: 100% !important;
+}
+.bc-compass-demo-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  padding: 11px 26px !important;
+  background: linear-gradient(180deg, #b87a5a 0%, #8b4a3a 100%) !important;
+  color: #fffaf3 !important;
+  font-family: var(--font-sans) !important;
+  font-size: 0.78rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  border: 1px solid rgba(184, 96, 84, 0.4) !important;
+  border-radius: 999px !important;
+  cursor: pointer !important;
+  box-shadow:
+    0 6px 18px -8px rgba(184, 96, 84, 0.55),
+    inset 0 1px 0 rgba(255, 250, 240, 0.30) !important;
+  transition: transform 0.32s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.32s ease, filter 0.32s ease !important;
+  position: relative !important;
+}
+.bc-compass-demo-btn::before {
+  content: '' !important;
+  position: absolute !important;
+  inset: 0 !important;
+  border-radius: 999px !important;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.30) 0%, transparent 50%) !important;
+  pointer-events: none !important;
+}
+.bc-compass-demo-btn:hover {
+  transform: translateY(-2px) !important;
+  filter: brightness(1.06) !important;
+  box-shadow:
+    0 10px 24px -8px rgba(184, 96, 84, 0.65),
+    inset 0 1px 0 rgba(255, 250, 240, 0.40) !important;
+}
+.bc-compass-demo-btn:active {
+  transform: translateY(0) !important;
+}
+.bc-compass-demo-btn:focus-visible {
+  outline: 2px solid #b87a5a !important;
+  outline-offset: 3px !important;
+}
+.bc-compass-demo-btn-text { position: relative !important; z-index: 1 !important; }
+.bc-compass-demo-btn-arrow {
+  position: relative !important;
+  z-index: 1 !important;
+  font-size: 0.95rem !important;
+  transition: transform 0.32s ease !important;
+}
+.bc-compass-demo-btn:hover .bc-compass-demo-btn-arrow {
+  transform: translateX(3px) !important;
+}
+.bc-compass-demo-hint {
+  font-family: var(--font-serif) !important;
+  font-style: italic !important;
+  font-size: 0.78rem !important;
+  color: #a89588 !important;
+  line-height: 1.5 !important;
+  letter-spacing: 0.01em !important;
+  max-width: 460px !important;
+  text-align: center !important;
+}
+.bc-compass-awaiting-preview {
+  display: flex !important;
+  align-items: flex-end !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  margin-top: 18px !important;
+  padding: 14px 10px 6px !important;
+  width: 100% !important;
+  max-width: 460px !important;
+  position: relative !important;
+}
+.bc-compass-preview-card {
+  font-family: var(--font-serif) !important;
+  font-style: italic !important;
+  font-weight: 700 !important;
+  font-size: 0.95rem !important;
+  padding: 6px 10px 5px !important;
+  border-radius: 10px !important;
+  border: 1px solid rgba(184, 122, 90, 0.18) !important;
+  background: rgba(255, 250, 244, 0.6) !important;
+  color: #8a6850 !important;
+  letter-spacing: -0.01em !important;
+  min-width: 44px !important;
+  text-align: center !important;
+  animation: bcPreviewFloat 3.2s ease-in-out infinite !important;
+}
+.bc-compass-preview-card.bc-compass-preview-sister {
+  color: #c89890 !important;
+  font-size: 1.1rem !important;
+  padding: 8px 12px 7px !important;
+  min-width: 50px !important;
+  border-color: rgba(200, 152, 144, 0.32) !important;
+  background: rgba(255, 244, 240, 0.7) !important;
+}
+.bc-compass-preview-card.bc-compass-preview-you {
+  font-size: 1.45rem !important;
+  padding: 11px 16px 10px !important;
+  min-width: 64px !important;
+  background:
+    radial-gradient(ellipse at center 25%, rgba(245, 212, 176, 0.55) 0%, rgba(245, 212, 176, 0.18) 70%),
+    linear-gradient(180deg, rgba(255, 250, 244, 0.95) 0%, rgba(252, 238, 228, 0.7) 100%) !important;
+  border: 1px solid rgba(184, 122, 90, 0.45) !important;
+  color: #8b4a3a !important;
+  box-shadow:
+    0 6px 16px -6px rgba(184, 96, 84, 0.30),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7) !important;
+  animation-delay: -1.4s !important;
+}
+.bc-compass-preview-card.bc-compass-preview-extended {
+  opacity: 0.62 !important;
+  font-size: 0.85rem !important;
+  padding: 5px 8px 4px !important;
+  min-width: 40px !important;
+}
+.bc-compass-preview-card:nth-child(1) { animation-delay: 0s !important; }
+.bc-compass-preview-card:nth-child(2) { animation-delay: -0.6s !important; }
+.bc-compass-preview-card:nth-child(3) { animation-delay: -1.2s !important; }
+.bc-compass-preview-card:nth-child(4) { animation-delay: -1.8s !important; }
+.bc-compass-preview-card:nth-child(5) { animation-delay: -2.4s !important; }
+@keyframes bcPreviewFloat {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-3px); }
+}
+/* 关键: 使用双类名提升 specificity (0,2,0) > 全局 .page-content :is(button) (0,1,1),
+   否则 11px 22px padding 会覆盖掉我们的紧凑 4px 水平 padding, 导致卡片内文字区只剩 28px */
+/* ═══════════════════════════════════════════════════════════════════════════
+   联动增强 1: YOU 卡视觉强化
+   - 顶部指针 (▼) 持续微动, 暗示 "this is the active center"
+   - 周边光晕呼吸, 强化 primary 视觉
+   - 当任意 sister 卡 hover 时, YOU 卡也有微妙的"被关注"反应
+   ═══════════════════════════════════════════════════════════════════════════ */
+@keyframes bcPointerBob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(2px); }
+}
+.bc-compass-sister-you .bc-compass-sister-pointer {
+  animation: bcPointerFadeIn 0.6s ease-out, bcPointerBob 2.6s ease-in-out 0.6s infinite !important;
+  text-shadow: 0 0 6px rgba(245, 212, 176, 0.55) !important;
+  filter: drop-shadow(0 1px 0 rgba(255, 250, 240, 0.7)) !important;
+}
+/* YOU 卡核心区域的精致高光 — 增强 primary 视觉 */
+.bc-compass-sister-you .bc-compass-sister-size::after {
+  content: '' !important;
+  position: absolute !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  bottom: -4px !important;
+  width: 60% !important;
+  height: 1px !important;
+  background: linear-gradient(90deg, transparent 0%, rgba(184, 122, 90, 0.5) 50%, transparent 100%) !important;
+  pointer-events: none !important;
+}
+/* 联动: 当任意非 YOU 卡被 hover, YOU 卡也微微"亮起"提示 active center */
+.bc-compass-sisters:has(.bc-compass-sister-clickable:hover) .bc-compass-sister-you.bc-compass-sister-you {
+  box-shadow:
+    0 16px 40px -10px rgba(184, 96, 84, 0.55),
+    0 0 0 2px rgba(245, 212, 176, 0.65),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95) !important;
+  transform: translateY(-2px) !important;
+}
+/* 联动: 当 sister 卡被 clicked (即将切换为 primary), 所有卡都有 wave 效果 */
+.bc-compass-sister.bc-compass-sister-clicked {
+  animation: bcClickBurst 0.6s ease-out !important;
+}
+@keyframes bcClickBurst {
+  0%   { transform: scale(1); }
+  30%  { transform: scale(0.94); box-shadow: 0 0 0 0 rgba(245, 212, 176, 0.6); }
+  60%  { transform: scale(1.02); box-shadow: 0 0 0 10px rgba(245, 212, 176, 0); }
+  100% { transform: scale(1); }
+}
+/* ═══════════════════════════════════════════════════════════════════════════
+   7 张卡 — 统一布局: role 标签固定在顶部, 主体内容居中
+   关键: 改用 justify-content: space-between + role 标签 first (order: -1)
+   让 role 标签在 7 张卡中始终位于同一行高(顶端), 视觉对齐
+   ═══════════════════════════════════════════════════════════════════════════ */
+.bc-compass-sister.bc-compass-sister {
+  text-align: center !important;
+  padding: 28px 4px 16px !important;
+  position: relative !important;
+  opacity: 1 !important;
+  transform: none !important;
+  animation: bcCompassSisterIn 0.6s ease-out backwards !important;
+  background: none !important;
+  border: 0 !important;
+  cursor: default !important;
+  font: inherit !important;
+  color: inherit !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  justify-content: flex-start !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  overflow: visible !important;
+  border-radius: 0 !important;
+  min-height: 200px !important;
+  font-size: inherit !important;
+  line-height: inherit !important;
+  letter-spacing: normal !important;
+}
+/* role 标签 — 固定在卡片顶部, 不受卡片内容长度影响 */
+.bc-compass-sister-role {
+  font-family: var(--font-sans) !important;
+  font-size: 0.58rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.24em !important;
+  text-transform: uppercase !important;
+  color: #b89580 !important;
+  margin: 0 0 6px !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  display: block !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: clip !important;
+  text-align: center !important;
+  min-height: 18px !important;
+  line-height: 1.2 !important;
+  flex-shrink: 0 !important;
+  position: relative !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+}
+/* 角色标签下方的精致装饰线 — 增加杂志感 */
+.bc-compass-sister-role::after {
+  content: '' !important;
+  display: block !important;
+  position: relative !important;
+  left: 50% !important;
+  bottom: 0 !important;
+  transform: translateX(-50%) !important;
+  width: 14px !important;
+  height: 1px !important;
+  background: currentColor !important;
+  opacity: 0.35 !important;
+  transition: width 0.32s ease, opacity 0.32s ease !important;
+  margin-top: 4px !important;
+}
+.bc-compass-sister-clickable:hover .bc-compass-sister-role::after {
+  width: 24px !important;
+  opacity: 0.7 !important;
+}
+.bc-compass-sister-you .bc-compass-sister-role { padding-right: 0 !important; }
+.bc-compass-sister-you .bc-compass-sister-role::after { width: 22px !important; opacity: 0.7 !important; background: linear-gradient(90deg, transparent 0%, #b87a5a 50%, transparent 100%) !important; }
+.bc-compass-sister-sister .bc-compass-sister-role { color: #c89890 !important; }
+.bc-compass-sister-you .bc-compass-sister-role { color: #b87a5a !important; font-weight: 800 !important; }
+.bc-compass-sister-extended .bc-compass-sister-role { color: #c8b8a8 !important; }
+.bc-compass-sister-clickable {
+  cursor: pointer !important;
+  border-radius: 12px !important;
+  transition: transform 0.32s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.32s ease, background 0.32s ease !important;
+  padding-top: 14px !important;
+  padding-bottom: 16px !important;
+  position: relative !important;
+}
+.bc-compass-sister-clickable::after {
+  content: '' !important;
+  position: absolute !important;
+  inset: 0 !important;
+  border-radius: 12px !important;
+  background: transparent !important;
+  border: 1px solid transparent !important;
+  transition: border-color 0.32s ease, background 0.32s ease !important;
+  pointer-events: none !important;
+}
+.bc-compass-sister-clickable:hover {
+  transform: translateY(-4px) !important;
+  background: linear-gradient(180deg, rgba(255, 250, 244, 0.85) 0%, rgba(255, 240, 226, 0.45) 100%) !important;
+  box-shadow: 0 14px 28px -10px rgba(184, 96, 84, 0.35), 0 3px 8px -2px rgba(120, 90, 80, 0.12) !important;
+}
+.bc-compass-sister-clickable:hover::after {
+  border-color: rgba(184, 122, 90, 0.38) !important;
+}
+.bc-compass-sister-clickable:active {
+  transform: translateY(-1px) scale(0.99) !important;
+  transition: transform 0.12s ease !important;
+}
+.bc-compass-sister-clickable:focus-visible {
+  outline: 2px solid #b87a5a !important;
+  outline-offset: 2px !important;
+}
+/* ─── Task: 增强联动 — 点击波纹效果 + 选中态(对比)精致化 ─── */
+.bc-compass-sister-clickable {
+  overflow: hidden !important;
+}
+.bc-compass-sister-clickable::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  width: 0 !important;
+  height: 0 !important;
+  border-radius: 50% !important;
+  background: radial-gradient(circle, rgba(245, 212, 176, 0.55) 0%, rgba(245, 212, 176, 0) 70%) !important;
+  transform: translate(-50%, -50%) !important;
+  transition: width 0.55s ease-out, height 0.55s ease-out, opacity 0.6s ease-out !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+}
+.bc-compass-sister-clickable:active::before,
+.bc-compass-sister-clickable.bc-compass-sister-clicked::before {
+  width: 220px !important;
+  height: 220px !important;
+  opacity: 1 !important;
+  transition: width 0s, height 0s, opacity 0s !important;
+}
+/* 选中态 — 强化视觉: 加深 outline + 微妙高光 */
+.bc-compass-sister-checked.bc-compass-sister-checked {
+  outline: 2px solid #b87a5a !important;
+  outline-offset: 2px !important;
+  box-shadow:
+    0 14px 28px -10px rgba(184, 96, 84, 0.40),
+    0 0 0 4px rgba(245, 212, 176, 0.32),
+    inset 0 1px 0 rgba(255, 250, 240, 0.8) !important;
+}
+/* 邻近联动高亮 — 当一张卡 hover 时, 周围 sister 卡也有微妙的 "联动" 视觉 */
+.bc-compass-sisters:has(.bc-compass-sister-clickable:hover) .bc-compass-sister-clickable:not(:hover) {
+  opacity: 0.78 !important;
+  transform: scale(0.985) !important;
+  transition: opacity 0.32s ease, transform 0.32s ease !important;
+}
+.bc-compass-sisters .bc-compass-sister-clickable {
+  transition:
+    transform 0.32s cubic-bezier(0.2, 0.7, 0.2, 1),
+    box-shadow 0.32s ease,
+    background 0.32s ease,
+    opacity 0.32s ease !important;
+}
+/* 切换 primary 时的波动 — 从 YOU 位置向外扩散 */
+.bc-compass-sister-switch-wave {
+  animation: bcSwitchWave 0.7s ease-out !important;
+}
+@keyframes bcSwitchWave {
+  0%   { transform: scale(0.94); opacity: 0; }
+  35%  { transform: scale(1.04); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+/* ─── 联动增强: hover 时显示 "tap to switch" 提示 ─── */
+.bc-compass-sister-clickable .bc-compass-sister-tap-hint {
+  display: block !important;
+  font-family: var(--font-sans) !important;
+  font-size: 0.42rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.20em !important;
+  text-transform: uppercase !important;
+  color: #b87a5a !important;
+  width: 100% !important;
+  text-align: center !important;
+  margin-top: 4px !important;
+  opacity: 0 !important;
+  max-height: 0 !important;
+  overflow: hidden !important;
+  transition: opacity 0.22s ease, max-height 0.22s ease, margin 0.22s ease !important;
+  line-height: 1.2 !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+}
+.bc-compass-sister-clickable:hover .bc-compass-sister-tap-hint {
+  opacity: 0.95 !important;
+  max-height: 18px !important;
+  margin-top: 6px !important;
+}
+.bc-compass-sister-clickable:hover .bc-compass-sister-comfort,
+.bc-compass-sister-clickable:hover .bc-compass-sister-original {
+  opacity: 0.25 !important;
+  transition: opacity 0.22s ease !important;
+}
+.bc-compass-sister-original {
+  display: inline-block !important;
+  margin-top: 4px !important;
+  padding: 1px 6px !important;
+  border-radius: 999px !important;
+  background: rgba(184, 122, 90, 0.12) !important;
+  color: #b87a5a !important;
+  font-family: var(--font-sans) !important;
+  font-size: 0.42rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+.bc-compass-sister-volume {
+  margin-top: 2px !important;
+  font-family: var(--font-sans) !important;
+  color: #6b4a3a !important;
+  font-size: 0.84rem !important;
+  letter-spacing: 0.005em !important;
+  white-space: nowrap !important;
+  display: block !important;
+  width: 100% !important;
+  text-align: center !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  font-weight: 500 !important;
+}
+.bc-compass-sister-volume strong {
+  font-weight: 800 !important;
+  color: #8b4a3a !important;
+  font-size: 1.06em !important;
+  letter-spacing: -0.01em !important;
+}
+.bc-compass-sister-unit {
+  font-size: 0.78em !important;
+  color: #a89588 !important;
+  margin-left: 1px !important;
+  font-weight: 500 !important;
+}
+.bc-compass-sister-band {
+  font-family: var(--font-sans) !important;
+  font-size: 0.5rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.10em !important;
+  text-transform: uppercase !important;
+  color: #a89588 !important;
+  margin-top: 3px !important;
+  line-height: 1.4 !important;
+  white-space: nowrap !important;
+  display: block !important;
+  width: 100% !important;
+  text-align: center !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  padding: 0 2px !important;
+  box-sizing: border-box !important;
+}
+.bc-compass-sister:nth-child(1) { animation-delay: 0.05s !important; }
+.bc-compass-sister:nth-child(2) { animation-delay: 0.15s !important; }
+.bc-compass-sister:nth-child(3) { animation-delay: 0.25s !important; }
+.bc-compass-sister:nth-child(4) { animation-delay: 0.35s !important; }
+.bc-compass-sister:nth-child(5) { animation-delay: 0.45s !important; }
+@keyframes bcCompassSisterIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+/* 已迁移到 7 张卡统一布局 — 旧定义已合并到 .bc-compass-sister-role 上方 */
+.bc-compass-sister-size {
+  font-family: var(--font-serif) !important;
+  font-style: italic !important;
+  font-weight: 700 !important;
+  font-size: clamp(0.72rem, 0.85vw + 0.30rem, 1.3rem) !important;
+  line-height: 1 !important;
+  color: #5a4035 !important;
+  margin-bottom: 3px !important;
+  letter-spacing: -0.045em !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  text-overflow: clip !important;
+  /* 使用 inline-flex + text-align: center, 让 band+cup 自然居中, ::after 用 position: absolute 不参与 flex 布局 */
+  display: inline-flex !important;
+  align-items: baseline !important;
+  justify-content: center !important;
+  gap: 0 !important;
+  flex-shrink: 0 !important;
+  position: relative !important;
+  /* 防止 5 字符大小(如 28DDD, 30DD)溢出窄卡 */
+  transform: scale(0.97) !important;
+  transform-origin: center !important;
+}
+.bc-compass-sister-size-band {
+  display: inline-block !important;
+  max-width: 100% !important;
+  font-size: 0.92em !important;
+  opacity: 0.96 !important;
+  letter-spacing: -0.005em !important;
+  font-weight: 600 !important;
+}
+.bc-compass-sister-you .bc-compass-sister-size-band {
+  background: linear-gradient(180deg, #8b4a3a 0%, #d68b6c 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  opacity: 1 !important;
+  color: #8b4a3a !important;
+  /* 移除 drop-shadow: 小字号 "34" 会被模糊成几乎不可见 */
+  font-weight: 700 !important;
+  letter-spacing: -0.01em !important;
+}
+.bc-compass-sister-size-cup {
+  display: inline-block !important;
+  font-size: 1em !important;
+  flex-shrink: 0 !important;
+  font-weight: 800 !important;
+  font-family: var(--font-serif) !important;
+  font-style: italic !important;
+  color: inherit !important;
+  margin-left: 0 !important;
+  letter-spacing: -0.05em !important;
+}
+.bc-compass-sister-you .bc-compass-sister-size {
+  font-size: clamp(1.3rem, 1.5vw + 0.4rem, 1.8rem) !important;
+  background: linear-gradient(180deg, #8b4a3a 0%, #d68b6c 60%, #f5d4b0 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  filter: drop-shadow(0 1px 0 rgba(255,255,255,0.5)) !important;
+  margin-bottom: 6px !important;
+  transform: none !important;
+  letter-spacing: -0.04em !important;
+}
+.bc-compass-sister-extended .bc-compass-sister-size { color: #a89588 !important; opacity: 0.65 !important; }
+.bc-compass-sister-you .bc-compass-sister-size-cup {
+  background: linear-gradient(180deg, #d68b6c 0%, #f5d4b0 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+/* YOU 卡顶部文本指针 (▼) — 位置在 YOU 标签下方, 明显分隔 */
+.bc-compass-sister-pointer {
+  display: block !important;
+  width: 100% !important;
+  text-align: center !important;
+  font-size: 0.65rem !important;
+  color: #b87a5a !important;
+  line-height: 1 !important;
+  margin-top: -2px !important;
+  margin-bottom: 1px !important;
+  font-weight: 800 !important;
+  animation: bcPointerFadeIn 0.6s ease-out !important;
+  text-shadow: 0 1px 0 rgba(255, 250, 240, 0.6) !important;
+  opacity: 0.95 !important;
+  letter-spacing: 0 !important;
+}
+@keyframes bcPointerFadeIn {
+  from { opacity: 0; transform: translateY(-3px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.bc-compass-sister-band {
+  font-family: var(--font-sans) !important;
+  font-size: 0.50rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  color: #8a6850 !important;
+  margin-top: 3px !important;
+  line-height: 1.4 !important;
+  white-space: nowrap !important;
+  display: block !important;
+  width: 100% !important;
+  text-align: center !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  padding: 0 1px !important;
+  box-sizing: border-box !important;
+  flex-shrink: 0 !important;
+  opacity: 0.85 !important;
+}
+.bc-compass-sister-you .bc-compass-sister-band {
+  color: #b87a5a !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.10em !important;
+  text-transform: uppercase !important;
+  opacity: 1 !important;
+}
+.bc-compass-sister-extended .bc-compass-sister-band { opacity: 0.7 !important; }
+/* 双类名 (0,2,0) 压过全局 .page-content :is(button) (0,1,1),
+   否则 14px/16px padding 会破坏 YOU 卡的呼吸视觉对齐 */
+.bc-compass-sister-you.bc-compass-sister-you {
+  position: relative !important;
+  /* YOU 卡用 transform: scale() 突出, 不靠宽度 — 7 张卡等宽 */
+  margin-top: -8px !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  transform: scale(1.06) !important;
+  transform-origin: center bottom !important;
+  background:
+    radial-gradient(ellipse at center 25%, rgba(245,212,176,0.55) 0%, rgba(245,212,176,0.22) 45%, rgba(245,212,176,0) 75%),
+    linear-gradient(180deg, rgba(255,250,244,0.85) 0%, rgba(252,238,228,0.55) 100%) !important;
+  border: 1px solid rgba(184, 122, 90, 0.32) !important;
+  border-radius: 22px !important;
+  z-index: 3 !important;
+  padding-top: 32px !important;
+  padding-left: 6px !important;
+  padding-right: 6px !important;
+  padding-bottom: 22px !important;
+  box-shadow:
+    0 14px 36px -12px rgba(184, 96, 84, 0.45),
+    0 0 0 1px rgba(255, 250, 240, 0.6) inset,
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    0 0 0 0 rgba(184, 122, 90, 0.32) !important;
+  animation: bcCompassYouPulse 3.6s ease-in-out infinite, bcYouAura 3.6s ease-in-out infinite !important;
+  overflow: visible !important;
+}
+@keyframes bcYouAura {
+  0%, 100% {
+    box-shadow:
+      0 14px 36px -12px rgba(184, 96, 84, 0.45),
+      0 0 0 1px rgba(255, 250, 240, 0.6) inset,
+      inset 0 1px 0 rgba(255, 255, 255, 0.95),
+      0 0 0 0 rgba(184, 122, 90, 0.32);
+  }
+  50% {
+    box-shadow:
+      0 14px 36px -12px rgba(184, 96, 84, 0.45),
+      0 0 0 1px rgba(255, 250, 240, 0.6) inset,
+      inset 0 1px 0 rgba(255, 255, 255, 0.95),
+      0 0 0 8px rgba(245, 212, 176, 0);
+  }
+}
+.bc-compass-sister-you::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 6px !important;
+  left: 14% !important;
+  right: 14% !important;
+  height: 2px !important;
+  background: linear-gradient(90deg, rgba(184,122,90,0) 0%, rgba(184,122,90,0.7) 50%, rgba(184,122,90,0) 100%) !important;
+  border-radius: 0 0 2px 2px !important;
+  z-index: 3 !important;
+}
+.bc-compass-sister-you::after {
+  content: '✦' !important;
+  position: absolute !important;
+  top: -8px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  color: #b87a5a !important;
+  font-size: 0.7rem !important;
+  background: linear-gradient(180deg, #fffaf3 0%, #fbe8d4 100%) !important;
+  width: 18px !important;
+  height: 18px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 50% !important;
+  box-shadow: 0 2px 6px -2px rgba(184, 96, 84, 0.35) !important;
+  z-index: 4 !important;
+  line-height: 1 !important;
+}
+@keyframes bcCompassYouPulse {
+  0%, 100% {
+    box-shadow:
+      0 10px 32px -12px rgba(184, 96, 84, 0.40),
+      inset 0 1px 0 rgba(255, 255, 255, 0.85),
+      0 0 0 0 rgba(184, 122, 90, 0);
+  }
+  50% {
+    box-shadow:
+      0 10px 32px -12px rgba(184, 96, 84, 0.40),
+      inset 0 1px 0 rgba(255, 255, 255, 0.85),
+      0 0 0 8px rgba(245, 212, 176, 0.25);
+  }
+}
+.bc-compass-sisters::before {
+  content: '' !important;
+  position: absolute !important;
+  left: 8% !important;
+  right: 8% !important;
+  top: 70% !important;
+  height: 1px !important;
+  background: linear-gradient(90deg, rgba(184,122,90,0) 0%, rgba(184,122,90,0.18) 30%, rgba(184,122,90,0.18) 70%, rgba(184,122,90,0) 100%) !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+}
+/* ─── 联动增强: 卡间流线 — 7 张卡之间加微妙的渐变细线 ─── */
+.bc-compass-sister:not(:last-child)::after {
+  content: '' !important;
+  position: absolute !important;
+  top: 50% !important;
+  right: -3px !important;
+  width: 6px !important;
+  height: 1px !important;
+  background: linear-gradient(90deg, rgba(184,122,90,0.5) 0%, rgba(184,122,90,0) 100%) !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+  opacity: 0.65 !important;
+}
+.bc-compass-sister:not(:first-child)::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: -3px !important;
+  width: 6px !important;
+  height: 1px !important;
+  background: linear-gradient(90deg, rgba(184,122,90,0) 0%, rgba(184,122,90,0.5) 100%) !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+  opacity: 0.65 !important;
+}
+.bc-compass-summary {
+  text-align: center !important;
+  font-family: var(--font-serif) !important;
+  font-style: italic !important;
+  font-size: 0.82rem !important;
+  color: #a89080 !important;
+  margin-top: 20px !important;
+  padding: 0 12px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  letter-spacing: 0.01em !important;
+  line-height: 1.6 !important;
+}
+.bc-compass-empty-text { text-align: center !important; padding: 18px 0 4px !important; max-width: 520px !important; margin: 0 auto !important; }
+.bc-compass-empty-icon { display: inline-block !important; color: #d68b6c !important; font-size: 1.1rem !important; margin-right: 6px !important; opacity: 0.85 !important; }
+.bc-compass-empty-text p { font-family: var(--font-serif) !important; font-style: italic !important; font-weight: 400 !important; font-size: 0.92rem !important; line-height: 1.6 !important; color: #a89080 !important; margin: 0 !important; }
+.bc-compass-empty-text p em { font-style: italic !important; color: #b87a5a !important; font-weight: 600 !important; }
+.bc-compass-hidden { display: none !important; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   bc-compass-summary 子元素 — 优雅的高级感信息展示
+   设计目标:
+     1) "Equal breast volume" 卡片: 居中突出体积数据
+     2) Range 显示: 两端尺码 + 双箭头
+     3) "Return" 按钮: 真实可点击, hover 有微妙反馈
+     4) Tip 提示: 引导用户探索, 低调优雅
+   ═══════════════════════════════════════════════════════════════════════════ */
+.bc-compass-summary-equal {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  width: 100% !important;
+  max-width: 360px !important;
+  margin: 6px auto 14px !important;
+  padding: 16px 24px !important;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255, 250, 240, 0.9) 0%, rgba(252, 238, 228, 0.45) 100%) !important;
+  border: 1px solid rgba(184, 122, 90, 0.20) !important;
+  border-radius: 16px !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.7),
+    inset 0 -1px 0 rgba(184, 122, 90, 0.06),
+    0 6px 18px -10px rgba(184, 96, 84, 0.20) !important;
+  gap: 3px !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+.bc-compass-summary-equal::before,
+.bc-compass-summary-equal::after {
+  content: '' !important;
+  position: absolute !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  height: 1px !important;
+  width: 36px !important;
+  background: linear-gradient(90deg, transparent, rgba(184, 122, 90, 0.35), transparent) !important;
+}
+.bc-compass-summary-equal::before { top: 5px !important; }
+.bc-compass-summary-equal::after  { bottom: 5px !important; }
+.bc-compass-summary-equal-label {
+  font-family: var(--font-sans) !important;
+  font-size: 0.58rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.32em !important;
+  text-transform: uppercase !important;
+  color: #b89580 !important;
+  line-height: 1.4 !important;
+}
+.bc-compass-summary-equal-value {
+  font-family: var(--font-serif) !important;
+  font-style: italic !important;
+  font-weight: 700 !important;
+  font-size: 1.55rem !important;
+  background: linear-gradient(180deg, #8b4a3a 0%, #d68b6c 60%, #f5d4b0 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.01em !important;
+  margin: 2px 0 !important;
+}
+.bc-compass-summary-equal-value::after {
+  content: ' mL';
+  font-size: 0.55em;
+  font-weight: 500;
+  color: #b87a5a;
+  -webkit-text-fill-color: #b87a5a;
+  letter-spacing: 0.05em;
+  margin-left: 2px;
+}
+.bc-compass-summary-equal-hint {
+  font-family: var(--font-serif) !important;
+  font-style: italic !important;
+  font-size: 0.78rem !important;
+  color: #a89080 !important;
+  line-height: 1.45 !important;
+  margin-top: 2px !important;
+}
+
+.bc-compass-summary-range {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  gap: 12px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 auto 10px !important;
+  padding: 0 8px !important;
+  font-family: var(--font-serif) !important;
+  font-style: italic !important;
+  font-size: 0.86rem !important;
+  color: #8a6850 !important;
+  letter-spacing: 0.01em !important;
+  flex-wrap: wrap !important;
+}
+.bc-compass-summary-range > span:not(.bc-compass-summary-arrow) {
+  font-weight: 600 !important;
+  color: #6b4a3a !important;
+  letter-spacing: 0.02em !important;
+}
+.bc-compass-summary-arrow {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 28px !important;
+  height: 28px !important;
+  font-size: 0.95rem !important;
+  color: #b87a5a !important;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(245, 212, 176, 0.45) 0%, rgba(245, 212, 176, 0) 70%) !important;
+  border: 1px solid rgba(184, 122, 90, 0.25) !important;
+  border-radius: 50% !important;
+  flex-shrink: 0 !important;
+}
+
+.bc-compass-summary-tip {
+  font-family: var(--font-serif) !important;
+  font-style: italic !important;
+  font-size: 0.84rem !important;
+  color: #a89080 !important;
+  text-align: center !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 auto !important;
+  padding: 0 8px !important;
+  line-height: 1.55 !important;
+  letter-spacing: 0.005em !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+}
+.bc-compass-summary-tip::before {
+  content: '✦';
+  display: inline-block;
+  color: #b87a5a;
+  font-size: 0.9em;
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+
+.bc-compass-summary-back {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  margin: 6px auto 0 !important;
+  padding: 9px 20px !important;
+  font-family: var(--font-sans) !important;
+  font-size: 0.82rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.04em !important;
+  color: #8b4a3a !important;
+  background: linear-gradient(180deg, rgba(255,250,244,0.95) 0%, rgba(252,238,228,0.55) 100%) !important;
+  border: 1px solid rgba(184, 122, 90, 0.35) !important;
+  border-radius: 999px !important;
+  cursor: pointer !important;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease, color 0.22s ease !important;
+  box-shadow: 0 2px 8px -4px rgba(184, 96, 84, 0.18) !important;
+  white-space: nowrap !important;
+  gap: 6px !important;
+  -webkit-tap-highlight-color: transparent !important;
+  touch-action: manipulation !important;
+}
+.bc-compass-summary-back:hover {
+  transform: translateY(-1px) !important;
+  background: linear-gradient(180deg, #fff5ec 0%, #f8e3d0 100%) !important;
+  color: #6b3328 !important;
+  box-shadow:
+    0 6px 16px -6px rgba(184, 96, 84, 0.30),
+    inset 0 1px 0 rgba(255,255,255,0.6) !important;
+}
+.bc-compass-summary-back:active {
+  transform: translateY(0) !important;
+}
+.bc-compass-summary-back:focus-visible {
+  outline: 2px solid #b87a5a !important;
+  outline-offset: 2px !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   装饰元素 — 顶部装饰线 (精密仪器)
+   设计目标: 在卡片顶部加一条细分隔线, 提升高级感
+   ═══════════════════════════════════════════════════════════════════════════ */
+.bc-compass-instrument::before {
+  content: '';
+  display: block !important;
+  width: 56px !important;
+  height: 1px !important;
+  margin: 0 auto 18px !important;
+  background: linear-gradient(90deg, rgba(184,122,90,0) 0%, rgba(184,122,90,0.5) 50%, rgba(184,122,90,0) 100%) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   中宽屏 (≤ 1100px) — 历史容器被压缩到 ~600px, 用更紧凑的卡片排版
+   7 张卡紧凑排列, 字号缩小但保持可读性
+   ═══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 1100px) {
+  .bc-compass-sisters {
+    grid-template-columns: repeat(7, minmax(0, 1fr)) !important;
+    gap: 4px !important;
+  }
+  .bc-compass-sister.bc-compass-sister { padding: 8px 2px 10px !important; }
+  .bc-compass-sister-size { font-size: 1.1rem !important; }
+  .bc-compass-sister-you .bc-compass-sister-size { font-size: 1.6rem !important; }
+  .bc-compass-sister-band { font-size: 0.6rem !important; letter-spacing: 0.04em !important; }
+  .bc-compass-sister-volume { font-size: 0.78rem !important; }
+  .bc-compass-sister-conversion { font-size: 0.5rem !important; gap: 3px !important; }
+  .bc-compass-sister-region { padding: 2px 4px !important; }
+  .bc-compass-sister-region-tag { font-size: 0.5rem !important; }
+  .bc-compass-sister-region-num { font-size: 0.72rem !important; }
+  .bc-compass-sister-comfort { font-size: 0.62rem !important; padding: 2px 7px !important; }
+  .bc-compass-sister-original { font-size: 0.55rem !important; padding: 1px 5px !important; }
+  .bc-compass-sister-pointer { font-size: 0.65rem !important; }
+  .bc-compass-sister-role { font-size: 0.5rem !important; letter-spacing: 0.2em !important; }
+}
+
+@media (max-width: 820px) and (min-width: 541px) {
+  .bc-compass-sisters {
+    grid-template-columns: repeat(7, minmax(0, 1fr)) !important;
+    gap: 3px !important;
+  }
+  .bc-compass-sister-size { font-size: 1.05rem !important; }
+  .bc-compass-sister-you .bc-compass-sister-size { font-size: 1.45rem !important; }
+  .bc-compass-sister-band { font-size: 0.5rem !important; letter-spacing: 0.1em !important; }
+  .bc-compass-sister-volume { font-size: 0.78rem !important; }
+  .bc-compass-sister-region-tag { font-size: 0.42rem !important; }
+  .bc-compass-sister-region-num { font-size: 0.62rem !important; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   窄屏 (≤ 540px) — 卡片改为单列垂直堆叠
+   关键: 此规则必须在 ≤1100px 之后, 否则 7 列布局会覆盖
+   ═══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 540px) {
+  .bc-compass-sisters {
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+    padding: 0 4px !important;
+  }
+  /* 单列卡: 顶部 = role + check, 中部 = size, 下部 = volume/band/conversion/comfort */
+  .bc-compass-sister.bc-compass-sister {
+    display: grid !important;
+    grid-template-columns: 1fr auto !important;
+    grid-template-rows: auto auto auto auto auto !important;
+    align-items: center !important;
+    padding: 10px 12px !important;
+    text-align: left !important;
+    gap: 3px 8px !important;
+    border-radius: 10px !important;
+    min-height: 0 !important;
+  }
+  /* role 标签固定在顶部左侧 — 不再悬浮在中间 */
+  .bc-compass-sister-role {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    align-self: center !important;
+    writing-mode: horizontal-tb !important;
+    font-size: 0.46rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.16em !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    text-align: left !important;
+    color: #b89580 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  /* + 按钮固定在顶部右侧 */
+  .bc-compass-sister-check {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    align-self: center !important;
+    width: 24px !important;
+    height: 24px !important;
+    font-size: 0.85rem !important;
+    margin: 0 !important;
+  }
+  /* size 显示在第二行, 突出大字号 */
+  .bc-compass-sister-size {
+    grid-column: 1 / -1 !important;
+    grid-row: 2 !important;
+    font-size: 1.2rem !important;
+    font-weight: 800 !important;
+    margin: 2px 0 4px !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+  .bc-compass-sister-you .bc-compass-sister-size {
+    font-size: 1.5rem !important;
+    margin: 2px 0 4px !important;
+  }
+  .bc-compass-sister-pointer {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+    align-self: center !important;
+    font-size: 0.7rem !important;
+    color: #b87a5a !important;
+    margin: 0 4px 0 0 !important;
+    display: inline-block !important;
+    text-align: right !important;
+  }
+  /* volume 与 band 同行, 居中显示 */
+  .bc-compass-sister-volume,
+  .bc-compass-sister-band {
+    grid-column: 1 / -1 !important;
+    grid-row: 3 !important;
+    font-size: 0.78rem !important;
+    display: inline-block !important;
+    text-align: center !important;
+    margin: 0 !important;
+  }
+  .bc-compass-sister-volume { margin-right: 6px !important; }
+  /* conversion 居中显示 */
+  .bc-compass-sister-conversion {
+    grid-column: 1 / -1 !important;
+    grid-row: 4 !important;
+    justify-content: center !important;
+    margin: 4px 0 0 !important;
+    gap: 6px !important;
+    font-size: 0.6rem !important;
+  }
+  .bc-compass-sister-region {
+    padding: 2px 6px !important;
+    font-size: 0.6rem !important;
+  }
+  .bc-compass-sister-region-num { font-size: 0.7rem !important; }
+  /* comfort 居中显示 */
+  .bc-compass-sister-comfort,
+  .bc-compass-sister-original {
+    grid-column: 1 / -1 !important;
+    grid-row: 5 !important;
+    font-size: 0.6rem !important;
+    justify-self: center !important;
+    margin: 4px 0 0 !important;
+  }
+  .bc-compass-sister-you.bc-compass-sister-you {
+    margin-top: 0 !important;
+    padding: 10px 12px !important;
+  }
+  .bc-compass-sister-you::before,
+  .bc-compass-sister-you::after { display: none !important; }
+  .bc-compass-sister-you .bc-compass-sister-pointer {
+    display: block !important;
+  }
+  .bc-compass-sister-you .bc-compass-sister-check {
+    display: none !important;
+  }
+  .bc-compass-summary-equal { max-width: 100% !important; padding: 12px 16px !important; }
+  .bc-compass-summary-equal-value { font-size: 1.32rem !important; }
+  .bc-compass-summary-equal-label { font-size: 0.55rem !important; }
+  .bc-compass-summary-equal-hint { font-size: 0.72rem !important; }
+  .bc-compass-summary-range { font-size: 0.78rem !important; gap: 6px !important; }
+  .bc-compass-summary-range > span:not(.bc-compass-summary-arrow) {
+    font-size: 0.85em;
+  }
+  .bc-compass-summary-arrow { width: 22px !important; height: 22px !important; font-size: 0.82rem !important; }
+  .bc-compass-summary-back { font-size: 0.76rem !important; padding: 8px 16px !important; max-width: 100% !important; }
+  .bc-compass-summary-tip { font-size: 0.78rem !important; }
+  .bc-compass-instrument::before { width: 40px !important; margin-bottom: 14px !important; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   极窄屏 (≤ 380px) — 进一步缩小, 保证可读
+   ═══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 380px) {
+  .bc-compass-summary-equal-value { font-size: 1.2rem !important; }
+  .bc-compass-summary-range { font-size: 0.74rem !important; }
+  .bc-compass-summary-back { font-size: 0.72rem !important; padding: 7px 14px !important; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Task 1: 空态预览卡 — 7 张纯文字卡 + 浮动动画
+   ═══════════════════════════════════════════════════════════════════════════ */
+.bc-compass-preview-card {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 4px !important;
+  padding: 7px 10px !important;
+  border-radius: 10px !important;
+  border: 1px solid rgba(184, 122, 90, 0.18) !important;
+  background: rgba(255, 250, 244, 0.6) !important;
+  color: #8a6850 !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  white-space: nowrap !important;
+  font-family: var(--font-serif) !important;
+  font-style: italic !important;
+  font-weight: 700 !important;
+  font-size: 0.95rem !important;
+  letter-spacing: -0.01em !important;
+  text-align: center !important;
+}
+.bc-compass-preview-card.bc-compass-preview-sister {
+  color: #c89890 !important;
+  font-size: 1.05rem !important;
+  border-color: rgba(200, 152, 144, 0.32) !important;
+  background: rgba(255, 244, 240, 0.7) !important;
+}
+.bc-compass-preview-card.bc-compass-preview-you {
+  font-size: 1.3rem !important;
+  background:
+    radial-gradient(ellipse at center 25%, rgba(245, 212, 176, 0.55) 0%, rgba(245, 212, 176, 0.18) 70%),
+    linear-gradient(180deg, rgba(255, 250, 244, 0.95) 0%, rgba(252, 238, 228, 0.7) 100%) !important;
+  border: 1px solid rgba(184, 122, 90, 0.45) !important;
+  color: #8b4a3a !important;
+  box-shadow:
+    0 6px 16px -6px rgba(184, 96, 84, 0.30),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7) !important;
+}
+.bc-compass-preview-card.bc-compass-preview-extended {
+  opacity: 0.62 !important;
+  font-size: 0.82rem !important;
+}
+.bc-compass-preview-mini-lbl {
+  font: inherit !important;
+  color: inherit !important;
+  letter-spacing: inherit !important;
+  display: inline-block !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  text-overflow: clip !important;
+}
+.bc-compass-preview-card:nth-child(1) { animation-delay: 0s !important; }
+.bc-compass-preview-card:nth-child(2) { animation-delay: -0.4s !important; }
+.bc-compass-preview-card:nth-child(3) { animation-delay: -0.8s !important; }
+.bc-compass-preview-card:nth-child(4) { animation-delay: -1.2s !important; }
+.bc-compass-preview-card:nth-child(5) { animation-delay: -1.6s !important; }
+.bc-compass-preview-card:nth-child(6) { animation-delay: -2.0s !important; }
+.bc-compass-preview-card:nth-child(7) { animation-delay: -2.4s !important; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Task 2: 激活态卡片 — 2 区域副标签 (US + EU 核心换算) + comfort 文字
+   关键: 整张卡换算行居中铺满, + 按钮已移到右下角不再冲突
+   设计: 换算只显示底围数字 (28 / 60), 杯字母从卡顶推断
+   ═══════════════════════════════════════════════════════════════════════════ */
+.bc-compass-sister-conversion {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  align-items: stretch !important;
+  justify-content: center !important;
+  gap: 4px !important;
+  margin-top: 6px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 0 1px !important;
+  box-sizing: border-box !important;
+  flex-shrink: 0 !important;
+  overflow: hidden !important;
+  min-width: 0 !important;
+}
+.bc-compass-sister-region {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 2px !important;
+  font-family: var(--font-sans) !important;
+  font-size: 0.46rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0 !important;
+  color: #8a6850 !important;
+  padding: 1px 3px !important;
+  border: 1px solid rgba(184, 122, 90, 0.24) !important;
+  border-radius: 3px !important;
+  background: rgba(255, 250, 244, 0.55) !important;
+  line-height: 1.15 !important;
+  white-space: nowrap !important;
+  min-width: 0 !important;
+  flex: 1 1 0 !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  text-overflow: clip !important;
+}
+.bc-compass-sister-region-num {
+  font-size: 0.66rem !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.01em !important;
+  color: #6b3328 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: clip !important;
+  min-width: 0 !important;
+  flex-shrink: 1 !important;
+}
+.bc-compass-sister-region-tag {
+  font-style: normal !important;
+  font-weight: 700 !important;
+  font-size: 0.46rem !important;
+  letter-spacing: 0.04em !important;
+  color: #a89588 !important;
+  text-transform: uppercase !important;
+  flex-shrink: 0 !important;
+  opacity: 0.85 !important;
+  min-width: 0 !important;
+}
+.bc-compass-sister-region.bc-compass-sister-region-us {
+  background: linear-gradient(180deg, rgba(245,212,176,0.45) 0%, rgba(255,250,244,0.65) 100%) !important;
+  border-color: rgba(184, 122, 90, 0.30) !important;
+}
+.bc-compass-sister-you .bc-compass-sister-region {
+  background: linear-gradient(180deg, rgba(255, 245, 232, 0.95) 0%, rgba(252, 238, 228, 0.65) 100%) !important;
+  border-color: rgba(184, 122, 90, 0.32) !important;
+  font-weight: 700 !important;
+}
+.bc-compass-sister-you .bc-compass-sister-region.bc-compass-sister-region-us {
+  background: linear-gradient(180deg, rgba(255,212,168,0.65) 0%, rgba(252,238,228,0.85) 100%) !important;
+  border-color: rgba(184, 96, 84, 0.40) !important;
+}
+.bc-compass-sister-extended .bc-compass-sister-region {
+  opacity: 0.65 !important;
+}
+.bc-compass-sister-comfort {
+  display: inline-block !important;
+  margin-top: 3px !important;
+  font-family: var(--font-sans) !important;
+  font-style: normal !important;
+  font-size: 0.54rem !important;
+  font-weight: 600 !important;
+  color: #b89580 !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase !important;
+  opacity: 0.92 !important;
+  white-space: nowrap !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  padding: 2px 7px !important;
+  border: 1px solid rgba(184, 122, 90, 0.20) !important;
+  border-radius: 999px !important;
+  background: rgba(255, 250, 244, 0.55) !important;
+  line-height: 1.2 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   切换 primary 平滑过渡 — fade-out / fade-in + YOU 卡微弹
+   ═══════════════════════════════════════════════════════════════════════════ */
+.bc-compass-sisters {
+  transition: opacity 0.18s ease, transform 0.18s ease !important;
+}
+.bc-compass-sisters-switching {
+  opacity: 0.18 !important;
+  transform: scale(0.985) translateY(-2px) !important;
+  pointer-events: none !important;
+}
+.bc-compass-sisters-entered {
+  animation: bcSistersEntered 0.45s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+@keyframes bcSistersEntered {
+  0%   { opacity: 0; transform: translateY(8px) scale(0.98); }
+  60%  { opacity: 1; transform: translateY(-2px) scale(1.012); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.bc-compass-sister {
+  transition:
+    transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.32s ease,
+    box-shadow 0.32s ease,
+    border-color 0.32s ease,
+    opacity 0.32s ease !important;
+}
+.bc-compass-sister-you {
+  transition:
+    transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.32s ease,
+    background 0.32s ease,
+    border-color 0.32s ease !important;
+}
+.bc-compass-sister-you-pop {
+  animation: bcYouPop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+@keyframes bcYouPop {
+  0%   { transform: scale(0.94) translateY(6px); }
+  40%  { transform: scale(1.06) translateY(-3px); }
+  70%  { transform: scale(0.99) translateY(1px); }
+  100% { transform: scale(1) translateY(0); }
+}
+/* 序列入场: 7 张依次浮入 */
+.bc-compass-sisters-entered .bc-compass-sister {
+  animation: bcSisterIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) backwards !important;
+}
+.bc-compass-sisters-entered .bc-compass-sister:nth-child(1) { animation-delay: 0.04s !important; }
+.bc-compass-sisters-entered .bc-compass-sister:nth-child(2) { animation-delay: 0.10s !important; }
+.bc-compass-sisters-entered .bc-compass-sister:nth-child(3) { animation-delay: 0.16s !important; }
+.bc-compass-sisters-entered .bc-compass-sister:nth-child(4) { animation-delay: 0.22s !important; }
+.bc-compass-sisters-entered .bc-compass-sister:nth-child(5) { animation-delay: 0.28s !important; }
+.bc-compass-sisters-entered .bc-compass-sister:nth-child(6) { animation-delay: 0.34s !important; }
+.bc-compass-sisters-entered .bc-compass-sister:nth-child(7) { animation-delay: 0.40s !important; }
+@keyframes bcSisterIn {
+  from { opacity: 0; transform: translateY(8px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Task 4: 对比模式 — ✓ 按钮 + 顶部对比卡
+   位置: 右上角 (top-right) — 避免遮挡下方的换算标签/体积/底围数据
+   尺寸: 18×18 — 紧凑, 不抢戏
+   关键: 移除了 bottom: 5px 改为 top: 4px, 避免与 conversion region (US 30 EU 65) 视觉重叠
+   ═══════════════════════════════════════════════════════════════════════════ */
+.bc-compass-sister-check {
+  position: absolute !important;
+  top: 4px !important;
+  right: 4px !important;
+  width: 18px !important;
+  height: 18px !important;
+  border-radius: 50% !important;
+  background: rgba(255, 250, 244, 0.85) !important;
+  border: 1px solid rgba(184, 122, 90, 0.30) !important;
+  color: #8b4a3a !important;
+  font-size: 0.78rem !important;
+  line-height: 1 !important;
+  font-weight: 700 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  opacity: 0 !important;
+  transform: scale(0.85) !important;
+  transition: opacity 0.22s ease, transform 0.22s ease, background 0.22s ease, color 0.22s ease !important;
+  z-index: 5 !important;
+  -webkit-tap-highlight-color: transparent !important;
+  /* 关键: + 按钮始终可见 (低透明), hover 时变明显 — 引导用户知道可以加入对比 */
+  pointer-events: auto !important;
+  opacity: 0.32 !important;
+  transform: scale(0.88) !important;
+}
+.bc-compass-sister:hover .bc-compass-sister-check,
+.bc-compass-sister:focus-within .bc-compass-sister-check,
+.bc-compass-sister-checked .bc-compass-sister-check {
+  opacity: 1 !important;
+  transform: scale(1) !important;
+}
+.bc-compass-sister-checked {
+  outline: 2px solid #b87a5a !important;
+  outline-offset: 1px !important;
+}
+.bc-compass-sister-checked .bc-compass-sister-check {
+  background: linear-gradient(180deg, #b87a5a 0%, #8b4a3a 100%) !important;
+  color: #fffaf3 !important;
+  border-color: rgba(184, 96, 84, 0.50) !important;
+}
+.bc-compass-sister-check:hover {
+  background: linear-gradient(180deg, #f5d4b0 0%, #e8c0a0 100%) !important;
+  border-color: rgba(184, 122, 90, 0.45) !important;
+}
+.bc-compass-sister-check:focus-visible {
+  outline: 2px solid #b87a5a !important;
+  outline-offset: 2px !important;
+}
+
+.bc-compass-compare {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 auto 14px !important;
+  animation: bcCompareIn 0.32s ease-out !important;
+}
+.bc-compass-compare[hidden] { display: none !important; }
+.bc-compass-compare.bc-compass-hidden { display: none !important; }
+@keyframes bcCompareIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.bc-compass-compare-card {
+  background:
+    linear-gradient(180deg, rgba(255, 247, 242, 0.95) 0%, rgba(252, 238, 228, 0.55) 100%) !important;
+  border: 1px solid rgba(184, 122, 90, 0.28) !important;
+  border-radius: 14px !important;
+  padding: 14px 18px 12px !important;
+  box-shadow:
+    0 8px 22px -10px rgba(184, 96, 84, 0.20),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6) !important;
+  position: relative !important;
+  text-align: center !important;
+}
+.bc-compass-compare-eyebrow {
+  font-family: var(--font-sans) !important;
+  font-size: 0.55rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.30em !important;
+  text-transform: uppercase !important;
+  color: #b87a5a !important;
+  margin-bottom: 6px !important;
+}
+.bc-compass-compare-pair {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 14px !important;
+  margin-bottom: 12px !important;
+  font-family: var(--font-serif) !important;
+  font-style: italic !important;
+  font-weight: 700 !important;
+  font-size: 1.4rem !important;
+  color: #6b3328 !important;
+}
+.bc-compass-compare-vs {
+  font-style: normal !important;
+  font-size: 0.85rem !important;
+  font-weight: 500 !important;
+  color: #a89588 !important;
+  letter-spacing: 0.15em !important;
+  text-transform: uppercase !important;
+}
+.bc-compass-compare-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 6px 14px !important;
+  font-family: var(--font-sans) !important;
+  font-size: 0.74rem !important;
+  color: #6b4a3a !important;
+  text-align: left !important;
+  max-width: 540px !important;
+  margin: 0 auto 10px !important;
+}
+.bc-compass-compare-row {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: baseline !important;
+  gap: 8px !important;
+  padding: 4px 0 !important;
+  border-bottom: 1px dashed rgba(184, 122, 90, 0.18) !important;
+}
+.bc-compass-compare-row span { color: #a89588 !important; letter-spacing: 0.05em !important; }
+.bc-compass-compare-row strong { color: #6b3328 !important; font-weight: 700 !important; }
+.bc-compass-compare-row-wide {
+  grid-column: 1 / -1 !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+  gap: 2px !important;
+  padding: 6px 0 0 !important;
+  border-bottom: 0 !important;
+}
+.bc-compass-compare-row-wide em {
+  font-style: italic !important;
+  font-family: var(--font-serif) !important;
+  color: #6b3328 !important;
+  font-size: 0.85rem !important;
+  line-height: 1.4 !important;
+}
+.bc-compass-compare-close {
+  position: absolute !important;
+  top: 8px !important;
+  right: 10px !important;
+  font-family: var(--font-sans) !important;
+  font-size: 0.65rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.10em !important;
+  text-transform: uppercase !important;
+  color: #a89588 !important;
+  background: transparent !important;
+  border: 0 !important;
+  cursor: pointer !important;
+  padding: 2px 6px !important;
+  border-radius: 999px !important;
+  transition: color 0.22s ease, background 0.22s ease !important;
+}
+.bc-compass-compare-close:hover { color: #8b4a3a !important; background: rgba(184,122,90,0.10) !important; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Task 5: 区域换算条
+   ═══════════════════════════════════════════════════════════════════════════ */
+.bc-compass-conversion {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 auto 22px !important;
+  padding: 14px 14px 16px !important;
+  border-top: 1px solid rgba(184, 122, 90, 0.15) !important;
+  border-bottom: 1px solid rgba(184, 122, 90, 0.15) !important;
+  background:
+    linear-gradient(180deg, rgba(245, 212, 176, 0.10) 0%, rgba(255, 250, 244, 0.20) 100%) !important;
+  position: relative !important;
+  border-radius: 8px 8px 0 0 !important;
+}
+.bc-compass-conversion::before {
+  content: '' !important;
+  position: absolute !important;
+  left: 0 !important; right: 0 !important; top: -1px !important;
+  height: 1px !important;
+  background: linear-gradient(90deg, rgba(184,122,90,0) 0%, rgba(184,122,90,0.45) 50%, rgba(184,122,90,0) 100%) !important;
+}
+.bc-compass-conversion-label {
+  font-family: var(--font-sans) !important;
+  font-size: 0.52rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.30em !important;
+  text-transform: uppercase !important;
+  color: #b87a5a !important;
+  margin-right: 4px !important;
+}
+.bc-compass-conversion-region {
+  display: inline-flex !important;
+  align-items: baseline !important;
+  gap: 4px !important;
+  font-family: var(--font-serif) !important;
+  font-style: italic !important;
+  font-weight: 700 !important;
+  font-size: 0.78rem !important;
+  color: #6b3328 !important;
+  line-height: 1 !important;
+}
+.bc-compass-conversion-region i {
+  font-family: var(--font-sans) !important;
+  font-style: normal !important;
+  font-weight: 600 !important;
+  font-size: 0.48rem !important;
+  letter-spacing: 0.30em !important;
+  text-transform: uppercase !important;
+  color: #a89588 !important;
+  margin-right: -1px !important;
+}
+.bc-compass-conversion-region b {
+  font-weight: 700 !important;
+  background: linear-gradient(180deg, #8b4a3a 0%, #d68b6c 60%, #f5d4b0 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  font-size: 0.95rem !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Task 6: 行动召唤按钮 — Find your fit + Save my size
+   ═══════════════════════════════════════════════════════════════════════════ */
+.bc-compass-actions {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  margin-top: 16px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+/* 单按钮时: 居中 + 限制最大宽度, 视觉更紧凑 */
+.bc-compass-actions-single {
+  justify-content: center !important;
+  gap: 0 !important;
+}
+.bc-compass-actions-single .bc-compass-action {
+  min-width: 0 !important;
+  max-width: 280px !important;
+  flex: 0 0 auto !important;
+}
+.bc-compass-action {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  padding: 10px 22px !important;
+  font-family: var(--font-sans) !important;
+  font-size: 0.74rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  border-radius: 999px !important;
+  cursor: pointer !important;
+  text-decoration: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  transition: transform 0.32s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.32s ease, filter 0.32s ease, background 0.32s ease !important;
+  position: relative !important;
+  white-space: nowrap !important;
+  border: 1px solid transparent !important;
+}
+.bc-compass-action-primary {
+  background: linear-gradient(180deg, #b87a5a 0%, #8b4a3a 100%) !important;
+  color: #fffaf3 !important;
+  border-color: rgba(184, 96, 84, 0.4) !important;
+  box-shadow:
+    0 6px 18px -8px rgba(184, 96, 84, 0.55),
+    inset 0 1px 0 rgba(255, 250, 240, 0.30) !important;
+}
+.bc-compass-action-primary::before {
+  content: '' !important;
+  position: absolute !important;
+  inset: 0 !important;
+  border-radius: 999px !important;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.30) 0%, transparent 50%) !important;
+  pointer-events: none !important;
+}
+.bc-compass-action-primary > * { position: relative !important; z-index: 1 !important; }
+.bc-compass-action-primary:hover {
+  transform: translateY(-2px) !important;
+  filter: brightness(1.06) !important;
+  box-shadow:
+    0 10px 24px -8px rgba(184, 96, 84, 0.65),
+    inset 0 1px 0 rgba(255, 250, 240, 0.40) !important;
+}
+.bc-compass-action-arrow {
+  font-size: 0.95rem !important;
+  transition: transform 0.32s ease !important;
+}
+.bc-compass-action-primary:hover .bc-compass-action-arrow {
+  transform: translateX(3px) !important;
+}
+.bc-compass-action-secondary {
+  background: linear-gradient(180deg, rgba(255,250,244,0.95) 0%, rgba(252,238,228,0.55) 100%) !important;
+  color: #8b4a3a !important;
+  border-color: rgba(184, 122, 90, 0.35) !important;
+  box-shadow: 0 2px 8px -4px rgba(184, 96, 84, 0.18) !important;
+}
+.bc-compass-action-secondary:hover {
+  transform: translateY(-1px) !important;
+  background: linear-gradient(180deg, #fff5ec 0%, #f8e3d0 100%) !important;
+  color: #6b3328 !important;
+  box-shadow:
+    0 6px 16px -6px rgba(184, 96, 84, 0.30),
+    inset 0 1px 0 rgba(255,255,255,0.6) !important;
+}
+.bc-compass-action-icon {
+  font-style: normal !important;
+  font-size: 0.95rem !important;
+  line-height: 1 !important;
+}
+.bc-compass-action:focus-visible {
+  outline: 2px solid #b87a5a !important;
+  outline-offset: 2px !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Task 7: Toast 提示
+   ═══════════════════════════════════════════════════════════════════════════ */
+.bc-compass-toast {
+  position: fixed !important;
+  bottom: 24px !important;
+  left: 50% !important;
+  transform: translateX(-50%) translateY(8px) !important;
+  background: linear-gradient(180deg, #6b3328 0%, #4a1f17 100%) !important;
+  color: #fff5ec !important;
+  font-family: var(--font-sans) !important;
+  font-size: 0.78rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.04em !important;
+  padding: 10px 20px !important;
+  border-radius: 999px !important;
+  box-shadow:
+    0 10px 28px -8px rgba(107, 51, 40, 0.45),
+    inset 0 1px 0 rgba(255, 245, 232, 0.20) !important;
+  opacity: 0 !important;
+  transition: opacity 0.32s ease, transform 0.32s cubic-bezier(0.2, 0.7, 0.2, 1) !important;
+  pointer-events: none !important;
+  z-index: 9999 !important;
+  max-width: calc(100vw - 32px) !important;
+  text-align: center !important;
+}
+.bc-compass-toast.bc-compass-toast-show {
+  opacity: 1 !important;
+  transform: translateX(-50%) translateY(0) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Task 8: 响应式断点
+   ═══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 540px) {
+  .bc-compass-conversion { gap: 6px !important; padding: 8px 8px !important; }
+  .bc-compass-conversion-region { font-size: 0.62rem !important; }
+  .bc-compass-conversion-region b { font-size: 0.78rem !important; }
+  .bc-compass-sister-conversion { gap: 2px !important; }
+  .bc-compass-sister-region { font-size: 0.46rem !important; padding: 1px 4px !important; }
+  .bc-compass-sister-region i { font-size: 0.4rem !important; }
+  .bc-compass-compare-pair { font-size: 1.1rem !important; }
+  .bc-compass-compare-grid { font-size: 0.7rem !important; }
+  .bc-compass-actions { gap: 8px !important; }
+  .bc-compass-action { font-size: 0.68rem !important; padding: 9px 18px !important; letter-spacing: 0.16em !important; }
+  .bc-compass-sister-check { opacity: 1 !important; transform: scale(0.85) !important; }
+  .bc-compass-sister-checked .bc-compass-sister-check { transform: scale(1) !important; }
+}
+@media (max-width: 380px) {
+  .bc-compass-conversion-label { display: none !important; }
+  .bc-compass-conversion { gap: 4px !important; padding: 6px 4px !important; }
+  .bc-compass-compare-card { padding: 12px 12px 10px !important; }
+  .bc-compass-compare-pair { font-size: 1.0rem !important; gap: 8px !important; }
+  .bc-compass-compare-grid { grid-template-columns: 1fr !important; }
+  .bc-compass-actions { flex-direction: column !important; gap: 6px !important; }
+  .bc-compass-action { width: 100% !important; max-width: 240px !important; }
+}
+

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head><link rel="stylesheet" href="/main.css"/>
+  <head><link rel="stylesheet" href="/main.css?v=20260726v9"/>
     
+    <script src="/assets/bra-calculator-main.js?v=20260726single" defer></script>
     
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-5SB8FNFYDV"></script>
     <script>
@@ -25,8 +26,7 @@
     <link rel="apple-touch-icon" sizes="192x192" href="/android-chrome-192x192.png"/>
     <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
     <link rel="manifest" href="/site.webmanifest"/>
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
+
     <link rel="alternate" hreflang="x-default" href="https://breastcalculator.com/"/>
     <title>
       Accurate Bra Size Calculator: Count &amp; Find Your True Cup
@@ -120,9 +120,10 @@
         }
       }
     </script>
-    <script src="/assets/bra-calculator.js?v=20260610a" defer></script>
-    <script src="/assets/bra-calculator-enhance.js?v=20260610a" defer></script>
-    <script src="/assets/bra-calculator-tip.js?v=20260610a" defer></script>
+    <script src="/assets/bra-calculator.js?v=20260801" defer></script>
+    <script src="/assets/bra-calculator-main.js?v=20260726single" defer></script>
+    <script src="/assets/bra-calculator-actions.js?v=20260801" defer></script>
+    <script src="/assets/bra-calculator-tip.js?v=20260801" defer></script>
     <script src="/common.js?v=91b7f18e" defer></script>
     <link rel="alternate" hreflang="en" href="https://breastcalculator.com/"/>
     <script type="application/ld+json">
@@ -222,11 +223,13 @@
   
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7388117485013143" crossorigin="anonymous"></script></head>
   <body>
-    <nav class="navbar" role="navigation" aria-label="Main navigation">
+<a class="skip-to-content" href="#main-content">Skip to main content</a>
+    <nav class="navbar classic-navbar" role="navigation" aria-label="Main navigation">
       <div class="nav-inner">
         <div class="nav-top">
           <a href="/" class="nav-logo">
-            BREAST CALCULATOR
+            <img src="/favicon.ico" alt="" class="nav-logo-img" width="28" height="28" />
+            <span>BREAST CALCULATOR</span>
           </a>
           <button type="button" class="nav-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
             <span></span>
@@ -234,6 +237,7 @@
             <span></span>
           </button>
         </div>
+
         <ul class="nav-categories">
           <li class="nav-category">
             <span class="nav-label" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">
@@ -327,12 +331,6 @@
               <a href="/bra-size-guide/" role="menuitem">
                 Bra Size Guides
               </a>
-              <a href="/bra-size-guide/h-cup/" role="menuitem">
-                H Cup Bra Guide
-              </a>
-              <a href="/bra-size-guide/compare/breast-size-chart/" role="menuitem">
-                Visual Size Chart
-              </a>
               <a href="/bra-size-guide/compare/" role="menuitem">
                 Bra Size Comparisons
               </a>
@@ -351,16 +349,10 @@
               <a href="/best-wireless-bras/" role="menuitem">
                 Best Wireless Bras
               </a>
-              <a href="/guide/no-underwire-bras/" role="menuitem">
-                No-Underwire Bras
-              </a>
-              <a href="/guide/comfortable-wireless-bras/" role="menuitem">
-                Comfortable Wireless Bras
-              </a>
             </div>
           </li>
         </ul>
-        <div class="nav-cta">
+        <div class="nav-cta" hidden style="display:none">
           <a href="/bra-size-calculator/">
             Calculate Size
           </a>
@@ -558,10 +550,15 @@
         © 2026 Breast Calculator
       </div>
     </div>
-    <main>
+    <main id="main-content">
       <section class="hero">
-        <h1>
-          The Most Accurate Bra Size Calculator
+        <h1 class="classic-h1">
+          <span class="classic-eyebrow">Science · Fit · Your Privacy Held</span>
+          <span class="classic-brand-row">
+            <img src="/favicon.ico" alt="" class="classic-brand-icon" width="36" height="36"/>
+            <span class="classic-brand-name">Breast Calculator</span>
+          </span>
+          <span class="classic-h1-sub">Bra Size Calculator</span>
         </h1>
         <p>
           Use our free bra calculator to calculate breast size and find your bra size in seconds. Accurate, private, and backed by science — measure your band and bust at home to get US, UK, EU, FR, and AU sizing. No registration needed.
@@ -572,7 +569,7 @@
           </span>
         </div>
         <div class="bra-calculator embedded">
-          <form class="calc-form">
+          <form class="calc-form" id="size-form" onsubmit="return false;" novalidate>
             <div class="calc-fields">
               <div class="calc-field">
                 <label for="underbust">
@@ -585,7 +582,7 @@
                   </button>
                 </div>
                 <p class="field-hint">
-                  Measure snugly around your ribcage, directly under your breasts.
+                  Measure snugly around your ribcage, directly under your breasts. Range: 20–90″ (50–230 cm). RST/corsetry bands 60–72″ fully supported. For O-T cups, brands like Comexim and Ulla Dessous.
                 </p>
               </div>
               <div class="calc-field">
@@ -593,14 +590,29 @@
                   Bust (Fullest Part)
                 </label>
                 <div class="input-with-tip">
-                  <input id="bust" type="number" step="0.1" min="20" max="70" placeholder="e.g. 36" required="" value=""/>
+                  <input id="bust" type="number" step="0.1" min="20" max="100" placeholder="e.g. 36" required="" value=""/>
                   <button type="button" class="measure-tip" title="How to measure bust">
                     ?
                   </button>
                 </div>
                 <p class="field-hint">
-                  Measure around the fullest part of your bust, keeping the tape parallel to the floor.
+                  Measure around the fullest part of your bust, keeping the tape parallel to the floor. Range: 20–110″ (50–280 cm). All cup sizes up to T supported.
                 </p>
+              </div>
+              <div class="calc-field bc-brand-field">
+                <span class="calc-field-eyebrow">
+                  <span class="calc-field-eyebrow-dot" aria-hidden="true"></span>
+                  Breast Brand <span class="calc-field-eyebrow-sub">tailored fit</span>
+                </span>
+                <label for="brand">
+                  Brand <span class="calc-field-optional">(optional)</span>
+                </label>
+                <select id="brand" name="brand">
+                  <option value="">
+                    — Select a brand for tailored fit —
+                  </option>
+                </select>
+                <div class="field-hint" id="brand-hint">Sizing varies by brand. Pick yours for a more accurate size.</div>
               </div>
               <div class="calc-field">
                 <label for="unit">
@@ -617,59 +629,120 @@
               </div>
             </div>
             <div class="calc-actions">
-              <button type="submit" class="btn-primary">
+              <button type="submit" class="btn-primary" id="calc-submit-btn">
                 Calculate My Bra Size
               </button>
+              <div class="bc-live-preview" id="bc-live-preview" aria-live="polite" aria-atomic="true" hidden>
+                <span class="bc-live-preview-label">Live preview</span>
+                <span class="bc-live-preview-value" id="bc-live-preview-value">—</span>
+              </div>
             </div>
           </form>
+          <div id="bc-debug" class="bc-debug" aria-live="polite" hidden></div>
+        </div>
+        <div class="calc-privacy-note" role="note" aria-label="Privacy notice">
+          <span class="calc-privacy-icon" aria-hidden="true">🔒</span>
+          <span class="calc-privacy-text"><strong>Private by design.</strong> Your measurements are processed entirely in your browser and never uploaded, stored, or shared with anyone. <a href="/privacy/" class="calc-privacy-link">Read our privacy promise</a>.</span>
         </div>
         <div style="margin-top:20px">
           <a class="btn-link-secondary" style="display:inline-block" href="/bra-size-calculator/">
             Open Full Calculator →
           </a>
         </div>
+        <div id="size-result" class="size-result" hidden aria-live="polite">
+          <div class="size-primary">
+            <span class="size-primary-label">Your US size</span>
+            <span class="size-primary-value" id="size-us">—</span>
+          </div>
+          <p class="size-primary-note" id="size-recommendation">—</p>
+          <div id="size-loading" class="size-loading" hidden>
+            <div class="size-loading-bar" aria-hidden="true"><span></span></div>
+            <p class="size-loading-text">Computing your sister sizes and fit profile across 6 regions…</p>
+          </div>
+          <div id="size-choice" class="size-choice" hidden aria-label="What would you like to do next?">
+            <p class="size-choice-eyebrow">Your results are ready — what matters most?</p>
+            <h3 class="size-choice-title">One quick tap to personalize what you see next</h3>
+            <div class="size-choice-grid">
+              <button type="button" class="size-choice-card" data-choice="shop">
+                <span class="size-choice-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                </span>
+                <span class="size-choice-card-title">Shop my exact size</span>
+                <span class="size-choice-card-desc" id="size-choice-shop-desc">See brands &amp; styles curated for 34D</span>
+                <span class="size-choice-arrow" aria-hidden="true">→</span>
+              </button>
+              <button type="button" class="size-choice-card" data-choice="guide">
+                <span class="size-choice-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+                </span>
+                <span class="size-choice-card-title">Get a fit guide</span>
+                <span class="size-choice-card-desc">Printable checklist + troubleshooting for your shape</span>
+                <span class="size-choice-arrow" aria-hidden="true">→</span>
+              </button>
+              <button type="button" class="size-choice-card" data-choice="compare">
+                <span class="size-choice-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M3 12h18"/><path d="M3 18h12"/></svg>
+                </span>
+                <span class="size-choice-card-title">Compare sister sizes</span>
+                <span class="size-choice-card-desc">See 32DD / 34D / 36C side-by-side and pick the best</span>
+                <span class="size-choice-arrow" aria-hidden="true">→</span>
+              </button>
+            </div>
+            <button type="button" class="size-choice-skip" id="size-choice-skip">Skip — just show me the raw numbers</button>
+          </div>
+          <div id="size-details" class="size-details" hidden>
+            <div class="size-grid">
+              <div class="size-cell"><span>UK</span><strong id="size-uk">—</strong></div>
+              <div class="size-cell"><span>EU</span><strong id="size-eu">—</strong></div>
+              <div class="size-cell"><span>FR</span><strong id="size-fr">—</strong></div>
+              <div class="size-cell"><span>AU</span><strong id="size-au">—</strong></div>
+              <div class="size-cell"><span>India</span><strong id="size-india">—</strong></div>
+            </div>
+            <p class="size-cup-info">Cup difference: <strong id="cup-diff-value">—</strong> · <strong id="cup-diff">—</strong></p>
+            <div class="size-save-row">
+              <button type="button" class="size-save" id="size-save" aria-label="Save this measurement to my history">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                <span id="size-save-label">Save to My Profile</span>
+              </button>
+              <span class="size-save-hint">Saved on this device only — never shared.</span>
+            </div>
+          </div>
+        </div>
+        <div id="bc-history" class="bc-history" aria-label="Sister size comparator">
+          <div class="bc-history-frame">
+            <div class="bc-history-head">
+              <div class="bc-history-head-left">
+                <span class="bc-history-eyebrow">
+                  <span class="bc-history-dot" aria-hidden="true"></span>
+                  <span>Live comparator · No data stored</span>
+                </span>
+                <h3 class="bc-history-title">Sister Size Comparator</h3>
+                <p class="bc-history-sub">How your calculated size compares with adjacent cup volumes. Pure analysis — nothing is saved, nothing leaves this page.</p>
+              </div>
+            </div>
+            <div class="bc-history-empty" id="bc-history-empty">
+              <div class="bc-compass-awaiting">
+                <div class="bc-compass-awaiting-icon" aria-hidden="true">✦</div>
+                <div class="bc-compass-awaiting-title">Awaiting your US size</div>
+                <div class="bc-compass-awaiting-text">Enter your measurements above and press <em>Calculate</em> — your US size will appear here, with six scientifically calculated sister sizes flanking it across the spectrum.</div>
+                <div class="bc-compass-awaiting-actions">
+                  <span class="bc-compass-demo-hint">Tip: use a Quick Fill preset (32A · 34B · 36C · 34DD · 38C · 40B) for an instant preview.</span>
+                </div>
+              </div>
+            </div>
+            <div class="bc-history-list-wrap" id="bc-history-list" hidden></div>
+            <div class="bc-compass-instrument" id="bc-compass-instrument" hidden>
+              <div class="bc-compass-compare" id="bc-compass-compare" hidden></div>
+              <div class="bc-compass-conversion" id="bc-compass-conversion"></div>
+              <div class="bc-compass-sisters" id="bc-compass-sisters"></div>
+              <div class="bc-compass-summary" id="bc-compass-summary">—</div>
+            </div>
+          </div>
+        </div>
       </section>
       <section class="section">
         <section class="section" id="how-to-measure">
-          <section class="hub-cards" id="hub-cards" aria-label="Topical hubs">
-            <h2 class="hub-title">
-              Explore the Breast Calculator Hubs
-            </h2>
-            <div class="hub-grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));">
-              <a href="/bra-size-calculator/" class="hub-card">
-                <h3>
-                  Bra Size Calculator Hub
-                </h3>
-                <p>
-                  Free, accurate bra sizing in US, UK, EU &amp; AU. Measure at home in 2 minutes.
-                </p>
-              </a>
-              <a href="/bra-size-guide/" class="hub-card">
-                <h3>
-                  Bra Size Guide Hub
-                </h3>
-                <p>
-                  Every band, every cup, fit problems explained. 21 size-specific guides + measurement steps.
-                </p>
-              </a>
-              <a href="/breast-volume/" class="hub-card">
-                <h3>
-                  Breast Volume &amp; Weight Hub
-                </h3>
-                <p>
-                  Estimate anatomy in cc, mL &amp; grams using peer-reviewed formulas.
-                </p>
-              </a>
-              <a href="/comfort-bras/" class="hub-card hub-card-cta" style="background:linear-gradient(135deg,#fff5f8 0%,#fef9f0 100%);border-color:#f3d4d4;">
-                <h3>
-                  Expert Bra Shopping Guides
-                </h3>
-                <p>
-                  Editor-tested recommendations for the most comfortable, supportive, and wire-free bras across all cup sizes.
-                </p>
-              </a>
-            </div>
-          </section>
+
           <h2 class="section-title">
             How to Calculate Bra Size at Home
           </h2>
@@ -787,9 +860,7 @@
               </p>
             </details>
             <p style="text-align:center;margin-top:24px">
-              <a href="/articles/" class="btn-secondary" style="display:inline-block;padding:10px 24px;background:#b89782;color:#fff !important;border:none;border-radius:50px;font-size:.88rem;font-weight:500;text-align:center;box-shadow:0 2px 8px rgba(184,151,130,.25);transition:background-color .2s,transform .2s;text-decoration:none;margin-top:8px;margin-bottom:0" onmouseover="this.style.background='#a68571';this.style.transform='translateY(-1px)'" onmouseout="this.style.background='#b89782';this.style.transform='translateY(0)'">
-                View All Bra Fitting Guides &rarr;
-              </a>
+              <a href="/articles/" class="btn-secondary">View All Bra Fitting Guides &rarr;</a>
             </p>
           </div>
         </section>
@@ -887,7 +958,7 @@
               View All Size Guides →
             </h3>
             <p>
-              Browse our complete library of 20+ bra size guides.
+              Browse our complete library of 72 bra size guides.
             </p>
           </a>
         </div>
@@ -1124,374 +1195,18 @@
           </div>
         </section>
       </main>
-      <footer class="bg-[#fdf8f5] border-t border-[#e8ddd0] text-[#8b7355] font-sans">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 pt-12 pb-8 text-center">
-          <div class="font-bold text-[1.35rem] mb-2 tracking-[0.06em] uppercase" style="font-family:Georgia,'Times New Roman',Times,serif;color:#7a6455">
-            BREAST CALCULATOR
-          </div>
-          <p class="text-[0.9rem] leading-[1.6] mb-3 max-w-lg mx-auto" style="font-family:Georgia,'Times New Roman',Times,serif;color:#8b7355">
-            Free science-based bra fitting tools and breast health education.
-          </p>
-          <a href="mailto:contact@breastcalculator.com?subject=Inquiry%20from%20Breast%20Calculator" class="inline-flex items-center gap-1.5 text-xs text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 min-h-[28px]">
-            <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 0 0 2.22 0L21 8M5 19h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2z"></path>
-            </svg>
-            <span class="hover:underline decoration-1 underline-offset-2">
-              contact@breastcalculator.com
-            </span>
-          </a>
-        </div>
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 pb-10">
-          <div class="md:hidden divide-y divide-[#e6d5c3] border-t border-[#e6d5c3]">
-            <button class="flex items-center justify-between w-full text-left font-bold text-sm tracking-[0.1em] text-[#7a6455] min-h-[48px] px-0 py-2 bg-transparent border-0 cursor-pointer" aria-expanded="false" onclick="const ul=this.nextElementSibling; const open=ul.classList.contains('hidden'); ul.classList.toggle('hidden',!open); ul.classList.toggle('block',open); this.querySelector('svg').classList.toggle('rotate-180',open); this.setAttribute('aria-expanded',open)">
-              TOOLS
-              <svg class="w-3 h-3 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </button>
-            <ul class="space-y-1 hidden pb-3 m-0 list-none">
-              <li>
-                <a class="block text-sm font-semibold text-[#7a6455] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/bra-size-calculator/">
-                  Bra Size Calculator
-                </a>
-              </li>
-              <li>
-                <a class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/tools/breast-expansion-calculator/">
-                  Breast Expansion Calculator
-                </a>
-              </li>
-              <li>
-                <a class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/tools/breast-ptosis-calculator/">
-                  Breast Ptosis Calculator
-                </a>
-              </li>
-              <li>
-                <a class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/tools/breast-volume-calculator/">
-                  Breast Volume Calculator
-                </a>
-              </li>
-              <li>
-                <a class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/tools/breast-weight-calculator/">
-                  Breast Weight Calculator
-                </a>
-              </li>
-              <li>
-                <a class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/tools/breast-shape-calculator/">
-                  Breast Shape Calculator
-                </a>
-              </li>
-              <li>
-                <a class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/tools/length-converter/">
-                  Length Converter
-                </a>
-              </li>
-            </ul>
-            <button class="flex items-center justify-between w-full text-left font-bold text-sm tracking-[0.1em] text-[#7a6455] min-h-[48px] px-0 py-2 bg-transparent border-0 cursor-pointer" aria-expanded="false" onclick="const ul=this.nextElementSibling; const open=ul.classList.contains('hidden'); ul.classList.toggle('hidden',!open); ul.classList.toggle('block',open); this.querySelector('svg').classList.toggle('rotate-180',open); this.setAttribute('aria-expanded',open)">
-              SPECIALS
-              <svg class="w-3 h-3 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </button>
-            <ul class="space-y-1 hidden pb-3 m-0 list-none">
-              <li>
-                <a class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/specials/why-d-cup-support/">
-                  D+ Cup Support Science
-                </a>
-              </li>
-              <li>
-                <a class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/sports-bra-guide/">
-                  Sports Bra Science
-                </a>
-              </li>
-              <li>
-                <a class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/specials/accessory-breast-guide/">
-                  Accessory Breast Guide
-                </a>
-              </li>
-              <li>
-                <a class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/specials/expansion-evidence/">
-                  Expansion Evidence
-                </a>
-              </li>
-              <li>
-                <a class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/specials/ptosis-prevention-evidence/">
-                  Ptosis Prevention
-                </a>
-              </li>
-              <li>
-                <a class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/bra-buying-guide/">
-                  D+ Cup Buying Guide
-                </a>
-              </li>
-            </ul>
-            <button class="flex items-center justify-between w-full text-left font-bold text-sm tracking-[0.1em] text-[#7a6455] min-h-[48px] px-0 py-2 bg-transparent border-0 cursor-pointer" aria-expanded="false" onclick="const ul=this.nextElementSibling; const open=ul.classList.contains('hidden'); ul.classList.toggle('hidden',!open); ul.classList.toggle('block',open); this.querySelector('svg').classList.toggle('rotate-180',open); this.setAttribute('aria-expanded',open)">
-              WELLNESS
-              <svg class="w-3 h-3 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </button>
-            <ul class="space-y-1 hidden pb-3 m-0 list-none">
-              <li>
-                <a class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/wellness/prosthetic-bras-guide/">
-                  Prosthetic Bras Guide
-                </a>
-              </li>
-              <li>
-                <a class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/wellness/sports-bras-after-surgery/">
-                  Sports Bras After Surgery
-                </a>
-              </li>
-              <li>
-                <a class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/wellness/">
-                  Overview
-                </a>
-              </li>
-            </ul>
-            <button class="flex items-center justify-between w-full text-left font-bold text-sm tracking-[0.1em] text-[#7a6455] min-h-[48px] px-0 py-2 bg-transparent border-0 cursor-pointer" aria-expanded="false" onclick="const ul=this.nextElementSibling; const open=ul.classList.contains('hidden'); ul.classList.toggle('hidden',!open); ul.classList.toggle('block',open); this.querySelector('svg').classList.toggle('rotate-180',open); this.setAttribute('aria-expanded',open)">
-              RESOURCES
-              <svg class="w-3 h-3 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </button>
-            <ul class="space-y-1 hidden pb-3 m-0 list-none">
-              <li>
-                <a class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/articles/">
-                  All Articles
-                </a>
-              </li>
-              <li>
-                <a class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/bra-size-guide/">
-                  Bra Size Guides
-                </a>
-              </li>
-              <li>
-                <a class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/bra-size-guide/compare/">
-                  Bra Size Comparisons
-                </a>
-              </li>
-              <li>
-                <a class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/how-to-measure-bra-size/">
-                  How to Measure Bra Size
-                </a>
-              </li>
-              <li>
-                <a class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/bra-buying-guide/">
-                  Bra Buying Guide
-                </a>
-              </li>
-              <li>
-                <a class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/sports-bra-guide/">
-                  Sports Bra Guide
-                </a>
-              </li>
-              <li>
-                <a class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/best-comfort-bras/">
-                  Most Comfortable Bras
-                </a>
-              </li>
-              <li>
-                <a class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/best-wireless-bras/">
-                  Best Wireless Bras
-                </a>
-              </li>
-              <li>
-                <a class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/guide/no-underwire-bras/">
-                  No-Underwire Bras
-                </a>
-              </li>
-              <li>
-                <a class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/guide/comfortable-wireless-bras/">
-                  Comfortable Wireless Bras
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div class="hidden md:grid grid-cols-4 gap-x-10 gap-y-8">
-            <div>
-              <div class="font-bold text-sm tracking-[0.1em] mb-4 text-[#7a6455]">
-                TOOLS
-              </div>
-              <ul class="space-y-1.5 m-0 p-0 list-none">
-                <li>
-                  <a class="block text-sm font-semibold text-[#7a6455] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/bra-size-calculator/">
-                    Bra Size Calculator
-                  </a>
-                </li>
-                <li>
-                  <a class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/tools/breast-expansion-calculator/">
-                    Breast Expansion Calculator
-                  </a>
-                </li>
-                <li>
-                  <a class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/tools/breast-ptosis-calculator/">
-                    Breast Ptosis Calculator
-                  </a>
-                </li>
-                <li>
-                  <a class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/tools/breast-volume-calculator/">
-                    Breast Volume Calculator
-                  </a>
-                </li>
-                <li>
-                  <a class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/tools/breast-weight-calculator/">
-                    Breast Weight Calculator
-                  </a>
-                </li>
-                <li>
-                  <a class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/tools/breast-shape-calculator/">
-                    Breast Shape Calculator
-                  </a>
-                </li>
-                <li>
-                  <a class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/tools/length-converter/">
-                    Length Converter
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <div class="font-bold text-sm tracking-[0.1em] mb-4 text-[#7a6455]">
-                SPECIALS
-              </div>
-              <ul class="space-y-1.5 m-0 p-0 list-none">
-                <li>
-                  <a class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/specials/why-d-cup-support/">
-                    D+ Cup Support Science
-                  </a>
-                </li>
-                <li>
-                  <a class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/sports-bra-guide/">
-                    Sports Bra Science
-                  </a>
-                </li>
-                <li>
-                  <a class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/specials/accessory-breast-guide/">
-                    Accessory Breast Guide
-                  </a>
-                </li>
-                <li>
-                  <a class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/specials/expansion-evidence/">
-                    Expansion Evidence
-                  </a>
-                </li>
-                <li>
-                  <a class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/specials/ptosis-prevention-evidence/">
-                    Ptosis Prevention
-                  </a>
-                </li>
-                <li>
-                  <a class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/bra-buying-guide/">
-                    D+ Cup Buying Guide
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <div class="font-bold text-sm tracking-[0.1em] mb-4 text-[#7a6455]">
-                WELLNESS
-              </div>
-              <ul class="space-y-1.5 m-0 p-0 list-none">
-                <li>
-                  <a class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/wellness/prosthetic-bras-guide/">
-                    Prosthetic Bras Guide
-                  </a>
-                </li>
-                <li>
-                  <a class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/wellness/sports-bras-after-surgery/">
-                    Sports Bras After Surgery
-                  </a>
-                </li>
-                <li>
-                  <a class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/wellness/">
-                    Overview
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <div class="font-bold text-sm tracking-[0.1em] mb-4 text-[#7a6455]">
-                RESOURCES
-              </div>
-              <ul class="space-y-1.5 m-0 p-0 list-none">
-                <li>
-                  <a class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/articles/">
-                    All Articles
-                  </a>
-                </li>
-                <li>
-                  <a class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/bra-size-guide/">
-                    Bra Size Guides
-                  </a>
-                </li>
-                <li>
-                  <a class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/bra-size-guide/compare/">
-                    Bra Size Comparisons
-                  </a>
-                </li>
-                <li>
-                  <a class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/how-to-measure-bra-size/">
-                    How to Measure Bra Size
-                  </a>
-                </li>
-                <li>
-                  <a class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/bra-buying-guide/">
-                    Bra Buying Guide
-                  </a>
-                </li>
-                <li>
-                  <a class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/sports-bra-guide/">
-                    Sports Bra Guide
-                  </a>
-                </li>
-                <li>
-                  <a class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/best-comfort-bras/">
-                    Most Comfortable Bras
-                  </a>
-                </li>
-                <li>
-                  <a class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/best-wireless-bras/">
-                    Best Wireless Bras
-                  </a>
-                </li>
-                <li>
-                  <a class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/guide/no-underwire-bras/">
-                    No-Underwire Bras
-                  </a>
-                </li>
-                <li>
-                  <a class="block text-sm text-[#8b7355] hover:text-[#6b5344] transition-colors duration-200 hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/guide/comfortable-wireless-bras/">
-                    Comfortable Wireless Bras
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="border-t border-[#e6d5c3]">
-          <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-            <p class="text-xs text-[#8b7355] m-0 text-center sm:text-left">
-              &copy; 2026 Breast Calculator. This website is for informational purposes only and does not provide medical advice.
-            </p>
-            <nav class="footer-legal flex flex-wrap items-center justify-center gap-x-6 gap-y-1 text-xs text-[#8b7355]" aria-label="Legal links">
-              <a class="hover:text-[#6b5344] hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/about/">
-                About
-              </a>
-              <a class="hover:text-[#6b5344] hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/privacy/">
-                Privacy Policy
-              </a>
-              <a class="hover:text-[#6b5344] hover:underline decoration-1 underline-offset-2 min-h-[28px] leading-[28px] no-underline" href="/terms/">
-                Terms of Use
-              </a>
-            </nav>
-            <button class="inline-flex items-center gap-1 px-3 py-1.5 rounded border border-[#e6d5c3] hover:border-[#6b5344] hover:text-[#6b5344] transition-colors duration-200 min-w-[48px] min-h-[48px] sm:min-w-0 sm:min-h-0 justify-center text-xs text-[#8b7355] flex-shrink-0" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="18 15 12 9 6 15"></polyline>
-              </svg>
-              <span class="hidden sm:inline">
-                Back to Top
-              </span>
-            </button>
-          </div>
+      <footer class="classic-footer">
+        <div class="cf-inner">
+          <p class="cf-brand">Breast Calculator</p>
+          <p class="cf-tagline">Free science-based bra fitting tools and breast health education.</p>
+          <a class="cf-email" href="mailto:contact@breastcalculator.com">contact@breastcalculator.com</a>
+          <nav class="cf-links" aria-label="Footer">
+            <a href="/about/">About</a>
+            <a href="/contact/">Contact</a>
+            <a href="/privacy/">Privacy Policy</a>
+            <a href="/terms/">Terms of Use</a>
+          </nav>
+          <p class="cf-copy">&copy; 2026 Breast Calculator. For informational purposes only — not a substitute for medical advice.</p>
         </div>
       </footer>
       <button id="footerBackToTop" class="fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full bg-[#fdf8f5] border border-[#e6d5c3] text-[#8b7355] hover:text-[#6b5344] hover:border-[#6b5344] shadow-md flex items-center justify-center transition-all duration-300 opacity-0 pointer-events-none" aria-label="Back to top">
@@ -1526,5 +1241,28 @@
           </div>
         </div>
       </div>
-    </body>
+      <script src="/assets/consent-banner.js?v=20260721" defer></script>
+      <script src="/assets/classic-ui.js?v=20260721" defer></script>
+      <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <defs>
+          <linearGradient id="bc-steel-h" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0%" stop-color="#f4efe5"/>
+            <stop offset="25%" stop-color="#d8cfc1"/>
+            <stop offset="50%" stop-color="#a89e8e"/>
+            <stop offset="75%" stop-color="#d8cfc1"/>
+            <stop offset="100%" stop-color="#8a7e6e"/>
+          </linearGradient>
+          <linearGradient id="bc-steel-v" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0%" stop-color="#9c9080"/>
+            <stop offset="50%" stop-color="#d8cfc1"/>
+            <stop offset="100%" stop-color="#7c7060"/>
+          </linearGradient>
+          <linearGradient id="bc-brass-v" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0%" stop-color="#a87a4a"/>
+            <stop offset="50%" stop-color="#e0b878"/>
+            <stop offset="100%" stop-color="#8b5a2a"/>
+          </linearGradient>
+        </defs>
+      </svg>
+</body>
   </html>

@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><link rel="stylesheet" href="/main.css"/>
+    
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5SB8FNFYDV"></script>
+    <script>
+      window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('consent', 'default', { 'ad_storage': 'denied', 'ad_user_data': 'denied', 'ad_personalization': 'denied', 'analytics_storage': 'granted', 'functionality_storage': 'granted', 'security_storage': 'granted', 'wait_for_update': 500 }); gtag('set', 'url_passthrough', true); gtag('js', new Date()); gtag('config', 'G-5SB8FNFYDV', { 'anonymize_ip': true });
+    </script>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=5"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+    <meta name="apple-mobile-web-app-title" content="Bra Calculator"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="theme-color" content="#fff9f5" media="(prefers-color-scheme: light)"/>
+    <meta name="theme-color" content="#15100f" media="(prefers-color-scheme: dark)"/>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png"/>
+    <link rel="apple-touch-icon" sizes="192x192" href="/android-chrome-192x192.png"/>
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+    <link rel="manifest" href="/site.webmanifest"/>
+    <title>
+      Bra Sister Sizes Explained: Charts, Math &amp; Fit Tips
+    </title>
+    <meta name="description" content="How bra sister sizes work, with charts, math and examples. Find the right sister size when your usual fit is unavailable. Evidence-based fit guide."/>
+    <meta name="keywords" content="breast calculator, bra size calculator, bra fitting, cup size, breast measurement, bra sister sizes, sister sizes explained, alternative bra fit, bra size chart, sister sizing guide"/>
+    <meta name="robots" content="index, follow"/>
+    <link rel="canonical" href="https://breastcalculator.com/article/bra-sister-sizes-explained/"/>
+    <link rel="alternate" hreflang="en" href="https://breastcalculator.com/article/bra-sister-sizes-explained/"/>
+    <link rel="alternate" hreflang="x-default" href="https://breastcalculator.com/article/bra-sister-sizes-explained/"/>
+    <meta property="og:title" content="Bra Sister Sizes Explained — How to Find Your Alternative Bra Fit"/>
+    <meta property="og:description" content="Learn how bra sister sizes work and find your alternative fit. Complete sister sizing guide with charts, examples, and expert bra shopping tips."/>
+    <meta property="og:url" content="https://breastcalculator.com/article/bra-sister-sizes-explained/"/>
+    <meta property="og:site_name" content="Breast Calculator"/>
+    <meta property="og:locale" content="en_US"/>
+    <meta property="og:image" content="https://breastcalculator.com/images/og-default.jpg"/>
+    <meta property="og:image:width" content="1200"/>
+    <meta property="og:image:height" content="630"/>
+    <meta property="og:type" content="article"/>
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:title" content="Bra Sister Sizes Explained — How to Find Your Alternative Bra Fit"/>
+    <meta name="twitter:description" content="Learn how bra sister sizes work and find your alternative fit. Complete sister sizing guide with charts, examples, and expert bra shopping tips."/>
+    <meta name="twitter:image" content="https://breastcalculator.com/images/og-default.jpg"/>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Breast Calculator",
+        "url": "https://breastcalculator.com",
+        "description": "Science-based breast measurement, bra sizing, and fitting tools — trusted by women worldwide.",
+        "foundingDate": "2024",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://breastcalculator.com/favicon.svg",
+          "width": 512,
+          "height": 512
+        },
+        "image": "https://breastcalculator.com/favicon.svg",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "url": "https://breastcalculator.com/about/"
+        },
+        "sameAs": []
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Breast Calculator",
+        "url": "https://breastcalculator.com",
+        "description": "Science-based breast measurement, bra sizing, and fitting tools — trusted by women worldwide.",
+        "inLanguage": "en",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://breastcalculator.com/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script>
+    <script src="/common.js?v=91b7f18e" defer></script>
+    <link rel="alternate" hreflang="en" href="https://breastcalculator.com/article/bra-sister-sizes-explained/"/>
+  
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7388117485013143" crossorigin="anonymous"></script></head>
+  <body>
+<a class="skip-to-content" href="#main-content">Skip to main content</a>
+    <nav class="navbar classic-navbar" role="navigation" aria-label="Main navigation">
+      <div class="nav-inner">
+        <div class="nav-top">
+          <a href="/" class="nav-logo">
+            <img src="/favicon.svg" alt="" class="nav-logo-img" width="28" height="28" />
+            BREAST CALCULATOR
+          </a>
+          <button type="button" class="nav-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+        <ul class="nav-categories">
+          <li class="nav-category">
+            <span class="nav-label" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">
+              TOOLS
+              <span class="arrow">
+                ▾
+              </span>
+            </span>
+            <div class="dropdown-menu" role="menu">
+              <a href="/bra-size-calculator/" role="menuitem">
+                Bra Size Calculator
+              </a>
+              <a href="/tools/breast-expansion-calculator/" role="menuitem">
+                Breast Expansion Calculator
+              </a>
+              <a href="/tools/breast-ptosis-calculator/" role="menuitem">
+                Breast Ptosis Calculator
+              </a>
+              <a href="/tools/breast-volume-calculator/" role="menuitem">
+                Breast Volume Calculator
+              </a>
+              <a href="/tools/breast-weight-calculator/" role="menuitem">
+                Breast Weight Calculator
+              </a>
+              <a href="/tools/breast-shape-calculator/" role="menuitem">
+                Breast Shape Calculator
+              </a>
+              <a href="/tools/length-converter/" role="menuitem">
+                Length Converter
+              </a>
+            </div>
+          </li>
+          <li class="nav-category">
+            <span class="nav-label" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">
+              SPECIALS
+              <span class="arrow">
+                ▾
+              </span>
+            </span>
+            <div class="dropdown-menu" role="menu">
+              <a href="/specials/why-d-cup-support/" role="menuitem">
+                D+ Cup Support Science
+              </a>
+              <a href="/sports-bra-guide/" role="menuitem">
+                Sports Bra Science
+              </a>
+              <a href="/specials/accessory-breast-guide/" role="menuitem">
+                Accessory Breast Guide
+              </a>
+              <a href="/specials/expansion-evidence/" role="menuitem">
+                Expansion Evidence
+              </a>
+              <a href="/specials/ptosis-prevention-evidence/" role="menuitem">
+                Ptosis Prevention
+              </a>
+              <a href="/bra-buying-guide/" role="menuitem">
+                D+ Cup Buying Guide
+              </a>
+            </div>
+          </li>
+          <li class="nav-category">
+            <span class="nav-label" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">
+              WELLNESS
+              <span class="arrow">
+                ▾
+              </span>
+            </span>
+            <div class="dropdown-menu" role="menu">
+              <a href="/wellness/prosthetic-bras-guide/" role="menuitem">
+                Prosthetic Bras Guide
+              </a>
+              <a href="/wellness/sports-bras-after-surgery/" role="menuitem">
+                Sports Bras After Surgery
+              </a>
+              <a href="/wellness/" role="menuitem">
+                Overview
+              </a>
+            </div>
+          </li>
+          <li class="nav-category">
+            <span class="nav-label" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">
+              RESOURCES
+              <span class="arrow">
+                ▾
+              </span>
+            </span>
+            <div class="dropdown-menu" role="menu">
+              <a href="/articles/" role="menuitem">
+                All Articles
+              </a>
+              <a href="/bra-size-guide/" role="menuitem">
+                Bra Size Guides
+              </a>
+              <a href="/bra-size-guide/h-cup/" role="menuitem">
+                H Cup Bra Guide
+              </a>
+              <a href="/bra-size-guide/compare/breast-size-chart/" role="menuitem">
+                Visual Size Chart
+              </a>
+              <a href="/guide/no-underwire-bras/" role="menuitem">
+                No-Underwire Bras
+              </a>
+              <a href="/guide/comfortable-wireless-bras/" role="menuitem">
+                Comfortable Wireless Bras
+              </a>
+              <a href="/bra-size-guide/compare/" role="menuitem">
+                Bra Size Comparisons
+              </a>
+              <a href="/how-to-measure-bra-size/" role="menuitem">
+                How to Measure Bra Size
+              </a>
+              <a href="/bra-buying-guide/" role="menuitem">
+                Bra Buying Guide
+              </a>
+              <a href="/sports-bra-guide/" role="menuitem">
+                Sports Bra Guide
+              </a>
+              <a href="/best-comfort-bras/" role="menuitem">
+                Most Comfortable Bras
+              </a>
+              <a href="/best-wireless-bras/" role="menuitem">
+                Best Wireless Bras
+              </a>
+            </div>
+          </li>
+        </ul>
+        </div>
+    </nav>
+    <div class="drawer-overlay" id="drawerOverlay"></div>
+    <div class="drawer" id="drawer" role="dialog" aria-label="Navigation menu">
+      <div class="drawer-header">
+        <span class="drawer-title">
+          Menu
+        </span>
+        <button type="button" class="drawer-close" id="drawerClose" aria-label="Close menu">
+          ×
+        </button>
+      </div>
+      <ul class="drawer-nav">
+        <li class="drawer-section drawer-section-label">
+          TOOLS
+        </li>
+        <li class="drawer-sub">
+          <a href="/bra-size-calculator/">
+            Bra Size Calculator
+          </a>
+        </li>
+        <li class="drawer-sub">
+          <a href="/tools/breast-expansion-calculator/">
+            Breast Expansion Calculator
+          </a>
+        </li>
+        <li class="drawer-sub">
+          <a href="/tools/breast-ptosis-calculator/">
+            Breast Ptosis Calculator
+          </a>
+        </li>
+        <li class="drawer-sub">
+          <a href="/tools/breast-volume-calculator/">
+            Breast Volume Calculator
+          </a>
+        </li>
+        <li class="drawer-sub">
+          <a href="/tools/breast-weight-calculator/">
+            Breast Weight Calculator
+          </a>
+        </li>
+        <li class="drawer-sub">
+          <a href="/tools/breast-shape-calculator/">
+            Breast Shape Calculator
+          </a>
+        </li>
+        <li class="drawer-sub">
+          <a href="/tools/length-converter/">
+            Length Converter
+          </a>
+        </li>
+        <li class="drawer-section drawer-section-label">
+          SPECIALS
+        </li>
+        <li class="drawer-sub">
+          <a href="/specials/why-d-cup-support/">
+            D+ Cup Support Science
+          </a>
+        </li>
+        <li class="drawer-sub">
+          <a href="/sports-bra-guide/">
+            Sports Bra Science
+          </a>
+        </li>
+        <li class="drawer-sub">
+          <a href="/specials/accessory-breast-guide/">
+            Accessory Breast Guide
+          </a>
+        </li>
+        <li class="drawer-sub">
+          <a href="/specials/expansion-evidence/">
+            Expansion Evidence
+          </a>
+        </li>
+        <li class="drawer-sub">
+          <a href="/specials/ptosis-prevention-evidence/">
+            Ptosis Prevention
+          </a>
+        </li>
+        <li class="drawer-sub">
+          <a href="/bra-buying-guide/">
+            D+ Cup Buying Guide
+          </a>
+        </li>
+        <li class="drawer-section drawer-section-label">
+          WELLNESS
+        </li>
+        <li class="drawer-sub">
+          <a href="/wellness/prosthetic-bras-guide/">
+            Prosthetic Bras Guide
+          </a>
+        </li>
+        <li class="drawer-sub">
+          <a href="/wellness/sports-bras-after-surgery/">
+            Sports Bras After Surgery
+          </a>
+        </li>
+        <li class="drawer-sub">
+          <a href="/wellness/">
+            Overview
+          </a>
+        </li>
+        <li class="drawer-section drawer-section-label">
+          RESOURCES
+        </li>
+        <li class="drawer-sub">
+          <a href="/articles/">
+            All Articles
+          </a>
+        </li>
+        <li class="drawer-sub">
+          <a href="/bra-size-guide/">
+            Bra Size Guides
+          </a>
+        </li>
+        <li class="drawer-sub">
+          <a href="/bra-size-guide/compare/">
+            Bra Size Comparisons
+          </a>
+        </li>
+        <li class="drawer-sub">
+          <a href="/how-to-measure-bra-size/">
+            How to Measure Bra Size
+          </a>
+        </li>
+        <li class="drawer-sub">
+          <a href="/bra-buying-guide/">
+            Bra Buying Guide
+          </a>
+        </li>
+        <li class="drawer-sub">
+          <a href="/sports-bra-guide/">
+            Sports Bra Guide
+          </a>
+        </li>
+        <li class="drawer-sub">
+          <a href="/best-comfort-bras/">
+            Most Comfortable Bras
+          </a>
+        </li>
+        <li class="drawer-sub">
+          <a href="/best-wireless-bras/">
+            Best Wireless Bras
+          </a>
+        </li>
+        <li class="drawer-section drawer-section-label">
+          LEGAL
+        </li>
+        <li class="drawer-sub">
+          <a href="/about/">
+            About
+          </a>
+        </li>
+        <li class="drawer-sub">
+          <a href="/privacy/">
+            Privacy Policy
+          </a>
+        </li>
+        <li class="drawer-sub">
+          <a href="/terms/">
+            Terms of Use
+          </a>
+        </li>
+        <li class="drawer-sub">
+          <a href="#" id="privacyFromDrawer">
+            Privacy Settings
+          </a>
+        </li>
+      </ul>
+      <div class="drawer-footer">
+        © 2026 Breast Calculator
+      </div>
+    </div>
+    <main id="main-content">
+      <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "headline": "Bra Sister Sizes Explained — How to Find Your Alternative Bra Fit",
+          "description": "Learn how bra sister sizes work and how to find your alternative bra fit. Complete guide to sister sizing with charts, examples, and tips for using sister sizes when shopping.",
+          "image": "https://breastcalculator.com/images/og-default.jpg",
+          "datePublished": "2026-05-11T08:00:00Z",
+          "dateModified": "2026-06-01T08:00:00Z",
+          "author": {
+            "@type": "Person",
+            "name": "Breast Calculator Team"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Breast Calculator",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://breastcalculator.com/favicon.svg"
+            }
+          }
+        }
+      </script>
+      <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://breastcalculator.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Bra Sister Sizes Explained",
+              "item": "https://breastcalculator.com/article/bra-sister-sizes-explained/"
+            }
+          ]
+        }
+      </script>
+      <section class="hero">
+        <h1 class="text-center">
+          Bra Sister Sizes Explained — How to Find Your Alternative Bra Fit
+        </h1>
+        <p>
+          Learn how sister sizes work, when to use them, and how to find your perfect alternative fit when your usual size is unavailable.
+        </p>
+      </section>
+      <article class="article">
+        <div class="placeholder-img" style="margin-bottom:32px">
+          [Image: Bra size measurement guide — sister sizes explained]
+        </div>
+        <p>
+          If you have ever gone bra shopping and found that your usual size is out of stock, or that a bra in your size does not fit quite right, sister sizes may be the answer. Understanding bra sister sizes can significantly expand your options and help you find a comfortable, supportive fit even when your exact size is not available.
+        </p>
+        <p>
+          In this guide, we explain what sister sizes are, how they work, and how to use them to find your perfect bra fit. Start with our
+          <a href="/bra-size-calculator/">
+            free bra size calculator
+          </a>
+          to determine your base size first.
+        </p>
+        <h2>
+          What Are Bra Sister Sizes?
+        </h2>
+        <p>
+          Sister sizes are bra sizes that have the
+          <strong>
+            same cup volume
+          </strong>
+          but different band and cup letter combinations. When you go up one band size and down one cup letter, or down one band size and up one cup letter, the cup volume remains the same.
+        </p>
+        <p>
+          For example, if you wear a
+          <strong>
+            34C
+          </strong>
+          bra, your sister sizes would be
+          <strong>
+            32D
+          </strong>
+          and
+          <strong>
+            36B
+          </strong>
+          . All three sizes contain approximately the same cup volume — only the band length and cup letter differ.
+        </p>
+        <h2>
+          Sister Size Rule Explained
+        </h2>
+        <p>
+          The sister size rule is simple to remember:
+        </p>
+        <ul>
+          <li>
+            <strong>
+              Band up, cup down:
+            </strong>
+            If you need a larger band, go up one band size and down one cup letter (e.g., 34C → 36B)
+          </li>
+          <li>
+            <strong>
+              Band down, cup up:
+            </strong>
+            If you need a smaller band, go down one band size and up one cup letter (e.g., 34C → 32D)
+          </li>
+        </ul>
+        <p>
+          This rule works because cup letters represent the difference between bust and band measurements, not absolute volume. By adjusting both the band and cup together, the overall cup volume stays consistent.
+        </p>
+        <div style="background:var(--color-primary-light);border:1px solid var(--color-border);border-radius:var(--radius);padding:28px 24px;margin:32px 0">
+          <h3 style="margin-top:0;font-size:1.1rem;color:var(--color-primary-dark)">
+            Quick Reference: Sister Size Chart
+          </h3>
+          <p style="margin-bottom:16px">
+            Find your size in the middle column, then look left (band down, cup up) or right (band up, cup down) for your sister sizes. This complete sister size chart covers every band from 28 to 44 and cup sizes from A through H.
+          </p>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>
+                    Band Down, Cup Up
+                  </th>
+                  <th>
+                    Your Size
+                  </th>
+                  <th>
+                    Band Up, Cup Down
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    —
+                  </td>
+                  <td>
+                    28A
+                  </td>
+                  <td>
+                    <strong>
+                      30AA
+                    </strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>
+                      28B
+                    </strong>
+                  </td>
+                  <td>
+                    30A
+                  </td>
+                  <td>
+                    <strong>
+                      32AA
+                    </strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>
+                      28C
+                    </strong>
+                  </td>
+                  <td>
+                    30B
+                  </td>
+                  <td>
+                    <strong>
+                      32A
+                    </strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>
+                      28D
+                    </strong>
+                  </td>
+                  <td>
+                    30C
+                  </td>
+                  <td>
+                    <strong>
+                      32B
+                    </strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>
+                      28DD
+                    </strong>
+                  </td>
+                  <td>
+                    30D
+                  </td>
+                  <td>
+                    <strong>
+                      32C
+                    </strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>
+                      28DDD
+                    </strong>
+                  </td>
+                  <td>
+                    30DD
+                  </td>
+                  <td>
+                    <strong>
+                      32D
+                    </strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>
+                      30C
+                    </strong>
+                  </td>
+                  <td>
+                    32B
+                  </td>
+                  <td>
+                    <strong>
+                      34A
+                    </strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>
+                      30D
+                    </strong>
+                  </td>
+                  <td>
+                    32C
+                  </td>
+                  <td>
+                    <strong>
+                      34B
+                    </strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>
+                      30DD
+                    </strong>
+                  </td>
+                  <td>
+                    32D
+                  </td>
+                  <td>
+                    <strong>
+                      34C
+                    </strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>
+                      30DDD
+                    </strong>
+                  </td>
+                  <td>
+                    32DD
+                  </td>
+                  <td>
+                    <strong>
+                      34D
+                    </strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>
+                      32C
+                    </strong>
+                  </td>
+                  <td>
+                    34B
+                  </td>
+                  <td>
+                    <strong>
+                      36A
+                    </strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>
+                      32D
+                    </strong>
+                  </td>
+                  <td>
+                    34C
+                  </td>
+                  <td>
+                    <strong>
+                      36B
+                    </strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>
+                      32DD
+                    </strong>
+                  </td>
+                  <td>
+                    34D
+                  </td>
+                  <td>
+                    <strong>
+                      36C
+                    </strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>
+                      32DDD
+                    </strong>
+                  </td>
+                  <td>
+                    34DD
+                  </td>
+                  <td>
+                    <strong>
+                      36D
+                    </strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>
+                      32G
+                    </strong>
+                  </td>
+                  <td>
+                    34DDD
+                  </td>
+                  <td>
+                    <strong>
+                      36DD
+                    </strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>
+                      34D
+                    </strong>
+                  </td>
+                  <td>
+                    36C
+                  </td>
+                  <td>
+                    <strong>
+                      38B
+                    </strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>
+                      34DD
+                    </strong>
+                  </td>
+                  <td>
+                    36D
+                  </td>
+                  <td>
+                    <strong>
+                      38C
+                    </strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>
+                      34DDD
+                    </strong>
+                  </td>
+                  <td>
+                    36DD
+                  </td>
+                  <td>
+                    <strong>
+                      38D
+                    </strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>
+                      34G
+                    </strong>
+                  </td>
+                  <td>
+                    36DDD
+                  </td>
+                  <td>
+                    <strong>
+                      38DD
+                    </strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>
+                      36DD
+                    </strong>
+                  </td>
+                  <td>
+                    38D
+                  </td>
+                  <td>
+                    <strong>
+                      40C
+                    </strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>
+                      36DDD
+                    </strong>
+                  </td>
+                  <td>
+                    38DD
+                  </td>
+                  <td>
+                    <strong>
+                      40D
+                    </strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>
+                      36G
+                    </strong>
+                  </td>
+                  <td>
+                    38DDD
+                  </td>
+                  <td>
+                    <strong>
+                      40DD
+                    </strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>
+                      38DDD
+                    </strong>
+                  </td>
+                  <td>
+                    40DD
+                  </td>
+                  <td>
+                    <strong>
+                      42D
+                    </strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>
+                      38G
+                    </strong>
+                  </td>
+                  <td>
+                    40DDD
+                  </td>
+                  <td>
+                    <strong>
+                      42DD
+                    </strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>
+                      40DDD
+                    </strong>
+                  </td>
+                  <td>
+                    42DD
+                  </td>
+                  <td>
+                    <strong>
+                      44D
+                    </strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>
+                      40G
+                    </strong>
+                  </td>
+                  <td>
+                    42DDD
+                  </td>
+                  <td>
+                    <strong>
+                      44DD
+                    </strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>
+                      42G
+                    </strong>
+                  </td>
+                  <td>
+                    44DDD
+                  </td>
+                  <td>
+                    —
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>
+                      42H
+                    </strong>
+                  </td>
+                  <td>
+                    44G
+                  </td>
+                  <td>
+                    —
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="margin-top:12px;font-size:0.9rem;color:var(--color-text-secondary)">
+            Note: Cup letters above DDD follow US sizing (G = 5" difference, H = 6" difference). UK and EU brands may use different letter systems — always check the brand's size chart.
+          </p>
+        </div>
+        <h2>
+          When to Use Sister Sizes
+        </h2>
+        <p>
+          Sister sizes are particularly useful in these situations:
+        </p>
+        <ul>
+          <li>
+            <strong>
+              Your exact size is unavailable:
+            </strong>
+            Many stores stock limited sizes. Sister sizes give you alternatives that will still fit well.
+          </li>
+          <li>
+            <strong>
+              Between band sizes:
+            </strong>
+            If you are between band sizes (e.g., between 34 and 36), trying sister sizes can help you decide which band feels more comfortable.
+          </li>
+          <li>
+            <strong>
+              Different bra styles fit differently:
+            </strong>
+            Some styles run smaller or larger in the band. Knowing your sister sizes helps you adjust.
+          </li>
+          <li>
+            <strong>
+              Weight fluctuations:
+            </strong>
+            If you have gained or lost a few pounds, sister sizing can help you find a comfortable fit without a full remeasurement.
+          </li>
+        </ul>
+        <h2>
+          Important Considerations When Using Sister Sizes
+        </h2>
+        <ul>
+          <li>
+            <strong>
+              Sister sizes are not identical:
+            </strong>
+            Although the cup volume is similar, the band length and cup shape differ slightly. You may need to adjust strap length when trying a sister size.
+          </li>
+          <li>
+            <strong>
+              Start with your correct base size:
+            </strong>
+            Always use our
+            <a href="/bra-size-calculator/">
+              bra size calculator
+            </a>
+            to find your most accurate size first, then explore sister sizes from there.
+          </li>
+          <li>
+            <strong>
+              Only go one step in each direction:
+            </strong>
+            Going more than one band size up or down can significantly alter the fit and support level.
+          </li>
+          <li>
+            <strong>
+              Band fit is critical:
+            </strong>
+            The band provides most of your bra&#x27;s support. If a sister size makes the band too loose or too tight, it may not provide adequate support.
+          </li>
+        </ul>
+        <h2>
+          How to Test a Sister Size
+        </h2>
+        <p>
+          When trying a sister size, follow these steps to ensure a good fit:
+        </p>
+        <ol>
+          <li>
+            Put on the bra and fasten it on the loosest hook
+          </li>
+          <li>
+            Check that the band sits level around your ribcage (not riding up or digging in)
+          </li>
+          <li>
+            Ensure the center gore lies flat against your breastbone
+          </li>
+          <li>
+            Verify there is no spillage from the cups or gaps at the top
+          </li>
+          <li>
+            Adjust the straps so they sit comfortably without digging in
+          </li>
+          <li>
+            Move around — raise your arms, bend over, and twist to test the fit in motion
+          </li>
+        </ol>
+        <p>
+          Understanding bra sister sizes gives you more flexibility and options when shopping for bras. Use our
+          <a href="/bra-size-calculator/">
+            bra size calculator
+          </a>
+          to find your base size, then explore sister sizes to discover your best fit.
+        </p>
+        <section class="related-guides">
+          <h2 style="font-size:1.5rem;font-weight:700;margin-bottom:1rem;color:#5b4636">
+            Related Guides
+          </h2>
+          <div class="card-grid">
+            <a class="card" href="/guide/no-underwire-bras/">
+              <h3>
+                No-Underwire Bras
+              </h3>
+              <p>
+                Wire-free comfort for every size — fit, brands, benefits.
+              </p>
+            </a>
+            <a class="card" href="/bra-size-guide/compare/breast-size-chart/">
+              <h3>
+                Visual Size Chart
+              </h3>
+              <p>
+                Cup sizes 28A–44H+ with US/UK/EU/JP comparisons.
+              </p>
+            </a>
+            <a class="card" href="/bra-size-guide/h-cup/">
+              <h3>
+                H Cup Bra Guide
+              </h3>
+              <p>
+                H cup fit, sister sizes, and best brands.
+              </p>
+            </a>
+          </div>
+        </section>
+        <h2>
+          Frequently Asked Questions About Sister Sizes
+        </h2>
+        <h3>
+          What is a sister size in bras?
+        </h3>
+        <p>
+          A sister size is a bra size that has the same cup volume as your usual size but uses a different band and cup letter combination. For example, 34C, 32D, and 36B are all sister sizes — they hold roughly the same volume of breast tissue, but the band is tighter or looser. Sister sizing is useful when your exact size is unavailable or when a particular bra style runs small or large in the band.
+        </p>
+        <h3>
+          How to find your sister size?
+        </h3>
+        <p>
+          To find your sister size, use the "band up, cup down" or "band down, cup up" rule. If you wear a 34C and want a tighter band, go down one band size and up one cup letter to get 32D. If you want a looser band, go up one band size and down one cup letter to get 36B. You can also use the sister size chart above — find your size in the middle column and read the alternatives on either side. Always start with your accurate base size from our
+          <a href="/bra-size-calculator/">
+            bra size calculator
+          </a>
+          .
+        </p>
+        <h3>
+          What is the 34D sister size?
+        </h3>
+        <p>
+          The 34D sister sizes are 32DD (band down, cup up) and 36C (band up, cup down). All three sizes have approximately the same cup volume — about 480 cc — but the 32DD has a tighter band and the 36C has a looser band. If a 34D bra feels too tight in the band, try a 36C; if it feels too loose, try a 32DD.
+        </p>
+        <h3>
+          What is the 34C sister size?
+        </h3>
+        <p>
+          The 34C sister sizes are 32D (band down, cup up) and 36B (band up, cup down). Each holds roughly 420 cc of cup volume. The 32D gives a snugger band with more projection, while the 36B offers a looser band with a slightly wider cup.
+        </p>
+        <h3>
+          What is the 32DDD sister size?
+        </h3>
+        <p>
+          The 32DDD sister sizes are 30G (band down, cup up) and 34DD (band up, cup down). The 34DD is the most commonly available alternative and is a great option if you find the 32 band too tight. Note that above DDD, US and UK sizing diverge — a US 30G is equivalent to a UK 30F.
+        </p>
+        <h3>
+          Do sister sizes fit exactly the same?
+        </h3>
+        <p>
+          No. While sister sizes share the same cup volume, the band length and cup shape differ. A 32D will feel snugger in the band than a 34C, and the cups may sit slightly closer together. Always try a sister size on and check the fit — the band should be firm but not restrictive, and the cups should fully contain your breast tissue without gaps or spillage.
+        </p>
+      </article>
+      <section class="section">
+        <div class="cta-banner">
+          <h2>
+            Find Your Exact Bra Size First
+          </h2>
+          <p>
+            Use our free calculator to determine your base size, then explore sister size alternatives with confidence.
+          </p>
+          <a class="btn-primary" style="display:inline-block" href="/bra-size-calculator/">
+            Calculate My Bra Size →
+          </a>
+        </div>
+      </section>
+      <section style="background:var(--color-surface);padding:56px 24px">
+        <div style="max-width:var(--max-width);margin:0 auto">
+          <h2 class="section-title">
+            Bra Size Comparisons
+          </h2>
+          <p class="section-subtitle">
+            Now that you understand sister sizes, explore our detailed side-by-side size comparisons to see the real differences in cup volume, band support, and fit.
+          </p>
+          <div class="card-grid" style="margin-top:24px">
+            <a class="card" style="display:block;background:linear-gradient(135deg, var(--color-primary-light), #f9eaf3);border:2px solid var(--color-primary)" href="/bra-size-guide/compare/32d-vs-34c/">
+              <h3>
+                32D vs 34C
+              </h3>
+              <p>
+                Sister sizes with ~420 cc each. Find the right balance between band snugness and comfort.
+              </p>
+            </a>
+            <a class="card" href="/bra-size-guide/compare/34b-vs-36c/">
+              <h3>
+                34B vs 36C
+              </h3>
+              <p>
+                Different cup volumes — 350 cc vs 450 cc. Understand which matches your measurements.
+              </p>
+            </a>
+            <a class="card" style="display:block;background:linear-gradient(135deg, var(--color-primary-light), #f9eaf3);border:2px solid var(--color-primary)" href="/bra-size-guide/compare/36b-vs-34c/">
+              <h3>
+                36B vs 34C
+              </h3>
+              <p>
+                Classic sister size trade-off: larger band + smaller cup, or smaller band + larger cup.
+              </p>
+            </a>
+            <a class="card" href="/bra-size-guide/compare/34dd-vs-36d/">
+              <h3>
+                34DD vs 36D
+              </h3>
+              <p>
+                Fuller bust comparison with ~700 cc each. Support and comfort for DD/D cups.
+              </p>
+            </a>
+            <a class="card" style="display:block;background:linear-gradient(135deg, var(--color-primary-light), #f9eaf3);border:2px solid var(--color-primary)" href="/bra-size-guide/compare/38c-vs-40b/">
+              <h3>
+                38C vs 40B
+              </h3>
+              <p>
+                Plus size sister sizes with ~480 cc each. Band comfort and support balance.
+              </p>
+            </a>
+            <a class="card" href="/bra-size-guide/compare/b-cup-vs-c-cup/">
+              <h3>
+                B Cup vs C Cup
+              </h3>
+              <p>
+                The most common cup size confusion — see the 1-inch difference in volume.
+              </p>
+            </a>
+            <a class="card" href="/bra-size-guide/compare/c-cup-vs-d-cup/">
+              <h3>
+                C Cup vs D Cup
+              </h3>
+              <p>
+                More volume, more projection, and different bra needs for each size.
+              </p>
+            </a>
+            <a class="card" href="/bra-size-guide/compare/d-cup-vs-dd-cup/">
+              <h3>
+                D Cup vs DD Cup
+              </h3>
+              <p>
+                Where support needs change dramatically between sizes.
+              </p>
+            </a>
+            <a class="card" href="/bra-size-guide/compare/dd-cup-vs-ddd-cup/">
+              <h3>
+                DD Cup vs DDD Cup
+              </h3>
+              <p>
+                The DD-to-DDD gap — professional fitting often reveals surprises here.
+              </p>
+            </a>
+            <a class="card" href="/bra-size-guide/compare/wireless-vs-wired-bra/">
+              <h3>
+                Wireless vs Wired Bra
+              </h3>
+              <p>
+                Not a cup comparison — style choice for breast shape and daily comfort.
+              </p>
+            </a>
+          </div>
+        </div>
+      </section>
+      <section class="related-links">
+        <div class="related-links-inner">
+          <h2>
+            Explore More
+          </h2>
+          <div class="related-grid">
+            <a href="/bra-size-guide/compare/">
+              All Comparisons
+            </a>
+            <a href="/bra-size-calculator/">
+              Bra Size Calculator
+            </a>
+            <a href="/bra-size-guide/">
+              Bra Size Guides
+            </a>
+            <a href="/how-to-measure-bra-size/">
+              How to Measure Bra Size
+            </a>
+            <a href="/bra-buying-guide/">
+              Bra Buying Guide
+            </a>
+            <a href="/best-comfort-bras/">
+              Most Comfortable Bras
+            </a>
+            <a href="/best-wireless-bras/">
+              Best Wireless Bras
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="classic-footer">
+  <div class="cf-inner">
+    <p class="cf-brand">Breast Calculator</p>
+    <p class="cf-tagline">Free science-based bra fitting tools and breast health education.</p>
+    <a class="cf-email" href="mailto:contact@breastcalculator.com">contact@breastcalculator.com</a>
+    <nav class="cf-links" aria-label="Footer">
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+      <a href="/privacy/">Privacy Policy</a>
+      <a href="/terms/">Terms of Use</a>
+    </nav>
+    <p class="cf-copy">&copy; 2026 Breast Calculator. For informational purposes only — not a substitute for medical advice.</p>
+  </div>
+</footer>
+    <button id="footerBackToTop" class="fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full bg-[#fdf8f5] border border-[#e6d5c3] text-[#8b7355] hover:text-[#6b5344] hover:border-[#6b5344] shadow-md flex items-center justify-center transition-all duration-300 opacity-0 pointer-events-none" aria-label="Back to top">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="18 15 12 9 6 15"></polyline>
+      </svg>
+    </button>
+    <div class="modal-overlay" id="privacyModal">
+      <div class="modal">
+        <h3>
+          Privacy Settings
+        </h3>
+        <label>
+          <input type="checkbox" id="ckFunc" disabled="" checked=""/>
+          <span>
+            Functional Cookies (always on)
+          </span>
+        </label>
+        <label>
+          <input type="checkbox" id="ckAnalytics"/>
+          <span>
+            Analytics Cookies
+          </span>
+        </label>
+        <div class="modal-actions">
+          <button class="btn-secondary">
+            Cancel
+          </button>
+          <button class="btn-primary">
+            Save Settings
+          </button>
+        </div>
+      </div>
+    </div>
+    <script src="/assets/consent-banner.js?v=20260721" defer></script>
+  <script src="/assets/classic-ui.js?v=20260721" defer></script>
+</body>
+</html>

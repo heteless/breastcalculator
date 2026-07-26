@@ -1,0 +1,58 @@
+
+/* section 30 — Breast Brand eyebrow */
+.calc-field-eyebrow { display: inline-flex !important; align-items: center !important; gap: 8px !important; font-family: var(--font-sans) !important; font-size: 0.62rem !important; font-weight: 700 !important; letter-spacing: 0.32em !important; text-transform: uppercase !important; color: #6b8a5e !important; margin-bottom: 6px !important; padding: 4px 12px 4px 8px !important; background: rgba(107,138,94,0.1) !important; border-radius: 100px !important; border: 1px solid rgba(107,138,94,0.18) !important; }
+.calc-field-eyebrow-dot { width: 6px !important; height: 6px !important; border-radius: 50% !important; background: #6b8a5e !important; box-shadow: 0 0 0 2px rgba(107,138,94,0.3) !important; animation: bcSisterPulse 2.2s ease-in-out infinite !important; }
+.calc-field-eyebrow-sub { font-family: var(--font-serif) !important; font-style: italic !important; font-weight: 500 !important; font-size: 0.66rem !important; letter-spacing: 0.04em !important; text-transform: lowercase !important; color: #8b6f5f !important; margin-left: 2px !important; }
+
+/* section 29 — Sister Size Comparator (precision instrument) */
+.bc-compass-gauge { position: relative !important; padding: 14px 4% 8px !important; max-width: 720px !important; margin: 0 auto 16px !important; }
+.bc-compass-gear { position: absolute !important; left: -2px !important; right: -2px !important; height: 6px !important; background: repeating-linear-gradient(90deg, rgba(184,151,130,0.6) 0 2px, transparent 2px 7px) !important; pointer-events: none !important; }
+.bc-compass-gear-top { top: 0 !important; }
+.bc-compass-gear-bottom { bottom: 0 !important; }
+.bc-compass-track { position: relative !important; height: 88px !important; background: linear-gradient(180deg, transparent 0%, transparent 32%, rgba(255,255,255,0.42) 32%, rgba(255,255,255,0.42) 68%, transparent 68%, transparent 100%) !important; }
+.bc-compass-ruler { position: absolute !important; inset: 0 !important; }
+.bc-compass-tick { position: absolute !important; top: 0 !important; bottom: 0 !important; transform: translateX(-50%) !important; width: 0 !important; }
+.bc-compass-tick-line { position: absolute !important; left: 50% !important; transform: translateX(-50%) !important; top: 30px !important; height: 30px !important; width: 1px !important; background: rgba(184,151,130,0.5) !important; }
+.bc-compass-tick-you .bc-compass-tick-line { width: 2px !important; height: 38px !important; top: 26px !important; background: linear-gradient(180deg, #6b8a5e 0%, #b86054 100%) !important; }
+.bc-compass-tick-sister .bc-compass-tick-line { width: 1.5px !important; height: 34px !important; top: 28px !important; background: rgba(184,96,84,0.65) !important; }
+.bc-compass-tick-cup { position: absolute !important; bottom: 0 !important; left: 50% !important; transform: translateX(-50%) !important; font-family: var(--font-sans) !important; font-size: 0.6rem !important; font-weight: 700 !important; color: #8b4a3a !important; padding-top: 5px !important; }
+.bc-compass-tick-you .bc-compass-tick-cup { color: #6b8a5e !important; font-size: 0.72rem !important; font-weight: 800 !important; }
+.bc-compass-tick-minor { position: absolute !important; top: 42px !important; height: 14px !important; width: 1px !important; background: rgba(184,151,130,0.28) !important; transform: translateX(-50%) !important; }
+.bc-compass-needle { position: absolute !important; top: -8px !important; bottom: -8px !important; transform: translateX(-50%) !important; z-index: 5 !important; pointer-events: none !important; transition: left 0.6s cubic-bezier(0.34, 1.4, 0.64, 1) !important; }
+.bc-compass-needle-pin { position: absolute !important; top: 22px !important; left: 50% !important; transform: translateX(-50%) !important; width: 12px !important; height: 12px !important; border-radius: 50% !important; background: linear-gradient(135deg, #b86054 0%, #6b3328 100%) !important; box-shadow: 0 0 0 3px rgba(255,255,255,0.95), 0 0 0 5px rgba(184,96,84,0.5), 0 3px 6px rgba(107,51,40,0.35) !important; }
+.bc-compass-needle-line { position: absolute !important; top: 28px !important; bottom: 12px !important; left: 50% !important; transform: translateX(-50%) !important; width: 2px !important; background: linear-gradient(180deg, #b86054 0%, transparent 100%) !important; }
+.bc-compass-needle-flag { position: absolute !important; bottom: -28px !important; left: 50% !important; transform: translateX(-50%) !important; background: linear-gradient(135deg, #6b3328 0%, #b86054 100%) !important; color: #fff !important; padding: 2px 8px 3px !important; border-radius: 4px !important; white-space: nowrap !important; box-shadow: 0 2px 6px rgba(107,51,40,0.3) !important; }
+.bc-compass-needle-cup { font-family: var(--font-serif) !important; font-style: italic !important; font-weight: 600 !important; font-size: 0.85rem !important; line-height: 1 !important; }
+.bc-compass-needle-lbl { font-family: var(--font-sans) !important; font-size: 0.45rem !important; font-weight: 700 !important; letter-spacing: 0.18em !important; text-transform: uppercase !important; margin-top: 1px !important; opacity: 0.9 !important; }
+.bc-compass-empty-text { text-align: center !important; padding: 18px 0 0 !important; max-width: 520px !important; margin: 0 auto !important; }
+.bc-compass-empty-icon { display: inline-block !important; color: #b86054 !important; font-size: 1.2rem !important; margin-right: 6px !important; }
+.bc-compass-empty-text p { font-family: var(--font-serif) !important; font-style: italic !important; font-weight: 500 !important; font-size: 0.92rem !important; line-height: 1.5 !important; color: #8b6f5f !important; margin: 0 !important; }
+.bc-compass-empty-text p em { font-style: italic !important; color: #6b3328 !important; font-weight: 600 !important; }
+.bc-compass-grid { max-width: 720px !important; margin: 16px auto 12px !important; padding: 0 4% !important; }
+.bc-compass-grid-eyebrow { font-family: var(--font-sans) !important; font-size: 0.62rem !important; font-weight: 700 !important; letter-spacing: 0.22em !important; text-transform: uppercase !important; color: #8b4a3a !important; text-align: center !important; margin-bottom: 10px !important; }
+.bc-compass-grid-cells { display: grid !important; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)) !important; gap: 10px !important; }
+.bc-compass-cell { padding: 12px 8px !important; background: rgba(255,255,255,0.5) !important; border: 1px solid rgba(184,151,130,0.28) !important; border-radius: 8px !important; text-align: center !important; transition: all 0.2s ease !important; }
+.bc-compass-cell:hover { transform: translateY(-2px) !important; box-shadow: 0 4px 12px -2px rgba(107,83,68,0.15) !important; }
+.bc-compass-cell-you { background: linear-gradient(135deg, rgba(107,138,94,0.18) 0%, rgba(107,138,94,0.08) 100%) !important; border-color: #6b8a5e !important; border-width: 1.5px !important; }
+.bc-compass-cell-sister { background: linear-gradient(135deg, rgba(184,96,84,0.1) 0%, rgba(184,96,84,0.04) 100%) !important; }
+.bc-compass-cell-extended { opacity: 0.7 !important; }
+.bc-compass-cell-role { font-family: var(--font-sans) !important; font-size: 0.55rem !important; font-weight: 700 !important; letter-spacing: 0.18em !important; text-transform: uppercase !important; color: #8b4a3a !important; margin-bottom: 4px !important; }
+.bc-compass-cell-you .bc-compass-cell-role { color: #6b8a5e !important; }
+.bc-compass-cell-size { font-family: var(--font-serif) !important; font-style: italic !important; font-weight: 600 !important; font-size: 1.3rem !important; color: #6b3328 !important; line-height: 1.1 !important; margin-bottom: 3px !important; }
+.bc-compass-cell-you .bc-compass-cell-size { color: #4a6240 !important; }
+.bc-compass-cell-diff { font-family: var(--font-sans) !important; font-size: 0.65rem !important; font-style: italic !important; color: #8b6f5f !important; }
+.bc-compass-readout { display: grid !important; grid-template-columns: repeat(3, 1fr) !important; max-width: 720px !important; margin: 12px auto 0 !important; padding: 12px 0 !important; border-top: 1px solid rgba(184,151,130,0.25) !important; border-bottom: 1px solid rgba(184,151,130,0.25) !important; }
+.bc-compass-readout-row { display: flex !important; flex-direction: column !important; align-items: center !important; gap: 3px !important; padding: 0 8px !important; border-right: 1px solid rgba(184,151,130,0.18) !important; }
+.bc-compass-readout-row:last-child { border-right: none !important; }
+.bc-compass-readout-label { font-family: var(--font-sans) !important; font-size: 0.55rem !important; font-weight: 700 !important; letter-spacing: 0.18em !important; text-transform: uppercase !important; color: #8b4a3a !important; }
+.bc-compass-readout-value { font-family: var(--font-serif) !important; font-style: italic !important; font-weight: 600 !important; font-size: 0.92rem !important; color: #6b3328 !important; line-height: 1.2 !important; text-align: center !important; }
+@media (max-width: 540px) {
+  .bc-compass-track { height: 78px !important; }
+  .bc-compass-tick-cup { font-size: 0.5rem !important; }
+  .bc-compass-needle-flag { padding: 1px 6px 2px !important; }
+  .bc-compass-needle-cup { font-size: 0.75rem !important; }
+  .bc-compass-readout { grid-template-columns: 1fr !important; gap: 8px !important; }
+  .bc-compass-readout-row { border-right: none !important; border-bottom: 1px solid rgba(184,151,130,0.15) !important; padding-bottom: 6px !important; }
+  .bc-compass-readout-row:last-child { border-bottom: none !important; }
+  .bc-compass-grid-cells { grid-template-columns: repeat(2, 1fr) !important; }
+}

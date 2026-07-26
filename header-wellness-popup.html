@@ -11,9 +11,6 @@
     </title>
     <meta name="description" content="Header pop-up with clickable wellness article cards. Reference implementation for navigation enhancement.">
     <meta name="robots" content="noindex,nofollow">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
     <style>
       /* ============================================================ DESIGN TOKENS — shared with main site ============================================================ */ :root { --sand:#f4e3d7; --sand-light:#fcf3ec; --rose:#dcb4a5; --rose-light:#e8c5b9; --rose-dark:#c49585; --cream:#fff9f5; --text:#3d2c2a; --text-light:#7a5f5a; --text-muted:#a08882; --heading:#2d1e1c; --heading-warm:#5a3d38; --bg:#fff9f5; --bg-card:#fff; --border:#e8d8cf; --shadow:0 2px 12px rgba(61,44,42,.06); --shadow-hover:0 8px 28px rgba(61,44,42,.10); --radius:16px; --radius-sm:10px; --radius-xs:6px; --font-sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; --font-serif:'Playfair Display',Georgia,'Times New Roman',serif; --transition-fast:.18s cubic-bezier(.4,0,.2,1); --transition-smooth:.32s cubic-bezier(.22,1,.36,1); --tap-min:48px }
       * { box-sizing:border-box; margin:0; padding:0 }
@@ -90,11 +87,11 @@
     </style>
   </head>
   <body>
-    <nav class="navbar" role="navigation" aria-label="Main navigation">
+<a class="skip-to-content" href="#main-content">Skip to main content</a>
+    <nav class="navbar classic-navbar" role="navigation" aria-label="Main navigation">
       <div class="nav-inner">
-        <a href="/" class="nav-logo">
-          BREAST CALCULATOR
-        </a>
+        <a href="/" class="nav-logo"><img src="/favicon.ico" alt="" class="nav-logo-img" width="28" height="28" />
+            <span>BREAST CALCULATOR</span></a>
         <ul class="nav-categories">
           <li class="nav-category">
             <span class="nav-label" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">
@@ -408,8 +405,8 @@
         </ul>
         </div>
     </nav>
-    <main class="demo-section">
-      <h1 class="demo-h1">
+    <main id="main-content" class="demo-section">
+      <h1 class="demo-h1 text-center">
         Wellness Header Pop-up
       </h1>
       <p class="demo-sub">
@@ -521,5 +518,7 @@
     <script>
       /* ============================================================ BEHAVIOR — keyboard/touch activation for the nav dropdown Mirrors the existing site behavior in /script.js ============================================================ */ (function(){ 'use strict'; var categories = document.querySelectorAll('.nav-category'); function closeAll(){ categories.forEach(function(c){ c.classList.remove('open'); }); document.querySelectorAll('.nav-label[aria-expanded="true"]').forEach(function(l){ l.setAttribute('aria-expanded','false'); }); } function openItem(li){ closeAll(); li.classList.add('open'); var label = li.querySelector(':scope> .nav-label'); if (label) label.setAttribute('aria-expanded','true'); } function isInsideDropdown(target){ return target.closest && target.closest('.dropdown-menu'); } categories.forEach(function(li){ var label = li.querySelector(':scope> .nav-label'); if (!label) return; // Click toggles (mobile / touch) label.addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); if (li.classList.contains('open')) { closeAll(); } else { openItem(li); } }); // Keyboard label.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (li.classList.contains('open')) closeAll(); else openItem(li); } else if (e.key === 'Escape') { closeAll(); label.blur(); } }); }); // Click outside closes document.addEventListener('click', function(e){ if (!isInsideDropdown(e.target) && !e.target.closest('.nav-label')) { closeAll(); } }); // Escape anywhere document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeAll(); }); })();
     </script>
-  </body>
+    <script src="/assets/consent-banner.js?v=20260721" defer></script>
+  <script src="/assets/classic-ui.js?v=20260721" defer></script>
+</body>
 </html>

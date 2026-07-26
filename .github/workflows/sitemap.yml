@@ -1,0 +1,35 @@
+name: Update Sitemap
+
+on:
+  schedule:
+    # Run daily at 00:00 UTC to keep the sitemap fresh
+    - cron: '0 0 * * *'
+  push:
+    branches: [ main, master ]
+    paths:
+      - '**/*.html'
+      - 'scripts/generate-sitemap.js'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+
+      - name: Generate sitemap.xml
+        run: node scripts/generate-sitemap.js
+
+      - name: Commit sitemap
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'chore: update sitemap.xml'
+          file_pattern: sitemap.xml

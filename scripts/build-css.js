@@ -24,15 +24,19 @@ const SOURCES = [
   path.join(ROOT, 'tailwind-built.css'),
   path.join(ROOT, 'style.css'),
   path.join(ROOT, 'assets', 'bra-calculator.css'),
+  path.join(ROOT, 'assets', 'classic-system.css'),
+  path.join(ROOT, 'assets', 'global-layout.css'),
+  path.join(ROOT, 'assets', 'tool-layout.css'),
 ];
 
 const OUT = path.join(ROOT, 'main.css');
 
 const BANNER = `/*!
  * main.css — combined stylesheet for breastcalculator.com
- *   ├── tailwind-built.css  (Tailwind utilities, purged)
- *   ├── style.css           (site chrome, components, theme)
- *   └── assets/bra-calculator.css  (calculator page styles)
+ *   ├── tailwind-built.css       (Tailwind utilities, purged)
+ *   ├── style.css                (site chrome, components, theme)
+ *   ├── assets/bra-calculator.css  (calculator page styles)
+ *   └── assets/classic-system.css  (classical brand design system overlay)
  * Loaded once via preload + onload swap; see header partial for the
  * <link> pattern.
  */
