@@ -1,4 +1,4 @@
-# === IDE/OS ===
+# === IDE / OS ===
 .vscode/
 .idea/
 .DS_Store
@@ -26,7 +26,7 @@ package-lock.json
 dist/
 dist-dryrun/
 
-# === Audit/log/debug output from scripts/ ===
+# === Audit / log / debug output from scripts/ ===
 .audit*.log
 .tree.log
 .file-tree.txt
@@ -36,6 +36,9 @@ dist-dryrun/
 
 # === Local generation cache used by hub builders ===
 .tmp-gen/
+.tmp-*.log
+.tmp-*.html
+.tmp-*
 
 # === IndexNow state ===
 .indexnow-key
@@ -49,3 +52,84 @@ reports/
 sitemap_fixed.xml
 sitemap.xml.bak
 .tmp-sitemap.xml
+
+# ============================================================
+# Dev / tooling artifacts — never sync to the production repo
+# ============================================================
+
+# IDE & tool state
+.agents/
+.trae/
+.reasonix/
+.cursor/
+.aider*
+.windsurf/
+
+# Local dev-server output
+.next-dev-server/
+.next/
+.nuxt/
+.cache/
+
+# Test output & one-off files
+test-output.html
+test-output.txt
+test-output.*
+_*.cjs
+72df502a4b3a4fcbb6662b9eedd24912.txt
+# any random hex-named tmp file
+[a-f0-9]{16,}.txt
+
+# Backup / temp / fragment files
+*.bak
+*.tmp
+*.orig
+*.rej
+*.swp
+_tmp.*
+temp_*
+~*
+
+# Root-level dev scripts & template fragments
+# (production assets live under /assets/ and /common.js)
+dev-server.js
+calculator.js
+script.js
+footer.html
+header-wellness-popup.html
+skills-lock.json
+
+# Tailwind dev sources (production CSS lives in /main.css and /assets/*.css)
+tailwind-input.css
+tailwind.config.js
+tailwind-built.css
+# PurgeCSS dev config
+purgecss.config.cjs
+
+# Sitemap XML used only by the dev SEO tooling
+# (Cloudflare Pages reads /sitemap.xml from the repo root in production)
+# keep this commented if you want sitemap.xml tracked
+# sitemap.xml
+
+# === Dev script directory (build / test / generate / inject) ===
+# Production build is fully static; scripts/ is local dev tooling only.
+scripts/
+
+# === .well-known split ===
+# Production files: keep llms.txt, security.txt, api-catalog
+# Dev-only agent skills live under .well-known/agent-skills/
+.well-known/agent-skills/
+.well-known/dns-aid/
+.well-known/link-headers/
+.well-known/markdown-negotiation/
+.well-known/api-catalog.json
+
+# === Root-level config & docs not needed for production ===
+# Cloudflare config: KEEP wrangler.toml and _headers / _redirects
+# Other config: dev-only
+.husky/
+.lintstagedrc*
+.commitlint*
+.editorconfig
+.prettierrc*
+.eslintrc*
