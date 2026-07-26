@@ -1,0 +1,88 @@
+/* 工具页统一横向布局：以体积计算器的 720px 内容轨道为基准。 */
+.tool-calculator-shell,
+.inputs-panel,
+.result-card-v2,
+.interpretation-v2,
+.how-to-measure,
+.tool-faq-v2,
+.quick-actions-v2,
+.tool-cta,
+.tool-ref,
+.psb-bar {
+  width: min(calc(100% - 32px), 720px);
+  margin-inline: auto;
+}
+
+.tool-calculator-shell {
+  margin-top: 1.5rem;
+  margin-bottom: 1.75rem;
+}
+
+.tool-calculator-shell > .form-group,
+.tool-calculator-shell > #simpleFields,
+.tool-calculator-shell > #advancedFields,
+.tool-calculator-shell > .form-row,
+.tool-calculator-shell > .calc-cta,
+.tool-calculator-shell > .calc-secondary,
+.tool-calculator-shell > .result-card-v2,
+.tool-calculator-shell > .quick-actions-v2,
+.tool-calculator-shell > .quiz-wrapper,
+.tool-calculator-shell > .shape-map,
+.tool-calculator-shell > .interpretation-v2,
+.tool-calculator-shell > .how-to-measure,
+.tool-calculator-shell > .tool-faq-v2 {
+  width: 100%;
+}
+
+.tool-calculator-shell > .form-group,
+.tool-calculator-shell > #simpleFields,
+.tool-calculator-shell > #advancedFields,
+.tool-calculator-shell > .form-row {
+  margin-bottom: 1rem;
+}
+
+.tool-calculator-shell > .calc-cta,
+.tool-calculator-shell > .calc-secondary,
+.tool-calculator-shell > .result-card-v2,
+.tool-calculator-shell > .quick-actions-v2 {
+  margin-inline: 0;
+}
+
+.inputs-panel {
+  margin-top: 1.5rem !important;
+}
+
+.tool-hero-v2 .container {
+  width: min(calc(100% - 32px), 960px);
+  padding-inline: 0;
+}
+
+@media (max-width: 640px) {
+  .tool-calculator-shell,
+  .inputs-panel,
+  .result-card-v2,
+  .interpretation-v2,
+  .how-to-measure,
+  .tool-faq-v2,
+  .quick-actions-v2,
+  .tool-cta,
+  .tool-ref,
+  .psb-bar {
+    width: min(calc(100% - 24px), 720px);
+  }
+
+  .tool-calculator-shell {
+    margin-top: 1rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .tool-calculator-shell .form-row[style] {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+
+  .tool-calculator-shell .form-group[style] {
+    min-width: 0 !important;
+  }
+}

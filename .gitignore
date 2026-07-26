@@ -23,7 +23,12 @@ package-lock.json
 .wrangler/
 
 # === Build output (Cloudflare Workers assets directory) ===
+# dist/ MUST be tracked so Cloudflare Pages (which clones the repo and
+# cannot run our local `npm run build` because scripts/ is excluded) can
+# serve the latest build. We commit the generated `dist/` and never edit
+# it by hand. If you need to rebuild: `node scripts/build-dist.js`.
 dist/
+!dist/
 dist-dryrun/
 
 # === Audit / log / debug output from scripts/ ===
@@ -112,8 +117,29 @@ purgecss.config.cjs
 # sitemap.xml
 
 # === Dev script directory (build / test / generate / inject) ===
-# Production build is fully static; scripts/ is local dev tooling only.
-scripts/
+# Production build is fully static. We allow a minimal allowlist of
+# build scripts so Cloudflare Pages can run `npm run build` and
+# regenerate dist/ on the edge. Everything else stays untracked.
+#
+# Implementation: re-include the whole `scripts/` dir, then ignore
+# everything except the allowlist. This is more reliable than
+# `scripts/ + !scripts/foo.js` which still matches via the directory.
+!scripts/
+/scripts/*
+# --- Allowlist: scripts required by `npm run build` ---
+!/scripts/build-tailwind.js
+!/scripts/purgecss.js
+!/scripts/build-css.js
+!/scripts/split-script.js
+!/scripts/reflow-fix.js
+!/scripts/idle-schedule.js
+!/scripts/dom-reduce.js
+!/scripts/layout-normalize.js
+!/scripts/perf-fixes.js
+!/scripts/build-dist.js
+!/scripts/optimize.js
+!/scripts/cache-bust.js
+!/scripts/articles-data.js
 
 # === .well-known split ===
 # Production files: keep llms.txt, security.txt, api-catalog
