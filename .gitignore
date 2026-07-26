@@ -97,9 +97,13 @@ temp_*
 
 # Root-level dev scripts & template fragments
 # (production assets live under /assets/ and /common.js)
+# NOTE: script.js is intentionally tracked — it is the source that
+# scripts/split-script.js reads to generate common.js + calculator.js
+# during the Cloudflare build. Without it, `npm run build` fails with
+# ENOENT in CI. It is excluded from dist/ via EXCLUDE_FILES in
+# scripts/build-dist.js, so it never ships to production.
 dev-server.js
 calculator.js
-script.js
 footer.html
 header-wellness-popup.html
 skills-lock.json
