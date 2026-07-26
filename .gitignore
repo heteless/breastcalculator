@@ -140,6 +140,8 @@ purgecss.config.cjs
 !/scripts/optimize.js
 !/scripts/cache-bust.js
 !/scripts/articles-data.js
+# --- Allowlist: scripts required by GitHub Actions workflows ---
+!/scripts/generate-sitemap.js
 
 # === .well-known split ===
 # Production files: keep llms.txt, security.txt, api-catalog
