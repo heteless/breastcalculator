@@ -7176,7 +7176,7 @@ form.calc-form + .bc-debug,
 
 
 
-/* ─── tool-layout.css (4779 B) ─── */
+/* ─── tool-layout.css (5545 B) ─── */
 /* 工具页统一横向布局：以体积计算器的 720px 内容轨道为基准。 */
 .steps-bar,
 .tool-calculator-shell,
@@ -7325,6 +7325,34 @@ body:has(#resultAccuracy) :is(.tool-breadcrumb, .steps-bar, .inputs-panel, .resu
 #main-content > .tool-faq h2,
 #main-content > .how-to-measure h2 {
   margin-bottom: 1rem;
+}
+
+/* 防止计算结果、说明文字、链接和嵌入内容撑开工具页。 */
+#main-content,
+#main-content :is(.tool-calculator-shell, .inputs-panel, .result-card-v2, .interpretation-v2, .how-to-measure, .tool-faq-v2, .tool-follow-up, .tool-cta, .tool-ref, .psb-bar) {
+  min-width: 0;
+}
+
+#main-content :is(p, li, h1, h2, h3, h4, summary, a, .big-val, .sub-val, .stat-val, .result-disclaimer, #conversionDetail) {
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+#main-content :is(img, svg, video, iframe, canvas) {
+  max-width: 100%;
+}
+
+#main-content .result-card-v2 .big-val {
+  max-width: 100%;
+  font-size: clamp(1.45rem, 7vw, 2.5rem);
+  line-height: 1.2;
+}
+
+#main-content .result-card-v2 .result-actions,
+#main-content .psb-actions,
+#main-content .quick-actions-v2 {
+  min-width: 0;
+  flex-wrap: wrap;
 }
 
 @media (max-width: 640px) {
