@@ -587,6 +587,7 @@
         <polyline points="18 15 12 9 6 15"/>
       </svg>
     </button>
+    <main id="main-content">
     <nav class="tool-breadcrumb breadcrumb" aria-label="Breadcrumb">
       <a href="/">
         Home
@@ -656,7 +657,8 @@
     <span class="step-label">Result</span>
   </div>
 </div>
-            </div>
+    <div class="tool-calculator-shell">
+      <form class="calc-form" onsubmit="return false">
             <div class="inputs-panel" style="margin-top:18px">
               <h4 class="inputs-title">
                 <span class="step-tag">
@@ -1155,6 +1157,7 @@
           </p>
         </details>
       </section>
+      <section class="tool-follow-up">
       <div>
         <h3>
           What is the typical breast volume range?
@@ -1191,6 +1194,7 @@
           . In Quick mode: ±30-50%&mdash;use for informal reference only. Neither mode replaces professional medical imaging for clinical decisions.
         </p>
       </div>
+      </section>
     </div>
     <div class="tool-ref">
       <p>
@@ -1299,6 +1303,7 @@
 <script>
   function toggleFooterCol(b){var u=b.nextElementSibling;while(u&&u.tagName!=='UL'){u=u.nextElementSibling}if(u){var sv=b.querySelector('svg');if(u.classList.contains('hidden')){u.classList.remove('hidden');if(sv)sv.style.transform='rotate(180deg)';b.setAttribute('aria-expanded','true')}else{u.classList.add('hidden');if(sv)sv.style.transform='';b.setAttribute('aria-expanded','false')}}}
 </script>
+<script>
 (function(){var bt=document.getElementById('footerBackToTop');if(!bt)return;window.addEventListener('scroll',function(){if(window.scrollY>500){bt.classList.remove('opacity-0','pointer-events-none')}else{bt.classList.add('opacity-0','pointer-events-none')}},{passive:true})})();
 </script>
 <script>

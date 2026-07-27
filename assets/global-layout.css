@@ -865,6 +865,121 @@ main a.btn-link-secondary[href*="/bra-size-calculator/"] {
   }
 }
 
+/* 内容页编辑排版：标题居中，正文保持新闻报道式左对齐。 */
+:where(.size-guide-content, article.article, .page-content, .specials-sub) {
+  text-align: left;
+}
+
+:where(.size-guide-content, article.article, .page-content, .specials-sub) > h1,
+:where(.size-guide-content, article.article, .page-content, .specials-sub) > header h1,
+:where(.size-guide-content, article.article, .page-content, .specials-sub) > section > h1,
+:where(.size-guide-content, article.article, .page-content, .specials-sub) h2 {
+  text-align: center !important;
+  text-wrap: balance;
+}
+
+:where(.size-guide-content, article.article, .page-content, .specials-sub) > h2,
+:where(.size-guide-content, article.article, .page-content, .specials-sub) > section > h2 {
+  margin-top: 3rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+:where(.size-guide-content, article.article, .page-content, .specials-sub) p,
+:where(.size-guide-content, article.article, .page-content, .specials-sub) li {
+  text-align: left;
+  line-height: 1.9;
+}
+
+:where(.size-guide-content, article.article, .page-content, .specials-sub) p {
+  margin-bottom: 1.35rem;
+}
+
+:where(.size-guide-content, article.article, .page-content, .specials-sub) > section,
+:where(.size-guide-content, article.article, .page-content, .specials-sub) .guide-section {
+  margin-bottom: 2.75rem;
+}
+
+:where(.size-guide-content, article.article, .page-content, .specials-sub) .placeholder-img,
+:where(.size-guide-content, article.article, .page-content, .specials-sub) .hero-ad-slot {
+  min-height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1.75rem 0 2rem;
+  padding: 2rem 1.5rem;
+  border: 1px dashed var(--rose);
+  border-radius: var(--radius-sm);
+  background: linear-gradient(180deg, var(--cream), var(--sand-light));
+  color: var(--text-muted);
+  text-align: center;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+}
+
+:where(.size-guide-content, article.article, .page-content, .specials-sub) .hero-ad-slot {
+  min-height: 90px;
+  margin-top: 0;
+  margin-bottom: 2.5rem;
+  border-style: solid;
+  border-color: var(--border);
+  background: var(--sand-light);
+}
+
+/* 明确覆盖旧模板规则，保证内容页 H2 始终居中。 */
+.specials-sub h2,
+.size-guide-content h2,
+article.article h2,
+.page-content h2 {
+  text-align: center !important;
+}
+
+/* 工具页说明、FAQ、参考资料使用一致的纵向节奏。 */
+#main-content > .interpretation-v2,
+#main-content > .how-to-measure,
+#main-content > .tool-support,
+#main-content > .tool-faq,
+#main-content > .tool-faq-v2,
+#main-content > .tool-ref,
+#main-content > .tool-follow-up {
+  margin-top: 2rem;
+  margin-bottom: 2.5rem;
+}
+
+#main-content > .tool-support p,
+#main-content > .tool-faq p,
+#main-content > .tool-faq-v2 p,
+#main-content > .tool-follow-up p,
+#main-content > .tool-ref {
+  line-height: 1.85;
+}
+
+#main-content > .tool-support h2,
+#main-content > .tool-faq h2,
+#main-content > .tool-faq-v2 h2,
+#main-content > .tool-follow-up h2,
+#main-content > .how-to-measure h2 {
+  text-align: center;
+  margin-bottom: 1.25rem;
+}
+
+@media (max-width: 640px) {
+  :where(.size-guide-content, article.article, .page-content, .specials-sub) {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  :where(.size-guide-content, article.article, .page-content, .specials-sub) h2 {
+    margin-top: 2.25rem;
+  }
+
+  :where(.size-guide-content, article.article, .page-content, .specials-sub) .placeholder-img {
+    min-height: 120px;
+    padding: 1.5rem 1rem;
+  }
+}
+
 @media (max-width: 380px) {
   .hero .bra-calculator.embedded .calc-actions .btn-primary {
     padding: 12px 18px !important;
