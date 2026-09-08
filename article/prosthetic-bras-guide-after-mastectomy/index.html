@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head><link rel="stylesheet" href="/main.css"/>
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+    <link rel="preconnect" href="https://googleads.g.doubleclick.net" crossorigin>
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
     
     
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-5SB8FNFYDV"></script>
@@ -437,6 +440,15 @@
           <p>
             Most surgeons recommend waiting 6&ndash;8 weeks after mastectomy before being fitted for a permanent prosthetic bra. During the immediate recovery period, a soft, post-surgical compression bra (without underwire and with front closure) is usually recommended. Once the surgical site has healed and any drains are removed, you can transition to a fitted prosthetic bra.
           </p>
+        <!-- AdSense In-Article Ad -->
+        <div class="article-in-ad" style="margin:40px auto;width:100%;max-width:100%;text-align:center;padding:18px 0;clear:both;min-height:260px;">
+          <ins class="adsbygoogle"
+               style="display:block; text-align:center;"
+               data-ad-layout="in-article"
+               data-ad-format="fluid"
+               data-ad-client="ca-pub-7388117485013143"
+               data-ad-slot="3789259624"></ins>
+        </div>
           <h2>
             Types of Breast Prostheses
           </h2>
@@ -867,7 +879,16 @@
         </a>
       </div>
     </section>
-  </main>
+  
+    <!-- Bottom Ad (auto / full-width responsive) -->
+    <div class="article-bottom-ad" style="margin:40px auto 24px;max-width:min(100%, 960px);padding:18px 22px;text-align:center;clear:both;background:var(--sand-light);border:1px solid var(--border);border-radius:var(--radius);min-height:120px;">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-7388117485013143"
+           data-ad-slot="4196453734"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+    </div></main>
   <footer class="classic-footer">
   <div class="cf-inner">
     <p class="cf-brand">Breast Calculator</p>
@@ -921,5 +942,26 @@
 </script>
   <script src="/assets/consent-banner.js?v=20260721" defer></script>
   <script src="/assets/classic-ui.js?v=20260721" defer></script>
-</body>
+
+    <script>
+      // AdSense Lazy Load via IntersectionObserver
+      window.adsbygoogle = window.adsbygoogle || [];
+      if ("IntersectionObserver" in window) {
+        var adObserver = new IntersectionObserver(function(entries, observer) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              (adsbygoogle = window.adsbygoogle || []).push({});
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { rootMargin: "200px 0px" });
+        document.querySelectorAll("ins.adsbygoogle").forEach(function(ad) { adObserver.observe(ad); });
+      } else {
+        // Fallback for old browsers
+        document.querySelectorAll("ins.adsbygoogle").forEach(function(ad) {
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        });
+      }
+    </script>
+  </body>
 </html>

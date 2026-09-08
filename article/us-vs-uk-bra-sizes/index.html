@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head><link rel="stylesheet" href="/main.css"/>
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+    <link rel="preconnect" href="https://googleads.g.doubleclick.net" crossorigin>
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
     
     
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-5SB8FNFYDV"></script>
@@ -624,6 +627,15 @@
           </a>
           outputs US, UK, EU, FR, and AU side by side so you can shop any brand with confidence. This guide explains where the two systems diverge, why it happens, and how to read a conversion chart.
         </p>
+        <!-- AdSense In-Article Ad -->
+        <div class="article-in-ad" style="margin:40px auto;width:100%;max-width:100%;text-align:center;padding:18px 0;clear:both;min-height:260px;">
+          <ins class="adsbygoogle"
+               style="display:block; text-align:center;"
+               data-ad-layout="in-article"
+               data-ad-format="fluid"
+               data-ad-client="ca-pub-7388117485013143"
+               data-ad-slot="3789259624"></ins>
+        </div>
         <h2>
           Why Do US and UK Cup Letters Differ?
         </h2>
@@ -1189,5 +1201,26 @@
     </div>
     <script src="/assets/consent-banner.js?v=20260721" defer></script>
   <script src="/assets/classic-ui.js?v=20260721" defer></script>
-</body>
+
+    <script>
+      // AdSense Lazy Load via IntersectionObserver
+      window.adsbygoogle = window.adsbygoogle || [];
+      if ("IntersectionObserver" in window) {
+        var adObserver = new IntersectionObserver(function(entries, observer) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              (adsbygoogle = window.adsbygoogle || []).push({});
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { rootMargin: "200px 0px" });
+        document.querySelectorAll("ins.adsbygoogle").forEach(function(ad) { adObserver.observe(ad); });
+      } else {
+        // Fallback for old browsers
+        document.querySelectorAll("ins.adsbygoogle").forEach(function(ad) {
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        });
+      }
+    </script>
+  </body>
 </html>
