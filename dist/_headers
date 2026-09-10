@@ -167,6 +167,14 @@
   Cache-Control: public, max-age=604800, stale-while-revalidate=2592000
 
 # --- Security headers & performance hints ---
+#
+# CSP note: https://*.skimresources.com is required by the Skimlinks
+# affiliate-automation snippet injected before </body> (script-src = the
+# loader itself, connect-src = its link-resolution calls, frame-src = its
+# hidden cross-domain cookie-sync frame). sl-sentry.skimlinks.com is that
+# loader's error reporter — a different registrable domain, so the
+# skimresources wildcard does not cover it. Without these the browser
+# blocks the snippet silently and no commission links are rewritten.
 
 /*
   X-Content-Type-Options: nosniff
@@ -174,7 +182,7 @@
   Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
   X-Frame-Options: DENY
   Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://pagead2.googlesyndication.com https://www.googletagmanager.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://*.analytics.google.com https://*.googlesyndication.com; frame-src https://googleads.g.doubleclick.net https://*.googlesyndication.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests; trusted-types bc bc-domains 'allow-duplicates'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://pagead2.googlesyndication.com https://www.googletagmanager.com https://cdn.jsdelivr.net https://*.skimresources.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://*.analytics.google.com https://*.googlesyndication.com https://*.skimresources.com https://sl-sentry.skimlinks.com; frame-src https://googleads.g.doubleclick.net https://*.googlesyndication.com https://*.skimresources.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests; trusted-types bc bc-domains 'allow-duplicates'
   Vary: Accept-Encoding
   Accept-CH: Sec-CH-Prefers-Color-Scheme, Sec-CH-UA-Mobile, Sec-CH-UA-Platform
   Critical-CH: Sec-CH-Prefers-Color-Scheme

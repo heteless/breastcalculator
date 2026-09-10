@@ -796,5 +796,8 @@
       (function(){'use strict';var T=document.getElementById('menuToggle'),D=document.getElementById('drawer'),O=document.getElementById('drawerOverlay'),C=document.getElementById('drawerClose');function o(){D.classList.add('open');O.classList.add('open');T.setAttribute('aria-expanded','true')}function c(){D.classList.remove('open');O.classList.remove('open');T.setAttribute('aria-expanded','false')}if(T)T.addEventListener('click',function(e){e.stopPropagation();D.classList.contains('open')?c():o()});if(O)O.addEventListener('click',c);if(C)C.addEventListener('click',c);document.addEventListener('keydown',function(e){if(e.key==='Escape'&&D.classList.contains('open'))c()});var cb=document.getElementById('cookieBanner'),pm=document.getElementById('privacyModal');if(!localStorage.getItem('cookieConsent')){cb.classList.add('show')}window.acceptCookies=function(){localStorage.setItem('cookieConsent','all');gtag('consent','update',{'analytics_storage':'granted'});cb.classList.remove('show')};window.openPrivacyModal=function(){cb.classList.remove('show');pm.classList.add('show')};window.closePrivacyModal=function(){pm.classList.remove('show')};window.savePrivacy=function(){var a=document.getElementById('ckAnalytics').checked?'granted':'denied';localStorage.setItem('cookieConsent','custom');gtag('consent','update',{'analytics_storage':a});pm.classList.remove('show')};document.getElementById('privacyLink').addEventListener('click',function(e){e.preventDefault();openPrivacyModal()});var pfd=document.getElementById('privacyFromDrawer');if(pfd)pfd.addEventListener('click',function(e){e.preventDefault();c();openPrivacyModal()});})();
     </script>
     <script src="/assets/consent-banner.js?v=20260721" defer></script>
-</body>
+
+  <!-- Skimlinks affiliate automation (publisher 309081X1797412) — must stay before </body> -->
+  <script type="text/javascript" src="https://s.skimresources.com/js/309081X1797412.skimlinks.js"></script>
+  </body>
 </html>

@@ -872,5 +872,8 @@
     (function(){ var dd=document.getElementById('drawer'),dov=document.getElementById('drawerOverlay'),mt=document.getElementById('menuToggle'),dc=document.getElementById('drawerClose'); function openDrawer(){if(dd){dd.classList.add('open')}if(dov){dov.classList.add('open')}if(mt){mt.setAttribute('aria-expanded','true')}} function closeDrawer(){if(dd){dd.classList.remove('open')}if(dov){dov.classList.remove('open')}if(mt){mt.setAttribute('aria-expanded','false')}} if(mt){mt.addEventListener('click',openDrawer)} if(dc){dc.addEventListener('click',closeDrawer)} if(dov){dov.addEventListener('click',closeDrawer)} document.addEventListener('keydown',function(e){if(e.key==='Escape'&&dd&&dd.classList.contains('open'))closeDrawer()}); })(); function toggleFooterCol(btn){ var col=btn.nextElementSibling; if(!col) return; var list=col.tagName==='UL'?col:col.querySelector('ul[data-footer-col]'); if(!list) return; var open=btn.getAttribute('aria-expanded')==='true'; btn.setAttribute('aria-expanded',open?'false':'true'); list.classList.toggle('hidden'); var svg=btn.querySelector('svg'); if(svg) svg.style.transform=open?'':'rotate(180deg)'; }
   </script>
   <script src="/assets/consent-banner.js?v=20260721" defer></script>
-</body>
+
+  <!-- Skimlinks affiliate automation (publisher 309081X1797412) — must stay before </body> -->
+  <script type="text/javascript" src="https://s.skimresources.com/js/309081X1797412.skimlinks.js"></script>
+  </body>
 </html>
