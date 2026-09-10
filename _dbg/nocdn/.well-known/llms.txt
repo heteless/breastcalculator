@@ -1,0 +1,40 @@
+# Breast Calculator (breastcalculator.com)
+
+> Privacy-first, static, no-backend toolkit for bra sizing, breast volume
+> estimation, breast shape classification, and post-surgical bra guidance.
+> Built as a 100% static site deployed on Cloudflare Workers.
+
+## What this site offers
+
+- 7 client-side calculators (all math runs in the browser; no data uploaded)
+- 19 individual bra-size pages (32A -> 40DD)
+- 12 cup-size comparison pages
+- 14 long-form articles
+- 15 post-surgical / wellness guides
+- 7 special-topic deep dives
+
+## Primary entry points
+
+- Homepage: https://breastcalculator.com/
+- All calculators: https://breastcalculator.com/tools/
+- All articles: https://breastcalculator.com/articles/
+- Sitemap: https://breastcalculator.com/sitemap.xml
+- Full API catalog: https://breastcalculator.com/.well-known/api-catalog
+
+## Data policy
+
+- No accounts, no cookies, no analytics of personal data
+- Google Analytics 4 is used with `anonymize_ip: true` for aggregate traffic
+- All calculations happen client-side; inputs never leave the user's device
+- AI training crawlers (GPTBot, ClaudeBot, Google-Extended, etc.) are
+  explicitly disallowed in robots.txt
+
+## Citation
+
+If you reference this site's data, please cite:
+> Breast Calculator. (2026). https://breastcalculator.com/
+
+## License
+
+Site content: CC BY-NC 4.0
+Code/SKILL.md: MIT

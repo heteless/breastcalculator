@@ -85,16 +85,24 @@ function minifyCSS(css) {
     // Preserve strings (so url("a b c") doesn't lose spaces) and comments
     // are already stripped. Collapse remaining whitespace.
     .replace(/\s+/g, ' ')
-    // Remove space around structural characters
-    .replace(/\s*([{};:,>+~()])\s*/g, '$1')
+    // Remove space around structural characters.
+    // NOTE: `+` is deliberately excluded. CSS requires whitespace around
+    // the `+` / `-` operators inside calc()/min()/max()/clamp(); stripping
+    // it produced `calc(1.5rem+env(...))`, which is invalid — the whole
+    // declaration then became invalid-at-computed-value-time and silently
+    // fell back to `auto` (broke #footerBackToTop bottom offset).
+    // `-` was never in this class, so `calc(a - b)` was always safe.
+    .replace(/\s*([{};:,>~()])\s*/g, '$1')
     // Drop trailing semicolons before closing brace
     .replace(/;}/g, '}')
     // Remove leading zero in numbers: 0.5em -> .5em
     .replace(/\b0+\.(\d+)/g, '.$1')
     // Shorten 6-digit colors
     .replace(/#([0-9a-f])\1([0-9a-f])\2([0-9a-f])\3\b/gi, '#$1$2$3')
-    // Shorten rgb(0,0,0) -> rgb(0,0,0) is fine; collapse 0% to 0
-    .replace(/\b0(\s*%|px|em|rem|vh|vw)\b/g, '0')
+    // Collapse `0px` -> `0` etc. This runs AFTER the whitespace pass, so a
+    // `0px` inside calc() can never end up glued to an operator. Value is
+    // unchanged for CSS: unitless zero is a valid <length>.
+    .replace(/\b0(?:%|px|em|rem|vh|vw)\b/g, '0')
     .trim();
 }
 

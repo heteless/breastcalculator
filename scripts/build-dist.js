@@ -32,6 +32,10 @@ const EXCLUDE_DIRS = new Set([
   '__tests__',
   '.wrangler',
   '.cache',
+  // Local debugging scratch space (_dbg/class-check.js, _dbg/nocdn/**).
+  // The nocdn/ tree is an A/B copy of 41 pages used to validate the
+  // Tailwind-CDN removal — build tooling only, never a public asset.
+  '_dbg',
   // SEO audit reports — kept on disk for the audit scripts to read,
   // but they contain raw crawl output that should never be served as
   // a public web asset.

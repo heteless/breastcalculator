@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head><link rel="stylesheet" href="/main.css"/>
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+    <link rel="preconnect" href="https://googleads.g.doubleclick.net" crossorigin>
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
     
     
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-5SB8FNFYDV"></script>
@@ -54,10 +57,6 @@
       .article-card h3 { font-size:1rem }
       .article-card p { font-size:0.84rem }
     </style>
-    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
-    <script>
-      tailwind.config={corePlugins:{preflight:false},theme:{extend:{colors:{brand:{bg:'#fdf8f5',text:'#8b7355',hover:'#6b5344',border:'#e8ddd0',highlight:'#7a6455'}}}}}
-    </script>
     <meta name="theme-color" content="#f4e3d7">
     <script type="application/ld+json">
       {
@@ -429,6 +428,18 @@
     </div>
     <main id="main-content">
       <div class="container">
+        <!-- In-Article Ad (above the fold) -->
+        <div class="article-in-ad" style="margin:24px auto;width:100%;max-width:min(100%, 720px);text-align:center;padding:16px 0;clear:both;min-height:200px;background:var(--sand-light);border:1px solid var(--border);border-radius:var(--radius);">
+          <ins class="adsbygoogle"
+               style="display:block; text-align:center;"
+               data-ad-layout="in-article"
+               data-ad-format="fluid"
+               data-ad-client="ca-pub-7388117485013143"
+               data-ad-slot="3789259624"></ins>
+          <script>
+               (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+        </div>
         <section style="padding:40px 0">
           <div class="articles-grid">
             <article class="article-card">
@@ -691,7 +702,19 @@
             </article>
           </div>
         </section>
-        <section class="cta-section">
+                <!-- Middle Ad (medium 540px) -->
+                <div class="article-middle-ad" style="margin:36px auto;max-width:min(100%, 600px);padding:16px 20px;text-align:center;clear:both;background:var(--sand-light);border:1px solid var(--border);border-radius:var(--radius);min-height:120px;">
+                  <ins class="adsbygoogle"
+                       style="display:block"
+                       data-ad-client="ca-pub-7388117485013143"
+                       data-ad-slot="4196453734"
+                       data-ad-format="auto"
+                       data-full-width-responsive="true"></ins>
+                  <script>
+                       (adsbygoogle = window.adsbygoogle || []).push({});
+                  </script>
+                </div>
+                <section class="cta-section">
           <h2>
             Use Our Free Bra Size Calculator
           </h2>
@@ -947,6 +970,18 @@
           </a>
         </div>
       </section>
+    <!-- Bottom Ad (auto / full-width responsive) -->
+    <div class="article-bottom-ad" style="margin:40px auto 24px;max-width:min(100%, 960px);padding:18px 22px;text-align:center;clear:both;background:var(--sand-light);border:1px solid var(--border);border-radius:var(--radius);min-height:120px;">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-7388117485013143"
+           data-ad-slot="7091114344"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+           (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
     </main>
     <footer class="classic-footer">
   <div class="cf-inner">

@@ -2126,7 +2126,7 @@ button:disabled, .calc-cta:disabled, .btn-primary:disabled, .btn-secondary:disab
 
 
 
-/* ─── global-layout.css (187510 B) ─── */
+/* ─── global-layout.css (188462 B) ─── */
 /* ==========================================================================
    global-layout.css — 全站统一布局规范 (Single Source of Truth)
    --------------------------------------------------------------------------
@@ -7174,9 +7174,46 @@ form.calc-form + .bc-debug,
   .bc-compass-action { width: 100% !important; max-width: 240px !important; }
 }
 
+/* ── 右下角浮动按钮:避让移动端底部锚定广告(Anchor Ads)与 iOS 安全区 ──
+   AdSense 锚定广告固定在视口底部,默认的 bottom:1.5rem 会与之重叠并遮挡
+   用户操作;这里抬高按钮并叠加安全区 inset,避免遮挡与误触。 */
+#footerBackToTop {
+  bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
+}
+
+@media (max-width: 640px) {
+  #footerBackToTop {
+    bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* ── 移动端统一广告容器预留高度 ──────────────────────────────────────
+   各页面的广告容器原先靠内联 min-height(200/260/120px 混用),窄屏下与
+   AdSense 实际渲染高度不符,既造成未填充时的大块空白,也会在填充时把
+   下方内容推移。这里按广告类型统一到接近移动端真实高度的预留值:
+     in-article / middle ≈ 250px   bottom(auto) ≈ 100px
+   预留值只影响未填充时的高度,广告本体不被裁剪。 */
+@media (max-width: 640px) {
+  .article-in-ad,
+  .article-middle-ad {
+    min-height: 250px !important;
+  }
+
+  .article-middle-ad {
+    margin: 20px auto !important;
+    padding: 10px 12px !important;
+  }
+
+  .article-bottom-ad {
+    min-height: 100px !important;
+    margin: 24px auto 16px !important;
+    padding: 12px 14px !important;
+  }
+}
 
 
-/* ─── tool-layout.css (5545 B) ─── */
+
+/* ─── tool-layout.css (7966 B) ─── */
 /* 工具页统一横向布局：以体积计算器的 720px 内容轨道为基准。 */
 .steps-bar,
 .tool-calculator-shell,
@@ -7390,6 +7427,128 @@ body:has(#resultAccuracy) :is(.tool-breadcrumb, .steps-bar, .inputs-panel, .resu
 
   .tool-calculator-shell .form-group[style] {
     min-width: 0 !important;
+  }
+}
+
+/* ── 工具页首屏横幅广告 ────────────────────────────────────────────────
+   工具页首屏曾用 in-article fluid 单元(AdSense 自行决定尺寸,390px 屏上
+   实测 334×299),会把计算器输入框顶到首屏底缘。现改为 responsive 单元 +
+   data-ad-format="horizontal",首屏是真正的横向 banner,输入框回到首屏内。
+   正文仍保留一个 in-article 单元(.article-middle-ad),位置在结果区之后。 */
+.article-top-banner-ad {
+  width: min(calc(100% - 32px), 720px);
+  margin: 20px auto;
+  padding: 12px 0;
+  text-align: center;
+  clear: both;
+  background: var(--sand-light);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  min-height: 100px;
+}
+
+/* ── 移动端首屏:压缩 hero / 信任徽章 / 步骤条 ──────────────────────────
+   目标:在 390×844 这类窄屏上,首屏广告保持完整曝光(不裁剪、不变形),
+   同时把计算器第一个输入框抬进首屏,避免用户必须先滚动才能操作。
+   仅压缩外围留白与装饰性排版,不改动广告单元本身。 */
+@media (max-width: 640px) {
+  .tool-breadcrumb {
+    margin-bottom: 4px;
+  }
+
+  .tool-hero-v2 {
+    padding: 14px 0 10px;
+  }
+
+  .tool-hero-v2 h1 {
+    font-size: clamp(1.12rem, 4.9vw, 1.5rem);
+    line-height: 1.22;
+    margin-bottom: 6px;
+  }
+
+  .tool-hero-v2 .subtitle {
+    font-size: 0.84rem;
+    line-height: 1.45;
+    margin-bottom: 10px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* 信任徽章压成单行:信息保留,高度从两行降到一行 */
+  .trust-badges {
+    flex-wrap: nowrap;
+    gap: 6px;
+    margin-top: 8px;
+  }
+
+  .trust-badge {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 4px 6px;
+    border-radius: 6px;
+  }
+
+  .trust-badge .num {
+    font-size: 0.82rem;
+    line-height: 1.2;
+  }
+
+  .trust-badge .lbl {
+    font-size: 0.58rem;
+    letter-spacing: 0.02em;
+    margin-top: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* 步骤条压成单行圆点(窄屏放不下文字标签) */
+  .steps-bar {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    max-width: none;
+    margin: 12px auto;
+    padding: 0 12px;
+  }
+
+  .step-item {
+    justify-content: center;
+    gap: 0;
+  }
+
+  .step-label {
+    display: none;
+  }
+
+  .step-circle {
+    width: 26px;
+    height: 26px;
+    font-size: 0.72rem;
+    border-width: 1.5px;
+  }
+
+  .step-connector {
+    width: auto;
+    height: 2px;
+    min-width: 18px;
+    max-width: none;
+    flex: 0 1 40px;
+    margin: 0 0.35rem;
+  }
+
+  /* 广告容器:收紧外围留白(预留高度由 global-layout.css 统一) */
+  .article-in-ad,
+  .article-top-banner-ad {
+    margin: 12px auto !important;
+    padding: 10px 0 !important;
+  }
+
+  .tool-calculator-shell {
+    margin-top: 0.5rem;
   }
 }
 

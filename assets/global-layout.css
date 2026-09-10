@@ -5045,3 +5045,40 @@ form.calc-form + .bc-debug,
   .bc-compass-action { width: 100% !important; max-width: 240px !important; }
 }
 
+/* ── 右下角浮动按钮:避让移动端底部锚定广告(Anchor Ads)与 iOS 安全区 ──
+   AdSense 锚定广告固定在视口底部,默认的 bottom:1.5rem 会与之重叠并遮挡
+   用户操作;这里抬高按钮并叠加安全区 inset,避免遮挡与误触。 */
+#footerBackToTop {
+  bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
+}
+
+@media (max-width: 640px) {
+  #footerBackToTop {
+    bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* ── 移动端统一广告容器预留高度 ──────────────────────────────────────
+   各页面的广告容器原先靠内联 min-height(200/260/120px 混用),窄屏下与
+   AdSense 实际渲染高度不符,既造成未填充时的大块空白,也会在填充时把
+   下方内容推移。这里按广告类型统一到接近移动端真实高度的预留值:
+     in-article / middle ≈ 250px   bottom(auto) ≈ 100px
+   预留值只影响未填充时的高度,广告本体不被裁剪。 */
+@media (max-width: 640px) {
+  .article-in-ad,
+  .article-middle-ad {
+    min-height: 250px !important;
+  }
+
+  .article-middle-ad {
+    margin: 20px auto !important;
+    padding: 10px 12px !important;
+  }
+
+  .article-bottom-ad {
+    min-height: 100px !important;
+    margin: 24px auto 16px !important;
+    padding: 12px 14px !important;
+  }
+}
+
