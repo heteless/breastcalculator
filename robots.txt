@@ -8,9 +8,9 @@ Disallow: /
 User-agent: meta-externalagent
 Disallow: /
 User-agent: Applebot-Extended
-Disallow: /
+Allow: /
 User-agent: Google-Extended
-Disallow: /
+Allow: /
 
 # open to Ahrefs/SimilarWeb/TrafficCV 
 User-agent: CCBot
