@@ -18,7 +18,8 @@ const EXCLUDE_DIRS = new Set([
   'images',
   '.git',
   '.vscode',
-  '404'
+  '404',
+  '_dbg'
 ]);
 
 // 优先级与更新频率规则（按路径前缀匹配）
