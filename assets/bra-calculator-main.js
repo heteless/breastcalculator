@@ -433,7 +433,7 @@ function buildCelebrationMessage(us, band, cup){
   var rarityPct = (SIZE_INSIGHTS[cup] || SIZE_INSIGHTS['C']).rarity.match(/(\d+(?:\.\d+)?)%/) || [,'15'];
   var p = rarityPct[1];
   if (parseFloat(p) < 6) return {headline:'A truly rare size — and a beautiful one.', sub:'You\'re one of only about ' + p + '% of US women who wear your size. Specialty brands are designed with you in mind.', vibe:'rare'};
-  if (cup === 'AA' || cup === 'A') return {headline:'A petite, pretty fit.', sub:'You\'re in a beautifully common petite size. Smaller cups are about being perfectly proportioned.', vibe:'petite'};
+  if (cup === 'AA' || cup === 'A') return {headline:'A petite, well-proportioned fit.', sub:'Smaller cups offer natural ease of movement and a streamlined silhouette. You\'re in a size range where fit precision matters most.', vibe:'petite'};
   if (cup === 'DD' || cup === 'DDD' || cup === 'G' || cup === 'H' || cup === 'I' || cup === 'J' || cup === 'K') return {headline:'A full, sculpted silhouette.', sub:'You\'re in a fuller cup range — and your shape deserves real engineering, not scaled-up B-cup designs.', vibe:'fuller'};
   return {headline:'Welcome to the most-loved size in America.', sub:'You\'re in the same size as the majority of US women — which means every style, every brand, and every color is designed with you in mind.', vibe:'common'};
 }
@@ -460,6 +460,12 @@ function fillAll(form, result){
     'size-recommendation': BC.getBraRecommendation(result.cupLetter, result.bandSize)
   };
   for (var id in fields) fillEl(form, id, fields[id]);
+  // Cup-diff explanation
+  var elDiffExp = document.getElementById('cup-diff-explain');
+  if (elDiffExp) elDiffExp.textContent = 'Bust is ' + result.cupDiff + '″ larger than band = ' + result.cupLetter + ' cup';
+  // Show next-steps cards after a short delay
+  var nextSteps = document.getElementById('size-next-steps');
+  if (nextSteps) setTimeout(function(){ nextSteps.classList.add('show'); }, 2200);
 }
 
 function renderSisterSizes(container, bandSize, cupLetter){

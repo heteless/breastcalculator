@@ -169,12 +169,35 @@
     }
   }
 
+  // ── 导航高亮：按当前路径给匹配 nav 链接加 is-active ───────────────────
+  function initNavHighlight() {
+    var navbar = document.querySelector('.classic-navbar') || document.querySelector('.navbar');
+    if (!navbar) return;
+    var links = navbar.querySelectorAll('a[href]');
+    if (!links.length) return;
+    var path = (window.location.pathname || '/').replace(/\/$/, '');
+    for (var i = 0; i < links.length; i++) {
+      var a = links[i];
+      var href = a.getAttribute('href') || '';
+      if (!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('mailto')) continue;
+      var hrefPath = href.replace(/\/$/, '');
+      if (hrefPath === path || (path === '' && hrefPath === '/') || (path !== '' && hrefPath !== '' && path.indexOf(hrefPath) === 0)) {
+        a.classList.add('is-active');
+        a.setAttribute('aria-current', 'page');
+      } else {
+        a.classList.remove('is-active');
+        a.removeAttribute('aria-current');
+      }
+    }
+  }
+
   // ── 初始化 ─────────────────────────────────────────────────────────
   function init() {
     initHeaderScroll();
     initDrawerLock();
     initCalcButtonGuard();
     initNavDropdowns();
+    initNavHighlight();
   }
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);

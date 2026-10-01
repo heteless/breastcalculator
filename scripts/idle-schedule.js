@@ -107,6 +107,8 @@ function main() {
     "injectHomeTools&&injectHomeTools();" +
     "[50,250,800,1500,3000].forEach(function(t){setTimeout(initInputValidation,t);});" +
     "},100);" +
+    // Rail ad (tool pages, visible-viewport only) + bookmark kit (home/article).
+    "scheduleIdle(function(){initRailAd();initBookmarkKit();initBookmarkResultPromo();},250);" +
     "});";
 
   const out = src.slice(0, startIdx) + newBlock + src.slice(fullEnd + 2);

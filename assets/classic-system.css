@@ -1119,6 +1119,13 @@ button:disabled, .calc-cta:disabled, .btn-primary:disabled, .btn-secondary:disab
 }
 .classic-navbar .nav-label:hover,
 .classic-navbar .nav-label:focus-visible { color: #1f1412; outline: none; }
+/* 导航高亮：当前页链接加粗 + 底部边框 */
+.classic-navbar a.is-active {
+  color: #1f1412 !important;
+  font-weight: 700 !important;
+  border-bottom: 2px solid currentColor;
+  padding-bottom: 8px;
+}
 .classic-navbar .nav-label .arrow {
   display: inline-block;
   font-size: 0.7rem;

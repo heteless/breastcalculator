@@ -567,17 +567,6 @@
         <p>
           Use our free bra calculator to calculate breast size and find your bra size in seconds. Accurate, private, and backed by science — measure your band and bust at home to get US, UK, EU, FR, and AU sizing. No registration needed.
         </p>
-        <div class="article-in-ad" style="margin:32px auto;width:100%;max-width:min(100%, 600px);text-align:center;padding:18px 0;clear:both;min-height:260px;background:var(--sand-light);border:1px solid var(--border);border-radius:var(--radius);">
-          <ins class="adsbygoogle"
-               style="display:block; text-align:center;"
-               data-ad-layout="in-article"
-               data-ad-format="fluid"
-               data-ad-client="ca-pub-7388117485013143"
-               data-ad-slot="3789259624"></ins>
-          <script>
-               (adsbygoogle = window.adsbygoogle || []).push({});
-          </script>
-        </div>
         <div class="bra-calculator embedded">
           <form class="calc-form" id="size-form" onsubmit="return false;" novalidate>
             <div class="calc-fields">
@@ -651,7 +640,7 @@
           <div id="bc-debug" class="bc-debug" aria-live="polite" hidden></div>
         </div>
         <div class="calc-privacy-note" role="note" aria-label="Privacy notice">
-          <span class="calc-privacy-icon" aria-hidden="true">🔒</span>
+          <span class="calc-privacy-icon" aria-hidden="true"><svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2"/><circle cx="8" cy="10.2" r="0.9" fill="currentColor" stroke="none"/></svg></span>
           <span class="calc-privacy-text"><strong>Private by design.</strong> Your measurements are processed entirely in your browser and never uploaded, stored, or shared with anyone. <a href="/privacy/" class="calc-privacy-link">Read our privacy promise</a>.</span>
         </div>
         <div class="article-bottom-ad" style="margin:24px auto;max-width:min(100%, 540px);padding:14px 18px;text-align:center;clear:both;background:var(--sand-light);border:1px solid var(--border);border-radius:var(--radius);min-height:120px;">
@@ -669,6 +658,18 @@
           <a class="btn-link-secondary" style="display:inline-block" href="/bra-size-calculator/">
             Open Full Calculator →
           </a>
+        </div>
+        <!-- In-Article Ad (below calculator form) -->
+        <div class="article-in-ad" style="margin:32px auto;width:100%;max-width:min(100%, 600px);text-align:center;padding:18px 0;clear:both;min-height:260px;background:var(--sand-light);border:1px solid var(--border);border-radius:var(--radius);">
+          <ins class="adsbygoogle"
+               style="display:block; text-align:center;"
+               data-ad-layout="in-article"
+               data-ad-format="fluid"
+               data-ad-client="ca-pub-7388117485013143"
+               data-ad-slot="3789259624"></ins>
+          <script>
+               (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
         </div>
         <div id="size-result" class="size-result" hidden aria-live="polite">
           <div class="size-primary">
@@ -719,7 +720,7 @@
               <div class="size-cell"><span>AU</span><strong id="size-au">—</strong></div>
               <div class="size-cell"><span>India</span><strong id="size-india">—</strong></div>
             </div>
-            <p class="size-cup-info">Cup difference: <strong id="cup-diff-value">—</strong> · <strong id="cup-diff">—</strong></p>
+            <p class="size-cup-info">Cup difference: <strong id="cup-diff-value">—</strong>″ (bust − band) → <strong id="cup-diff">—</strong> cup &nbsp;<span id="cup-diff-explain" style="font-size:.82rem;color:var(--text-muted);font-style:italic"></span></p>
             <div class="size-save-row">
               <button type="button" class="size-save" id="size-save" aria-label="Save this measurement to my history">
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
@@ -760,9 +761,29 @@
             </div>
           </div>
         </div>
+        <div id="size-next-steps" class="bc-next-steps" hidden aria-label="Recommended next tools">
+          <p class="bc-next-steps-eyebrow">Want to go deeper?</p>
+          <h3 class="bc-next-steps-title">Related tools based on your result</h3>
+          <div class="bc-next-steps-grid">
+            <a href="/tools/breast-volume-calculator/" class="bc-next-step-card">
+              <span class="bc-next-step-icon" aria-hidden="true">📐</span>
+              <span class="bc-next-step-label">Breast Volume</span>
+              <span class="bc-next-step-desc">Estimate volume in cc / mL with clinical formulas</span>
+            </a>
+            <a href="/tools/breast-ptosis-calculator/" class="bc-next-step-card">
+              <span class="bc-next-step-icon" aria-hidden="true">📊</span>
+              <span class="bc-next-step-label">Ptosis Grade</span>
+              <span class="bc-next-step-desc">Assess sagging with the Regnault classification</span>
+            </a>
+            <a href="/how-to-measure-bra-size/" class="bc-next-step-card">
+              <span class="bc-next-step-icon" aria-hidden="true">📏</span>
+              <span class="bc-next-step-label">Measurement Guide</span>
+              <span class="bc-next-step-desc">Printable checklist for accurate home measurements</span>
+            </a>
+          </div>
+        </div>
       </section>
-      <section class="section">
-        <section class="section" id="how-to-measure">
+      <section class="section" id="how-to-measure">
 
           <h2 class="section-title">
             How to Calculate Bra Size at Home
@@ -1299,6 +1320,6 @@
       </svg>
 
   <!-- Skimlinks affiliate automation (publisher 309081X1797412) — must stay before </body> -->
-  <script type="text/javascript" src="https://s.skimresources.com/js/309081X1797412.skimlinks.js"></script>
+  <script type="text/javascript" src="https://s.skimresources.com/js/309081X1797412.skimlinks.js" defer></script>
   </body>
   </html>
