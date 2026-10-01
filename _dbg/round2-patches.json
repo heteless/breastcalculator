@@ -1,0 +1,19 @@
+{
+  "diagnosis": "Round 2 global scan found that main.css already has strong tap-target (44-48px), overflow-x hidden, smooth scroll, and drawer lock rules. The main gap is: (1) number inputs on Chrome/Safari show spinner controls that interfere with the clean calculator UI and cause layout shift on some devices; (2) the back-to-top button has dead HTML on all pages except bra-size-calculator — the JS is only in one page, so 10+ other pages have a broken button that never appears.",
+  "patch_list": [
+    {
+      "file": "d:\\DevProject\\breastcalculator\\main.css",
+      "issue": "Chrome/Safari number inputs show native spinner buttons (up/down arrows) which overlap the calculator input fields and cause layout shift. This is especially bad on the bra-size-calculator page where the two number inputs sit side by side.",
+      "old_snippet": "input[type=\"number\"]:focus,.calc-field input:focus,input[data-validate]:focus{outline:none;box-shadow:inset 0 0 0 1px var(--color-primary,#d6336c),0 0 0 3px rgba(214,51,108,.12);transition:box-shadow .15s ease}",
+      "new_snippet": "input[type=\"number\"]:focus,.calc-field input:focus,input[data-validate]:focus{outline:none;box-shadow:inset 0 0 0 1px var(--color-primary,#d6336c),0 0 0 3px rgba(214,51,108,.12);transition:box-shadow .15s ease}input[type=\"number\"]{-webkit-appearance:textfield;-moz-appearance:textfield;appearance:textfield}input[type=\"number\"]::-webkit-inner-spin-button,input[type=\"number\"]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}",
+      "goal": "Remove native number spinners from input[type=number] to prevent layout shift and visual clutter on the calculator form."
+    },
+    {
+      "file": "d:\\DevProject\\breastcalculator\\bra-size-calculator\\index.html",
+      "issue": "The back-to-top button was fixed in this page only. But 10+ other pages (articles, best-comfort-bras, best-wireless-bras, about, contact, 404, bra-buying-guide, how-to-measure-bra-size, bra-size-guide sub-pages) still have dead back-to-top HTML with no JS. Moving the JS into classic-ui.js makes it global and fixes all pages at once.",
+      "old_snippet": "    <button id=\"footerBackToTop\" class=\"fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full bg-[#fdf8f5] border border-[#e6d5c3] text-[#8b7355] hover:text-[#6b5344] hover:border-[#6b5344] shadow-md flex items-center justify-center transition-all duration-300 opacity-0 pointer-events-none\" aria-label=\"Back to top\">\n      <svg class=\"w-5 h-5\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n        <polyline points=\"18 15 12 9 6 15\"></polyline>\n      </svg>\n    </button>\n    <script>!function(){var b=document.getElementById('footerBackToTop');if(!b)return;var show=function(){b.classList.toggle('bc-back-to-top-visible',window.scrollY>600);};window.addEventListener('scroll',show,{passive:true});show();b.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});}();</script>",
+      "new_snippet": "    <button id=\"footerBackToTop\" class=\"fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full bg-[#fdf8f5] border border-[#e6d5c3] text-[#8b7355] hover:text-[#6b5344] hover:border-[#6b5344] shadow-md flex items-center justify-center transition-all duration-300 opacity-0 pointer-events-none\" aria-label=\"Back to top\">\n      <svg class=\"w-5 h-5\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n        <polyline points=\"18 15 12 9 6 15\"></polyline>\n      </svg>\n    </button>",
+      "goal": "Remove the page-specific inline script from bra-size-calculator (it will be replaced by the global classic-ui.js initializer). This keeps the HTML clean before the global fix lands."
+    }
+  ]
+}

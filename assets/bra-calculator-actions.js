@@ -315,12 +315,12 @@ if (document.readyState === 'loading'){
   setTimeout(wireActions, 0);
 }
 /* 多次重试以确保所有脚本加载完毕 */
-[0, 50, 250, 800].forEach(function(t){setTimeout(function(){
+setTimeout(function(){
   /* 显示 history 区域(空状态也显示) */
   var wrap = document.getElementById('bc-history');
   if (wrap) wrap.hidden = false;
   if (typeof renderHistory === 'function') renderHistory();
-}, t);});
+});
 /* 暴露给外部 */
 window.BCActions = {
   loadHistory: loadHistory,

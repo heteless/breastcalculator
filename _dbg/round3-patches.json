@@ -1,0 +1,19 @@
+{
+  "diagnosis": "Round 3 scan of the core user task flows found three issues: (1) The loading spinner text says '6 regions' but the calculator actually computes 8 regions (US/UK/EU/FR/AU/NZ/India/Canada), creating a trust gap — users who notice the discrepancy question accuracy. (2) The compare sister-sizes card description lacks an id attribute (id='size-choice-compare-desc') so the JavaScript that dynamically updates it with the user's actual sister sizes (e.g. 'See 32DD / 34D / 36C side-by-side') silently fails — users always see the generic placeholder text. (3) The #size-next-steps element referenced in bra-calculator-main.js fillAll() does not exist in the HTML, so the 2.2s delayed reveal animation is a no-op dead code; this is harmless but indicates incomplete feature wiring between the two JS files.",
+  "patch_list": [
+    {
+      "file": "d:\\DevProject\\breastcalculator\\bra-size-calculator\\index.html",
+      "issue": "Loading spinner text says 'across 6 regions' but the calculator computes 8 regions (US/UK/EU/FR/AU/NZ/India/Canada). This is a factual mismatch that undermines trust when users notice it.",
+      "old_snippet": "        <div id=\"size-loading\" class=\"size-loading\" hidden><div class=\"size-loading-bar\" aria-hidden=\"true\"><span></span></div><p class=\"size-loading-text\">Computing your sister sizes and fit profile across 6 regions…</p></div>",
+      "new_snippet": "        <div id=\"size-loading\" class=\"size-loading\" hidden><div class=\"size-loading-bar\" aria-hidden=\"true\"><span></span></div><p class=\"size-loading-text\">Computing your size across 8 regions…</p></div>",
+      "goal": "Accurate loading text matches actual computation (8 regions), preserving trust and reducing perceived inaccuracy."
+    },
+    {
+      "file": "d:\\DevProject\\breastcalculator\\bra-size-calculator\\index.html",
+      "issue": "The Compare sister sizes card description <span> has no id attribute, but bra-calculator-enhance.js tries to update it via document.getElementById('size-choice-compare-desc'). The update silently fails, so every user sees the static placeholder 'See 32DD / 34D / 36C side-by-side' regardless of their actual calculated size.",
+      "old_snippet": "              <span class=\"size-choice-card-desc\">See 32DD / 34D / 36C side-by-side and pick the best</span>",
+      "new_snippet": "              <span class=\"size-choice-card-desc\" id=\"size-choice-compare-desc\">See 32DD / 34D / 36C side-by-side and pick the best</span>",
+      "goal": "Enable dynamic update of the compare card description with the user's actual sister sizes (e.g. 'See 32DD / 34D / 36C'), making the CTA feel personalized and increasing click-through to the size comparison page."
+    }
+  ]
+}

@@ -573,7 +573,7 @@
             <button type="submit" class="btn-primary" id="calc-submit-btn">Calculate My Bra Size</button>
             <div class="bc-live-preview" id="bc-live-preview" aria-live="polite" aria-atomic="true" hidden>
               <span class="bc-live-preview-label">Live preview</span>
-              <span class="bc-live-preview-value" id="bc-live-preview-value">—</span>
+              <span class="bc-live-preview-value" id="bc-live-preview-value">Enter measurements</span>
             </div>
           </div>
         </form>
@@ -591,7 +591,7 @@
       <div id="size-result" class="size-result" hidden aria-live="polite" style="max-width:720px;margin:24px auto">
         <div class="size-primary"><span class="size-primary-label">Your US size</span><span class="size-primary-value" id="size-us">—</span></div>
         <p class="size-primary-note" id="size-recommendation">—</p>
-        <div id="size-loading" class="size-loading" hidden><div class="size-loading-bar" aria-hidden="true"><span></span></div><p class="size-loading-text">Computing your sister sizes and fit profile across 6 regions…</p></div>
+        <div id="size-loading" class="size-loading" hidden><div class="size-loading-bar" aria-hidden="true"><span></span></div><p class="size-loading-text">Computing your size across 8 regions…</p></div>
         <div id="size-choice" class="size-choice" hidden aria-label="What would you like to do next?">
           <p class="size-choice-eyebrow">Your results are ready — what matters most?</p>
           <h3 class="size-choice-title">One quick tap to personalize what you see next</h3>
@@ -611,7 +611,7 @@
             <button type="button" class="size-choice-card" data-choice="compare">
               <span class="size-choice-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M3 12h18"/><path d="M3 18h12"/></svg></span>
               <span class="size-choice-card-title">Compare sister sizes</span>
-              <span class="size-choice-card-desc">See 32DD / 34D / 36C side-by-side and pick the best</span>
+              <span class="size-choice-card-desc" id="size-choice-compare-desc">See 32DD / 34D / 36C side-by-side and pick the best</span>
               <span class="size-choice-arrow" aria-hidden="true">→</span>
             </button>
           </div>

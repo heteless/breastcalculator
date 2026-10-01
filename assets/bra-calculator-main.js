@@ -297,7 +297,7 @@ function ensureCelebrate(form, resultEl){
       '<div class="bc-celebrate-sister-head">' +
         '<div class="bc-celebrate-sister-eyebrow"><span class="bc-celebrate-sister-dot"></span>Sister Size Spectrum</div>' +
         '<div class="bc-celebrate-sister-title">Where you fall on the cup spectrum</div>' +
-        '<div class="bc-celebrate-sister-sub" id="size-sister-sub">Calculating your position across 12 cup sizes and 23 band sizes…</div>' +
+        '<div class="bc-celebrate-sister-sub" id="size-sister-sub">Calculating your position across 12 cup sizes and 23 band sizes</div>' +
       '</div>' +
       '<div class="bc-celebrate-sister-gauge" id="size-sister-gauge">' +
         '<div class="bc-celebrate-sister-gear bc-celebrate-sister-gear-top" aria-hidden="true"></div>' +
@@ -352,9 +352,6 @@ function ensureCelebrate(form, resultEl){
     '<div class="bc-celebrate-actions">' +
       '<button type="button" class="bc-celebrate-action bc-celebrate-action-primary" data-bc-action="print">' +
         '<span aria-hidden="true">🖨</span><span>Print my size</span>' +
-      '</button>' +
-      '<button type="button" class="bc-celebrate-action" data-bc-action="print">' +
-        '<span aria-hidden="true">🖨</span><span>Print</span>' +
       '</button>' +
       '<button type="button" class="bc-celebrate-action" data-bc-action="share">' +
         '<span aria-hidden="true">↗</span><span>Share</span>' +
@@ -494,7 +491,7 @@ function setLoading(form, loading){
   if (loading){
     btn.disabled = true;
     btn.dataset.origText = btn.textContent;
-    btn.innerHTML = '<span class="bc-spinner" aria-hidden="true"></span><span>Calculating…</span>';
+    btn.innerHTML = '<span class="bc-spinner" aria-hidden="true"></span><span>Calculating</span>';
     btn.classList.add('is-loading');
   } else {
     btn.disabled = false;
@@ -1554,7 +1551,7 @@ function wireLivePreview(form){
 function runCalculation(form){
   if (!form) return;
   setLoading(form, true);
-  setStatus('loading', 'Calculating your size…');
+  setStatus('loading', 'Calculating your size');
   setTimeout(function(){
     try {
       var data = readForm(form);
@@ -1956,5 +1953,5 @@ if (document.readyState === 'loading'){
   wireAll();
 }
 /* 多次重试,确保所有脚本加载完毕后才 wire */
-[50, 250, 800].forEach(function(t){setTimeout(wireAll, t);});
+setTimeout(wireAll, 800);
 })();

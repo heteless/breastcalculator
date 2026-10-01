@@ -1,0 +1,19 @@
+{
+  "diagnosis": "Round 5 UX text polish found three minor but perceptible issues: (1) The live preview badge shows '—' (em dash) before any input, which reads as 'Live preview: —' and looks like a glitch rather than an intentional placeholder. A subtle hint like 'Enter measurements' is clearer. (2) The 'Calculating…' button text during loading uses an ellipsis character (…) that some older Android WebView renderers display as a broken box; using 'Calculating' without the ellipsis is safer and reads just as well. (3) The privacy note text 'Private by design.' is good but could be slightly warmer while keeping the same factual claim — changing to 'Your measurements stay here.' makes it more personal without adding marketing copy.",
+  "patch_list": [
+    {
+      "file": "d:\\DevProject\\breastcalculator\\bra-size-calculator\\index.html",
+      "issue": "Live preview shows '—' as placeholder, which looks like a broken/loading state rather than a friendly empty state hint.",
+      "old_snippet": "              <span class=\"bc-live-preview-value\" id=\"bc-live-preview-value\">—</span>",
+      "new_snippet": "              <span class=\"bc-live-preview-value\" id=\"bc-live-preview-value\">Enter measurements</span>",
+      "goal": "Replace the ambiguous em-dash with a clear action-oriented hint so users understand the live preview will populate as they type."
+    },
+    {
+      "file": "d:\\DevProject\\breastcalculator\\assets\\bra-calculator-main.js",
+      "issue": "Loading button uses ellipsis character '…' which can render as a box on some older Android WebViews, causing a confusing visual.",
+      "old_snippet": "    btn.innerHTML = '<span class=\"bc-spinner\" aria-hidden=\"true\"></span><span>Calculating…</span>';",
+      "new_snippet": "    btn.innerHTML = '<span class=\"bc-spinner\" aria-hidden=\"true\"></span><span>Calculating</span>';",
+      "goal": "Remove the ellipsis character to avoid rendering issues on older Android devices, improving perceived reliability."
+    }
+  ]
+}

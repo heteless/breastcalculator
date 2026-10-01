@@ -191,6 +191,20 @@
     }
   }
 
+  // ── Back to top button (global, all pages) ──────────────────────
+  function initBackToTop() {
+    var b = document.getElementById('footerBackToTop');
+    if (!b) return;
+    var show = function () {
+      b.classList.toggle('bc-back-to-top-visible', window.scrollY > 600);
+    };
+    window.addEventListener('scroll', show, { passive: true });
+    show();
+    b.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
   // ── 初始化 ─────────────────────────────────────────────────────────
   function init() {
     initHeaderScroll();
@@ -198,6 +212,7 @@
     initCalcButtonGuard();
     initNavDropdowns();
     initNavHighlight();
+    initBackToTop();
   }
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
