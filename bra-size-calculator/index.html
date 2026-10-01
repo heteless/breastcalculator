@@ -27,16 +27,16 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
     <link rel="manifest" href="/site.webmanifest"/>
     <title>
-      Bra Size Calculator – Find Your US/UK/EU Size (Free, Private)
+      Bra Size Calculator – US, UK, EU, AU, NZ, Canada &amp; India (Free)
     </title>
-    <meta name="description" content="Professional bra size calculator trusted by fitters, lingerie brands and wellness pros. US/UK/EU/AU sizing with sister-size analysis. Measure at home in 2 minutes — instant, private, no signup."/>
+    <meta name="description" content="Calculate your bra size in US, UK, EU, FR, AU, NZ, India &amp; Canada instantly. Two measurements, 8-region results, sister-size analysis. Private — nothing leaves your browser."/>
     <meta name="keywords" content="bra size calculator, accurate bra size calculator, bra size calculator online, bra measurement calculator, bra calculator us, how to calculate bra size, figure out bra size, calculate bra size at home"/>
     <meta name="robots" content="index, follow"/>
     <link rel="canonical" href="https://breastcalculator.com/bra-size-calculator/"/>
     <link rel="alternate" hreflang="en" href="https://breastcalculator.com/bra-size-calculator/"/>
     <link rel="alternate" hreflang="x-default" href="https://breastcalculator.com/bra-size-calculator/"/>
-    <meta property="og:title" content="Bra Size Calculator – Free, Accurate, Instant Results"/>
-    <meta property="og:description" content="Free, accurate bra size calculator for US, UK, EU and AU sizing. Measure at home in 2 minutes — get instant, private results. No registration, 100% mobile friendly."/>
+    <meta property="og:title" content="Bra Size Calculator – Instant US, UK, EU, AU, NZ &amp; Canada Results"/>
+    <meta property="og:description" content="Free bra size calculator delivering instant US, UK, EU, FR, AU, New Zealand, India &amp; Canada sizing. Two measurements, results in seconds — private, no signup."/>
     <meta property="og:url" content="https://breastcalculator.com/bra-size-calculator/"/>
     <meta property="og:site_name" content="Breast Calculator"/>
     <meta property="og:locale" content="en_US"/>
@@ -45,8 +45,8 @@
     <meta property="og:image:height" content="630"/>
     <meta property="og:type" content="article"/>
     <meta name="twitter:card" content="summary_large_image"/>
-    <meta name="twitter:title" content="Bra Size Calculator – Free, Accurate, Instant Results"/>
-    <meta name="twitter:description" content="Free, accurate bra size calculator for US, UK, EU and AU sizing. Measure at home in 2 minutes — get instant, private results. No registration, 100% mobile friendly."/>
+    <meta name="twitter:title" content="Bra Size Calculator – Instant US, UK, EU, AU, NZ &amp; Canada Results"/>
+    <meta name="twitter:description" content="Free bra size calculator delivering instant US, UK, EU, FR, AU, New Zealand, India &amp; Canada sizing. Two measurements, results in seconds — private, no signup."/>
     <meta name="twitter:image" content="https://breastcalculator.com/images/og-default.jpg"/>
     <script type="application/ld+json">
       {
@@ -571,10 +571,6 @@
           </div>
           <div class="calc-actions">
             <button type="submit" class="btn-primary" id="calc-submit-btn">Calculate My Bra Size</button>
-            <div class="bc-live-preview" id="bc-live-preview" aria-live="polite" aria-atomic="true" hidden>
-              <span class="bc-live-preview-label">Live preview</span>
-              <span class="bc-live-preview-value" id="bc-live-preview-value">Enter measurements</span>
-            </div>
           </div>
         </form>
         <div id="bc-debug" class="bc-debug" aria-live="polite" hidden></div>
@@ -591,48 +587,21 @@
       <div id="size-result" class="size-result" hidden aria-live="polite" style="max-width:720px;margin:24px auto">
         <div class="size-primary"><span class="size-primary-label">Your US size</span><span class="size-primary-value" id="size-us">—</span></div>
         <p class="size-primary-note" id="size-recommendation">—</p>
-        <div id="size-loading" class="size-loading" hidden><div class="size-loading-bar" aria-hidden="true"><span></span></div><p class="size-loading-text">Computing your size across 8 regions…</p></div>
-        <div id="size-choice" class="size-choice" hidden aria-label="What would you like to do next?">
-          <p class="size-choice-eyebrow">Your results are ready — what matters most?</p>
-          <h3 class="size-choice-title">One quick tap to personalize what you see next</h3>
-          <div class="size-choice-grid">
-            <button type="button" class="size-choice-card" data-choice="shop">
-              <span class="size-choice-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span>
-              <span class="size-choice-card-title">Shop my exact size</span>
-              <span class="size-choice-card-desc" id="size-choice-shop-desc">See brands &amp; styles curated for 34D</span>
-              <span class="size-choice-arrow" aria-hidden="true">→</span>
-            </button>
-            <button type="button" class="size-choice-card" data-choice="guide">
-              <span class="size-choice-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg></span>
-              <span class="size-choice-card-title">Get a fit guide</span>
-              <span class="size-choice-card-desc">Printable checklist + troubleshooting for your shape</span>
-              <span class="size-choice-arrow" aria-hidden="true">→</span>
-            </button>
-            <button type="button" class="size-choice-card" data-choice="compare">
-              <span class="size-choice-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M3 12h18"/><path d="M3 18h12"/></svg></span>
-              <span class="size-choice-card-title">Compare sister sizes</span>
-              <span class="size-choice-card-desc" id="size-choice-compare-desc">See 32DD / 34D / 36C side-by-side and pick the best</span>
-              <span class="size-choice-arrow" aria-hidden="true">→</span>
-            </button>
-          </div>
-          <button type="button" class="size-choice-skip" id="size-choice-skip">Skip — just show me the raw numbers</button>
+        <div class="size-grid">
+          <div class="size-cell"><span>UK</span><strong id="size-uk">—</strong></div>
+          <div class="size-cell"><span>EU</span><strong id="size-eu">—</strong></div>
+          <div class="size-cell"><span>FR</span><strong id="size-fr">—</strong></div>
+          <div class="size-cell"><span>AU</span><strong id="size-au">—</strong></div>
+          <div class="size-cell"><span>India</span><strong id="size-india">—</strong></div>
+          <div class="size-cell"><span>NZ</span><strong id="size-nz">—</strong></div>
+          <div class="size-cell"><span>Canada</span><strong id="size-canada">—</strong></div>
         </div>
-        <div id="size-details" class="size-details" hidden>
-          <div class="size-grid">
-            <div class="size-cell"><span>UK</span><strong id="size-uk">—</strong></div>
-            <div class="size-cell"><span>EU</span><strong id="size-eu">—</strong></div>
-            <div class="size-cell"><span>FR</span><strong id="size-fr">—</strong></div>
-            <div class="size-cell"><span>AU</span><strong id="size-au">—</strong></div>
-            <div class="size-cell"><span>India</span><strong id="size-india">—</strong></div>
-          </div>
-          <p class="size-cup-info">Cup difference: <strong id="cup-diff-value">—</strong>″ (bust − band) → <strong id="cup-diff">—</strong> cup &nbsp;<span id="cup-diff-explain" style="font-size:.82rem;color:var(--text-muted);font-style:italic"></span></p>
-          <div class="size-save-row">
-            <button type="button" class="size-save" id="size-save" aria-label="Save this measurement to my history">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
-              <span id="size-save-label">Save to My Profile</span>
-            </button>
-            <span class="size-save-hint">Saved on this device only — never shared.</span>
-          </div>
+        <p class="size-cup-info">Cup difference: <strong id="cup-diff-value">—</strong>″ (bust − band) → <strong id="cup-diff">—</strong> cup &nbsp;<span id="cup-diff-explain" style="font-size:.82rem;color:var(--text-muted);font-style:italic"></span></p>
+        <div class="size-save-row">
+          <button type="button" class="size-save" id="size-save" aria-label="Print this measurement">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+            <span id="size-save-label">Print my size</span>
+          </button>
         </div>
       </div>
       <div id="bc-history" class="bc-history" aria-label="Sister size comparator" style="max-width:720px;margin:24px auto">
@@ -710,9 +679,9 @@
       {
         "@context": "https://schema.org",
         "@type": "WebApplication",
-        "name": "Bra Size Calculator - US/UK/EU/AU Sizing Assistant",
+        "name": "Bra Size Calculator - US/UK/EU/AU/NZ/Canada/India Sizing Assistant",
         "url": "https://breastcalculator.com/bra-size-calculator/",
-        "description": "Professional bra size calculator delivering instant US, UK, EU, FR and AU sizing with sister-size analysis using the standard underbust-and-bust method. Free, private, fitter-grade.",
+        "description": "Professional bra size calculator delivering instant US, UK, EU, FR, AU, New Zealand, India and Canada sizing with sister-size analysis using the standard underbust-and-bust method. Free, private, fitter-grade.",
         "applicationCategory": "HealthApplication",
         "operatingSystem": "All",
         "browserRequirements": "Requires JavaScript",
@@ -723,7 +692,7 @@
           "priceCurrency": "USD"
         },
         "featureList": [
-              "US/UK/EU/FR/AU bra size conversion",
+              "US/UK/EU/FR/AU/NZ/Canada/India bra size conversion",
               "Sister size lookup and analysis",
               "Band and bust measurement guidance",
               "Fit problem diagnostics"
@@ -739,7 +708,7 @@
     </script>
       <article class="article">
         <h1 class="text-center">
-          Professional Bra Size Calculator &#8212; Pro US / UK / EU / AU Sizing Tool for Fitters &amp; Lingerie Pros
+          Professional Bra Size Calculator &#8212; Pro US / UK / EU / AU / NZ / Canada / India Sizing Tool for Fitters &amp; Lingerie Pros
         </h1>
         <p>
           Use the
@@ -748,7 +717,7 @@
           </strong>
           below to find your exact bra size in
           <strong>
-            US, UK, EU and AU
+            US, UK, EU, AU, New Zealand, Canada and India
           </strong>
           sizing. All you need is a soft measuring tape and two measurements: your
           <em>
@@ -826,7 +795,7 @@
         </p>
         
     <h2>
-          US vs UK vs EU vs AU Sizing
+          US vs UK vs EU vs AU vs NZ Sizing
         </h2>
         <p>
           Most regions share the same band and cup letters up to cup D, then diverge. The key change happens at

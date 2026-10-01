@@ -452,6 +452,8 @@ function fillAll(form, result){
     'size-fr': result.fr,
     'size-au': result.au,
     'size-india': result.india,
+    'size-nz': result.nz,
+    'size-canada': result.canada,
     'cup-diff': result.cupLetter,
     'cup-diff-value': result.cupDiff,
     'size-recommendation': BC.getBraRecommendation(result.cupLetter, result.bandSize)
@@ -460,9 +462,6 @@ function fillAll(form, result){
   // Cup-diff explanation
   var elDiffExp = document.getElementById('cup-diff-explain');
   if (elDiffExp) elDiffExp.textContent = 'Bust is ' + result.cupDiff + '″ larger than band = ' + result.cupLetter + ' cup';
-  // Show next-steps cards after a short delay
-  var nextSteps = document.getElementById('size-next-steps');
-  if (nextSteps) setTimeout(function(){ nextSteps.classList.add('show'); }, 2200);
 }
 
 function renderSisterSizes(container, bandSize, cupLetter){
@@ -1473,81 +1472,8 @@ function renderBrandResult(container, adjusted, original){
 }
 
 /* ──────────────────────────────────────────────────────────
-   Live Preview — 输入数字时实时显示预估尺码
-   联动: form 字段 ↔ 实时尺码预览 ↔ 用户感知"计算有意义"
+   主计算函数 — 总是有效
    ────────────────────────────────────────────────────────── */
-var _livePreviewTimer = null;
-var _lastLiveSize = null;
-
-function wireLivePreview(form){
-  var ub = document.getElementById('underbust');
-  var b  = document.getElementById('bust');
-  var u  = document.getElementById('unit');
-  var preview = document.getElementById('bc-live-preview');
-  var previewVal = document.getElementById('bc-live-preview-value');
-  if (!ub || !b || !preview || !previewVal) return;
-
-  function update(){
-    if (_livePreviewTimer) clearTimeout(_livePreviewTimer);
-    _livePreviewTimer = setTimeout(function(){
-      try {
-        var ubVal = parseFloat(ub.value);
-        var bVal  = parseFloat(b.value);
-        var unit  = (u && u.value) || 'inches';
-        var uk = unit === 'centimeters' || unit === 'cm' ? 'cm' : 'inch';
-        /* 必须两个字段都有合法值 */
-        if (isNaN(ubVal) || isNaN(bVal) || ubVal <= 0 || bVal <= 0){
-          preview.hidden = true;
-          return;
-        }
-        var v1 = BC.validateMeasurement(ubVal, 'underbust', uk);
-        var v2 = BC.validateMeasurement(bVal, 'bust', uk);
-        if (!v1.valid || !v2.valid){
-          preview.hidden = true;
-          return;
-        }
-        var ubIn = BC.convertToInches(ubVal, uk);
-        var bIn  = BC.convertToInches(bVal, uk);
-        var vp = BC.validatePair(ubIn, bIn);
-        if (!vp.valid){
-          preview.hidden = true;
-          return;
-        }
-        var r = BC.calculateBraSize(ubIn, bIn);
-        if (r && r.us){
-          var prevText = _lastLiveSize;
-          previewVal.textContent = r.us;
-          preview.hidden = false;
-          _lastLiveSize = r.us;
-          /* 联动反馈: 数字变化时闪烁 */
-          if (prevText && prevText !== r.us){
-            preview.classList.remove('bc-live-preview-pulse');
-            /* 强制 reflow 重新触发动画 */
-            /* eslint-disable-next-line no-unused-expressions */
-            preview.offsetHeight;
-            preview.classList.add('bc-live-preview-pulse');
-            setTimeout(function(){ preview.classList.remove('bc-live-preview-pulse'); }, 420);
-          }
-        } else {
-          preview.hidden = true;
-        }
-      } catch (err){
-        preview.hidden = true;
-      }
-    }, 180);
-  }
-
-  function markLinked(){
-    if (ub.value) ub.classList.add('bc-input-linked'); else ub.classList.remove('bc-input-linked');
-    if (b.value)  b.classList.add('bc-input-linked');  else b.classList.remove('bc-input-linked');
-  }
-  ub.addEventListener('input', function(){ markLinked(); update(); });
-  b.addEventListener('input', function(){ markLinked(); update(); });
-  if (u) u.addEventListener('change', update);
-  markLinked();
-}
-
-/* 主计算函数 — 总是有效 */
 function runCalculation(form){
   if (!form) return;
   setLoading(form, true);
@@ -1580,20 +1506,14 @@ function runCalculation(form){
       var result = BC.calculateBraSize(ubIn, bIn);
       /* 优雅状态 — 不暴露技术细节, 仅显示 "Ready" 标签 */
       setStatus('success', 'Your size is ready');
-      /* 联动: 标记 form 为"已计算"状态 — 高亮输入框 */
-      if (form) form.classList.add('bc-form-calculated');
-      /* 填充所有 ID 字段(站内的 + celebrate 内的) */
-      fillAll(form, result);
-      /* 直接给 #size-us 再保险一次(只设最重要的字段) */
-      var su = document.getElementById('size-us');
-      if (su) su.textContent = result.us;
-      /* Celebration */
+      /* Celebration — always show */
       var resultEl = getResultEl(form);
       if (resultEl){
         resultEl.hidden = false;
         resultEl.removeAttribute('hidden');
         resultEl.classList.remove('hidden');
         resultEl.style.display = 'block';
+        fillAll(form, result);
         ensureCelebrate(form, resultEl);
       }
       var cel = form.parentElement.querySelector('.bc-celebrate');
@@ -1642,7 +1562,7 @@ function runCalculation(form){
           var el2 = cel.querySelector('#' + sizes8[r2].id);
           if (el2) el2.textContent = sizes8[r2].v;
         }
-        /* Sister Size Spectrum 精密仪器式渲染 */
+        /* Sister Size Spectrum */
         renderSisterSpectrum(cel, result);
         /* Brand-specific size card */
         var brandSel2 = getBrandSelect(form);
@@ -1653,7 +1573,6 @@ function runCalculation(form){
           var adj2 = BC.applyBrandAdjustment(result, brandSel2.value);
           brandCard.hidden = false;
           if (brandSub) brandSub.textContent = 'Adjusted from your US ' + result.us + ' to ' + (adj2.brand && adj2.brand.name ? adj2.brand.name : 'your selected brand') + ' sizing standards.';
-          /* 全部 8 region sizes 按品牌调整 */
           var gridHtml = '';
           var bAdj = [
             { l: 'US',     v: adj2.us,     o: result.us     },
@@ -1674,17 +1593,16 @@ function runCalculation(form){
               '</div>';
           }
           brandGrid.innerHTML = gridHtml;
-          /* 展示品牌详细信息卡 */
           var brandInfo = cel.querySelector('#size-brand-info');
           if (brandInfo && adj2.brand){
-            var bi = adj2.brand;
-            var infoHtml = '<div class="bc-celebrate-brand-info-title">' + bi.name + '</div>';
-            infoHtml += '<div class="bc-celebrate-brand-info-row"><span class="bc-celebrate-brand-info-label">Country</span><span class="bc-celebrate-brand-info-value">' + bi.country + '</span></div>';
-            infoHtml += '<div class="bc-celebrate-brand-info-row"><span class="bc-celebrate-brand-info-label">Specialty</span><span class="bc-celebrate-brand-info-value">' + bi.specialty + '</span></div>';
-            infoHtml += '<div class="bc-celebrate-brand-info-row"><span class="bc-celebrate-brand-info-label">Fit</span><span class="bc-celebrate-brand-info-value">' + bi.fit + '</span></div>';
-            infoHtml += '<div class="bc-celebrate-brand-info-row"><span class="bc-celebrate-brand-info-label">Best for</span><span class="bc-celebrate-brand-info-value">' + bi.bestFor + '</span></div>';
-            infoHtml += '<div class="bc-celebrate-brand-info-row"><span class="bc-celebrate-brand-info-label">Avoid if</span><span class="bc-celebrate-brand-info-value">' + bi.avoid + '</span></div>';
-            infoHtml += '<div class="bc-celebrate-brand-info-row"><span class="bc-celebrate-brand-info-label">Sister-size advice</span><span class="bc-celebrate-brand-info-value">' + bi.sisterSizeAdvice + '</span></div>';
+            var bi2 = adj2.brand;
+            var infoHtml = '<div class="bc-celebrate-brand-info-title">' + bi2.name + '</div>';
+            infoHtml += '<div class="bc-celebrate-brand-info-row"><span class="bc-celebrate-brand-info-label">Country</span><span class="bc-celebrate-brand-info-value">' + bi2.country + '</span></div>';
+            infoHtml += '<div class="bc-celebrate-brand-info-row"><span class="bc-celebrate-brand-info-label">Specialty</span><span class="bc-celebrate-brand-info-value">' + bi2.specialty + '</span></div>';
+            infoHtml += '<div class="bc-celebrate-brand-info-row"><span class="bc-celebrate-brand-info-label">Fit</span><span class="bc-celebrate-brand-info-value">' + bi2.fit + '</span></div>';
+            infoHtml += '<div class="bc-celebrate-brand-info-row"><span class="bc-celebrate-brand-info-label">Best for</span><span class="bc-celebrate-brand-info-value">' + bi2.bestFor + '</span></div>';
+            infoHtml += '<div class="bc-celebrate-brand-info-row"><span class="bc-celebrate-brand-info-label">Avoid if</span><span class="bc-celebrate-brand-info-value">' + bi2.avoid + '</span></div>';
+            infoHtml += '<div class="bc-celebrate-brand-info-row"><span class="bc-celebrate-brand-info-label">Sister-size advice</span><span class="bc-celebrate-brand-info-value">' + bi2.sisterSizeAdvice + '</span></div>';
             brandInfo.innerHTML = infoHtml;
             brandInfo.hidden = false;
           }
@@ -1693,11 +1611,10 @@ function runCalculation(form){
         }
         if (sConf) fireConfetti(sConf);
       }
-      /* Sisters — 旧版 (legacy) */
+      /* Sisters — legacy */
       var sisterEl = getSisterContainer(form);
       if (sisterEl) renderSisterSizes(sisterEl, result.bandSize, result.cupLetter);
-      /* 同步更新首页 Sister Size Comparator 面板 (新版 — 7 张卡 + 转换 + 总结)
-         必须在 if (cel) 块外调用, 因为 .bc-celebrate 元素可能不在 form.parentElement 内 */
+      /* Sister Size Comparator */
       renderSisterComparator(result);
       /* Brand */
       var brandSel = getBrandSelect(form);
@@ -1708,7 +1625,7 @@ function runCalculation(form){
       } else if (brandResultEl){
         brandResultEl.innerHTML = '';
       }
-      /* 滚动到结果 */
+      /* Scroll to result */
       if (resultEl){
         try{resultEl.scrollIntoView({behavior:'smooth', block:'start'});}catch(e){}
       }
@@ -1769,8 +1686,8 @@ function wireAll(){
         runCalculation(form);
       }
     }, true);
-    /* Live Preview 实时联动 */
-    wireLivePreview(form);
+    /* Unit 切换 */
+    wireUnitSwitch();
   });
   /* Celebration 按钮点击委托 — Print / Share / Reset (no save, no storage) */
   document.addEventListener('click', function(e){
@@ -1801,33 +1718,6 @@ function wireAll(){
       if (BCA) BCA.printResult();
     }, true);
   }
-  /* size-choice 卡片(Shop / Guide / Compare) */
-  document.addEventListener('click', function(e){
-    var card = e.target.closest('.size-choice-card');
-    if (!card) return;
-    var choice = card.dataset.choice;
-    var result = document.querySelector('form#size-form') && document.querySelector('form#size-form').__lastResult;
-    if (choice === 'shop' && result){
-      window.location.href = '/bra-buying-guide/?size=' + encodeURIComponent(result.us);
-    } else if (choice === 'guide'){
-      window.location.href = '/how-to-measure-bra-size/';
-    } else if (choice === 'compare'){
-      var details = document.getElementById('size-details');
-      var choice2 = document.getElementById('size-choice');
-      if (details){details.hidden = false;details.removeAttribute('hidden');details.style.display = 'block';}
-      if (choice2){choice2.hidden = true;choice2.style.display = 'none';}
-    }
-  }, true);
-  /* size-choice-skip 按钮 */
-  document.addEventListener('click', function(e){
-    if (e.target.closest && e.target.closest('#size-choice-skip')){
-      e.preventDefault();
-      var choice3 = document.getElementById('size-choice');
-      var details2 = document.getElementById('size-details');
-      if (choice3){choice3.hidden = true;choice3.style.display = 'none';}
-      if (details2){details2.hidden = false;details2.removeAttribute('hidden');details2.style.display = 'block';}
-    }
-  }, true);
   /* 填充 brand 下拉(全部 35 品牌按 region 分组) */
   populateBrandSelect();
   /* 渲染 Quick Fill 快捷填充(美国女性最常见尺码) */
