@@ -62,7 +62,7 @@ function readForm(form){
 function unitKey(s){return s === 'inches' || s === 'inch' ? 'inch' : (s === 'centimeters' || s === 'cm') ? 'cm' : (s === 'millimeters' || s === 'mm') ? 'mm' : 'inch';}
 
 function getResultEl(form){
-  return $('#size-result', form.parentElement) || $('.calc-result', form.parentElement) || $('[data-result]', form.parentElement);
+  return $('#size-result', form.parentElement) || $('.calc-result', form.parentElement) || $('[data-result]', form.parentElement) || document.getElementById('size-result');
 }
 
 function getSisterContainer(form){
@@ -500,7 +500,7 @@ function setLoading(form, loading){
 }
 
 function flashSuccess(form){
-  var result = form.parentElement && (form.parentElement.querySelector('.calc-result') || form.parentElement.querySelector('#size-result') || form.parentElement.querySelector('[data-result]'));
+  var result = getResultEl(form);
   if (!result) return;
   result.classList.add('bc-flash-success');
   setTimeout(function(){result.classList.remove('bc-flash-success');},1200);
@@ -1516,7 +1516,7 @@ function runCalculation(form){
         fillAll(form, result);
         ensureCelebrate(form, resultEl);
       }
-      var cel = form.parentElement.querySelector('.bc-celebrate');
+      var cel = resultEl && resultEl.querySelector('.bc-celebrate');
       if (cel){
         cel.hidden = false;
         cel.classList.add('bc-celebrate-show');

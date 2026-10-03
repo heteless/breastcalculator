@@ -1,3 +1,10 @@
-module.exports ={content:[
-'.*.html','.index.html','.footer.html','.header.html','./index.html','./footer.html','./header.html','./script.js'
-],corePlugins:{preflight:false},theme:{extend:{}},plugins:[]};
+module.exports = {
+  content: [
+    './**/index.html', './**/footer.html', './**/header.html', './script.js',
+    '!./node_modules/**', '!./dist/**', '!./dist-dryrun/**',
+    '!./_dbg/**', '!./scripts/**', '!./test/**', '!./tests/**', '!./.*/**',
+  ],
+  corePlugins: { preflight: false },
+  theme: { extend: {} },
+  plugins: [],
+};
