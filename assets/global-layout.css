@@ -5169,3 +5169,300 @@ form.calc-form + .bc-debug,
   line-height: 1.5;
 }
 
+/* ============================================================
+   Readability pass — centred text past two lines loses the
+   return sweep, and the rules above force-centre card copy with
+   !important. Section headings keep their centring; only the
+   running copy is pulled back to a left-aligned measure.
+   Mirrors the existing selector lists so these later declarations
+   win the cascade.
+   ============================================================ */
+main a.card.card-cta h3,
+main a.card[href*="/bra-sister-sizes"] h3,
+main a.card[href*="/bra-size-guide"] h3 {
+  text-align: left !important;
+}
+
+main a.card.card-cta p,
+main a.card[href*="/bra-sister-sizes"] p,
+main a.card[href*="/bra-size-guide"] p {
+  text-align: left !important;
+}
+
+/* The rules above only cover the cards whose hrefs match; every card is also
+   shrink-wrapped by align-items:center, which centres the text block even when
+   text-align is left. Match the existing (0,2,2)/(0,2,3) specificity so these
+   later declarations win, and stretch the copy to the full card width. */
+main .card-grid a.card,
+main .card-grid div.card {
+  align-items: flex-start !important;
+  text-align: left !important;
+}
+
+main .card-grid a.card p,
+main .card-grid div.card p {
+  text-align: left !important;
+  width: 100% !important;
+}
+
+/* Quick-fill hints matched the field eyebrow at .62rem. */
+.bc-quick-hint {
+  font-size: .72rem !important;
+  letter-spacing: .12em !important;
+}
+
+/* ============================================================
+   Focus visibility.
+   Every control already had a :focus rule, but the rings were
+   pale tints — rgba(220,180,165,.18) composited over the cream
+   page measures 1.1:1, far below the 3:1 WCAG 1.4.11 asks of a
+   focus indicator. These rules give keyboard users a solid
+   --rose-dark ring (5.9:1 on --bg) while leaving mouse clicks on
+   the existing subtle treatment, because they target
+   :focus-visible only.
+   The deep selectors mirror the rules being overridden: several of
+   them set `outline:none !important` at (0,4,1), so a bare
+   `input:focus-visible` would lose.
+   ============================================================ */
+.hero .bra-calculator.embedded .input-with-tip input:focus-visible,
+.bra-calculator.embedded .input-with-tip input:focus-visible,
+.hero .bra-calculator.embedded .calc-field input:focus-visible,
+.hero .bra-calculator.embedded .calc-field select:focus-visible,
+.bra-calculator.embedded .calc-field input:focus-visible,
+.bra-calculator.embedded .calc-field select:focus-visible,
+.bra-calculator .calc-field input:focus-visible,
+.bra-calculator .calc-field select:focus-visible,
+.form-group input:focus-visible,
+.form-group select:focus-visible,
+.classic-form-row input:focus-visible,
+.classic-form-row select:focus-visible,
+.classic-form-row textarea:focus-visible,
+.bc-brand-field select:focus-visible,
+.calc-field input:focus-visible,
+.calc-field select:focus-visible,
+input[type="number"]:focus-visible,
+input[type="text"]:focus-visible,
+input[type="email"]:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--rose-dark) !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 4px rgba(117, 91, 77, .16) !important;
+}
+
+/* Buttons whose :focus-visible rule sets outline:none and leans on the hover
+   background change instead — invisible on a keyboard, since the hover style is
+   also applied to the element in front of the caret. */
+.bc-history-btn:focus-visible,
+.size-choice-card:focus-visible,
+.size-choice-skip:focus-visible,
+.bc-tip-close:focus-visible,
+.classic-navbar .nav-label:focus-visible,
+.classic-navbar .dropdown-menu a:focus-visible {
+  outline: 2px solid var(--rose-dark) !important;
+  outline-offset: 2px !important;
+}
+
+a.btn-tool:focus-visible,
+.nav-cta a:focus-visible,
+.cta-banner a:focus-visible,
+.psb-btn:focus-visible,
+.back-btn:focus-visible,
+.back-to-top:focus-visible,
+.sibling-nav a:focus-visible,
+.tool-cta-btn:focus-visible,
+.calc-cta:focus-visible,
+.card-cta:focus-visible,
+.quiz-btn:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--rose-dark);
+  outline-offset: 2px;
+}
+
+/* ============================================================
+   Button system — one scale, three tiers.
+   Before this block the site rendered 19 distinct button looks
+   across 8 heights and 7 corner radii, and .btn-primary alone
+   came out as a 56px pill in the hero but a 52px 8px-radius
+   rectangle elsewhere, because each context added its own
+   !important override. Legacy class names stay in the HTML; this
+   maps them onto roles. The hero keeps its crafted gradient
+   because it is re-asserted last.
+   ============================================================ */
+:root {
+  --btn-h: 46px;
+  --btn-h-lg: 52px;
+  --btn-h-sm: 44px;
+  --btn-radius: 999px;
+  --btn-pad-x: 22px;
+  --btn-grad: linear-gradient(135deg, var(--rose) 0%, var(--rose-dark) 100%);
+  --btn-shadow: 0 4px 14px rgba(117, 91, 77, .26);
+}
+
+/* Tier 1 — primary action */
+.btn-primary,
+.btn-tool,
+.calc-cta,
+.tool-cta-btn,
+a.btn-calc,
+.quiz-btn.btn-next,
+.quiz-btn.btn-submit {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px;
+  min-height: var(--btn-h) !important;
+  padding: 10px var(--btn-pad-x) !important;
+  border: 0 !important;
+  border-radius: var(--btn-radius) !important;
+  background-image: var(--btn-grad) !important;
+  background-color: var(--rose-dark) !important;
+  color: #fff !important;
+  font-size: .95rem !important;
+  font-weight: 600 !important;
+  box-shadow: var(--btn-shadow);
+  transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+}
+
+.btn-primary:hover,
+.btn-tool:hover,
+.calc-cta:hover,
+.tool-cta-btn:hover,
+a.btn-calc:hover,
+.quiz-btn.btn-next:hover,
+.quiz-btn.btn-submit:hover {
+  filter: brightness(1.06);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px rgba(117, 91, 77, .34);
+}
+
+.btn-primary:active,
+.btn-tool:active,
+.calc-cta:active,
+a.btn-calc:active {
+  transform: scale(.98);
+}
+
+/* Tier 2 — secondary action */
+.btn-secondary,
+.btn-link-secondary,
+.quiz-btn.btn-prev,
+.quiz-btn.btn-reset,
+.btn-copy,
+.btn-retry {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: var(--btn-h) !important;
+  padding: 10px var(--btn-pad-x) !important;
+  border-radius: var(--btn-radius) !important;
+  background-image: none !important;
+  background-color: var(--rose-lighter) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--heading-warm) !important;
+  font-size: .92rem !important;
+  font-weight: 600 !important;
+  transition: background-color .18s ease, border-color .18s ease, transform .18s ease;
+}
+
+.btn-secondary:hover,
+.btn-link-secondary:hover,
+.quiz-btn.btn-prev:hover,
+.quiz-btn.btn-reset:hover,
+.btn-copy:hover,
+.btn-retry:hover {
+  background-color: var(--rose-light) !important;
+  border-color: var(--rose) !important;
+  color: var(--heading) !important;
+}
+
+/* Tier 3 — compact utility (share row, back link, nav pill) */
+.psb-btn,
+main .psb-btn,
+.back-btn,
+.nav-cta a {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: var(--btn-h-sm) !important;
+  padding: 8px 16px !important;
+  border-radius: var(--btn-radius) !important;
+  font-size: .84rem !important;
+  font-weight: 600 !important;
+}
+
+/* The nav CTA is a primary action wearing compact clothes. */
+.nav-cta a {
+  background-image: var(--btn-grad) !important;
+  background-color: var(--rose-dark) !important;
+  color: #fff !important;
+  border: 0 !important;
+}
+
+/* The hero's own calculator CTA is the most-clicked control on the site and
+   carries a hand-tuned three-stop gradient plus a ::before glow — keep it
+   byte-for-byte by re-asserting it after the tier rules. */
+.hero .bra-calculator.embedded .calc-actions .btn-primary,
+.bra-calculator.embedded .calc-actions .btn-primary {
+  min-height: var(--btn-h-lg) !important;
+  background-image: linear-gradient(135deg, #b89782 0%, var(--rose) 60%, #6b5344 100%) !important;
+  font-size: .96rem !important;
+}
+
+.hero .bra-calculator.embedded .calc-actions .btn-primary:hover,
+.bra-calculator.embedded .calc-actions .btn-primary:hover {
+  background-image: linear-gradient(135deg, #c4a08a 0%, #9a7d6a 60%, #7a604c 100%) !important;
+  transform: translateY(-2px);
+  filter: none;
+}
+
+/* Placement: the hero CTA row capped buttons at 150px, which wrapped
+   "Calculate My Bra Size" and made the primary action look cramped. */
+.hero-cta-group .btn-primary,
+.hero-cta-group .btn-secondary,
+.hero-cta-group .btn-tool {
+  max-width: none;
+  min-width: 160px;
+}
+
+/* A blanket `main:is(button) { border-radius:8px !important }` squares off
+   controls that are deliberately a pill or a circle. Restore those two; the
+   6px/8px hamburger and the 9999px back-to-top are left alone because the
+   difference is not perceptible. */
+.bc-quick-btn {
+  border-radius: var(--btn-radius) !important;
+}
+
+/* Mirrors the calculator-scoped selectors so it matches the specificity of the
+   `.hero .bra-calculator.embedded .measure-tip { border-radius:8px !important }`
+   rule that squares this circular help toggle. */
+.hero .bra-calculator.embedded .measure-tip,
+.hero .bra-calculator .measure-tip,
+.bra-calculator.embedded .measure-tip,
+.inputs-panel .form-group .measure-tip,
+.measure-tip {
+  border-radius: 50% !important;
+}
+
+.size-guide-header p,
+.page-content p,
+.specials-sub p,
+article.article p {
+  text-align: left;
+  max-width: 68ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Calculator field labels rendered at 9.9px with .32em tracking. */
+.calc-field-eyebrow {
+  font-size: .72rem !important;
+  letter-spacing: .18em !important;
+}
+
+/* The sibling-size pager is a primary nav control but only 20px tall. */
+.sibling-nav a {
+  display: inline-block;
+  padding: 12px 6px;
+}
+

@@ -9,6 +9,15 @@ const BASE_URL = 'https://breastcalculator.com';
 // Dynamic lastmod: today's date in YYYY-MM-DD (UTC)
 const TODAY = new Date().toISOString().slice(0, 10);
 
+// 从现有重定向规则排除 3xx 源 URL，保留源目录中的文章文件。
+const REDIRECT_SOURCES = new Set(
+  fs.readFileSync(path.join(ROOT, '_redirects'), 'utf8')
+    .split(/\r?\n/)
+    .map(line => line.trim().match(/^(\/\S*)\s+\S+\s+3\d{2}(?:\s|$)/))
+    .filter(Boolean)
+    .map(match => match[1])
+);
+
 // 排除的目录（不进入 sitemap）
 const EXCLUDE_DIRS = new Set([
   'node_modules',
@@ -87,7 +96,7 @@ if (fs.existsSync(rootIndex)) {
 }
 pages.push(...allPages);
 
-const unique = [...new Set(pages)].sort();
+const unique = [...new Set(pages)].filter(p => !REDIRECT_SOURCES.has(p)).sort();
 
 console.log(`Found ${unique.length} pages`);
 

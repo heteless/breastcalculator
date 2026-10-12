@@ -56,8 +56,46 @@ const SKIP_FILES = new Set(['cache-bust.js', 'package.json', 'package-lock.json'
 
 // ---------- Minifiers ----------
 
+// Elements whose box is block-level: whitespace next to them is never a word
+// separator, so it can be dropped safely.
+const BLOCK_TAGS = new Set([
+  'address', 'article', 'aside', 'blockquote', 'body', 'dd', 'div', 'dl', 'dt',
+  'fieldset', 'figcaption', 'figure', 'footer', 'form', 'h1', 'h2', 'h3', 'h4',
+  'h5', 'h6', 'head', 'header', 'hr', 'html', 'li', 'main', 'nav', 'ol',
+  'option', 'p', 'pre', 'script', 'section', 'select', 'style', 'table',
+  'tbody', 'td', 'tfoot', 'th', 'thead', 'tr', 'ul',
+]);
+
+// `</a> <a>`, `</em> <strong>`, `: <a>` sit in normal inline flow, where the
+// whitespace is the only thing separating the two words. The old unconditional
+// `>\s+<` pass deleted it and rendered "AboutContact" and "size:bra size
+// calculator". Only collapse when at least one side is block-level.
+const INTER_TAG_WS = /(<\/?)([a-zA-Z][\w-]*)([^>]*>)(\s+)(<\/?)([a-zA-Z][\w-]*)/g;
+
+function dropGapBetweenTags(match, open1, name1, rest1, gap, open2, name2) {
+  if (!BLOCK_TAGS.has(name1.toLowerCase()) && !BLOCK_TAGS.has(name2.toLowerCase())) {
+    return match;
+  }
+  return open1 + name1 + rest1 + open2 + name2;
+}
+
 function minifyHTML(html) {
-  return html
+  // Inline <script> and <style> bodies must be lifted out before the whitespace
+  // passes below. Collapsing newlines inside a script turns `// comment` into a
+  // line that swallows the rest of the code: the AdSense lazy-load block on 29
+  // pages became one comment, so two of the three ad slots on those pages were
+  // never pushed, and the breast-shape wizard rendered no question at all.
+  const stash = [];
+  const hold = (open, body, close) => {
+    stash.push(open + body + close);
+    return '\u0000BLOB' + (stash.length - 1) + '\u0000';
+  };
+  let out = html.replace(/(<script\b[^>]*>)([\s\S]*?)(<\/script>)/gi, (m, open, body, close) =>
+    (/\bsrc\s*=/i.test(open) || !body.trim()) ? m : hold(open, body, close));
+  out = out.replace(/(<style\b[^>]*>)([\s\S]*?)(<\/style>)/gi, (m, open, body, close) =>
+    body.trim() ? hold(open, body, close) : m);
+
+  out = out
     // Strip normal HTML comments; preserve <!--[if ...]> and <![endif]-->
     .replace(/<!--(?!\s*\[if)[\s\S]*?-->/g, '')
     // Drop the XML processing instruction (<?xml ... ?>) - irrelevant for HTML
@@ -71,11 +109,13 @@ function minifyHTML(html) {
     // dashes, CJK) correctly. Removing it produced "â–¾" garbled output.
     // Collapse all whitespace runs (including newlines) to a single space
     .replace(/\s+/g, ' ')
-    // Remove whitespace between tags
-    .replace(/>\s+</g, '><')
+    // Remove whitespace between tags where it cannot be a word separator
+    .replace(INTER_TAG_WS, dropGapBetweenTags)
     // Remove whitespace at the start of a tag content
     .replace(/\s+>/g, '>')
     .trim();
+
+  return out.replace(/\u0000BLOB(\d+)\u0000/g, (m, i) => stash[+i]);
 }
 
 function minifyCSS(css) {
@@ -122,9 +162,11 @@ function minifyJS(js) {
   out = out.replace(/[ \t]+/g, ' ').replace(/\s*\n\s*/g, '\n');
   // Remove blank lines
   out = out.replace(/\n{2,}/g, '\n');
-  // Remove whitespace around operators and punctuation (safe for our script)
-  out = out.replace(/\s*([{};,:])\s*/g, '$1');
-  // Trim leading/trailing
+  // NOTE: deliberately no whitespace-around-`,;:{}` collapse. The old pass ran
+  // over string literals as well as code, so every sentence the calculator
+  // renders lost the space after its punctuation — "Your recommended size, by
+  // region" shipped as "size,by region" and the cookie banner as
+  // `"Accept All",you consent`. It saved 5.8 KB of raw JS site-wide.
   out = out.trim();
   return out;
 }

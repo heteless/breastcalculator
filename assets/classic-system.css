@@ -261,6 +261,23 @@ footer a:hover, .back-btn:hover {
   background-image: none !important;
 }
 
+/* The reset above kills background-image to suppress the animated underline,
+   but .nav-cta a and .btn-tool are painted WITH a gradient fill, so it left
+   them as white text on a transparent box — the header's primary "Calculate
+   Size" CTA was effectively invisible. Restore their fill; the underline stays
+   off because these declarations replace it rather than add to it. */
+.nav-cta a,
+a.btn-tool {
+  background-image: linear-gradient(135deg, var(--rose) 0%, var(--rose-dark) 100%) !important;
+  background-size: auto !important;
+  color: #fff !important;
+}
+.nav-cta a:hover,
+a.btn-tool:hover {
+  background-image: linear-gradient(135deg, var(--rose-dark) 0%, #a87868 100%) !important;
+  color: #fff !important;
+}
+
 /* ── 按钮全局修复 (44px 触控区) ───────────────────────────────────── */
 .btn, button, [type="submit"], .btn-primary, .btn-secondary, .btn-tool,
 .size-save, .size-choice-skip, .bc-history-btn, .calc-cta,

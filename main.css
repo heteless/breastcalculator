@@ -917,7 +917,7 @@
 /* ─── bra-calculator.css (7923 B) ─── */
 .btn-primary.is-loading,button[type="submit"].is-loading{position:relative;pointer-events:none;opacity:.85}.bc-spinner{display:inline-block;width:14px;height:14px;margin-right:8px;border:2px solid rgba(255,255,255,.35);border-top:2px solid #fff;border-radius:50%;animation:bc-spin .7s linear infinite;vertical-align:-2px}@keyframes bc-spin{to{transform:rotate(360deg)}}@keyframes bc-flash{0%{background-color:rgba(40,167,69,0)}20%{background-color:rgba(40,167,69,.15)}100%{background-color:rgba(40,167,69,0)}}.bc-sister-sizes{margin-top:24px;padding:18px 20px;border:1px solid var(--color-border,#e5e5e5);border-radius:10px;background:var(--color-surface,#fafafa)}.bc-sister-title{margin:0 0 12px 0;font-size:1rem;font-weight:600}.bc-sister-hint{font-weight:400;color:var(--color-text-muted,#777);font-size:.85em;margin-left:6px}.bc-sister-list{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}.bc-sister-badge{font-size:.7em;background:rgba(255,255,255,.25);padding:2px 8px;border-radius:999px;margin-left:4px}.bc-brand-result{margin-top:18px;padding:16px 18px;border-radius:10px;background:linear-gradient(135deg,#fff5f8 0%,#fef9f0 100%);border:1px solid #f3d4d4}.bc-brand-title{margin:0 0 10px 0;font-size:.95rem;font-weight:600}.bc-brand-sizes{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px;margin-bottom:10px}.bc-brand-row{display:flex;align-items:center;gap:6px;font-size:.9rem}.bc-brand-label{font-weight:600;color:var(--color-text-muted,#666);min-width:28px}.bc-brand-value{font-weight:700;font-size:1rem}.bc-brand-original{font-size:.8em;color:var(--color-text-muted,#888);text-decoration:line-through}.bc-brand-note{font-size:.85em;color:#555;margin:6px 0 0 0;line-height:1.4}.bc-brand-metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin:12px 0 8px;padding:12px 14px;background:rgba(255,255,255,.55);border:1px solid #f0d8d8;border-radius:8px}.bc-brand-metric{display:flex;flex-direction:column;gap:2px;align-items:flex-start;text-align:left}.bc-brand-metric-label{font-size:.68em;font-weight:600;color:var(--color-text-muted,#888);text-transform:uppercase;letter-spacing:.06em}.bc-brand-metric-value{font-size:1.15rem;font-weight:700;color:#8b2a4a;line-height:1.15}.bc-brand-metric-unit{font-size:.7em;font-weight:500;color:#999;margin-left:2px}.bc-brand-metric-hint{font-size:.72em;color:#7a6060;line-height:1.3;margin-top:2px}.bc-brand-field{margin-top:12px}.bc-brand-field select{width:100%;padding:10px 12px;border:1px solid var(--color-border,#ddd);border-radius:8px;font-size:1rem;background:#fff;transition:box-shadow .15s ease}.bc-brand-field select:focus{outline:none;box-shadow:inset 0 0 0 1px var(--color-primary,#d6336c),0 0 0 3px rgba(214,51,108,.15)}.bc-quick-templates{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:16px;padding:12px 14px;background:var(--color-surface,#f5f5f5);border-radius:8px}.bc-quick-label{font-size:.85em;color:var(--color-text-muted,#666);margin-right:4px}.bc-quick-btn{padding:6px 12px;background:#fff;border:1px solid var(--color-border,#ddd);border-radius:999px;font-size:.85em;cursor:pointer;transition:background .15s ease,color .15s ease,transform .15s ease,box-shadow .15s ease}.bc-quick-btn:hover{background:var(--color-primary,#d6336c);color:#fff;border-color:transparent;box-shadow:inset 0 0 0 1px var(--color-primary,#d6336c);transform:translateY(-1px)}.bc-quick-btn:active{transform:translateY(0)}input[type="number"]:focus,.calc-field input:focus,input[data-validate]:focus{outline:none;box-shadow:inset 0 0 0 1px var(--color-primary,#d6336c),0 0 0 3px rgba(214,51,108,.12);transition:box-shadow .15s ease}input.invalid{border-color:#dc3545;background:#fff5f5;animation:bc-shake .3s ease}input.valid{border-color:#28a745}@keyframes bc-shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-3px)}75%{transform:translateX(3px)}}.calc-result:not(.hidden){animation:bc-fade-up .4s ease-out}@keyframes bc-fade-up{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}.bc-result-card{margin-top:20px;padding:20px 22px;border:1px solid var(--color-border,#e5e5e5);border-radius:12px;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.04)}.bc-result-title{margin:0 0 14px 0;font-size:1.1rem;font-weight:600;color:var(--color-text,#333)}.bc-result-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin-bottom:14px}.bc-result-cell{display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 8px;background:var(--color-surface,#fafafa);border:1px solid var(--color-border,#eaeaea);border-radius:10px;transition:transform .15s ease,box-shadow .15s ease}.bc-result-cell:hover{transform:translateY(-1px);box-shadow:0 2px 6px rgba(0,0,0,.06)}.bc-result-label{font-size:.75em;font-weight:600;color:var(--color-text-muted,#888);text-transform:uppercase;letter-spacing:.05em}.bc-result-value{font-size:1.4rem;font-weight:700;color:var(--color-primary,#d6336c)}.bc-result-recommendation{margin:0;padding:12px 14px;background:#f9fafc;border-left:3px solid var(--color-primary,#d6336c);border-radius:6px;font-size:.9rem;line-height:1.5;color:#444}@media(max-width:480px){.bc-result-grid{grid-template-columns:repeat(2,1fr)}.bc-result-value{font-size:1.2rem}}@media(max-width:640px){.bc-sister-list{gap:6px}.bc-quick-btn{padding:10px 14px;font-size:.9rem;min-height:44px}.bc-brand-field select{min-height:44px;font-size:16px}}.bc-tip-overlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(43,30,25,.55);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);z-index:9999;opacity:0;transition:opacity .18s ease}.bc-tip-overlay.is-open{display:flex;opacity:1}html.bc-tip-open,html.bc-tip-open body{overflow:hidden}.bc-tip-dialog{position:relative;background:var(--bg-card,#fff);color:var(--text,#2b1e19);border:1px solid var(--border,#e8ddd0);border-radius:var(--radius,14px);box-shadow:0 18px 48px rgba(0,0,0,.28);width:100%;max-width:480px;max-height:min(85vh,640px);overflow-y:auto;padding:28px 28px 24px;font-family:var(--font-sans,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif);transform:translateY(8px)scale(.985);transition:transform .2s ease;-webkit-overflow-scrolling:touch}.bc-tip-overlay.is-open .bc-tip-dialog{transform:translateY(0)scale(1)}.bc-tip-close{position:absolute;top:10px;right:12px;width:36px;height:36px;border:0;border-radius:50%;background:transparent;color:var(--text-light,#7a6455);font-size:1.5rem;line-height:1;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:background .15s ease,color .15s ease}.bc-tip-close:hover,.bc-tip-close:focus-visible{background:var(--sand-light,#f3e7dc);color:var(--text,#2b1e19);outline:none}.bc-tip-close:focus-visible{box-shadow:0 0 0 3px rgba(220,180,165,.45)}.bc-tip-title{margin:0 36px 12px 0;font-size:1.18rem;font-weight:700;color:var(--heading,#5b4636);line-height:1.35;font-family:var(--font-serif,Georgia,"Times New Roman",serif)}.bc-tip-steps{margin:0 0 16px 0;padding-left:1.25rem;color:var(--text,#2b1e19);font-size:.94rem;line-height:1.6}.bc-tip-steps li{margin-bottom:8px;word-wrap:break-word;overflow-wrap:break-word}.bc-tip-steps li:last-child{margin-bottom:0}.bc-tip-note{margin:0;padding:12px 14px;background:var(--sand-light,#f3e7dc);border-left:3px solid var(--rose,#c98a82);border-radius:6px;font-size:.88rem;line-height:1.55;color:var(--text,#2b1e19);font-style:italic}@media(max-width:480px){.bc-tip-dialog{padding:22px 20px 20px;max-height:min(90vh,640px)}.bc-tip-title{font-size:1.08rem}.bc-tip-steps{font-size:.9rem}.bc-tip-note{font-size:.85rem}}@media(prefers-reduced-motion:reduce){.bc-spinner,input.invalid,.calc-result:not(.hidden),.bc-quick-btn{animation:none !important;transition:none !important}.bc-tip-overlay,.bc-tip-dialog{transition:none !important}}
 
-/* ─── classic-system.css (31489 B) ─── */
+/* ─── classic-system.css (32213 B) ─── */
 /* ==========================================================================
    classic-system.css — 古典品牌感设计系统增强
    与 style.css 协同工作：仅补充和覆盖，不重写基础 token。
@@ -1179,6 +1179,23 @@ footer a, .back-btn, .back-to-top,
 .nav-logo:hover, .nav-cta a:hover,
 footer a:hover, .back-btn:hover {
   background-image: none !important;
+}
+
+/* The reset above kills background-image to suppress the animated underline,
+   but .nav-cta a and .btn-tool are painted WITH a gradient fill, so it left
+   them as white text on a transparent box — the header's primary "Calculate
+   Size" CTA was effectively invisible. Restore their fill; the underline stays
+   off because these declarations replace it rather than add to it. */
+.nav-cta a,
+a.btn-tool {
+  background-image: linear-gradient(135deg, var(--rose) 0%, var(--rose-dark) 100%) !important;
+  background-size: auto !important;
+  color: #fff !important;
+}
+.nav-cta a:hover,
+a.btn-tool:hover {
+  background-image: linear-gradient(135deg, var(--rose-dark) 0%, #a87868 100%) !important;
+  color: #fff !important;
 }
 
 /* ── 按钮全局修复 (44px 触控区) ───────────────────────────────────── */
@@ -2133,7 +2150,7 @@ button:disabled, .calc-cta:disabled, .btn-primary:disabled, .btn-secondary:disab
 
 
 
-/* ─── global-layout.css (187778 B) ─── */
+/* ─── global-layout.css (197662 B) ─── */
 /* ==========================================================================
    global-layout.css — 全站统一布局规范 (Single Source of Truth)
    --------------------------------------------------------------------------
@@ -7303,6 +7320,303 @@ form.calc-form + .bc-debug,
   font-size: 0.78rem;
   color: var(--text-light);
   line-height: 1.5;
+}
+
+/* ============================================================
+   Readability pass — centred text past two lines loses the
+   return sweep, and the rules above force-centre card copy with
+   !important. Section headings keep their centring; only the
+   running copy is pulled back to a left-aligned measure.
+   Mirrors the existing selector lists so these later declarations
+   win the cascade.
+   ============================================================ */
+main a.card.card-cta h3,
+main a.card[href*="/bra-sister-sizes"] h3,
+main a.card[href*="/bra-size-guide"] h3 {
+  text-align: left !important;
+}
+
+main a.card.card-cta p,
+main a.card[href*="/bra-sister-sizes"] p,
+main a.card[href*="/bra-size-guide"] p {
+  text-align: left !important;
+}
+
+/* The rules above only cover the cards whose hrefs match; every card is also
+   shrink-wrapped by align-items:center, which centres the text block even when
+   text-align is left. Match the existing (0,2,2)/(0,2,3) specificity so these
+   later declarations win, and stretch the copy to the full card width. */
+main .card-grid a.card,
+main .card-grid div.card {
+  align-items: flex-start !important;
+  text-align: left !important;
+}
+
+main .card-grid a.card p,
+main .card-grid div.card p {
+  text-align: left !important;
+  width: 100% !important;
+}
+
+/* Quick-fill hints matched the field eyebrow at .62rem. */
+.bc-quick-hint {
+  font-size: .72rem !important;
+  letter-spacing: .12em !important;
+}
+
+/* ============================================================
+   Focus visibility.
+   Every control already had a :focus rule, but the rings were
+   pale tints — rgba(220,180,165,.18) composited over the cream
+   page measures 1.1:1, far below the 3:1 WCAG 1.4.11 asks of a
+   focus indicator. These rules give keyboard users a solid
+   --rose-dark ring (5.9:1 on --bg) while leaving mouse clicks on
+   the existing subtle treatment, because they target
+   :focus-visible only.
+   The deep selectors mirror the rules being overridden: several of
+   them set `outline:none !important` at (0,4,1), so a bare
+   `input:focus-visible` would lose.
+   ============================================================ */
+.hero .bra-calculator.embedded .input-with-tip input:focus-visible,
+.bra-calculator.embedded .input-with-tip input:focus-visible,
+.hero .bra-calculator.embedded .calc-field input:focus-visible,
+.hero .bra-calculator.embedded .calc-field select:focus-visible,
+.bra-calculator.embedded .calc-field input:focus-visible,
+.bra-calculator.embedded .calc-field select:focus-visible,
+.bra-calculator .calc-field input:focus-visible,
+.bra-calculator .calc-field select:focus-visible,
+.form-group input:focus-visible,
+.form-group select:focus-visible,
+.classic-form-row input:focus-visible,
+.classic-form-row select:focus-visible,
+.classic-form-row textarea:focus-visible,
+.bc-brand-field select:focus-visible,
+.calc-field input:focus-visible,
+.calc-field select:focus-visible,
+input[type="number"]:focus-visible,
+input[type="text"]:focus-visible,
+input[type="email"]:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--rose-dark) !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 4px rgba(117, 91, 77, .16) !important;
+}
+
+/* Buttons whose :focus-visible rule sets outline:none and leans on the hover
+   background change instead — invisible on a keyboard, since the hover style is
+   also applied to the element in front of the caret. */
+.bc-history-btn:focus-visible,
+.size-choice-card:focus-visible,
+.size-choice-skip:focus-visible,
+.bc-tip-close:focus-visible,
+.classic-navbar .nav-label:focus-visible,
+.classic-navbar .dropdown-menu a:focus-visible {
+  outline: 2px solid var(--rose-dark) !important;
+  outline-offset: 2px !important;
+}
+
+a.btn-tool:focus-visible,
+.nav-cta a:focus-visible,
+.cta-banner a:focus-visible,
+.psb-btn:focus-visible,
+.back-btn:focus-visible,
+.back-to-top:focus-visible,
+.sibling-nav a:focus-visible,
+.tool-cta-btn:focus-visible,
+.calc-cta:focus-visible,
+.card-cta:focus-visible,
+.quiz-btn:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--rose-dark);
+  outline-offset: 2px;
+}
+
+/* ============================================================
+   Button system — one scale, three tiers.
+   Before this block the site rendered 19 distinct button looks
+   across 8 heights and 7 corner radii, and .btn-primary alone
+   came out as a 56px pill in the hero but a 52px 8px-radius
+   rectangle elsewhere, because each context added its own
+   !important override. Legacy class names stay in the HTML; this
+   maps them onto roles. The hero keeps its crafted gradient
+   because it is re-asserted last.
+   ============================================================ */
+:root {
+  --btn-h: 46px;
+  --btn-h-lg: 52px;
+  --btn-h-sm: 44px;
+  --btn-radius: 999px;
+  --btn-pad-x: 22px;
+  --btn-grad: linear-gradient(135deg, var(--rose) 0%, var(--rose-dark) 100%);
+  --btn-shadow: 0 4px 14px rgba(117, 91, 77, .26);
+}
+
+/* Tier 1 — primary action */
+.btn-primary,
+.btn-tool,
+.calc-cta,
+.tool-cta-btn,
+a.btn-calc,
+.quiz-btn.btn-next,
+.quiz-btn.btn-submit {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px;
+  min-height: var(--btn-h) !important;
+  padding: 10px var(--btn-pad-x) !important;
+  border: 0 !important;
+  border-radius: var(--btn-radius) !important;
+  background-image: var(--btn-grad) !important;
+  background-color: var(--rose-dark) !important;
+  color: #fff !important;
+  font-size: .95rem !important;
+  font-weight: 600 !important;
+  box-shadow: var(--btn-shadow);
+  transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+}
+
+.btn-primary:hover,
+.btn-tool:hover,
+.calc-cta:hover,
+.tool-cta-btn:hover,
+a.btn-calc:hover,
+.quiz-btn.btn-next:hover,
+.quiz-btn.btn-submit:hover {
+  filter: brightness(1.06);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px rgba(117, 91, 77, .34);
+}
+
+.btn-primary:active,
+.btn-tool:active,
+.calc-cta:active,
+a.btn-calc:active {
+  transform: scale(.98);
+}
+
+/* Tier 2 — secondary action */
+.btn-secondary,
+.btn-link-secondary,
+.quiz-btn.btn-prev,
+.quiz-btn.btn-reset,
+.btn-copy,
+.btn-retry {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: var(--btn-h) !important;
+  padding: 10px var(--btn-pad-x) !important;
+  border-radius: var(--btn-radius) !important;
+  background-image: none !important;
+  background-color: var(--rose-lighter) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--heading-warm) !important;
+  font-size: .92rem !important;
+  font-weight: 600 !important;
+  transition: background-color .18s ease, border-color .18s ease, transform .18s ease;
+}
+
+.btn-secondary:hover,
+.btn-link-secondary:hover,
+.quiz-btn.btn-prev:hover,
+.quiz-btn.btn-reset:hover,
+.btn-copy:hover,
+.btn-retry:hover {
+  background-color: var(--rose-light) !important;
+  border-color: var(--rose) !important;
+  color: var(--heading) !important;
+}
+
+/* Tier 3 — compact utility (share row, back link, nav pill) */
+.psb-btn,
+main .psb-btn,
+.back-btn,
+.nav-cta a {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: var(--btn-h-sm) !important;
+  padding: 8px 16px !important;
+  border-radius: var(--btn-radius) !important;
+  font-size: .84rem !important;
+  font-weight: 600 !important;
+}
+
+/* The nav CTA is a primary action wearing compact clothes. */
+.nav-cta a {
+  background-image: var(--btn-grad) !important;
+  background-color: var(--rose-dark) !important;
+  color: #fff !important;
+  border: 0 !important;
+}
+
+/* The hero's own calculator CTA is the most-clicked control on the site and
+   carries a hand-tuned three-stop gradient plus a ::before glow — keep it
+   byte-for-byte by re-asserting it after the tier rules. */
+.hero .bra-calculator.embedded .calc-actions .btn-primary,
+.bra-calculator.embedded .calc-actions .btn-primary {
+  min-height: var(--btn-h-lg) !important;
+  background-image: linear-gradient(135deg, #b89782 0%, var(--rose) 60%, #6b5344 100%) !important;
+  font-size: .96rem !important;
+}
+
+.hero .bra-calculator.embedded .calc-actions .btn-primary:hover,
+.bra-calculator.embedded .calc-actions .btn-primary:hover {
+  background-image: linear-gradient(135deg, #c4a08a 0%, #9a7d6a 60%, #7a604c 100%) !important;
+  transform: translateY(-2px);
+  filter: none;
+}
+
+/* Placement: the hero CTA row capped buttons at 150px, which wrapped
+   "Calculate My Bra Size" and made the primary action look cramped. */
+.hero-cta-group .btn-primary,
+.hero-cta-group .btn-secondary,
+.hero-cta-group .btn-tool {
+  max-width: none;
+  min-width: 160px;
+}
+
+/* A blanket `main:is(button) { border-radius:8px !important }` squares off
+   controls that are deliberately a pill or a circle. Restore those two; the
+   6px/8px hamburger and the 9999px back-to-top are left alone because the
+   difference is not perceptible. */
+.bc-quick-btn {
+  border-radius: var(--btn-radius) !important;
+}
+
+/* Mirrors the calculator-scoped selectors so it matches the specificity of the
+   `.hero .bra-calculator.embedded .measure-tip { border-radius:8px !important }`
+   rule that squares this circular help toggle. */
+.hero .bra-calculator.embedded .measure-tip,
+.hero .bra-calculator .measure-tip,
+.bra-calculator.embedded .measure-tip,
+.inputs-panel .form-group .measure-tip,
+.measure-tip {
+  border-radius: 50% !important;
+}
+
+.size-guide-header p,
+.page-content p,
+.specials-sub p,
+article.article p {
+  text-align: left;
+  max-width: 68ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Calculator field labels rendered at 9.9px with .32em tracking. */
+.calc-field-eyebrow {
+  font-size: .72rem !important;
+  letter-spacing: .18em !important;
+}
+
+/* The sibling-size pager is a primary nav control but only 20px tall. */
+.sibling-nav a {
+  display: inline-block;
+  padding: 12px 6px;
 }
 
 

@@ -1786,12 +1786,12 @@ function setUnit(unit){
         return '<span style="opacity:0.4">' + m + '</span>';
       });
       text = text.replace(/(\d+[\u2013\u2014\-]\d+\s*)(cm|centimeters?)/gi, function(m, range){
-        return '<span style="color:#b87a5a;font-weight:600">' + m + '</span>';
+        return '<span style="color:#8b4a3a;font-weight:600">' + m + '</span>';
       });
     } else {
       /* 高亮 inch 范围 */
       text = text.replace(/(\d+[\u2013\u2014\-]\d+\s*)(?:\u2033|in|inches?)/gi, function(m, range){
-        return '<span style="color:#b87a5a;font-weight:600">' + m + '</span>';
+        return '<span style="color:#8b4a3a;font-weight:600">' + m + '</span>';
       });
       text = text.replace(/(\d+[\u2013\u2014\-]\d+\s*)(cm|centimeters?)/gi, function(m, range){
         return '<span style="opacity:0.4">' + m + '</span>';
