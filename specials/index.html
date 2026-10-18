@@ -394,7 +394,7 @@
           </a>
         </li>
         <li class="drawer-sub">
-          <a href="#" id="privacyFromDrawer">
+          <a href="/privacy/" id="privacyFromDrawer">
             Privacy Settings
           </a>
         </li>
@@ -819,35 +819,9 @@
     <p class="cf-copy">&copy; 2026 Breast Calculator. For informational purposes only — not a substitute for medical advice.</p>
   </div>
 </footer>
-    <div class="modal-overlay" id="privacyModal">
-      <div class="modal">
-        <h3>
-          Privacy Settings
-        </h3>
-        <label>
-          <input type="checkbox" id="ckFunc" checked disabled>
-          <span>
-            Functional Cookies (always on)
-          </span>
-        </label>
-        <label>
-          <input type="checkbox" id="ckAnalytics">
-          <span>
-            Analytics Cookies
-          </span>
-        </label>
-        <div class="modal-actions">
-          <button class="btn-secondary" onclick="closePrivacyModal()">
-            Cancel
-          </button>
-          <button class="btn-primary" onclick="savePrivacy()">
-            Save Settings
-          </button>
-        </div>
-      </div>
-    </div>
+
     <script>
-      (function(){ 'use strict'; var T=document.getElementById('menuToggle'),D=document.getElementById('drawer'),O=document.getElementById('drawerOverlay'),C=document.getElementById('drawerClose'); function o(){D.classList.add('open');O.classList.add('open');T.setAttribute('aria-expanded','true')}function c(){D.classList.remove('open');O.classList.remove('open');T.setAttribute('aria-expanded','false')} if(T)T.addEventListener('click',function(e){e.stopPropagation();D.classList.contains('open')?c():o()});if(O)O.addEventListener('click',c);if(C)C.addEventListener('click',c); document.addEventListener('keydown',function(e){if(e.key==='Escape'&&D.classList.contains('open'))c()}); var cb=document.getElementById('cookieBanner')||document.createElement('div'),pm=document.getElementById('privacyModal')||document.createElement('div'); if(!localStorage.getItem('cookieConsent')){cb.classList.add('show')} window.acceptCookies=function(){localStorage.setItem('cookieConsent','all');gtag('consent','update',{'analytics_storage':'granted'});cb.classList.remove('show')}; window.openPrivacyModal=function(){cb.classList.remove('show');pm.classList.add('show')};window.closePrivacyModal=function(){pm.classList.remove('show')}; window.savePrivacy=function(){var a=(document.getElementById('ckAnalytics')||{checked:false}).checked?'granted':'denied';localStorage.setItem('cookieConsent','custom');gtag('consent','update',{'analytics_storage':a});pm.classList.remove('show')}; (document.getElementById('privacyLink')||document.createElement('a')).addEventListener('click',function(e){e.preventDefault();openPrivacyModal()}); var pfd=document.getElementById('privacyFromDrawer');if(pfd)pfd.addEventListener('click',function(e){e.preventDefault();c();openPrivacyModal()}); })();
+      (function(){ 'use strict'; var T=document.getElementById('menuToggle'),D=document.getElementById('drawer'),O=document.getElementById('drawerOverlay'),C=document.getElementById('drawerClose'); function o(){D.classList.add('open');O.classList.add('open');T.setAttribute('aria-expanded','true')}function c(){D.classList.remove('open');O.classList.remove('open');T.setAttribute('aria-expanded','false')} if(T)T.addEventListener('click',function(e){e.stopPropagation();D.classList.contains('open')?c():o()});if(O)O.addEventListener('click',c);if(C)C.addEventListener('click',c); document.addEventListener('keydown',function(e){if(e.key==='Escape'&&D.classList.contains('open'))c()}); })();
     </script>
     <script>
       function toggleFooterCol(b){var u=b.nextElementSibling;while(u&&u.tagName!=='UL'){u=u.nextElementSibling}if(u){var sv=b.querySelector('svg');if(u.classList.contains('hidden')){u.classList.remove('hidden');if(sv)sv.style.transform='rotate(180deg)';b.setAttribute('aria-expanded','true')}else{u.classList.add('hidden');if(sv)sv.style.transform='';b.setAttribute('aria-expanded','false')}}}

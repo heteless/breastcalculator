@@ -388,7 +388,7 @@
             Have a question about your bra size, a suggestion for our tools, or a partnership inquiry? Drop us a message below and we will get back to you.
           </p>
 
-          <form action="https://formspree.io/f/your-form-id" method="POST" class="contact-form" style="margin:24px 0">
+          <form action="mailto:contact@breastcalculator.com" method="get" enctype="text/plain" class="contact-form" style="margin:24px 0">
             <div class="form-group" style="margin-bottom:18px">
               <label for="contact-name" style="display:block;font-size:0.875rem;font-weight:600;color:#5b4636;margin-bottom:6px">
                 Name
@@ -411,6 +411,42 @@
               Send Message
             </button>
           </form>
+          <p
+            id="contactNote"
+            role="status"
+            aria-live="polite"
+            style="display:none;margin:0 0 24px 0;padding:12px 16px;border:1px solid #e8ddd0;border-left:3px solid #7a6455;border-radius:6px;background:#fdf8f5;font-size:0.9rem;line-height:1.55;color:#5b4636"
+          ></p>
+          <script>
+            (function () {
+              'use strict';
+              // The form used to POST to https://formspree.io/f/your-form-id — an
+              // unfilled placeholder that CSP's form-action 'self' also blocked, so
+              // "Send Message" silently did nothing. There is no backend here, so the
+              // form now composes a mailto: draft; the plain mailto: action above keeps
+              // it working for visitors with JavaScript disabled.
+              var form = document.querySelector('.contact-form');
+              var note = document.getElementById('contactNote');
+              if (!form) return;
+              form.addEventListener('submit', function (e) {
+                var name = (document.getElementById('contact-name').value || '').trim();
+                var email = (document.getElementById('contact-email').value || '').trim();
+                var message = (document.getElementById('contact-message').value || '').trim();
+                if (!name || !email || !message) return; // native validation still owns this
+                e.preventDefault();
+                var body = 'Name: ' + name + '\nEmail: ' + email + '\n\n' + message;
+                window.location.href =
+                  'mailto:contact@breastcalculator.com?subject=' +
+                  encodeURIComponent('Contact from ' + name) +
+                  '&body=' + encodeURIComponent(body);
+                if (note) {
+                  note.textContent =
+                    'Your email app should open with the message ready to send. If nothing opened, copy your note to contact@breastcalculator.com.';
+                  note.style.display = 'block';
+                }
+              });
+            })();
+          </script>
 
           <h2 style="margin-top:32px">
             Email Us Directly

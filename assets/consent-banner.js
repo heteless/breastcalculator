@@ -74,6 +74,9 @@
     try {
       var ls = localStorage.getItem(CONSENT_LS);
       if (ls === 'true' || ls === 'false') return ls;
+      // common.js recorded its choice under different keys before its duplicate
+      // banner was retired; honour them so those visitors are not asked again.
+      if (getCookie('bc_consent') || localStorage.getItem('bcConsent')) return 'true';
     } catch (e) {}
     return null;
   }

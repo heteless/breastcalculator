@@ -500,7 +500,7 @@
           </a>
         </li>
         <li>
-          <a href="#" id="privacyFromDrawer">
+          <a href="/privacy/" id="privacyFromDrawer">
             Privacy Settings
           </a>
         </li>
@@ -1107,35 +1107,9 @@
     <p class="cf-copy">&copy; 2026 Breast Calculator. For informational purposes only — not a substitute for medical advice.</p>
   </div>
 </footer>
-  <div class="modal-overlay" id="privacyModal">
-    <div class="modal">
-      <h3>
-        Privacy Settings
-      </h3>
-      <label>
-        <input type="checkbox" id="ckFunc" checked disabled>
-        <span>
-          Functional (always on)
-        </span>
-      </label>
-      <label>
-        <input type="checkbox" id="ckAnalytics">
-        <span>
-          Analytics
-        </span>
-      </label>
-      <div class="modal-actions">
-        <button class="btn-secondary" onclick="closePrivacyModal()">
-          Cancel
-        </button>
-        <button class="btn-primary" onclick="savePrivacy()">
-          Save
-        </button>
-      </div>
-    </div>
-  </div>
+
   <script>
-    (function(){ var conv=document.getElementById('inputValue'),from=document.getElementById('fromUnit'),to=document.getElementById('toUnit'); /* Conversion factors: each value in grams (NIST exact definitions) */ var TO_GRAMS={ kg:1000, g:1, mg:0.001, lb:453.59237, oz:28.349523125, st:6350.29318 }; var UNIT_LABELS={ kg:'kg', g:'g', mg:'mg', lb:'lb', oz:'oz', st:'st' }; function roundVal(n,mode,d){ var p=Math.pow(10,d); if(mode==='trunc')return Math.trunc(n*p)/p; if(mode==='banker'){ var r=n*p; var f=Math.floor(r); var diff=r-f; if(diff<0.5)return f/p; if(diff>0.5)return (f+1)/p; /* exactly 0.5 -> round to even */ return (f%2===0?f:f+1)/p; } /* half-up */ return Math.round(n*p)/p; } window.convertWeight=function(){ var v=parseFloat(conv.value); var res=document.getElementById('result'); if(isNaN(v)){res.classList.remove('show');alert('Please enter a valid number.');return} var f=from.value,t=to.value; var precEl=document.getElementById('precisionSel'); var roundEl=document.getElementById('roundingSel'); var d=precEl?parseInt(precEl.value,10):2; var mode=roundEl?roundEl.value:'half-up'; /* Convert: v (in f) -> grams -> t */ var grams=v*TO_GRAMS[f]; var out=grams/TO_GRAMS[t]; var result=roundVal(out,mode,d); var resultStr=result.toFixed(d); var fromLbl=UNIT_LABELS[f]||f; var toLbl=UNIT_LABELS[t]||t; document.getElementById('resultValue').textContent=resultStr+' '+toLbl; document.getElementById('resultSub').textContent=v+' '+fromLbl+' = '+resultStr+' '+toLbl; document.getElementById('conversionDetail').textContent= 'Using the exact conversion: 1 '+fromLbl+' = '+(TO_GRAMS[f]/TO_GRAMS[t]).toFixed(6)+' '+toLbl+ ' (NIST). All calculations are performed locally in your browser; no data is sent to any server.'; document.getElementById('resultAccuracy').textContent='NIST standard'; document.getElementById('resultActions').style.display='flex'; res.classList.add('show'); }; })(); (function(){var dd=document.getElementById('drawer'),dov=document.getElementById('drawerOverlay'),mt=document.getElementById('menuToggle'),dc=document.getElementById('drawerClose');function od(){dd.classList.add('open');dov.classList.add('open');mt.setAttribute('aria-expanded','true')}function cd(){dd.classList.remove('open');dov.classList.remove('open');mt.setAttribute('aria-expanded','false')}if(mt)mt.addEventListener('click',od);if(dc)dc.addEventListener('click',cd);if(dov)dov.addEventListener('click',cd);document.addEventListener('keydown',function(e){if(e.key==='Escape'&&dd.classList.contains('open'))cd()})})(); (function(){var cb=document.getElementById('cookieBanner')||document.createElement('div'),pm=document.getElementById('privacyModal')||document.createElement('div');if(cb&&!localStorage.getItem('cookieConsent')){setTimeout(function(){if (cb) cb.classList.add('show')},600)} window.acceptCookies=function(){localStorage.setItem('cookieConsent','all');gtag('consent','update',{'analytics_storage':'granted'});cb.classList.remove('show')}; window.openPrivacyModal=function(){cb.classList.remove('show');pm.classList.add('show')};window.closePrivacyModal=function(){pm.classList.remove('show')}; window.savePrivacy=function(){var a=(document.getElementById('ckAnalytics')||{checked:false}).checked?'granted':'denied';localStorage.setItem('cookieConsent','custom');gtag('consent','update',{'analytics_storage':a});pm.classList.remove('show')}; (document.getElementById('privacyLink')||document.createElement('a')).addEventListener('click',function(e){e.preventDefault();openPrivacyModal()});var pfd=document.getElementById('privacyFromDrawer');if(pfd)pfd.addEventListener('click',function(e){e.preventDefault();cd();setTimeout(openPrivacyModal,400)})})();
+    (function(){ var conv=document.getElementById('inputValue'),from=document.getElementById('fromUnit'),to=document.getElementById('toUnit'); /* Conversion factors: each value in grams (NIST exact definitions) */ var TO_GRAMS={ kg:1000, g:1, mg:0.001, lb:453.59237, oz:28.349523125, st:6350.29318 }; var UNIT_LABELS={ kg:'kg', g:'g', mg:'mg', lb:'lb', oz:'oz', st:'st' }; function roundVal(n,mode,d){ var p=Math.pow(10,d); if(mode==='trunc')return Math.trunc(n*p)/p; if(mode==='banker'){ var r=n*p; var f=Math.floor(r); var diff=r-f; if(diff<0.5)return f/p; if(diff>0.5)return (f+1)/p; /* exactly 0.5 -> round to even */ return (f%2===0?f:f+1)/p; } /* half-up */ return Math.round(n*p)/p; } window.convertWeight=function(){ var v=parseFloat(conv.value); var res=document.getElementById('result'); if(isNaN(v)){res.classList.remove('show');alert('Please enter a valid number.');return} var f=from.value,t=to.value; var precEl=document.getElementById('precisionSel'); var roundEl=document.getElementById('roundingSel'); var d=precEl?parseInt(precEl.value,10):2; var mode=roundEl?roundEl.value:'half-up'; /* Convert: v (in f) -> grams -> t */ var grams=v*TO_GRAMS[f]; var out=grams/TO_GRAMS[t]; var result=roundVal(out,mode,d); var resultStr=result.toFixed(d); var fromLbl=UNIT_LABELS[f]||f; var toLbl=UNIT_LABELS[t]||t; document.getElementById('resultValue').textContent=resultStr+' '+toLbl; document.getElementById('resultSub').textContent=v+' '+fromLbl+' = '+resultStr+' '+toLbl; document.getElementById('conversionDetail').textContent= 'Using the exact conversion: 1 '+fromLbl+' = '+(TO_GRAMS[f]/TO_GRAMS[t]).toFixed(6)+' '+toLbl+ ' (NIST). All calculations are performed locally in your browser; no data is sent to any server.'; document.getElementById('resultAccuracy').textContent='NIST standard'; document.getElementById('resultActions').style.display='flex'; res.classList.add('show'); }; })(); (function(){var dd=document.getElementById('drawer'),dov=document.getElementById('drawerOverlay'),mt=document.getElementById('menuToggle'),dc=document.getElementById('drawerClose');function od(){dd.classList.add('open');dov.classList.add('open');mt.setAttribute('aria-expanded','true')}function cd(){dd.classList.remove('open');dov.classList.remove('open');mt.setAttribute('aria-expanded','false')}if(mt)mt.addEventListener('click',od);if(dc)dc.addEventListener('click',cd);if(dov)dov.addEventListener('click',cd);document.addEventListener('keydown',function(e){if(e.key==='Escape'&&dd.classList.contains('open'))cd()})})(); (function(){})();
   </script>
   <script>
     function toggleFooterCol(b){var u=b.nextElementSibling;while(u&&u.tagName!=='UL'){u=u.nextElementSibling}if(u){var sv=b.querySelector('svg');if(u.classList.contains('hidden')){u.classList.remove('hidden');if(sv)sv.style.transform='rotate(180deg)';b.setAttribute('aria-expanded','true')}else{u.classList.add('hidden');if(sv)sv.style.transform='';b.setAttribute('aria-expanded','false')}}}

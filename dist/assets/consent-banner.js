@@ -58,6 +58,7 @@ if (c === 'true' || c === 'false') return c;
 try {
 var ls = localStorage.getItem(CONSENT_LS);
 if (ls === 'true' || ls === 'false') return ls;
+if (getCookie('bc_consent') || localStorage.getItem('bcConsent')) return 'true';
 } catch (e) {}
 return null;
 }
