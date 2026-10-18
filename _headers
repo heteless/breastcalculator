@@ -192,7 +192,19 @@
   #   static.cloudflareinsights.com, analytics.ahrefs.com
   #     both tags already ship in the HTML; blocked, so they cost a request and
   #     collect nothing. Allowed here rather than removed from the pages.
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://pagead2.googlesyndication.com https://www.googletagmanager.com https://cdn.jsdelivr.net https://fundingchoicesmessages.google.com https://static.cloudflareinsights.com https://analytics.ahrefs.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://*.analytics.google.com https://*.googlesyndication.com https://*.adtrafficquality.google; frame-src https://googleads.g.doubleclick.net https://*.googlesyndication.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests; trusted-types bc bc-domains goog#html 'allow-duplicates'
+  #
+  # Measured on the live site after the 2026-10-18 deploy (browser console, every
+  # page load) — these were still being blocked, silently:
+  #   https://www.google.com/g/collect   GA4 page_view + scroll events. Blocked =>
+  #     Analytics reported almost no traffic even though the tag loaded fine.
+  #   https://fundingchoicesmessages.google.com/el/...  consent-message reporting,
+  #     blocked in connect-src although script-src already allowed the loader.
+  #   https://ep2.adtrafficquality.google/sodar/sodar2.js  Ad Quality script,
+  #     allowed to connect but not to load.
+  #   TrustedTypePolicy 'ContributorServingResponseClientJs#html'  AdSense's
+  #     contributor-annotation policy, separate from goog#html.
+  #   https://analytics.ahrefs.com/api/event  same story: script allowed, beacon not.
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://pagead2.googlesyndication.com https://www.googletagmanager.com https://cdn.jsdelivr.net https://fundingchoicesmessages.google.com https://static.cloudflareinsights.com https://analytics.ahrefs.com https://*.adtrafficquality.google; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://*.analytics.google.com https://*.googlesyndication.com https://*.adtrafficquality.google https://*.google.com https://*.googletagmanager.com https://analytics.ahrefs.com; frame-src https://googleads.g.doubleclick.net https://*.googlesyndication.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests; trusted-types bc bc-domains goog#html ContributorServingResponseClientJs#html 'allow-duplicates'
   Vary: Accept-Encoding
   Accept-CH: Sec-CH-Prefers-Color-Scheme, Sec-CH-UA-Mobile, Sec-CH-UA-Platform
   Critical-CH: Sec-CH-Prefers-Color-Scheme
