@@ -171,3 +171,9 @@ skills-lock.json
 
 # local audit harness (Node scripts + iframe lab), never shipped to dist/
 _dbg/
+
+# scripts/verify-build-artifacts.js is the last step of `npm run build`; the broad
+# /scripts/* rule above used to leave it out of the repo, which made the Cloudflare
+# Pages build die with MODULE_NOT_FOUND and silently kept serving the previous
+# deployment. Keep it tracked.
+!/scripts/verify-build-artifacts.js
