@@ -373,7 +373,11 @@ main input[type="button"] {
 }
 
 /* ── B. 基础按钮规则 (使用 :is() 获得真实优先级) ────────────────── */
-main :is(button):not([class*="nav"]):not([class*="drawer"]):not([class*="back-to-top"]):not([class*="back-btn"]):not(.btn-link-secondary):not(.bc-compass-sister),
+/* The classes appended to the :not() chain below are styled by the button tier
+   system at the end of this file. Without the exclusion a <button class="btn-primary">
+   kept this rule's 8px radius while <a class="btn-primary"> got the pill, so the
+   same control looked different depending on its tag. */
+main :is(button):not([class*="nav"]):not([class*="drawer"]):not([class*="back-to-top"]):not([class*="back-btn"]):not(.btn-link-secondary):not(.bc-compass-sister):not(.btn-primary):not(.btn-secondary):not(.btn-tool):not(.calc-cta):not(.tool-cta-btn):not(.contact-submit):not(.btn-calc):not(.quiz-btn):not(.size-save),
 main :is(input[type="button"]):not(.btn-link-secondary),
 main :is(input[type="submit"]):not(.btn-link-secondary),
 main :is(input[type="reset"]),
@@ -386,7 +390,7 @@ main :is(input[type="reset"]),
 article.article :is(button),
 .size-guide-content :is(button),
 .specials-sub :is(button),
-.page-content :is(button):not(.bc-compass-sister) {
+.page-content :is(button):not(.bc-compass-sister):not(.btn-primary):not(.btn-secondary):not(.btn-tool):not(.calc-cta):not(.tool-cta-btn):not(.contact-submit):not(.btn-calc):not(.quiz-btn):not(.size-save) {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -5305,6 +5309,7 @@ button:focus-visible {
 .calc-cta,
 .tool-cta-btn,
 a.btn-calc,
+.contact-submit,
 .quiz-btn.btn-next,
 .quiz-btn.btn-submit {
   display: inline-flex !important;
@@ -5322,6 +5327,13 @@ a.btn-calc,
   font-weight: 600 !important;
   box-shadow: var(--btn-shadow);
   transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+  /* carried over from the blanket rule these classes are now excluded from */
+  font-family: inherit;
+  line-height: 1.25;
+  cursor: pointer;
+  white-space: normal;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .btn-primary:hover,
@@ -5363,6 +5375,13 @@ a.btn-calc:active {
   font-size: .92rem !important;
   font-weight: 600 !important;
   transition: background-color .18s ease, border-color .18s ease, transform .18s ease;
+  /* carried over from the blanket rule these classes are now excluded from */
+  font-family: inherit;
+  line-height: 1.25;
+  cursor: pointer;
+  white-space: normal;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .btn-secondary:hover,
@@ -5444,6 +5463,99 @@ main .psb-btn,
   border-radius: 50% !important;
 }
 
+/* ============================================================
+   Calculator result panel — readability and hierarchy pass.
+   The classic overlay made every number Georgia italic at
+   4.5rem, set the whole panel centred, and gave the seven
+   conversion tiles a hover lift. Four problems, all fixable
+   without touching markup or the brand:
+   1. Italic numerals are the slowest way to read a number, and
+      the size IS the answer. Italic stays on the prose note.
+   2. The recommendation sentence was centred across up to 3
+      lines; long copy needs a left edge.
+   3. Region labels sat at .62rem (9.9px) with .22em tracking.
+   4. The tiles are not clickable, so the hover lift was a false
+      affordance; and a 3-column grid holding 7 items always
+      leaves an empty slot.
+   ============================================================ */
+.size-primary-value {
+  font-style: normal !important;
+  letter-spacing: -0.02em !important;
+}
+
+.size-cell strong {
+  font-style: normal !important;
+  letter-spacing: -0.01em !important;
+}
+
+.size-primary-note {
+  text-align: left !important;
+  max-width: 46ch;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.size-cell span {
+  font-size: .72rem !important;
+  letter-spacing: .14em !important;
+  /* was #b86054 on --sand-light = 3.96:1, below the 4.5:1 AA floor for text
+     this small. --rose-dark measures 5.6:1 on the same tile. */
+  color: var(--rose-dark) !important;
+}
+
+/* auto-fit + 1fr stretches the final row, so seven regions share the
+   container evenly at every width instead of leaving a gap. */
+.size-grid {
+  grid-template-columns: repeat(auto-fit, minmax(84px, 1fr)) !important;
+  max-width: 660px !important;
+}
+
+.size-cell {
+  background: var(--sand-light) !important;
+  border-color: var(--border) !important;
+  transition: none !important;
+}
+
+.size-cell:hover {
+  transform: none !important;
+  box-shadow: none !important;
+  border-color: var(--border) !important;
+}
+
+/* The panel flips from hidden to shown, which is a real state change, so it
+   earns a short one-shot reveal. transform + opacity only, so it cannot shift
+   the ad slots around it. */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes bc-result-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  .size-result:not([hidden]) > .size-primary,
+  .size-result:not([hidden]) > .size-grid,
+  .size-result:not([hidden]) > .size-cup-info,
+  .size-result:not([hidden]) > .size-save-row {
+    animation: bc-result-in .42s cubic-bezier(.16, 1, .3, 1) both;
+  }
+
+  .size-result:not([hidden]) > .size-grid     { animation-delay: .07s; }
+  .size-result:not([hidden]) > .size-cup-info { animation-delay: .14s; }
+  .size-result:not([hidden]) > .size-save-row { animation-delay: .2s; }
+}
+
+/* Tactile press on the one control in here that is actually a button. */
+.size-save:active {
+  transform: scale(.98);
+}
+
+/* Both of these have a dedicated `main .x { border-radius:8px !important }`
+   rule elsewhere in this file, so the tier list alone cannot beat them.
+   Same specificity, later in the cascade, wins. */
+main .contact-submit,
+main .size-save {
+  border-radius: var(--btn-radius) !important;
+}
+
 .size-guide-header p,
 .page-content p,
 .specials-sub p,
@@ -5466,3 +5578,72 @@ article.article p {
   padding: 12px 6px;
 }
 
+
+/* ── Byline / E-E-A-T trust line ─────────────────────────────────────
+   Two markup families render the same thing on 12 pages: <p class="byline">
+   (11 article pages, styled inline in two position-dependent variants) and
+   <div class="article-byline"> (the self-exam guide, styled in that page's
+   own <style>). The .article-byline treatment is the better of the two, so
+   the inline family is converged onto it. Per-page margins and borders are
+   left alone — an article's first element and a hero's last one legitimately
+   differ. Note the byline can sit outside <main> (it closes a <header> hero
+   on /wellness/breast-self-exam/), so these selectors are unprefixed, and
+   page <style> blocks load after this bundle, hence !important. */
+.byline,
+.article-byline {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 5px 10px !important;
+  font-size: .82rem !important;
+  line-height: 1.5 !important;
+  letter-spacing: .01em;
+  /* Literal, not var(--text-muted): /wellness/breast-self-exam/ re-declares the
+     whole palette inside its own <style>, and there --text-muted resolves to
+     #a08882, i.e. 3.14:1 on the hero. Same reason the dots below are literal:
+     --rose is #dcb4a5 (1.81:1) in that scope and #8b6f5f everywhere else. */
+  color: #6a5550 !important;
+}
+
+/* The reviewer's name is the whole point of the line, and it used to render
+   in exactly the same grey as the words "Reviewed by" — no visual weight at
+   all for the strongest trust signal on the page. */
+.byline :is(strong, [itemprop="author"]),
+.article-byline :is(strong, [itemprop="author"]) {
+  color: #3d2a26 !important;
+  font-weight: 600 !important;
+  font-style: normal !important;
+}
+
+/* --rose-light is a background token (#f5ede8); as text it is invisible on
+   cream, which is why these dots did nothing before. */
+.byline [aria-hidden="true"],
+.article-byline .byline-sep {
+  color: #8b6f5f !important;
+  font-weight: 600;
+  margin: 0 1px;
+}
+
+.byline time,
+.article-byline time {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Below 600px the self-exam page removes its "·" separators and tightens the
+   gap to 8px, so "Cyclonix, MPH, MHA" and "June 20, 2026" read as one phrase.
+   Keep the separator; shrink the spacing instead. */
+@media (max-width: 600px) {
+  .byline,
+  .article-byline {
+    gap: 4px 7px !important;
+    font-size: .79rem !important;
+  }
+  .article-byline .byline-sep {
+    display: inline !important;
+  }
+}
+
+/* A byline that closes a centred hero must not snap flush left under it. */
+.hero .byline {
+  justify-content: center;
+}

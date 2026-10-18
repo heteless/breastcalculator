@@ -38,13 +38,7 @@ function setStatus(type, message, subMessage){
     '</span>';
 }
 
-function getFormFromContext(el){
-  while (el && el !== document.body){
-    if (el.tagName === 'FORM') return el;
-    el = el.parentElement;
-  }
-  return null;
-}
+
 
 function readForm(form){
   var ub = $('input[name="underbust"],#underbust', form);
@@ -1160,40 +1154,7 @@ function switchSisterPrimary(band, cup){
   }, 180);
 }
 
-function makeCupSvg(band, cup, volPct, role){
-  /* SVG cup cross-section — width scales with band, height scales with cup */
-  var bandScale = Math.min(2.0, Math.max(0.8, band / 36));
-  var cupScale = Math.min(2.2, Math.max(0.5, volPct / 70));
-  var w = 50 * bandScale;
-  var h = 60 * cupScale;
-  var x = 60 - w / 2;
-  var y = 100 - h;
-  var c1, c2;
-  if (role === 'you'){ c1 = '#6b8a5e'; c2 = '#4a6240'; }
-  else if (role === 'sister'){ c1 = '#b86054'; c2 = '#8b4a3a'; }
-  else { c1 = '#d4a574'; c2 = '#b88a5a'; }
-  return '<svg viewBox="0 0 120 110" class="bc-cup-svg" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
-    '<defs>' +
-      '<linearGradient id="cupGrad-' + band + cup + '" x1="0" x2="0" y1="0" y2="1">' +
-        '<stop offset="0%" stop-color="' + c1 + '"/>' +
-        '<stop offset="100%" stop-color="' + c2 + '"/>' +
-      '</linearGradient>' +
-      '<linearGradient id="cupHi-' + band + cup + '" x1="0" x2="0" y1="0" y2="1">' +
-        '<stop offset="0%" stop-color="rgba(255,255,255,0.6)"/>' +
-        '<stop offset="100%" stop-color="rgba(255,255,255,0)"/>' +
-      '</linearGradient>' +
-    '</defs>' +
-    /* Band arc at bottom */
-    '<path d="M 8 100 Q 60 102 112 100" fill="none" stroke="#8b4a3a" stroke-width="3" stroke-linecap="round"/>' +
-    '<path d="M 8 100 Q 60 102 112 100" fill="none" stroke="rgba(184,151,130,0.35)" stroke-width="6" stroke-linecap="round"/>' +
-    /* Cup body */
-    '<path d="M ' + x + ' ' + y + ' Q 60 0 ' + (x + w) + ' ' + y + ' L ' + (x + w) + ' 100 L ' + x + ' 100 Z" fill="url(#cupGrad-' + band + cup + ')"/>' +
-    /* Highlight */
-    '<path d="M ' + (x + w * 0.18) + ' ' + (y + h * 0.3) + ' Q ' + (x + w * 0.5) + ' ' + (y + h * 0.08) + ' ' + (x + w * 0.82) + ' ' + (y + h * 0.3) + ' L ' + (x + w * 0.78) + ' ' + (y + h * 0.5) + ' Q ' + (x + w * 0.5) + ' ' + (y + h * 0.32) + ' ' + (x + w * 0.22) + ' ' + (y + h * 0.5) + ' Z" fill="url(#cupHi-' + band + cup + ')"/>' +
-    /* Band label */
-    '<text x="60" y="108" text-anchor="middle" font-family="var(--font-sans)" font-size="6" font-weight="700" fill="#8b4a3a" letter-spacing="0.5">' + band + '″ BAND</text>' +
-  '</svg>';
-}
+
 
 /* ──────────────────────────────────────────────────────────
    makeStainlessCupSvg — 不锈钢齿轮刻度质感的 cup 截面图

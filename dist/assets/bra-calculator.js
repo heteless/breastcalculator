@@ -604,7 +604,7 @@ var frCup = FR_CUP_MAP[usCup] || usCup;
 var euBand = Math.round((bandSize * 2.54) / 5) * 5;
 var frBand = euBand + 15;
 var caBand = bandSize; var caCup = usCup;
-var nzBand = bandSize - 2; var nzCup = auCup;
+var nzBand = bandSize - 22; var nzCup = auCup;
 return {
 us: bandSize + usCup,
 uk: bandSize + ukCup,
@@ -715,7 +715,7 @@ var auCup = AU_CUP_MAP[usCup] || usCup;
 var frCup = FR_CUP_MAP[usCup] || usCup;
 var euBand = Math.round((band * 2.54) / 5) * 5;
 var frBand = euBand + 15;
-var nzBand = band - 2;
+var nzBand = band - 22;
 var baseVolume = CUP_VOLUME_ML[sizeResult.cupLetter] || 0;
 var volumeJitter = 0.96 + hash * 0.08;
 var adjustedVolumeMl = Math.round(baseVolume * cut.cupVolumeFactor * volumeJitter);

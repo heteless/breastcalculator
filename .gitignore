@@ -168,3 +168,6 @@ skills-lock.json
 .editorconfig
 .prettierrc*
 .eslintrc*
+
+# local audit harness (Node scripts + iframe lab), never shipped to dist/
+_dbg/

@@ -190,10 +190,6 @@
   min-height: 60vh
 }
 
-.min-h-screen {
-  min-height: 100vh
-}
-
 .w-12 {
   width: 3rem
 }
@@ -208,10 +204,6 @@
 
 .max-w-\[720px\] {
   max-width: 720px
-}
-
-.max-w-lg {
-  max-width: 32rem
 }
 
 .max-w-xl {
@@ -343,11 +335,6 @@
   background-color: rgb(122 100 85 / var(--tw-bg-opacity, 1))
 }
 
-.bg-\[\#d4a76a\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(212 167 106 / var(--tw-bg-opacity, 1))
-}
-
 .bg-\[\#f5e6d8\] {
   --tw-bg-opacity: 1;
   background-color: rgb(245 230 216 / var(--tw-bg-opacity, 1))
@@ -356,11 +343,6 @@
 .bg-\[\#f5ebde\] {
   --tw-bg-opacity: 1;
   background-color: rgb(245 235 222 / var(--tw-bg-opacity, 1))
-}
-
-.bg-\[\#fdf8f4\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(253 248 244 / var(--tw-bg-opacity, 1))
 }
 
 .bg-\[\#fdf8f5\] {
@@ -448,11 +430,6 @@
   padding-right: 1.25rem
 }
 
-.px-6 {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem
-}
-
 .py-1 {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem
@@ -478,10 +455,6 @@
 
 .text-center {
   text-align: center
-}
-
-.font-sans {
-  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"
 }
 
 .font-serif {
@@ -670,10 +643,6 @@
   text-decoration-line: underline
 }
 
-.no-underline {
-  text-decoration-line: none
-}
-
 .opacity-0 {
   opacity: 0
 }
@@ -743,11 +712,6 @@
 .hover\:bg-\[\#6b5344\]:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(107 83 68 / var(--tw-bg-opacity, 1))
-}
-
-.hover\:bg-\[\#c49555\]:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(196 149 85 / var(--tw-bg-opacity, 1))
 }
 
 .hover\:bg-\[\#fffcf9\]:hover {

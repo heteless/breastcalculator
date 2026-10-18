@@ -666,8 +666,12 @@ function calculateBraSize(underbustInches, bustInches) {
   var frBand = euBand + 15;
   /* 加拿大使用 US 尺码 (Change Lingerie, La Vie en Rose 等),但有些使用 UK */
   var caBand = bandSize; var caCup = usCup;
-  /* 新西兰使用 AU 尺码 (Bendon NZ 等) */
-  var nzBand = bandSize - 2; var nzCup = auCup;
+  /* AU and NZ share one system: bands are labelled 8/10/12/14/16, so
+     AU band = UK/US band - 22 (US 34 -> AU 12). The previous offset of -2
+     produced "AU 32", a band that is not sold under that numbering.
+     Comment left by the original author cited Bendon for -2; Bendon itself
+     retails in AU 10/12/14, which matches -22. */
+  var nzBand = bandSize - 22; var nzCup = auCup;
   return {
     us: bandSize + usCup,
     uk: bandSize + ukCup,
@@ -839,7 +843,9 @@ function applyBrandAdjustment(sizeResult, brandKey){
   /* ③ 8 区域尺码 */
   var euBand = Math.round((band * 2.54) / 5) * 5;
   var frBand = euBand + 15;
-  var nzBand = band - 2;
+  /* AU/NZ band numbering is 8/10/12/14/16, i.e. UK/US minus 22. See the
+     matching note in the other conversion helper. */
+  var nzBand = band - 22;
 
   /* ④ 调整后体积 (mL) — cut 因子 × 品牌哈希微调 (0.96-1.04) */
   var baseVolume = CUP_VOLUME_ML[sizeResult.cupLetter] || 0;
